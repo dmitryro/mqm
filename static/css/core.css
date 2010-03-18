@@ -1,0 +1,28 @@
+/* clear floats */
+.clearfix:after {
+    clear:both;
+    content:".";
+    display:block;
+    font-size:0;
+    height:0;
+    visibility:hidden;
+}
+
+/* essential for Safari browser !! */
+.clearfix {
+    display:block;
+}
+
+/* hidden elements like skip links */
+.skip, .print {
+    position:absolute;
+    top:-32768px;
+    left:-32768px;
+}
+
+/* make skip links visible when using tab navigation */
+.skip:focus, .skip:active {
+    position:static;
+    top:0;
+    left:0;
+}

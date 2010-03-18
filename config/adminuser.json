@@ -1,0 +1,20 @@
+[
+  {
+    "pk": 1,
+    "model": "auth.user",
+    "fields": {
+      "username": "admin",
+      "first_name": "Test",
+      "last_name": "Admin",
+      "is_active": true,
+      "is_superuser": true,
+      "is_staff": true,
+      "last_login": "2010-01-01 00:00:00",
+      "groups": [],
+      "user_permissions": [],
+      "password": "sha1$18440$08cb5bacf39cab43c6995ca8cddbdd2a45c7a2f3",
+      "email": "angelo@ma-work.co.uk",
+      "date_joined": "2010-01-01 00:00:00"
+    }
+  }
+]

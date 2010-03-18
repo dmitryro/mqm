@@ -1,0 +1,21 @@
+{% if is_paginated %}
+<div class="pagination subcolumns">
+    <div class="c33l"><div class="subcl">
+        {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}">« newer entries</a>
+        {% else %}&nbsp;{% endif %}
+    </div></div>
+    <div class="c33l"><div class="subc">
+        Page:&nbsp;
+        {% for page_number in paginator.page_range %}
+        <a href="?page={{ page_number }}">{{ page_number }}</a> 
+            {% if not forloop.last %}/{% endif %}
+        {% endfor %}
+    </div></div>
+    <div class="c33r"><div class="subcr">
+        {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">older entries »</a>
+        {% else %}&nbsp;{% endif %}
+    </div></div>
+</div>
+{% endif %}

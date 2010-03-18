@@ -1,0 +1,3 @@
+#!/bin/bash
+cd /home/<REPLACE:PROJECT_NAME>
+bin/django mediastore_process_video_queue > videoqueue.log 2&>1
