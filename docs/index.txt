@@ -1,0 +1,46 @@
+Skeleton Project Documentation
+==============================
+
+``fab devinit``
+---------------
+
+After you have created a new checkout go to the directory and run::
+
+    fab devinit
+
+This will run a couple of things for you:
+
+    * It will set up buildout environment (``python bootstrap.py`` and
+      ``bin/buildout``)
+    * It creates a ``local_settings.py`` file for you.
+    * It installes a sqlite db ready to use and runs ``syncdb``.
+    * It creates a superuser for the project called *admin* with password
+      *admin*.
+
+``restartfcgi``
+---------------
+
+*restartfcgi* is the same as e.g. ``./bac`` or ``./hoxton`` with other
+projects. Its a script to restart the django FCGI server. Run the following
+while you are in the root directory of the project on the server to restart
+the site::
+
+    ./restartfcgi
+
+nginx config
+------------
+
+There is a file called ``nginx.conf`` in the ``config/`` directory. Use this
+to configure nginx. After you customized ``nginx.conf``, commit and update the
+server. Now run the following command to make the configuration file available
+to nginx::
+
+    ln -s /home/alice/config/nginx.conf /opt/nginx/conf.d/alice.conf
+
+You can now restart nginx to make the site online. If you want to "uninstall"
+the site (to take it offline), just remove the symbolic link you created with
+the ``ln`` command::
+
+    rm /opt/nginx/conf.d/alice.conf
+
+Restart nginx and the site will be offline.
