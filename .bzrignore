@@ -20,4 +20,4 @@ src/website/local_settings.py
 static/admin
 static/mediastore
 static/_cache
-**/.svn
+**/.svn/
