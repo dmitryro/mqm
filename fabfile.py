@@ -113,8 +113,7 @@ def devinit():
     local('bin/buildout', capture=False)
     local(
         'test -e src/website/local_settings.py || '
-        'cp -p src/website/local_settings.example.py src/website/local_settings.py && '
-        '%s src/website/local_settings.py' % _replace_secret_key())
+        'cp -p src/website/local_settings.example.py src/website/local_settings.py')
     local('bin/django syncdb --noinput')
     local('bin/django loaddata config/adminuser.json')
 
