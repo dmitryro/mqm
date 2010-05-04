@@ -3,12 +3,22 @@
 <head>{% load compress %}
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
     <title>{% block title %}{% endblock %} · site name</title>
+    <meta name="title" content="" />
+    <meta name="classification" content="" />
+    <meta name="robots" content="all, index, follow" /><!-- ALL ROBOTS --> 
+    <meta name="googlebot" content="all, index, follow" /><!-- GOOGLE --> 
+    <meta name="google-site-verification" content="" />
     <meta name="description" content="{% block meta_description %}{% endblock %}" />
     <meta name="keywords" content="{% block meta_keywords %}{% endblock %}" />
-    <meta name="language" content="uk" />
+    <meta name="language" content="en-GB" />
     <meta name="robots" content="index,follow" />
     <meta name="revisit-After" content="14 days" />
     <meta name="distribution" content="global" />
+    <meta name="author" content="Angelo Petsas" />
+    <meta name="copyright" content="Copyright 2010 London M/A Work Ltd // Digital Media // Advertising // Design. All Rights Reserved." />
+    
+    <!-- Designed and Created by M/A // Digital Media // Advertising // Design // www.ma-work.co.uk --> 
+    
     {% compress css %}{% block extra_css %}
     <link rel="stylesheet" href="{{ STATIC_URL }}css/html5reset.css" />
     <link rel="stylesheet" href="{{ STATIC_URL }}css/form.css" />
