@@ -113,9 +113,12 @@ def devinit():
     local('bin/buildout', capture=False)
     local(
         'test -e src/website/local_settings.py || '
-        'cp -p src/website/local_settings.example.py src/website/local_settings.py')
-    local('bin/django syncdb --noinput')
-    local('bin/django loaddata config/adminuser.json')
+        'cp -p src/website/local_settings.example.py src/website/local_settings.py',
+        capture=False)
+    local('bin/django syncdb --noinput', capture=False)
+    local('bin/django loaddata config/adminuser.json', capture=False)
+    local('bin/django build_static --noinput', capture=False)
+
 
 def replace(**kwargs):
     for key, value in kwargs.items():
