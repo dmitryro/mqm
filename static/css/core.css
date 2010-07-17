@@ -26,3 +26,8 @@
     top:0;
     left:0;
 }
+
+/* there is some weird space under the images without this*/
+img {
+vertical-align: text-bottom;
+}
