@@ -25,6 +25,9 @@ projects. Its a script to restart the django FCGI server. Run the following
 while you are in the root directory of the project on the server to restart
 the site::
 
+* If for any reason you get permission denied when trying to use 'restartfcgi'
+run: chmod +x restartfcgi
+
     ./restartfcgi
 
 nginx config
