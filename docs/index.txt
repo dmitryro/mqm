@@ -39,6 +39,8 @@ server. Now run the following command to make the configuration file available
 to nginx::
 
     ln -s /home/alice/config/nginx.conf /opt/nginx/conf.d/alice.conf
+    or on maworaa1:
+    ln -s /home/frantic/config/nginx.conf /etc/nginx/sites-enabled/frantic.conf
 
 You can now restart nginx to make the site online. If you want to "uninstall"
 the site (to take it offline), just remove the symbolic link you created with
