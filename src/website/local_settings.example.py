@@ -21,9 +21,7 @@ ADMINS = (
 )
 MANAGERS = ADMINS
 
-EMAIL_HOST = 'localhost'
-EMAIL_PORT = 1025
-EMAIL_USE_TLS = False
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = '<REPLACE:SECRET_KEY>'
