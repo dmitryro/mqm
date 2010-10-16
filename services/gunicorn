@@ -1,0 +1,12 @@
+#!/bin/bash
+
+SCRIPT=$(readlink -f $0)
+SCRIPTPATH=`dirname $SCRIPT`
+
+# go one dir up
+PROJECT_ROOT=`dirname $SCRIPTPATH`
+cd $PROJECT_ROOT
+
+exec /usr/bin/env - \
+    setuidgid <REPLACE:PROJECT_NAME> \
+    bin/django run_gunicorn 127.0.0.1:<REPLACE:PORT> -w 5

@@ -1,0 +1,12 @@
+#!/bin/bash
+
+SCRIPT=$(readlink -f $0)
+SCRIPTPATH=`dirname $SCRIPT`
+
+# go one dir up
+PROJECT_ROOT=`dirname $SCRIPTPATH`
+cd $PROJECT_ROOT
+
+exec /usr/bin/env - \
+    setuidgid <REPLACE:PROJECT_NAME> \
+    bin/django celeryd  -B -s celery -E -l INFO -f $PROJECT_ROOT/logs/celeryd.log
