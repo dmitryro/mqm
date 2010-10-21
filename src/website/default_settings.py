@@ -64,6 +64,7 @@ SECRET_KEY = 'defined in local_settings.py'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
+    'django_mobile.loader.Loader',
     'django.template.loaders.filesystem.load_template_source',
     'django.template.loaders.app_directories.load_template_source',
 #     'django.template.loaders.eggs.load_template_source',
@@ -76,6 +77,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.media',
     'django.core.context_processors.request',
     'staticfiles.context_processors.static_url',
+    'django_mobile.context_processors.flavour',
     'website.context_processors.site',
 )
 
@@ -84,6 +86,8 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.doc.XViewMiddleware',
+    'django_mobile.middleware.MobileDetectionMiddleware',
+    'django_mobile.middleware.SetFlavourMiddleware',
 )
 
 ROOT_URLCONF = 'website.urls'
@@ -101,6 +105,7 @@ INSTALLED_APPS = (
     'django.contrib.webdesign',
     'django_extensions',
     'django_markup',
+    'django_mobile',
     'compressor',
     'contact_form',
     'debug_toolbar',
