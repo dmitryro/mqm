@@ -8,12 +8,12 @@ path = os.path.abspath(os.path.dirname(__file__))
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
-DATABASE_ENGINE = 'sqlite3' # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-DATABASE_NAME = os.path.join(path, '../../db.sqlite')
-DATABASE_USER = ''
-DATABASE_PASSWORD = ''
-DATABASE_HOST = ''
-DATABASE_PORT = ''
+DATABASES = {
+    'default': {
+        'ENGINE': 'sqlite3',
+        'NAME': os.path.join(path, '../../db.sqlite'),
+    }
+}
 
 ADMINS = (
     ('Angelo', 'angelo@ma-work.co.uk'),
