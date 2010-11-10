@@ -88,6 +88,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.doc.XViewMiddleware',
     'django_mobile.middleware.MobileDetectionMiddleware',
     'django_mobile.middleware.SetFlavourMiddleware',
+    'website.pages.middleware.PageFallbackMiddleware',
 )
 
 ROOT_URLCONF = 'website.urls'
@@ -97,6 +98,9 @@ TEMPLATE_DIRS = (
 )
 
 INSTALLED_APPS = (
+    # load patches first
+    'website.patch',
+
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -123,7 +127,7 @@ INSTALLED_APPS = (
     'tinymce',
 
     'website',
-    'website.patch',
+    'website.pages',
 )
 
 FIXTURE_DIRS = (
