@@ -38,11 +38,10 @@ def _services():
 
 def update():
     '''
-    Push current local commit to server and update the checkout.
+    * Update the checkout.
     '''
-    local('bzr push --no-strict bzr+ssh://%s%s' % (env['host'], path))
     with cd(path):
-        run('bzr update')
+        run('svn update')
 
 def syncdb():
     '''
@@ -56,7 +55,7 @@ def restart():
     * restart all services
     '''
     with cd(path):
-        run('./restartfcgi')
+        run('./restart')
 
 def restart_webserver():
     '''
@@ -76,8 +75,8 @@ def buildout():
     * run a buildout
     '''
     with cd(path):
-        run('test -e bin/buildout || python bootstrap.py')
-        run('bin/buildout')
+        run('test -e bin/buildout || python bootstrap.py', capture=False)
+        run('bin/buildout', capture=False)
 
 def deploy():
     '''
