@@ -58,6 +58,22 @@
 <script type="text/javascript" src="{{ STATIC_URL }}js/libs/jquery-1.4.3.min.js"></script>
 <script type="text/javascript" src="{{ STATIC_URL }}js/init.js"></script>
 {% endblock %}{% endcompress %}
-{% block analytics %}{# Google Analytics code #}{% endblock %}
+
+{# remove if no analytics is used #}
+{% block analytics %}
+{% if GOOGLE_ANALYTICS_SITE_ID %}
+<script type="text/javascript">
+var _gaq = [['_setAccount', '{{ GOOGLE_ANALYTICS_SITE_ID }}'], ['_trackPageview']];
+(function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+})(document, 'script');
+</script>
+{% endif %}
+{% endblock %}
+
 {% endblock %}</body>
 </html>
