@@ -123,6 +123,7 @@ INSTALLED_APPS = (
     'tinymce',
 
     'website',
+    'website.patch',
 )
 
 FIXTURE_DIRS = (
