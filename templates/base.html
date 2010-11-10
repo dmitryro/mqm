@@ -22,13 +22,16 @@
 
     <link rel="shortcut icon" href="{{ STATIC_URL }}favicon.png">
     <link rel="apple-touch-icon" href="{{ STATIC_URL }}favicon.png">
-    
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     {% compress css %}{% block extra_css %}
     <link rel="stylesheet" href="{{ STATIC_URL }}css/html5reset.css" />
     <link rel="stylesheet" href="{{ STATIC_URL }}css/form.css" />
     <link rel="stylesheet" href="{{ STATIC_URL }}css/core.css" />
     <link rel="stylesheet" href="{{ STATIC_URL }}css/layout.css" />
     <link rel="stylesheet" href="{{ STATIC_URL }}css/typography.css" />
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/handheld.css" media="handheld" />
     <link rel="stylesheet" href="{{ STATIC_URL }}css/print.css" media="print" />
     {% endblock %}{% endcompress %}
     <!--[if lte IE 8]>
