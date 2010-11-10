@@ -117,7 +117,7 @@ def devinit():
         capture=False)
     local('bin/django syncdb --noinput', capture=False)
     local('bin/django loaddata config/adminuser.json', capture=False)
-    local('bin/django build_static --noinput', capture=False)
+    local('bin/django loaddata config/localsite.json', capture=False)
 
 
 def replace(**kwargs):
