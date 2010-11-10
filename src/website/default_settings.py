@@ -120,6 +120,7 @@ INSTALLED_APPS = (
     'sorl.thumbnail',
     'staticfiles',
     'tagging',
+    'tinymce',
 
     'website',
 )
@@ -127,6 +128,16 @@ INSTALLED_APPS = (
 FIXTURE_DIRS = (
     os.path.join(PROJECT_ROOT, 'fixtures'),
 )
+
+TINYMCE_DEFAULT_CONFIG = {
+    'plugins': 'inlinepopups,safari',
+    'theme': 'advanced',
+    'theme_advanced_disable': 'underline,strikethrough,justifyleft,justifycenter,justifyright,justifyfull,numlist,outdent,indent,hr,styleselect,sub,sup',
+    'theme_advanced_toolbar_location': 'top',
+    'theme_advanced_toolbar_align': 'left',
+    'relative_urls': False,
+    'dialog_type': 'modal',
+}
 
 LOGIN_REDIRECT_URL = '/'
 
