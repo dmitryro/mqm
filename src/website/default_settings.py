@@ -109,6 +109,7 @@ INSTALLED_APPS = (
     'compressor',
     'contact_form',
     'debug_toolbar',
+    'flatblocks',
     'mailer',
     'mediastore',
     'mediastore.mediatypes.download',
