@@ -120,8 +120,11 @@ def devinit():
 
 
 def replace(**kwargs):
-    for key, value in kwargs.items():
-        local(r'find -type f | grep -v "^\./\." | xargs sed -i "s/<REPLACE:%s>/%s/g"' % (
-            key,
-            value.replace('"', r'\"'),
-        ))
+    if kwargs:
+        for key, value in kwargs.items():
+            local(r'find -type f | grep -v "^\./\." | xargs sed -i "s/<REPLACE:%s>/%s/g"' % (
+                key,
+                value.replace('"', r'\"'),
+            ))
+    else:
+        local(r'grep -r "<REPLACE:[^>]\+>" .', capture=False)
