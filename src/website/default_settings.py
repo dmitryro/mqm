@@ -114,6 +114,7 @@ INSTALLED_APPS = (
     'contact_form',
     'debug_toolbar',
     'flatblocks',
+    'gunicorn',
     'mailer',
     'mediastore',
     'mediastore.mediatypes.download',
