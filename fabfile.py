@@ -20,6 +20,9 @@ config = {
     'repo_url': repo_url,
 }
 
+
+SERVER_SETTINGS_FILE = 'server_settings.py'
+
 def update():
     '''
     * Update the checkout.
@@ -34,13 +37,6 @@ def syncdb():
     '''
     with cd(path):
         run('bin/django syncdb --noinput')
-
-def restart():
-    '''
-    * restart all services
-    '''
-    with cd(path):
-        sudo('./restart')
 
 def reload_webserver():
     '''
@@ -65,8 +61,8 @@ def buildout():
     * run a buildout
     '''
     with cd(path):
-        run('test -e bin/buildout || python bootstrap.py', capture=False)
-        run('bin/buildout', capture=False)
+        run('test -e bin/buildout || python bootstrap.py')
+        run('bin/buildout')
 
 def deploy():
     '''
@@ -128,6 +124,12 @@ def status():
         for service_config in _services():
             sudo('svstat /etc/service/%(service_name)s' % service_config)
 
+def serversettings(operation='get', filename=SERVER_SETTINGS_FILE):
+    if operation == 'get':
+        get('%s/src/website/local_settings.py' % config['path'], SERVER_SETTINGS_FILE)
+    if operation == 'put':
+        put(SERVER_SETTINGS_FILE, '%s/src/website/local_settings.py' % config['path'])
+
 
 ##############################
 # Installation on new server #
@@ -154,10 +156,11 @@ def install():
     with cd(path):
         run('test -e bin/buildout || python bootstrap.py')
         with settings(warn_only=True):
-            run('python %(path)s/bin/buildout' % config)
-        run('test -e src/website/local_settings.py && cp -p src/website/local_settings.example.py src/website/local_settings.py')
+            run('bin/buildout')
+            run('test -e src/website/local_settings.py && cp -p src/website/local_settings.example.py src/website/local_settings.py')
+    serversettings('get')
     print('-' * 30)
-    print('Please update local_settings.py in %s%ssrc/website/' % (env['host'], path))
+    print('Please edit server_settings.py and upload with "fab settings:put"')
 
 def load_adminuser():
     with cd(path):
@@ -214,8 +217,8 @@ def teardown():
         for service_config in _services():
             sudo('svc -dx /etc/service/%(service_name)s' % service_config)
             sudo('rm -r /etc/service/%(service_name)s' % service_config)
-        sudo('rm /etc/nginx/sites-available/%(project)s' % config)
-        sudo('rm /etc/nginx/sites-enabled/%(project)s' % config)
+        sudo('rm /etc/nginx/sites-available/%(project)s.conf' % config)
+        sudo('rm /etc/nginx/sites-enabled/%(project)s.conf' % config)
     reload_webserver()
 
 
@@ -233,7 +236,6 @@ def _replace_secret_key():
         r'''sed -i "s/^SECRET_KEY\s*=\s*[ru]\?['\"].*['\"]\s*$/'''
         r'''SECRET_KEY = '%s'/"''' % secret_key)
 
-
 def devinit():
     local('test -e bin/buildout || python bootstrap.py', capture=False)
     local('bin/buildout', capture=False)
@@ -245,7 +247,6 @@ def devinit():
     local('bin/django loaddata config/adminuser.json', capture=False)
     local('bin/django loaddata config/localsite.json', capture=False)
     local('bin/django build_static --noinput', capture=False)
-
 
 def replace(**kwargs):
     if kwargs:
