@@ -5,5 +5,5 @@ SCRIPTPATH=`dirname $SCRIPT`
 PROJECT_ROOT=SCRIPTPATH
 PROJECT_NAME=`basename $SCRIPTPATH`
 
-sudo svc -du /etc/service/$PROJECT_NAME-django
+sudo svc -du /etc/service/$PROJECT_NAME-gunicorn
 sudo svc -du /etc/service/$PROJECT_NAME-celery
