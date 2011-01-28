@@ -29,6 +29,12 @@ SITE_ID = 1
 # to load the internationalization machinery.
 USE_I18N = True
 
+
+EMAIL_BACKEND = 'django_ses.SESBackend'
+
+AWS_ACCESS_KEY_ID = 'defined in local_settings.py'
+AWS_SECRET_ACCESS_KEY = 'defined in local_settings.py'
+
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
 MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'media')
