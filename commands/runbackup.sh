@@ -1,5 +1,12 @@
 #!/bin/bash
-PROJECT_DIR="/srv/<REPLACE:PROJECT_NAME>"
+
+SCRIPT=$(readlink -f $0)
+SCRIPTPATH=`dirname $SCRIPT`
+
+# go one dir up
+PROJECT_ROOT=`dirname $SCRIPTPATH`
+cd $PROJECT_ROOT
+
 BACKUP_DIR="/backups/<REPLACE:PROJECT_NAME>"
 BACKUP_LOG="/backups/<REPLACE:PROJECT_NAME>.log"
 BACKUP_ERROR_LOG="/backups/<REPLACE:PROJECT_NAME>.err"
