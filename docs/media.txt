@@ -25,7 +25,7 @@ displays each type of media within a MultipleMediaField:
 {% display_embeded object.media.all %}
 
 
-------------
+---------------
 
 REQUIRED
 
