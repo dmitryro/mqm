@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import with_statement
 import os
-from fabric.api import abort, cd, local, env, run, settings, sudo
+from fabric.api import abort, cd, local, env, run, settings, sudo, get, put
 
 
 env.hosts.extend([
@@ -18,6 +18,7 @@ config = {
     'path': path,
     'project': project_name,
     'repo_url': repo_url,
+    'services': ['gunicorn'],
 }
 
 
@@ -78,6 +79,8 @@ def deploy():
     restart()
 
 def _get_services():
+    if 'services' in config:
+        return config['services']
     service_dir = os.path.join(
         os.path.dirname(os.path.abspath(__file__)),
         'services')
@@ -129,6 +132,18 @@ def conf(operation='get', filename=SERVER_SETTINGS_FILE):
         get('%s/src/website/local_settings.py' % config['path'], SERVER_SETTINGS_FILE)
     if operation == 'put':
         put(SERVER_SETTINGS_FILE, '%s/src/website/local_settings.py' % config['path'])
+
+
+def loaddata(apps):
+    dump_file = '.dump.json'
+    server_dump = os.path.join(config['path'], dump_file)
+    with cd(path):
+        run('%s/bin/django dumpdata --indent=2 %s > %s' % (
+            config['path'],
+            apps,
+            server_dump))
+        get(server_dump, dump_file)
+    local('bin/django loaddata %s' % dump_file)
 
 
 ##############################
