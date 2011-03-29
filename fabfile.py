@@ -124,7 +124,7 @@ def status():
         for service_config in _services():
             sudo('svstat /etc/service/%(service_name)s' % service_config)
 
-def serversettings(operation='get', filename=SERVER_SETTINGS_FILE):
+def conf(operation='get', filename=SERVER_SETTINGS_FILE):
     if operation == 'get':
         get('%s/src/website/local_settings.py' % config['path'], SERVER_SETTINGS_FILE)
     if operation == 'put':
@@ -136,6 +136,31 @@ def serversettings(operation='get', filename=SERVER_SETTINGS_FILE):
 ##############################
 
 
+def create_user():
+    with settings(warn_only=True):
+        sudo('useradd --home %(path)s %(project)s' % config)
+        sudo('gpasswd -a www-data %(project)s' % config)
+        sudo('gpasswd -a %s %s' % (env['user'], config['project']))
+
+def create_project_directory():
+    with settings(warn_only=True):
+        sudo('mkdir -p %s' % os.path.dirname(config['path']))
+
+def checkout():
+    sudo('svn checkout %(repo_url)s %(path)s' % config)
+
+def setup_fs_permissions():
+    sudo('chown %(project)s:%(project)s -R %(path)s' % config)
+    sudo('chmod u+rw,g+rw -R %(path)s' % config)
+    sudo('chmod g+s -R %(path)s' % config)
+
+def bootstrap():
+    with cd(path):
+        run('test -e bin/buildout || python bootstrap.py')
+        with settings(warn_only=True):
+            run('bin/buildout')
+            run('test -e src/website/local_settings.py && cp -p src/website/local_settings.example.py src/website/local_settings.py')
+
 def install():
     '''
     * create project user
@@ -144,23 +169,14 @@ def install():
     * install everything with buildout
     * install sample local_settings.py
     '''
-    with settings(warn_only=True):
-        sudo('useradd --home %(path)s %(project)s' % config)
-        sudo('gpasswd -a www-data %(project)s' % config)
-        sudo('gpasswd -a %s %s' % (env['user'], config['project']))
-        sudo('mkdir -p %s' % os.path.dirname(config['path']))
-    sudo('svn checkout %(repo_url)s %(path)s' % config)
-    sudo('chown %(project)s:%(project)s -R %(path)s' % config)
-    sudo('chmod u+rw,g+rw -R %(path)s' % config)
-    sudo('chmod g+s -R %(path)s' % config)
-    with cd(path):
-        run('test -e bin/buildout || python bootstrap.py')
-        with settings(warn_only=True):
-            run('bin/buildout')
-            run('test -e src/website/local_settings.py && cp -p src/website/local_settings.example.py src/website/local_settings.py')
-    serversettings('get')
+    create_user()
+    create_project_directory()
+    checkout()
+    setup_fs_permissions()
+    bootstrap()
+    conf('get')
     print('-' * 30)
-    print('Please edit server_settings.py and upload with "fab settings:put"')
+    print('Please edit server_settings.py and upload with "fab conf:put"')
 
 def load_adminuser():
     with cd(path):
