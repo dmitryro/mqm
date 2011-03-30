@@ -1,0 +1,41 @@
+/* ---------------------------------- */
+
+/*
+ * {{ project name }}
+ * {{ date }}
+ *
+ * layout.css
+ *
+ * 
+ */
+
+
+/* ---------------------------------- */
+
+/*
+ *  TABLE OF CONTENTS
+ *  
+ *  @Global
+ *  @Wrapper
+ *  @Masthead
+ *  @Nav
+ *  @Footer
+ *  
+ *
+ */
+ 
+ /*
+ *  COLOURS
+ *
+ *  black { color:#000000; }
+ *  cyan { color:#009DE0; }
+ *  magenta { color:#BE0060; }
+ *
+ */
+
+/* ---------------------------------- */
+
+
+html {
+	-webkit-font-smoothing: antialiased;
+}
