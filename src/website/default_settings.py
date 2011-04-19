@@ -149,6 +149,7 @@ TINYMCE_DEFAULT_CONFIG = {
     'theme_advanced_toolbar_align': 'left',
     'relative_urls': False,
     'dialog_type': 'modal',
+    'entity_encoding': 'raw',
 }
 
 LOGIN_REDIRECT_URL = '/'
