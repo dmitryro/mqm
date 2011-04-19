@@ -35,17 +35,30 @@ EMAIL_BACKEND = 'django_ses.SESBackend'
 AWS_ACCESS_KEY_ID = 'defined in local_settings.py'
 AWS_SECRET_ACCESS_KEY = 'defined in local_settings.py'
 
-# Absolute path to the directory that holds media.
-# Example: "/home/media/media.lawrence.com/"
-MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'media')
+# Media/Static file handling
 
-# URL that handles the media served from MEDIA_ROOT. Make sure to use a
-# trailing slash if there is a path component (optional in other cases).
-# Examples: "http://media.lawrence.com", "http://example.com/media/"
+MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'media')
 MEDIA_URL = '/media/'
 
-STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'media', 'static')
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = (
+    os.path.join(PROJECT_ROOT, 'static'),
+)
+
+STATICFILES_EXCLUDED_APPS = (
+    'debug_toolbar',
+)
+
+STATICFILES_FINDERS = (
+    #'django.contrib.staticfiles.finders.FileSystemFinder',
+    #'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'staticfiles.finders.FileSystemFinder',
+    'staticfiles.finders.AppDirectoriesFinder',
+    'staticfiles.finders.LegacyAppDirectoriesFinder',
+)
+
 
 COMPRESS_URL = STATIC_URL
 COMPRESS_ROOT = STATIC_ROOT
@@ -102,7 +115,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.admin',
     'django.contrib.sites',
-    'django.contrib.staticfiles',
+    #'django.contrib.staticfiles',
+    'staticfiles',
     'django.contrib.webdesign',
     'django_extensions',
     'django_markup',

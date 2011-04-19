@@ -25,5 +25,4 @@ if settings.DEBUG:
         url(r'^_403/$', 'django.views.generic.simple.direct_to_template', {'template': '403.html'}),
         url(r'^_404/$', 'django.views.generic.simple.direct_to_template', {'template': '404.html'}),
         url(r'^_500/$', 'django.views.generic.simple.direct_to_template', {'template': '500.html'}),
-        url(r'', include('staticfiles.urls')),
     )
