@@ -45,25 +45,15 @@ MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'media')
 MEDIA_URL = '/media/'
 
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
-
 STATIC_URL = '/static/'
-
-STATICFILES_EXCLUDED_APPS = (
-    'debug_toolbar',
-)
 
 COMPRESS_URL = STATIC_URL
 COMPRESS_ROOT = STATIC_ROOT
 COMPRESS_OUTPUT_DIR = '_cache'
 
 COMPRESS_CSS_FILTERS = [
-    'compressor_cssmin.CSSMinFilter',
+    #'compressor_cssmin.CSSMinFilter',
 ]
-
-# URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
-# trailing slash.
-# Examples: "http://foo.com/media/", "/media/".
-ADMIN_MEDIA_PREFIX = '/static/admin/'
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = 'defined in local_settings.py'
@@ -81,8 +71,8 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.debug',
     'django.core.context_processors.i18n',
     'django.core.context_processors.media',
+    'django.core.context_processors.static',
     'django.core.context_processors.request',
-    'staticfiles.context_processors.static_url',
     'django_mobile.context_processors.flavour',
     'website.context_processors.site',
 )
@@ -112,6 +102,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.admin',
     'django.contrib.sites',
+    'django.contrib.staticfiles',
     'django.contrib.webdesign',
     'django_extensions',
     'django_markup',
@@ -129,7 +120,6 @@ INSTALLED_APPS = (
     'mediastore.mediatypes.pdf',
     'mediastore.mediatypes.video',
     'sorl.thumbnail',
-    'staticfiles',
     'tagging',
     'tinymce',
 
