@@ -57,6 +57,13 @@ def test():
     '''
     local('bin/test', capture=False)
 
+def collectstatic():
+    '''
+    * run bin/django collectstatic
+    '''
+    with cd(path):
+        run('bin/django collectstatic -v0 --noinput')
+
 def buildout():
     '''
     * run a buildout
@@ -67,15 +74,12 @@ def buildout():
 
 def deploy():
     '''
-    * test project
     * upload source
-    * run buildout on server and run db migrations
+    * build static files
     * restart services
     '''
-    test()
     update()
-    buildout()
-    syncdb()
+    collectstatic()
     restart()
 
 def _get_services():
