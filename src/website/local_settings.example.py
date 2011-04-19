@@ -10,7 +10,7 @@ path = os.path.abspath(os.path.dirname(__file__))
 
 DATABASES = {
     'default': {
-        'ENGINE': 'sqlite3',
+        'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(path, '../../db.sqlite'),
     }
 }
