@@ -156,6 +156,8 @@ TINYMCE_DEFAULT_CONFIG = {
     'entity_encoding': 'raw',
 }
 
+TINYMCE_JS_URL = '/static/tiny_mce/tiny_mce.js'
+
 LOGIN_REDIRECT_URL = '/'
 
 SKIP_SOUTH_TESTS = True
