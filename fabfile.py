@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import with_statement
 import os
+import fabric.api
 from fabric.api import abort, cd, local, env, run, settings, sudo, get, put
 
 
@@ -69,7 +70,7 @@ def buildout():
     * run a buildout
     '''
     with cd(path):
-        run('test -e bin/buildout || python bootstrap.py')
+        run('test ! -e bin/buildout && python bootstrap.py')
         run('bin/buildout')
 
 def deploy():
@@ -169,16 +170,20 @@ def checkout():
     sudo('svn checkout %(repo_url)s %(path)s' % config)
 
 def setup_fs_permissions():
-    sudo('chown %(project)s:%(project)s -R %(path)s' % config)
-    sudo('chmod u+rw,g+rw -R %(path)s' % config)
-    sudo('chmod g+s -R %(path)s' % config)
+    with cd(path):
+        sudo('chown %(project)s:%(project)s -R .' % config)
+        sudo('chmod u+rw,g+rw -R .')
+        sudo('chmod g+s -R .')
+        sudo('chmod +x restart')
+        for service in config['services']:
+            sudo('chmod +x services/%s' % service)
 
 def bootstrap():
     with cd(path):
-        run('test -e bin/buildout || python bootstrap.py')
         with settings(warn_only=True):
+            run('test ! -e bin/buildout && python bootstrap.py')
             run('bin/buildout')
-            run('test -e src/website/local_settings.py && cp -p src/website/local_settings.example.py src/website/local_settings.py')
+            run('test ! -e src/website/local_settings.py && cp -p src/website/local_settings.example.py src/website/local_settings.py')
 
 def install():
     '''
@@ -192,6 +197,7 @@ def install():
     create_project_directory()
     checkout()
     setup_fs_permissions()
+    fabric.api.disconnect_all()
     bootstrap()
     conf('get')
     print('-' * 30)
@@ -275,7 +281,7 @@ def devinit():
     local('test -e bin/buildout || python bootstrap.py', capture=False)
     local('bin/buildout', capture=False)
     local(
-        'test -e src/website/local_settings.py || '
+        'test ! -e src/website/local_settings.py && '
         'cp -p src/website/local_settings.example.py src/website/local_settings.py',
         capture=False)
     local('bin/django syncdb --noinput', capture=False)
@@ -286,9 +292,9 @@ def devinit():
 def replace(**kwargs):
     if kwargs:
         for key, value in kwargs.items():
-            local(r'find -type f | grep -v "^\./\." | xargs sed -i "s/<REPLACE:%s>/%s/g"' % (
+            local(r'find -type f | grep -v "^\./\." | grep -v ".svn" | xargs sed -i "s/<REPLACE:%s>/%s/g"' % (
                 key,
                 value.replace('"', r'\"'),
             ))
     else:
-        local(r'grep -r "<REPLACE:[^>]\+>" .', capture=False)
+        local(r'grep -r "<REPLACE:[^>]\+>" . | grep -v ".svn"', capture=False)
