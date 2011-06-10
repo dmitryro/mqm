@@ -1,0 +1,80 @@
+/* ---------------------------------- */
+
+/*
+ * PROJECT NAME
+ * PROJECT DATE
+ */
+
+/* ---------------------------------- */
+
+/*
+ *  TABLE OF CONTENTS
+ *  
+ *  @Global
+ *  @Wrapper
+ *  @Masthead
+ *  @Nav
+ *  @Footer
+ *  
+ *
+ */
+
+/* ---------------------------------- */
+
+/* @USEFUL CSS SELECTORS */
+
+/*
+
+will only select direct children
+div#container > ul {
+  border: 1px solid black;
+}
+
+It will select only the element that is immediately preceded by the former element
+ul + p {
+   color: red;
+}
+
+a[title] {
+   color: green;
+}
+
+a[href="http://net.tutsplus.com"] {
+  color: #1f6053;
+}
+
+a[href^="http"] {
+   background: url(path/to/external/icon.png) no-repeat;
+   padding-left: 10px;
+}
+
+a[href$=".jpg"] {
+   color: red;
+}
+
+a[data-filetype="image"] {
+   color: red;
+}
+
+p::first-line {
+   font-weight: bold;
+   font-size: 1.2em;
+}
+
+p::first-letter {
+   float: left;
+   font-size: 2em;
+   font-weight: bold;
+   font-family: cursive;
+   padding-right: 2px;
+}
+
+li:nth-child(3) {
+   color: red;
+}
+
+ul li:first-child {
+   border-top: none;
+}
+
+/* ---------------------------------- */

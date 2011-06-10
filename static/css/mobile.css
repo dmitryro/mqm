@@ -1,0 +1,165 @@
+/* ---------------------------------- */
+
+/*
+ * PROJECT TITLE
+ * MOBILE STYLESHHET - PROJECT DATE
+ */
+
+/* ---------------------------------- */
+
+/*
+ *  TABLE OF CONTENTS
+ *  
+ *  @Global
+ *  @Wrapper
+ *  @Masthead
+ *  @Nav
+ *  @Footer
+ *  
+ *
+ */
+
+/* ---------------------------------- */
+
+
+/* @FONTS */
+
+html {
+	-webkit-font-smoothing: antialiased;
+}
+
+
+@font-face {
+    font-family: 'SBCLutz';
+    src: url('fonts/sbclutz-webfont.eot');
+    src: url('fonts/sbclutz-webfont.eot?#iefix') format('eot'),
+         url('fonts/sbclutz-webfont.woff') format('woff'),
+         url('fonts/sbclutz-webfont.ttf') format('truetype'),
+         url('fonts/sbclutz-webfont.svg#webfontq9dIVR2T') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+/* ---------------------------------- * /
+
+/* @MOBILE TARGET */
+
+/* target mobile devices  
+@media only screen and (max-device-width: 480px) {  
+    
+body { max-width: 100%; } 
+       
+}  
+
+*/
+  
+/* recent Webkit-specific media query to target the iPhone 4's high-resolution Retina display  
+@media only screen and (-webkit-min-device-pixel-ratio: 2) {  
+    // CSS goes here  
+}
+*/  
+  
+/* should technically achieve a similar result to the above query,targeting based on screen resolution (the iPhone 4 has 326 ppi/dpi)  
+@media only screen and (min-resolution: 300dpi) {  
+    // CSS goes here  
+} 
+*/
+
+@media all and (orientation: portrait) 
+{  
+
+  
+} 
+
+  
+
+@media all and (orientation: landscape) 
+{  
+   
+}  
+
+
+
+/* ---------------------------------- * /
+
+
+/* @GLOBALS */
+
+* 
+{
+  font-family: 		'SBCAkkuratProLight', Arial, Helvetica, sans-serif;
+  font-weight: 		normal;
+  font-size: 		12px;
+  line-height: 		18px;
+  color: 			#333;
+}
+
+
+/* no padding set for the fullscreen splash screen */
+body {
+	max-width: 		100%;
+	padding: 		0;
+}
+
+/* padding required for other pages */
+body.mobile {
+	max-width: 		100%;
+	padding: 		5px;
+}
+
+/*
+div{
+  clear:both!important;
+  display:block!important;
+  width:100%!important;
+  float:none!important;
+  margin:0!important;
+  padding:0!important;
+}
+*/
+
+p
+{
+  margin: 			0 0 18px 0;
+  font-size: 		12px;
+  color: 			#333;
+  line-height: 		18px;
+}
+
+a
+{
+  text-decoration: 		none;
+  -moz-transition:		color .15s .1s linear;
+  -o-transition:		color .15s .1s linear;
+  -webkit-transition:	color .15s .1s linear;
+  transition:			color .15s .1s linear;
+
+}
+
+a:hover
+{
+  text-decoration: 	none;
+  color:			#cccccc;
+
+}
+
+
+h2
+{
+  font-size: 		21px;
+  line-height: 		42px;
+}
+
+
+/* ---------------------------------- * /
+
+/* @LAYOUT */
+
+
+div#site-wrapper
+{
+  height:           100%;
+  width:			100%;
+}

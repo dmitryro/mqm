@@ -1,20 +1,25 @@
 <!DOCTYPE html>
-<html class="no-js">
+<!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html lang="en" class="no-js ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en" class="no-js ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="en" class="no-js ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
 <head>{% load compress %}
-    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+	<meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title>{% block title %}{% endblock %} · {{ site.name }}</title>
-    <meta name="title" content="" />
-    <meta name="classification" content="" />
+   
     <meta name="robots" content="all, index, follow" /><!-- ALL ROBOTS -->
     <meta name="googlebot" content="all, index, follow" /><!-- GOOGLE -->
     <meta name="google-site-verification" content="" />
-    <meta name="description" content="Hi, were looking for you too!.{% block meta_description %}{% endblock %}" />
-    <meta name="keywords" content="{% block meta_keywords %}{% endblock %}" />
     <meta name="language" content="en-GB" />
     <meta name="robots" content="index,follow" />
     <meta name="revisit-After" content="14 days" />
     <meta name="distribution" content="global" />
+    
+    <meta name="title" content="" />
+    <meta name="description" content="Hi, were looking for you too!.{% block meta_description %}{% endblock %}" />
+    <meta name="keywords" content="{% block meta_keywords %}{% endblock %}" />
     <meta name="author" content="Angelo Petsas" />
     <meta name="copyright" content="Copyright 2010 London M/A Work Ltd // Art Direction // Digital Media // Advertising // Design. All Rights Reserved." />
 
@@ -54,23 +59,22 @@
     </footer>
 </div>
 
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+<script>!window.jQuery && document.write(unescape('%3Cscript src="js/libs/jquery-1.5.1.min.js"%3E%3C/script%3E'))</script>
+
 {% compress js %}{% block extra_js %}
-<script type="text/javascript" src="{{ STATIC_URL }}js/libs/jquery-1.4.3.min.js"></script>
-<script type="text/javascript" src="{{ STATIC_URL }}js/init.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/plugins.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/script.js"></script>
 {% endblock %}{% endcompress %}
 
 {# remove if no analytics is used #}
 {% block analytics %}
 {% if GOOGLE_ANALYTICS_SITE_ID %}
 <script type="text/javascript">
-var _gaq = [['_setAccount', '{{ GOOGLE_ANALYTICS_SITE_ID }}'], ['_trackPageview']];
-(function(d, t) {
-    var g = d.createElement(t),
-        s = d.getElementsByTagName(t)[0];
-    g.async = true;
-    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    s.parentNode.insertBefore(g, s);
-})(document, 'script');
+	var _gaq=[['_setAccount','{{ GOOGLE_ANALYTICS_SITE_ID }}'],['_trackPageview']]; // Change UA-XXXXX-X to be your site's ID
+	(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.async=1;
+	g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+	s.parentNode.insertBefore(g,s)}(document,'script'));
 </script>
 {% endif %}
 {% endblock %}
