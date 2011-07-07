@@ -123,6 +123,7 @@ def restart():
     '''
     stop()
     start()
+    collectstatic()
 
 def status():
     '''
