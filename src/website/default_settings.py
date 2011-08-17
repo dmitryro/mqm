@@ -57,6 +57,7 @@ STATICFILES_FINDERS = (
     'staticfiles.finders.FileSystemFinder',
     'staticfiles.finders.AppDirectoriesFinder',
     'staticfiles.finders.LegacyAppDirectoriesFinder',
+    'compressor.finders.CompressorFinder',
 )
 
 
