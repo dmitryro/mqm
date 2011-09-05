@@ -15,6 +15,15 @@ DATABASES = {
     }
 }
 
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.mysql',
+#        'NAME': '<REPLACE:PROJECT_NAME>',
+#        'USER': '<REPLACE:PROJECT_NAME>',
+#        'PASSWORD': '<REPLACE:MYSQL_PASSWORD>',
+#    }
+#}
+
 #########
 # EMAIL #
 #########
@@ -29,8 +38,26 @@ DEFAULT_FROM_EMAIL = 'angelo@ma-work.co.uk'
 # remove this in production
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
+# production email settings
+#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+#EMAIL_USE_TLS = True
+#EMAIL_HOST = 'smtp.gmail.com'
+#EMAIL_HOST_USER = ''
+#EMAIL_HOST_PASSWORD = ''
+#EMAIL_PORT = 587
+
 AWS_ACCESS_KEY_ID = ''
 AWS_SECRET_ACCESS_KEY = ''
+
+#########
+# MEDIA #
+#########
+
+#MEDIA_URL = 'http://media.<REPLACE:DOMAIN>/'
+
+#STATIC_URL = 'http://static.<REPLACE:DOMAIN>/'
+#COMPRESS_URL = STATIC_URL
 
 ##############
 # SECRET KEY #
