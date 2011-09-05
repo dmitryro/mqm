@@ -161,7 +161,8 @@ def create_user():
     with settings(warn_only=True):
         sudo('useradd --home %(path)s %(project)s' % config)
         sudo('gpasswd -a www-data %(project)s' % config)
-        sudo('gpasswd -a %s %s' % (env['user'], config['project']))
+        sudo('gpasswd -a gregor %s' % (config['project']))
+        sudo('gpasswd -a angelo %s' % (config['project']))
 
 def create_project_directory():
     with settings(warn_only=True):
@@ -186,7 +187,7 @@ def bootstrap():
             run('bin/buildout')
             run('test ! -e src/website/local_settings.py && cp -p src/website/local_settings.example.py src/website/local_settings.py')
 
-def install():
+def install(mysql_root_password=None):
     '''
     * create project user
     * add webserver and ssh user to project user
@@ -200,9 +201,21 @@ def install():
     setup_fs_permissions()
     fabric.api.disconnect_all()
     bootstrap()
+    buildout()
+
+    if mysql_root_password:
+        create_database(mysql_root_password)
+
     conf('get')
     print('-' * 30)
     print('Please edit server_settings.py and upload with "fab conf:put"')
+
+def install2():
+    syncdb()
+    load_adminuser()
+    collectstatic()
+    restart()
+    reload_webserver()
 
 def load_adminuser():
     with cd(path):
@@ -213,7 +226,11 @@ def setup_django():
     syncdb()
     load_adminuser()
 
-def create_database(root_password, user_password):
+def create_database(root_password, user_password=None):
+    created = False
+    if user_password is None:
+        user_password = _pwdgen()
+        created = True
     sudo(
         'echo "CREATE DATABASE IF NOT EXISTS %(project)s CHARACTER SET utf8;"'
         ' | mysql --user=root --password=%(root_password)s' % {
@@ -229,6 +246,9 @@ def create_database(root_password, user_password):
             'root_password': root_password,
             'user_password': user_password,
         })
+    if created:
+        print('The project\'s mysql password is: %s' % user_password)
+    return user_password
 
 def setup(service=None):
     '''
@@ -277,6 +297,18 @@ def _replace_secret_key():
     return (
         r'''sed -i "s/^SECRET_KEY\s*=\s*[ru]\?['\"].*['\"]\s*$/'''
         r'''SECRET_KEY = '%s'/"''' % secret_key)
+
+def _pwdgen():
+    import random
+    random.seed()
+    allowedConsonants = "bcdfghjklmnprstvwxz"
+    allowedVowels = "aeiou"
+    allowedDigits = "0123456789"
+    pwd = allowedConsonants[ random.randint(0, len(allowedConsonants)-1 ) ] + allowedVowels[ random.randint(0, len(allowedVowels)-1 ) ] \
+        + allowedConsonants[ random.randint(0, len(allowedConsonants)-1 ) ] + allowedVowels[ random.randint(0, len(allowedVowels)-1 ) ] \
+        + allowedConsonants[ random.randint(0, len(allowedConsonants)-1 ) ] + allowedVowels[ random.randint(0, len(allowedVowels)-1 ) ] \
+        + allowedDigits[ random.randint(0, len(allowedDigits)-1 ) ] + allowedDigits[ random.randint(0, len(allowedDigits)-1 ) ]
+    return pwd
 
 def devinit():
     local('test -e bin/buildout || python bootstrap.py', capture=False)
