@@ -1,7 +1,16 @@
 # -*- coding: utf-8 -*-
+'''
+How to install a server::
+
+    fab replace
+    # replace all occurences of settings that are not yet set
+
+    fab install:<mysql_root_password>
+    fab install2
+'''
 from __future__ import with_statement
 import os
-import fabric.api
+from fabric import network
 from fabric.api import abort, cd, local, env, run, settings, sudo, get, put
 
 
@@ -70,7 +79,6 @@ def buildout():
     * run a buildout
     '''
     with cd(path):
-        run('test ! -e bin/buildout && python bootstrap.py')
         run('bin/buildout')
 
 def deploy():
@@ -199,7 +207,7 @@ def install(mysql_root_password=None):
     create_project_directory()
     checkout()
     setup_fs_permissions()
-    fabric.api.disconnect_all()
+    network.disconnect_all()
     bootstrap()
     buildout()
 
@@ -214,7 +222,8 @@ def install2():
     syncdb()
     load_adminuser()
     collectstatic()
-    restart()
+    setup()
+    start()
     reload_webserver()
 
 def load_adminuser():
