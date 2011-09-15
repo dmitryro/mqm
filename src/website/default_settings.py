@@ -116,7 +116,6 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.admin',
     'django.contrib.sites',
-    #'django.contrib.staticfiles',
     'staticfiles',
     'django.contrib.webdesign',
     'django_extensions',
@@ -126,6 +125,7 @@ INSTALLED_APPS = (
     'contact_form',
     'debug_toolbar',
     'flatblocks',
+#    'haystack',
     'gunicorn',
     'mailer',
     'mediastore',
@@ -158,6 +158,10 @@ TINYMCE_DEFAULT_CONFIG = {
 }
 
 TINYMCE_JS_URL = '/static/tiny_mce/tiny_mce.js'
+
+#HAYSTACK_SITECONF = 'website.search_sites'
+#HAYSTACK_SEARCH_ENGINE = 'whoosh'
+#HAYSTACK_WHOOSH_PATH = os.path.join(PROJECT_ROOT, 'search_index')
 
 LOGIN_REDIRECT_URL = '/'
 
