@@ -8,13 +8,6 @@ path = os.path.abspath(os.path.dirname(__file__))
 # DATABSE #
 ###########
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(path, '../../db.sqlite'),
-    }
-}
-
 #DATABASES = {
 #    'default': {
 #        'ENGINE': 'django.db.backends.mysql',
@@ -35,10 +28,6 @@ ADMINS = (
 MANAGERS = ADMINS
 DEFAULT_FROM_EMAIL = 'angelo@ma-work.co.uk'
 
-# remove this in production
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
-# production email settings
 #EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 #EMAIL_USE_TLS = True
@@ -73,8 +62,17 @@ SECRET_KEY = '<REPLACE:SECRET_KEY>'
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(path, '../../db.sqlite'),
+    }
+}
+
 MIDDLEWARE_CLASSES = MIDDLEWARE_CLASSES + (
     'debug_toolbar.middleware.DebugToolbarMiddleware',
 )
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 #COMPRESS = True
