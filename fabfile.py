@@ -88,6 +88,7 @@ def deploy():
     * restart services
     '''
     update()
+    buildout()
     collectstatic()
     restart()
 
