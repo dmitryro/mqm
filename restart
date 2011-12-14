@@ -6,5 +6,5 @@ PROJECT_ROOT=SCRIPTPATH
 PROJECT_NAME=`basename $SCRIPTPATH`
 
 sudo svc -du /etc/service/$PROJECT_NAME-gunicorn
-sudo svc -du /etc/service/$PROJECT_NAME-celery
+#sudo svc -du /etc/service/$PROJECT_NAME-celery
 sudo -u $PROJECT_NAME $SCRIPTPATH/bin/django collectstatic -v0 --noinput
