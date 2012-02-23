@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
+from django.conf import settings
 from django.conf.urls.defaults import *
 from django.contrib import admin
 from django.views.generic.simple import direct_to_template
-from django.conf import settings
 
 
 admin.autodiscover()
@@ -25,4 +25,5 @@ if settings.DEBUG:
         url(r'^_403/$', 'django.views.generic.simple.direct_to_template', {'template': '403.html'}),
         url(r'^_404/$', 'django.views.generic.simple.direct_to_template', {'template': '404.html'}),
         url(r'^_500/$', 'django.views.generic.simple.direct_to_template', {'template': '500.html'}),
+        url(r'^media/(.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
     )
