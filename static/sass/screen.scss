@@ -1,0 +1,290 @@
+/*
+Title:      M/A London @madebyMA
+Author:     Angelo Petsas (http://ma-work.co.uk)
+*/
+
+//=VARIABLES - GLOBAL
+$directive: #FF4F4F;
+$noir: #000000;
+$background: #FFFFFF;
+$grey: #f2f2f2;
+
+//=VARIABLES - GRID
+$columns: 12;
+$column-width: 60px;
+$gutter-width: 20px;
+$max-width: $columns * ($column-width + $gutter-width);
+
+//=VARIABLES - FONTS
+$font-base: 15px;
+$font-base-line-height: 24px;
+$kerning: 2px;
+
+//=MIXINS - FONTS
+@mixin serif-reg {
+  font-family: "adobe-text-pro-1","adobe-text-pro-2",sans-serif;
+  font-style: normal;
+  font-weight: 400;
+}
+@mixin serif-it {
+  font-family: "adobe-text-pro-1","adobe-text-pro-2",sans-serif;
+  font-style: italic;
+  font-weight: 400;
+}
+@mixin sans-reg {
+  font-family: "proxima-nova-1","proxima-nova-2",sans-serif;
+  font-style: normal;
+  font-weight: 700;
+}
+
+//=FUNTIONS - LAYOUT
+//@function em($target, $context: $font-base) {
+   //@if $target == 0 { @return 0 }
+   //@return $target / $context + 0em;
+//}
+
+//@function perc($width, $container-width: $max-width) {
+   //@return percentage($width / $container-width);
+//}
+
+
+//=IMPORTS
+@import "reset";
+
+
+/* GENERAL STYLES
+----------------------------------------------- */
+
+body {
+  color: #222;
+  background: $background;
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased; }
+
+
+/* LINKS */
+a:link, a:visited {
+  text-decoration: none;
+  color: #000;
+  -moz-transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out; }
+
+a:hover, a:focus {
+    color: #555;
+     }
+
+/* SELECTION COLORS */
+::selection {
+  background: rgba(0, 0, 0, 0.1); }
+
+::-moz-selection {
+  background: rgba(0, 0, 0, 0.1); }
+
+img::selection {
+  background: transparent; }
+
+img::-moz-selection {
+  background: transparent; }
+
+body {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1); }
+
+
+
+/* STRUCTURE
+-------------------------------------------------------- */
+/* GRID = 1280px max-width */
+
+header#masthead, header[role="masthead"] {
+  position: fixed;
+  top: 0;
+  left: 0;
+  min-width:220px;
+  height: 100%;
+  width:220px; 
+  z-index: 100;
+}
+
+#container {
+  margin: 0 0 0 220px;
+  height: 100%;
+  width:3000px; /* must be set by js */
+  overflow-y: hidden;
+  background:$background; 
+}
+
+
+#showcase, #approach {
+  position: relative;
+  overflow: hidden;
+  width: 804px;
+  background:#f2f2f2; 
+  float:left;
+}
+
+
+/* SIDEBAR
+-------------------------------------------------------- */
+
+#branding {
+  width:115px;
+  margin:18px auto 160px 18px;
+  font-family: Arial, Helvetica;
+  font-weight: bold;
+  font-size:64px;
+  color:#333;
+}
+
+#masthead nav,
+#masthead aside {
+  margin-left:18px;
+  margin-bottom:36px;
+}
+
+#masthead nav ul li a {
+  @include serif-reg;
+  color:$directive;
+  font-size:13px;
+  margin-bottom:1px;
+  &:hover {
+      opacity:0.5;
+      text-decoration:none;
+      border:none;
+    }
+}
+
+#masthead aside ul li {
+  @include serif-reg;
+  color:$noir;
+  font-size:13px;
+  margin-bottom:1px;
+  &.contact {
+      @include serif-it;
+      color:$noir;
+    }
+  a { 
+    color:$noir;
+    text-decoration:underline;
+    &:hover {
+      opacity:0.5;
+      text-decoration:none;
+      border:none;
+    } 
+  } 
+}
+
+
+/* CONTENT = PORTFOLIO
+-------------------------------------------------------- */
+
+/* Selected Works list */
+
+#showcase article {
+  display:block;
+  &.welcome {
+    display: block;
+  }
+}
+
+.welcome h1 {
+  @include sans-reg;
+  color: $directive;
+  font-size: 32px;
+  letter-spacing: $kerning;
+  line-height: 34px;
+  text-align: left;
+  text-transform: uppercase;
+  display: block;
+  width: 90%;
+  position: relative;
+}
+
+.welcome h2 {
+  @include serif-reg;
+  color: $noir;
+  font-size: 13px;
+  line-height: 14px;
+  text-align: left;
+  display: block;
+  width: 40%;
+  margin: 40px 20px;
+  position: relative;
+}
+
+.feature {
+    background: url("../img/loaderonwhite.gif") no-repeat scroll 50% 50% transparent;
+    display: block;
+    text-transform: uppercase;
+    position: relative;
+    background: black;
+    & img.main {
+      display: block; 
+    }
+    & .inner {
+      display: block;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      cursor: pointer;
+      z-index: 100; 
+      h2 {
+        display: block;
+        width: 480px;
+        color: white;
+        @include sans-reg;
+        font-size: 36px;
+        letter-spacing: $kerning;
+        line-height: 38px;
+        text-align: center;
+        text-transform: uppercase;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-left: -240px;
+      }
+    }
+  }
+
+/* Selected Works list information */
+
+.details {
+  position: absolute;
+  top: 0;
+  left:0;
+  width: 100%;
+  height:100%;
+  padding: 0;
+  background-color: rgba(0,0,0,0.8);
+  opacity:0;
+  display:none;
+  z-index: 20000;
+}
+
+.details div {
+  @include serif-it;
+  color: $directive;
+  &.acc {
+    width:450px;
+    margin:50px auto;
+  }
+}
+
+
+
+/* -------------------------------------- */
+/* @MOUSE EVENTS */
+
+.followMouseTooltip {
+    position: absolute;
+    @include sans-reg;
+    font-size: 16px;
+    color: $directive;
+    text-transform: uppercase;
+    z-index: 1002;
+    /* html.no-js & { // killer nesting
+      display:none;
+    } */
+}
+
