@@ -137,6 +137,7 @@ INSTALLED_APPS = (
     'sorl.thumbnail',
     'tagging',
     'tinymce',
+    'south',
 
     'website',
     'website.pages',
