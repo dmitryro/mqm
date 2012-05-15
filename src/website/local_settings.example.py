@@ -28,6 +28,8 @@ ADMINS = (
 MANAGERS = ADMINS
 DEFAULT_FROM_EMAIL = 'angelo@ma-work.co.uk'
 
+INTERNAL_IPS = ('127.0.0.1',)
+
 #EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 #EMAIL_USE_TLS = True
