@@ -12,6 +12,7 @@ from __future__ import with_statement
 import os
 from fabric import network
 from fabric.api import abort, cd, local, env, run, settings, sudo, get, put
+from fabric.api import run as _fabric_run
 
 
 env.hosts.extend([
@@ -34,12 +35,22 @@ config = {
 
 SERVER_SETTINGS_FILE = 'server_settings.py'
 
+
+def run(command):
+    '''
+    Overwriting run command to execute tasks as project user.
+    '''
+    command = command.encode('string-escape')
+    sudo('su %s -c "%s"' % (project_name, command))
+
+
 def update():
     '''
     * Update the checkout.
     '''
     with cd(path):
         run('svn update')
+    setup_fs_permissions()
 
 def syncdb():
     '''
@@ -48,6 +59,7 @@ def syncdb():
     '''
     with cd(path):
         run('bin/django syncdb --noinput')
+        run('bin/django migrate --noinput')
 
 def reload_webserver():
     '''
@@ -172,6 +184,7 @@ def create_user():
         sudo('gpasswd -a www-data %(project)s' % config)
         sudo('gpasswd -a gregor %s' % (config['project']))
         sudo('gpasswd -a angelo %s' % (config['project']))
+        sudo('gpasswd -a martin %s' % (config['project']))
 
 def create_project_directory():
     with settings(warn_only=True):
@@ -226,6 +239,7 @@ def install2():
     setup()
     start()
     reload_webserver()
+    setup_fs_permissions()
 
 def load_adminuser():
     with cd(path):
@@ -328,6 +342,7 @@ def devinit():
         'cp -p src/website/local_settings.example.py src/website/local_settings.py',
         capture=False)
     local('bin/django syncdb --noinput', capture=False)
+    local('bin/django migrate', capture=False)
     local('bin/django loaddata config/adminuser.json', capture=False)
     local('bin/django loaddata config/localsite.json', capture=False)
     local('bin/django collectstatic --noinput', capture=False)
