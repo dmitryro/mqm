@@ -173,6 +173,13 @@ def loaddata(apps):
     local('bin/django loaddata %s' % dump_file)
 
 
+def loadmedia():
+    assert len(env['hosts']) == 1
+    local('rsync -r %s:/srv/%s/media/media/ media/media/' % (
+        env['hosts'][0],
+        config['project']))
+
+
 ##############################
 # Installation on new server #
 ##############################
