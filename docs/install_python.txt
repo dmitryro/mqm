@@ -1,0 +1,36 @@
+Install python on MacOS
+=======================
+
+This is what we currently do with new macs:
+
+* Install _`macports <install macports>`
+* Make sure macports is installed :)
+* Install python using macports::
+
+    sudo port selfupdate
+    sudo port python27
+
+* Make sure that you use the correct python version::
+
+    which python
+
+Should return something like this starting with ``/opt/``::
+
+    /opt/local/bin/python
+
+.. _install macports: http://www.macports.org/install.php
+
+Install PIL (Python Imaging Library)
+------------------------------------
+
+* Install PIL using macports::
+
+    sudo port install py27-pil
+
+* Test if it installed correctly::
+
+    python
+    >>> import PIL
+    >>> import Image
+
+This should not give you any errors.
