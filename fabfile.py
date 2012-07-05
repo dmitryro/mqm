@@ -341,9 +341,12 @@ def _pwdgen():
         + allowedDigits[ random.randint(0, len(allowedDigits)-1 ) ] + allowedDigits[ random.randint(0, len(allowedDigits)-1 ) ]
     return pwd
 
+def devsetup():
+    local('virtualenv . --system-site-packages')
+    local('bin/pip install -r requirements/development.txt')
+
 def devinit():
-    local('test -e bin/buildout || python bootstrap.py', capture=False)
-    local('bin/buildout', capture=False)
+    devsetup()
     local(
         'test ! -e src/website/local_settings.py && '
         'cp -p src/website/local_settings.example.py src/website/local_settings.py',
@@ -352,7 +355,9 @@ def devinit():
     local('bin/django migrate', capture=False)
     local('bin/django loaddata config/adminuser.json', capture=False)
     local('bin/django loaddata config/localsite.json', capture=False)
-    local('bin/django collectstatic --noinput', capture=False)
+    # We don't need that, right? In development serving static files should
+    # happen automagically
+    #local('bin/django collectstatic --noinput', capture=False)
 
 def replace(**kwargs):
     if kwargs:

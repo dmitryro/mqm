@@ -34,3 +34,13 @@ Install PIL (Python Imaging Library)
     >>> import Image
 
 This should not give you any errors.
+
+Install required python libraries
+---------------------------------
+
+For development we usually need a few more libraries. Please install them by
+executing::
+
+    sudo easy_install pip
+    sudo pip install virtualenv
+    sudo pip install fabric
