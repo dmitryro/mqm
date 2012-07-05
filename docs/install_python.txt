@@ -20,6 +20,14 @@ Should return something like this starting with ``/opt/``::
 
 .. _install macports: http://www.macports.org/install.php
 
+If all of the above was successfull, then run::
+
+    sudo mv /usr/bin/python /usr/bin/python_original
+    sudo ln -s /usr/bin/python `which python`
+
+This will overwrite the systems python version with the one we just installed
+via macports.
+
 Install PIL (Python Imaging Library)
 ------------------------------------
 
