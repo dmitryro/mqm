@@ -51,6 +51,7 @@ def update():
     '''
     with cd(path):
         run('svn update')
+        run('mkdir -p logs')
     setup_fs_permissions()
 
 def syncdb():
