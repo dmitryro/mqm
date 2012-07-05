@@ -3,39 +3,42 @@ import os
 PROJECT_ROOT = os.path.dirname(
     os.path.dirname(os.path.dirname(__file__)))
 
+
+###########################################################################
+#                            project settings                             #
+###########################################################################
+
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
-ADMINS = (
-    # ('Your Name', 'your_email@domain.com'),
-)
+# responsible persons
+# -------------------
 
+ADMINS = (
+    (u'Angelo', u'angelo@ma-work.co.uk'),
+    (u'Gregor', u'gregor@ma-work.co.uk'),
+)
 MANAGERS = ADMINS
 
-# Local time zone for this installation. Choices can be found here:
-# http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
-# although not all choices may be available on all operating systems.
-# If running in a Windows environment this must be set to the same as your
-# system time zone.
-TIME_ZONE = 'Europe/London'
+# Email settings
+# --------------
 
-# Language code for this installation. All choices can be found here:
-# http://www.i18nguy.com/unicode/language-identifiers.html
+DEFAULT_FROM_EMAIL = 'angelo@ma-work.co.uk'
+
+# i18n / l10n
+# ------------
+
+TIME_ZONE = 'Europe/London'
 LANGUAGE_CODE = 'en'
+USE_I18N = True
+
+# more django core settings
+# -------------------------
 
 SITE_ID = 1
 
-# If you set this to False, Django will make some optimizations so as not
-# to load the internationalization machinery.
-USE_I18N = True
-
-
-EMAIL_BACKEND = 'django_ses.SESBackend'
-
-AWS_ACCESS_KEY_ID = 'defined in local_settings.py'
-AWS_SECRET_ACCESS_KEY = 'defined in local_settings.py'
-
 # Media/Static file handling
+# --------------------------
 
 MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'media')
 MEDIA_URL = '/media/'
@@ -47,19 +50,16 @@ STATICFILES_DIRS = (
     os.path.join(PROJECT_ROOT, 'static'),
 )
 
-STATICFILES_EXCLUDED_APPS = (
-    'debug_toolbar',
-)
-
 STATICFILES_FINDERS = (
-    #'django.contrib.staticfiles.finders.FileSystemFinder',
-    #'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    'staticfiles.finders.FileSystemFinder',
-    'staticfiles.finders.AppDirectoriesFinder',
-    'staticfiles.finders.LegacyAppDirectoriesFinder',
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+#    'django.contrib.staticfiles.finders.LegacyAppDirectoriesFinder',
     'compressor.finders.CompressorFinder',
 )
 
+STATICFILES_EXCLUDED_APPS = (
+    'debug_toolbar',
+)
 
 COMPRESS_URL = STATIC_URL
 COMPRESS_ROOT = STATIC_ROOT
@@ -69,15 +69,18 @@ COMPRESS_CSS_FILTERS = [
     #'compressor_cssmin.CSSMinFilter',
 ]
 
-# Make this unique, and don't share it with anybody.
-SECRET_KEY = 'defined in local_settings.py'
+# Template related settings
+# -------------------------
 
-# List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
     'django_mobile.loader.Loader',
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
 #     'django.template.loaders.eggs.load_template_source',
+)
+
+TEMPLATE_DIRS = (
+    os.path.join(PROJECT_ROOT, 'templates/'),
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
@@ -91,32 +94,13 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'website.context_processors.site',
 )
 
-MIDDLEWARE_CLASSES = (
-    'django.middleware.common.CommonMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.middleware.doc.XViewMiddleware',
-    'django_mobile.middleware.MobileDetectionMiddleware',
-    'django_mobile.middleware.SetFlavourMiddleware',
-    'website.pages.middleware.PageFallbackMiddleware',
-)
-
-ROOT_URLCONF = 'website.urls'
-
-TEMPLATE_DIRS = (
-    os.path.join(PROJECT_ROOT, 'templates/'),
-)
-
 INSTALLED_APPS = (
-    # load patches first
-    'website.patch',
-
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.admin',
     'django.contrib.sites',
-    'staticfiles',
+    'django.contrib.staticfiles',
     'django.contrib.webdesign',
     'django_extensions',
     'django_markup',
@@ -143,9 +127,38 @@ INSTALLED_APPS = (
     'website.pages',
 )
 
+ROOT_URLCONF = 'website.urls'
+
+MIDDLEWARE_CLASSES = (
+    'django.middleware.common.CommonMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.middleware.doc.XViewMiddleware',
+    'django_mobile.middleware.MobileDetectionMiddleware',
+    'django_mobile.middleware.SetFlavourMiddleware',
+    'website.pages.middleware.PageFallbackMiddleware',
+)
+
 FIXTURE_DIRS = (
     os.path.join(PROJECT_ROOT, 'fixtures'),
 )
+
+# global development options
+# --------------------------
+
+SKIP_SOUTH_TESTS = True
+
+DEBUG_TOOLBAR_CONFIG = {
+    'INTERCEPT_REDIRECTS': False,
+}
+
+
+###########################################################################
+#                            third-party apps                             #
+###########################################################################
+
+# TinyMCE
+# -------
 
 TINYMCE_DEFAULT_CONFIG = {
     'plugins': 'inlinepopups,safari',
@@ -160,18 +173,17 @@ TINYMCE_DEFAULT_CONFIG = {
 
 TINYMCE_JS_URL = '/static/tiny_mce/tiny_mce.js'
 
-#HAYSTACK_SITECONF = 'website.search_sites'
-#HAYSTACK_SEARCH_ENGINE = 'whoosh'
-#HAYSTACK_WHOOSH_PATH = os.path.join(PROJECT_ROOT, 'search_index')
+# haystack
+# --------
 
-LOGIN_REDIRECT_URL = '/'
+HAYSTACK_SITECONF = 'website.search_sites'
+HAYSTACK_SEARCH_ENGINE = 'whoosh'
+HAYSTACK_WHOOSH_PATH = os.path.join(PROJECT_ROOT, 'search_index')
 
-SKIP_SOUTH_TESTS = True
 
-DEBUG_TOOLBAR_CONFIG = {
-    'INTERCEPT_REDIRECTS': False,
-}
-
+###########################################################################
+#                          local settings import                          #
+###########################################################################
 
 try:
     from local_settings import *

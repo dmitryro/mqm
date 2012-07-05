@@ -4,65 +4,73 @@ from default_settings import *
 import os
 path = os.path.abspath(os.path.dirname(__file__))
 
-###########
-# DATABSE #
-###########
 
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.mysql',
-#        'NAME': '<REPLACE:PROJECT_NAME>',
-#        'USER': '<REPLACE:PROJECT_NAME>',
-#        'PASSWORD': '<REPLACE:MYSQL_PASSWORD>',
-#    }
-#}
+###########################################################################
+#                            database settings                            #
+###########################################################################
 
-#########
-# EMAIL #
-#########
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': '<REPLACE:PROJECT_NAME>',
+        'USER': '<REPLACE:PROJECT_NAME>',
+        'PASSWORD': '<REPLACE:MYSQL_PASSWORD>',
+    }
+}
 
-ADMINS = (
-    ('Angelo', 'angelo@ma-work.co.uk'),
-    ('Gregor', 'gregor@ma-work.co.uk'),
-)
-MANAGERS = ADMINS
+
+###########################################################################
+#                             email settings                              #
+###########################################################################
+
 DEFAULT_FROM_EMAIL = 'angelo@ma-work.co.uk'
 
-INTERNAL_IPS = ('127.0.0.1',)
+# GMail Email setup
+# -----------------
 
 #EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-
 #EMAIL_USE_TLS = True
 #EMAIL_HOST = 'smtp.gmail.com'
 #EMAIL_HOST_USER = ''
 #EMAIL_HOST_PASSWORD = ''
 #EMAIL_PORT = 587
 
-AWS_ACCESS_KEY_ID = ''
-AWS_SECRET_ACCESS_KEY = ''
+# SES Email setup
+# ---------------
 
-#########
-# MEDIA #
-#########
+#EMAIL_BACKEND = 'django_ses.SESBackend'
+#AWS_ACCESS_KEY_ID = ''
+#AWS_SECRET_ACCESS_KEY = ''
+
+
+###########################################################################
+#                        media / static files urls                        #
+###########################################################################
 
 #MEDIA_URL = 'http://media.<REPLACE:DOMAIN>/'
 
 #STATIC_URL = 'http://static.<REPLACE:DOMAIN>/'
 #COMPRESS_URL = STATIC_URL
 
-##############
-# SECRET KEY #
-##############
+
+###########################################################################
+#                              secret sauce                               #
+###########################################################################
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = '<REPLACE:SECRET_KEY>'
 
-##########################
-# DEVELOPMENT OVERWRITES #
-##########################
+
+###########################################################################
+#                         development overwrites                          #
+###########################################################################
+
+# delete those settings in production
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
+
+INTERNAL_IPS = ('127.0.0.1',)
 
 DATABASES = {
     'default': {
@@ -76,5 +84,3 @@ MIDDLEWARE_CLASSES = MIDDLEWARE_CLASSES + (
 )
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
-#COMPRESS = True
