@@ -1,6 +1,18 @@
 Skeleton Project Documentation
 ==============================
 
+Setup a project for development
+-------------------------------
+
+There are a few simple steps you need to follow to setup this project:
+
+1. Checkout the source code
+2. Make sure your python is installed correctly (see :doc:`install python
+<install_python>`)
+3. Run::
+
+    fab devinit
+
 ``fab devinit``
 ---------------
 
@@ -10,12 +22,20 @@ After you have created a new checkout go to the directory and run::
 
 This will run a couple of things for you:
 
-    * It will set up buildout environment (``python bootstrap.py`` and
-      ``bin/buildout``)
-    * It creates a ``local_settings.py`` file for you.
-    * It installes a sqlite db ready to use and runs ``syncdb``.
-    * It creates a superuser for the project called *admin* with password
-      *admin*.
+* It will set up a virtualenv for you
+* It installs all the python dependecies into the virtualenv
+* It creates a ``local_settings.py`` file if non exists yet
+* It installes a sqlite db ready to use and runs ``syncdb``
+* It creates a superuser for the project called *admin* with password
+  *admin*.
+
+Working on a project
+--------------------
+
+Djangos management command can be found at the root of the project. Run
+commands like this::
+
+    python manage.py runserver
 
 ``restart``
 -----------
@@ -32,19 +52,6 @@ run: ``chmod +x restart``
 nginx config
 ------------
 
-There is a file called ``nginx.conf`` in the ``config/`` directory. Use this
-to configure nginx. After you customized ``nginx.conf``, commit and update the
-server. Now run the following command to make the configuration file available
-to nginx::
-
-    ln -s /home/alice/config/nginx.conf /opt/nginx/conf.d/alice.conf
-    or on maworaa1:
-    ln -s /home/frantic/config/nginx.conf /etc/nginx/sites-enabled/frantic.conf
-
-You can now restart nginx to make the site online. If you want to "uninstall"
-the site (to take it offline), just remove the symbolic link you created with
-the ``ln`` command::
-
-    rm /opt/nginx/conf.d/alice.conf
-
-Restart nginx and the site will be offline.
+There is a file called ``config/nginx.conf``. Use this to configure nginx.
+After you customized ``nginx.conf``, commit and update the server. You can now
+restart nginx to take the changes into effect.
