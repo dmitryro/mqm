@@ -14,15 +14,15 @@ django-markup == 0.3
 django-mobile == 0.2.3
 django-publicmanager == 0.9.2
 django-ses == 0.2
-django-sortedm2m == 0.3.3
-django-tagging == 0.3.1
+django-sortedm2m == 0.4.0
+django-taggit == 0.9.3
 django-templatequery == 0.3.0
 django-tinymce == 1.5.1b2
 ghettoq == 0.4.5
 gunicorn == 0.14.3
 South == 0.7.5
 Whoosh == 2.4.0
-http://pypi-81b384.ma-work.co.uk/media/dists/django-mediastore-0.5.6.tar.gz#md5=07fb2b9bc930366a14ee7eb6f0f296f7
-http://pypi-81b384.ma-work.co.uk/media/dists/BeautifulSoup-3.2.0.tar.gz#md5=d535f7d6030e82fd72d6dbce5edc982d
-http://pypi-81b384.ma-work.co.uk/media/dists/sorl-thumbnail-3.2.5-ma1.tar.gz#md5=2c1ab7216c0c23567a01b18b45bcd421
+http://pypi-81b384.ma-work.co.uk/media/dists/django-mediastore-0.6.0.tar.gz
+http://pypi-81b384.ma-work.co.uk/media/dists/BeautifulSoup-3.2.0.tar.gz
+http://pypi-81b384.ma-work.co.uk/media/dists/sorl-thumbnail-3.2.5-ma1.tar.gz
 dependencies/django-contact-form-0.3.tar.gz

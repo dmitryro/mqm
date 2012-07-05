@@ -121,7 +121,7 @@ INSTALLED_APPS = (
     'mediastore.mediatypes.pdf',
     'mediastore.mediatypes.video',
     'sorl.thumbnail',
-    'tagging',
+    'taggit',
     'tinymce',
     'south',
 
