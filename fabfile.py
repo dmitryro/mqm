@@ -28,6 +28,7 @@ repo_url = 'svn://granger@theobaldgranger.com/svnroot/%s' % project_name
 config = {
     'path': path,
     'project': project_name,
+    'user': project_name,
     'repo_url': repo_url,
     'services': ['gunicorn'],
 }
@@ -41,7 +42,7 @@ def run(command):
     Overwriting run command to execute tasks as project user.
     '''
     command = command.encode('string-escape')
-    sudo('su %s -c "%s"' % (project_name, command))
+    sudo('su %s -c "%s"' % (config['user'], command))
 
 
 def update():
@@ -175,9 +176,9 @@ def loaddata(apps):
 
 def loadmedia():
     assert len(env['hosts']) == 1
-    local('rsync -r %s:/srv/%s/media/media/ media/media/' % (
+    local('rsync -r %s:%s/media/media/ media/media/' % (
         env['hosts'][0],
-        config['project']))
+        config['path']))
 
 
 ##############################
