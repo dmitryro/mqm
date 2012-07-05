@@ -53,7 +53,6 @@ STATICFILES_DIRS = (
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-#    'django.contrib.staticfiles.finders.LegacyAppDirectoriesFinder',
     'compressor.finders.CompressorFinder',
 )
 
@@ -61,13 +60,13 @@ STATICFILES_EXCLUDED_APPS = (
     'debug_toolbar',
 )
 
-COMPRESS_URL = STATIC_URL
-COMPRESS_ROOT = STATIC_ROOT
-COMPRESS_OUTPUT_DIR = '_cache'
+# django-compressor
+# -----------------
 
-COMPRESS_CSS_FILTERS = [
-    #'compressor_cssmin.CSSMinFilter',
-]
+COMPRESS_JS_FILTERS = (
+    'compressor.filters.css_default.CssAbsoluteFilter',
+    'compressor.filters.cssmin.CSSMinFilter',
+)
 
 # Template related settings
 # -------------------------
@@ -95,6 +94,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 )
 
 INSTALLED_APPS = (
+    # core apps
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -102,14 +102,16 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.staticfiles',
     'django.contrib.webdesign',
+
+    # third-party apps
+    'compressor',
     'django_extensions',
     'django_markup',
     'django_mobile',
-    'compressor',
     'contact_form',
     'debug_toolbar',
     'flatblocks',
-#    'haystack',
+    #'haystack',
     'gunicorn',
     'mailer',
     'mediastore',
@@ -123,6 +125,7 @@ INSTALLED_APPS = (
     'tinymce',
     'south',
 
+    # project apps
     'website',
     'website.pages',
 )
