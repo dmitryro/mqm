@@ -3,7 +3,7 @@ carrot == 0.10.7
 celery == 2.5.5
 Django == 1.4.0
 django-celery == 2.5.5
-django_compressor == 1.2a2
+django_compressor == 1.1.2
 django-contact-form == 0.3
 django-extensions == 0.9
 django-flatblocks == 0.6.0
