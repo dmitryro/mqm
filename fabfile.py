@@ -58,8 +58,8 @@ def syncdb():
     * run migrate
     '''
     with cd(path):
-        run('bin/django syncdb --noinput')
-        run('bin/django migrate --noinput')
+        run('bin/python manage.py syncdb --noinput')
+        run('bin/python manage.py migrate --noinput')
 
 def reload_webserver():
     '''
@@ -81,10 +81,10 @@ def test():
 
 def collectstatic():
     '''
-    * run bin/django collectstatic
+    * run bin/python manage.py collectstatic
     '''
     with cd(path):
-        run('bin/django collectstatic -v0 --noinput')
+        run('bin/python manage.py collectstatic -v0 --noinput')
 
 def buildout():
     '''
@@ -165,12 +165,12 @@ def loaddata(apps):
     dump_file = '.dump.json'
     server_dump = os.path.join(config['path'], dump_file)
     with cd(path):
-        run('%s/bin/django dumpdata --indent=2 %s > %s' % (
+        run('%s/bin/python manage.py dumpdata --indent=2 %s > %s' % (
             config['path'],
             apps,
             server_dump))
         get(server_dump, dump_file)
-    local('bin/django loaddata %s' % dump_file)
+    local('bin/python manage.py loaddata %s' % dump_file)
 
 
 def loadmedia():
@@ -250,7 +250,7 @@ def install2():
 
 def load_adminuser():
     with cd(path):
-        run('bin/django loaddata config/adminuser.json')
+        run('bin/python manage.py loaddata config/adminuser.json')
 
 def setup_django():
     buildout()
@@ -347,17 +347,17 @@ def devsetup():
 
 def devinit():
     devsetup()
-    local(
-        'test ! -e src/website/local_settings.py && '
-        'cp -p src/website/local_settings.example.py src/website/local_settings.py',
-        capture=False)
-    local('bin/django syncdb --noinput', capture=False)
-    local('bin/django migrate', capture=False)
-    local('bin/django loaddata config/adminuser.json', capture=False)
-    local('bin/django loaddata config/localsite.json', capture=False)
+    if not os.path.exists('src/website/local_settings.py'):
+        local(
+            'cp -p src/website/local_settings.example.py src/website/local_settings.py',
+            capture=False)
+    local('bin/python manage.py syncdb --noinput', capture=False)
+    local('bin/python manage.py migrate', capture=False)
+    local('bin/python manage.py loaddata config/adminuser.json', capture=False)
+    local('bin/python manage.py loaddata config/localsite.json', capture=False)
     # We don't need that, right? In development serving static files should
     # happen automagically
-    #local('bin/django collectstatic --noinput', capture=False)
+    #local('bin/python manage.py collectstatic --noinput', capture=False)
 
 def replace(**kwargs):
     if kwargs:
