@@ -88,12 +88,12 @@ def collectstatic():
     with cd(path):
         run('bin/python manage.py collectstatic -v0 --noinput')
 
-def buildout():
+def pip_install():
     '''
-    * run a buildout
+    * install dependcies
     '''
     with cd(path):
-        run('bin/buildout')
+        run('bin/pip install -r requirements/live.txt')
 
 def deploy():
     '''
@@ -102,7 +102,8 @@ def deploy():
     * restart services
     '''
     update()
-    buildout()
+    pip_install()
+    syncdb()
     collectstatic()
     restart()
 
@@ -211,19 +212,12 @@ def setup_fs_permissions():
         for service in config['services']:
             sudo('chmod +x services/%s' % service)
 
-def bootstrap():
-    with cd(path):
-        with settings(warn_only=True):
-            run('test ! -e bin/buildout && python bootstrap.py')
-            run('bin/buildout')
-            run('test ! -e src/website/local_settings.py && cp -p src/website/local_settings.example.py src/website/local_settings.py')
-
 def install(mysql_root_password=None):
     '''
     * create project user
     * add webserver and ssh user to project user
     * create project directory and push sources to server
-    * install everything with buildout
+    * install everything with pip_install
     * install sample local_settings.py
     '''
     create_user()
@@ -231,8 +225,8 @@ def install(mysql_root_password=None):
     checkout()
     setup_fs_permissions()
     network.disconnect_all()
-    bootstrap()
-    buildout()
+    pip_install()
+    pip_install()
 
     if mysql_root_password:
         create_database(mysql_root_password)
@@ -255,7 +249,7 @@ def load_adminuser():
         run('bin/python manage.py loaddata config/adminuser.json')
 
 def setup_django():
-    buildout()
+    pip_install()
     syncdb()
     load_adminuser()
 
@@ -354,7 +348,7 @@ def devinit():
             'cp -p src/website/local_settings.example.py src/website/local_settings.py',
             capture=False)
     local('bin/python manage.py syncdb --noinput', capture=False)
-    local('bin/python manage.py migrate', capture=False)
+    local('bin/python manage.py migrate --noinput', capture=False)
     local('bin/python manage.py loaddata config/adminuser.json', capture=False)
     local('bin/python manage.py loaddata config/localsite.json', capture=False)
     # We don't need that, right? In development serving static files should
