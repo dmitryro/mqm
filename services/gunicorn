@@ -9,4 +9,4 @@ cd $PROJECT_ROOT
 
 exec /usr/bin/env - \
     setuidgid <REPLACE:PROJECT_NAME> \
-    bin/django run_gunicorn 127.0.0.1:<REPLACE:PORT> -w 5
+    bin/python manage.py run_gunicorn 127.0.0.1:<REPLACE:PORT> -w 5

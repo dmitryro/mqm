@@ -9,4 +9,4 @@ cd $PROJECT_ROOT
 
 exec /usr/bin/env - \
     setuidgid <REPLACE:PROJECT_NAME> \
-    bin/django celeryd  -B -s celery -E -l INFO -f $PROJECT_ROOT/logs/celeryd.log
+    bin/python manage.py celeryd  -B -s celery -E -l INFO -f $PROJECT_ROOT/logs/celeryd.log

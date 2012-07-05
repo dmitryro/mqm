@@ -16,7 +16,7 @@ path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 # set to 'python manage.py' or 'django-admin.py' if you use don't use buildout
-MANAGE_COMMAND = 'bin/django'
+MANAGE_COMMAND = 'bin/python manage.py'
 
 # path to your settings file that contains the INSTALLED_APPS
 SETTINGS_FILE = 'src/website/settings.py'
