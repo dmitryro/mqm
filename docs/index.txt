@@ -17,18 +17,17 @@ This will run a couple of things for you:
     * It creates a superuser for the project called *admin* with password
       *admin*.
 
-``restartfcgi``
----------------
+``restart``
+-----------
 
-*restartfcgi* is the same as e.g. ``./bac`` or ``./hoxton`` with other
-projects. Its a script to restart the django FCGI server. Run the following
-while you are in the root directory of the project on the server to restart
-the site::
+*restart* is the on-server script that restarts the django site.  Run the
+following while you are in the root directory of the project on the server to
+restart the site::
 
-* If for any reason you get permission denied when trying to use 'restartfcgi'
-run: chmod +x restartfcgi
+    ./restart
 
-    ./restartfcgi
+* If for any reason you get permission denied when trying to use ``restart``
+run: ``chmod +x restart``
 
 nginx config
 ------------
