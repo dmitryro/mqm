@@ -25,6 +25,17 @@ path = '/srv/%s' % project_name
 repo_url = 'svn://granger@theobaldgranger.com/svnroot/%s' % project_name
 
 
+default_loaddata_apps = [
+    'flatblocks',
+    'pages',
+    'mediastore',
+    'download',
+    'embeded',
+    'image',
+    'taggit',
+]
+
+
 config = {
     'path': path,
     'project': project_name,
@@ -164,11 +175,11 @@ def conf(operation='get', filename=SERVER_SETTINGS_FILE):
         put(SERVER_SETTINGS_FILE, '%s/src/website/local_settings.py' % config['path'])
 
 
-def loaddata(apps):
+def loaddata(apps=' '.join(default_loaddata_apps)):
     dump_file = '.dump.json'
     server_dump = os.path.join(config['path'], dump_file)
     with cd(path):
-        run('%s/bin/python manage.py dumpdata --indent=2 %s > %s' % (
+        run('%s/bin/python manage.py dumpdata --indent=2 --natural --all %s > %s' % (
             config['path'],
             apps,
             server_dump))
