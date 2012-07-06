@@ -8,7 +8,11 @@ This is what we currently do with new macs:
 * Install python using macports::
 
     sudo port selfupdate
-    sudo port python27
+    sudo port install python27
+    sudo port install py-setuptools
+    sudo port install py-pip
+    sudo port install py-virtualenv
+    sudo port install py-fabric
 
 * Make sure that you use the correct python version::
 
@@ -46,8 +50,8 @@ This should not give you any errors.
 Install required python libraries
 ---------------------------------
 
-For development we usually need a few more libraries. Please install them by
-executing::
+If you are on a Mac, the commands at the beginning of the page already did
+this for you. On all other platforms, run::
 
     sudo easy_install pip
     sudo pip install virtualenv
