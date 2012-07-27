@@ -7,11 +7,11 @@ from django.views.generic.simple import direct_to_template
 
 admin.autodiscover()
 
-urlpatterns = patterns('website.views',
-    url(r'^$', 'index', name='index'),
+urlpatterns = patterns('',
+    url(r'^$', 'website.views.index', name='index'),
 
-    url(r'^contact/$', 'contact', name='contact'),
-    url(r'^about/$', 'about', name='about'),
+    url(r'^contact/$', 'website.views.contact', name='contact'),
+    url(r'^about/$', 'website.views.about', name='about'),
     
     url(r'^robots.txt$', direct_to_template, {'template': 'robots.txt'},),
     url(r'^humans.txt$', direct_to_template, {'template': 'humans.txt'},),
