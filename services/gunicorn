@@ -7,6 +7,6 @@ SCRIPTPATH=`dirname $SCRIPT`
 PROJECT_ROOT=`dirname $SCRIPTPATH`
 cd $PROJECT_ROOT
 
-exec /usr/bin/env - \
+exec \
     setuidgid <REPLACE:PROJECT_NAME> \
     bin/python manage.py run_gunicorn 127.0.0.1:<REPLACE:PORT> -w 5

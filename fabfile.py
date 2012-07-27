@@ -99,6 +99,13 @@ def collectstatic():
     with cd(path):
         run('bin/python manage.py collectstatic -v0 --noinput')
 
+def setup_virtualenv():
+    '''
+    * setup virtualenv
+    '''
+    with cd(path):
+        run('virtualenv . --system-site-packages')
+
 def pip_install():
     '''
     * install dependcies
@@ -236,8 +243,13 @@ def install(mysql_root_password=None):
     checkout()
     setup_fs_permissions()
     network.disconnect_all()
+    setup_virtualenv()
     pip_install()
-    pip_install()
+    with cd(path):
+        with settings(warn_only=True):
+            run(
+                'test ! -e src/website/local_settings.py && '
+                'cp -p src/website/local_settings.example.py src/website/local_settings.py')
 
     if mysql_root_password:
         create_database(mysql_root_password)
