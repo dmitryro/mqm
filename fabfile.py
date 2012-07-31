@@ -361,7 +361,7 @@ def _pwdgen():
     return pwd
 
 def devsetup():
-    local('virtualenv . --system-site-packages')
+    local('virtualenv . --system-site-packages --python=`which python`')
     local('bin/pip install -r requirements/development.txt')
 
 def devinit():
