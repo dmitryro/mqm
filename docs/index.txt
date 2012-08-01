@@ -37,21 +37,32 @@ commands like this::
 
     python manage.py runserver
 
-``restart``
------------
-
-*restart* is the on-server script that restarts the django site.  Run the
-following while you are in the root directory of the project on the server to
-restart the site::
-
-    ./restart
-
-* If for any reason you get permission denied when trying to use ``restart``
-run: ``chmod +x restart``
-
 nginx config
 ------------
 
 There is a file called ``config/nginx.conf``. Use this to configure nginx.
 After you customized ``nginx.conf``, commit and update the server. You can now
 restart nginx to take the changes into effect.
+
+Deploying to the server
+-----------------------
+
+After you have made some changes to the project locally, follow these steps to
+put them on the server:
+
+1. Make sure that you've committed the changed files to SVN.
+2. Open a terminal and change the directory to your project's directory (where
+   the ``fabfile.py`` is located).
+3. Run: ``fab update`` -- this will update the SVN checkout on the server with
+   your changes.
+4. Run: ``fab restart`` -- this will restart the website's process so that
+   your changes are taken into account.
+
+You can shortcut the third and fourth step my combining them into one command:
+``fab update restart``.
+
+By default ``fab`` uses the username from your local account for the server
+login. However if you have a different username locally, then pass the correct
+one to ``fab`` via the ``-u`` option::
+
+    fab -u serveruser update restart
