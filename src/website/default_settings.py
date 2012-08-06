@@ -111,7 +111,6 @@ INSTALLED_APPS = (
     'django_markup',
     'django_mobile',
     'contact_form',
-    'debug_toolbar',
     'flatblocks',
     #'haystack',
     'gunicorn',
