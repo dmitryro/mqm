@@ -56,10 +56,6 @@ STATICFILES_FINDERS = (
     'compressor.finders.CompressorFinder',
 )
 
-STATICFILES_EXCLUDED_APPS = (
-    'debug_toolbar',
-)
-
 # django-compressor
 # -----------------
 
