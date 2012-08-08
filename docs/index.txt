@@ -66,3 +66,6 @@ login. However if you have a different username locally, then pass the correct
 one to ``fab`` via the ``-u`` option::
 
     fab -u serveruser update restart
+
+    or for angelo:
+    fab -u angelo update restart
