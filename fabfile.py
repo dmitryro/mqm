@@ -16,34 +16,39 @@ from fabric.api import run as _fabric_run
 from fabric.contrib import files
 
 
+def _project_config():
+    from ConfigParser import SafeConfigParser
+    config_file = os.path.join(
+        os.path.dirname(os.path.abspath(__file__)),
+        'project.ini')
+    project_config = SafeConfigParser()
+    project_config.read(config_file)
+    return project_config
+project_config = _project_config()
+
+
 env.hosts.extend([
-    '<REPLACE:IP>',
+    project_config.get('project', 'host'),
 ])
 
 
-project_name = '<REPLACE:PROJECT_NAME>'
-path = '/srv/%s' % project_name
-repo_url = 'svn://granger@theobaldgranger.com/svnroot/%s' % project_name
+project_name = project_config.get('project', 'name')
 
 
-default_loaddata_apps = [
-    'flatblocks',
-    'pages',
-    'mediastore',
-    'download',
-    'embeded',
-    'image',
-    'taggit',
-]
-
+_services = project_config.get('project', 'services')
+_services = _services.split()
 
 config = {
-    'path': path,
+    'path': project_config.get('project', 'path'),
     'project': project_name,
     'user': project_name,
-    'repo_url': repo_url,
-    'services': ['gunicorn'],
+    'repo_url': project_config.get('project', 'repository'),
+    'services': _services,
 }
+
+del _services
+
+path = config['path']
 
 
 SERVER_SETTINGS_FILE = 'server_settings.py'
@@ -170,7 +175,9 @@ def conf(operation='get', filename=SERVER_SETTINGS_FILE):
         put(SERVER_SETTINGS_FILE, '%s/src/website/local_settings.py' % config['path'])
 
 
-def loaddata(apps=' '.join(default_loaddata_apps)):
+def loaddata(apps=None):
+    if apps is None:
+        apps = project_config.get('development', 'loaddata_apps')
     dump_file = '.dump.json'
     server_dump = os.path.join(config['path'], dump_file)
     with cd(path):
