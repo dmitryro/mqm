@@ -126,19 +126,8 @@ def deploy():
     collectstatic()
     restart()
 
-def _get_services():
-    if 'services' in config:
-        return config['services']
-    service_dir = os.path.join(
-        os.path.dirname(os.path.abspath(__file__)),
-        'services')
-    services = [d
-        for d in os.listdir(service_dir)
-        if os.path.isfile(os.path.join(service_dir, d))]
-    return services
-
 def _services():
-    for service in _get_services():
+    for service in config['services']:
         service_config = {
             'service': service,
             'service_name': '%s-%s' % (config['project'], service),
