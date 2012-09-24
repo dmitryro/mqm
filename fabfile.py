@@ -10,6 +10,8 @@ How to install a server::
 '''
 from __future__ import with_statement
 import os
+import sys
+from fabric.colors import blue, green, red, white, yellow
 from fabric import network
 from fabric.api import abort, cd, local, env, run, settings, sudo, get, put
 from fabric.api import run as _fabric_run
@@ -91,10 +93,55 @@ def restart_webserver():
     sudo('/etc/init.d/nginx restart')
 
 def test():
-    '''
-    * test project and abort if tests have failed
-    '''
-    local('bin/test', capture=False)
+    # test if the project.ini file is filled correctly
+    required_config = (
+        ('project', 'name'),
+        ('project', 'repository'),
+        ('project', 'host'),
+        ('project', 'domain'),
+        ('project', 'path'),
+        ('django', 'port'),
+    )
+    missing_values = []
+    for config_name in required_config:
+        value = project_config.get(*config_name)
+        if not value:
+            missing_values.append(config_name)
+    if missing_values:
+        print(
+            red(u'Error: ') +
+            u'Please modify ' + yellow('project.ini') +
+            u' to contain all the necessary information. ' +
+            u'The following options are missing:\n'
+        )
+        for section, key in missing_values:
+            print(yellow(u'\t%s.%s' % (section, key)))
+        sys.exit(1)
+
+    # check if project is already set up on the server
+    if not files.exists(config['path']):
+        print(
+            red(u'Error: ') +
+            u'The project is not yet installed on the server. ' +
+            u'Please run ' + blue(u'fab install')
+        )
+        sys.exit(1)
+
+    # check if project has a local_settings file
+    with cd(path):
+        if not files.exists('src/website/local_settings.py'):
+            print(
+                red(u'Error: ') +
+                u'The project has no ' + yellow(u'local_settings.py') +
+                u' configuration file on the server yet. ' +
+                u'Please run ' + blue(u'fab install') + u'.'
+            )
+            sys.exit(1)
+
+    print(
+        green(u'Congratulations. Everything seems fine so far!\n') +
+        u'You can run ' + yellow(u'fab deploy') + ' to update the server.'
+    )
 
 def collectstatic():
     '''
