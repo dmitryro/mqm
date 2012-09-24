@@ -13,6 +13,7 @@ import os
 from fabric import network
 from fabric.api import abort, cd, local, env, run, settings, sudo, get, put
 from fabric.api import run as _fabric_run
+from fabric.contrib import files
 
 
 env.hosts.extend([
@@ -214,13 +215,6 @@ def create_user():
         sudo('gpasswd -a angelo %s' % (config['project']))
         sudo('gpasswd -a martin %s' % (config['project']))
 
-def create_project_directory():
-    with settings(warn_only=True):
-        sudo('mkdir -p %s' % os.path.dirname(config['path']))
-
-def checkout():
-    sudo('svn checkout %(repo_url)s %(path)s' % config)
-
 def setup_fs_permissions():
     with cd(path):
         sudo('chown %(project)s:%(project)s -R .' % config)
@@ -231,50 +225,76 @@ def setup_fs_permissions():
             sudo('chmod +x services/%s' % service)
 
 def install(mysql_root_password=None):
-    '''
+    u'''
     * create project user
     * add webserver and ssh user to project user
     * create project directory and push sources to server
     * install everything with pip_install
-    * install sample local_settings.py
+    * install local_settings.py
+    * syncdb
+    * load a sample admin user
+    * run collectstatic
+    * setup the webserver and gunicorn
+    * starting the gunicorn server
+    * reloading nginx
+    * setting the filesystem permissions correctly
     '''
+    while not mysql_root_password:
+        mysql_root_password = raw_input(u'Please enter the mysql root password: ')
+
     create_user()
-    create_project_directory()
-    checkout()
+
+    # create project directory
+    dirname = os.path.dirname(config['path'])
+    if not files.exists(dirname):
+        sudo('mkdir -p %s' % os.path.dirname(config['path']))
+
+    # svn checkout
+    sudo('svn checkout %(repo_url)s %(path)s' % config)
+
     setup_fs_permissions()
+
+    # disconnect from ssh to make new system users/groups available
     network.disconnect_all()
+
     setup_virtualenv()
     pip_install()
+
+    mysql_user_password = create_database(mysql_root_password)
+
     with cd(path):
-        with settings(warn_only=True):
-            run(
-                'test ! -e src/website/local_settings.py && '
-                'cp -p src/website/local_settings.example.py src/website/local_settings.py')
+        if files.exists('src/website/local_settings.py'):
+            email_user = raw_input(u'Please enter a GMail username for the email setup: ')
+            email_password = raw_input(u'Please enter the GMail password: ')
+            files.upload_template(
+                u'src/website/local_settings.example.py',
+                context={
+                    u'PROJECT_NAME': project_name,
+                    u'MYSQL_PASSWORD': mysql_user_password,
+                    u'SECRET_KEY': _generate_secret_key(),
+                    u'EMAIL_USER': email_user,
+                    u'EMAIL_PASSWORD': email_password,
+                },
+                destination=u'src/website/local_settings.py')
 
-    if mysql_root_password:
-        create_database(mysql_root_password)
-
-    conf('get')
-    print('-' * 30)
-    print('Please edit server_settings.py and upload with "fab conf:put"')
-
-def install2():
     syncdb()
-    load_adminuser()
+
+    with cd(path):
+        run('bin/python manage.py loaddata config/adminuser.json')
+
     collectstatic()
     setup()
     start()
     reload_webserver()
     setup_fs_permissions()
 
-def load_adminuser():
-    with cd(path):
-        run('bin/python manage.py loaddata config/adminuser.json')
-
-def setup_django():
-    pip_install()
-    syncdb()
-    load_adminuser()
+    conf('get')
+    print(
+        u'The project should be up and running. You will find the '
+        u'local_settings.py used on the server on your local machine as '
+        u'`server_settings.py` in the current working directory. Modify it '
+        u'as needed and upload again with:\n'
+        u'fab conf:put')
 
 def create_database(root_password, user_password=None):
     created = False
@@ -338,15 +358,12 @@ def teardown():
 # Development helpers #
 #######################
 
-def _replace_secret_key():
-    from random import choice
-    secret_key = ''.join([
-        choice('abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)')
-        for i in range(50)])
-    secret_key = secret_key.replace('&', '\\&')
-    return (
-        r'''sed -i "s/^SECRET_KEY\s*=\s*[ru]\?['\"].*['\"]\s*$/'''
-        r'''SECRET_KEY = '%s'/"''' % secret_key)
+def _generate_secret_key():
+    import random
+    return u''.join([
+        random.choice(u'abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)')
+        for i in range(50)
+    ])
 
 def _pwdgen():
     import random
@@ -354,10 +371,10 @@ def _pwdgen():
     allowedConsonants = "bcdfghjklmnprstvwxz"
     allowedVowels = "aeiou"
     allowedDigits = "0123456789"
-    pwd = allowedConsonants[ random.randint(0, len(allowedConsonants)-1 ) ] + allowedVowels[ random.randint(0, len(allowedVowels)-1 ) ] \
-        + allowedConsonants[ random.randint(0, len(allowedConsonants)-1 ) ] + allowedVowels[ random.randint(0, len(allowedVowels)-1 ) ] \
-        + allowedConsonants[ random.randint(0, len(allowedConsonants)-1 ) ] + allowedVowels[ random.randint(0, len(allowedVowels)-1 ) ] \
-        + allowedDigits[ random.randint(0, len(allowedDigits)-1 ) ] + allowedDigits[ random.randint(0, len(allowedDigits)-1 ) ]
+    pwd = random.choice(allowedConsonants) + random.choice(allowedVowels) \
+        + random.choice(allowedConsonants) + random.choice(allowedVowels) \
+        + random.choice(allowedConsonants) + random.choice(allowedVowels) \
+        + random.choice(allowedDigits) + random.choice(allowedDigits)
     return pwd
 
 def devsetup():

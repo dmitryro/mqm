@@ -12,9 +12,9 @@ path = os.path.abspath(os.path.dirname(__file__))
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': '<REPLACE:PROJECT_NAME>',
-        'USER': '<REPLACE:PROJECT_NAME>',
-        'PASSWORD': '<REPLACE:MYSQL_PASSWORD>',
+        'NAME': '%(PROJECT_NAME)s',
+        'USER': '%(PROJECT_NAME)s',
+        'PASSWORD': '%(MYSQL_PASSWORD)s',
     }
 }
 
@@ -28,12 +28,12 @@ DEFAULT_FROM_EMAIL = 'angelo@ma-work.co.uk'
 # GMail Email setup
 # -----------------
 
-#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-#EMAIL_USE_TLS = True
-#EMAIL_HOST = 'smtp.gmail.com'
-#EMAIL_HOST_USER = ''
-#EMAIL_HOST_PASSWORD = ''
-#EMAIL_PORT = 587
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = '%(EMAIL_USER)s'
+EMAIL_HOST_PASSWORD = '%(EMAIL_PASSWORD)s'
+EMAIL_PORT = 587
 
 # SES Email setup
 # ---------------
@@ -58,27 +58,25 @@ DEFAULT_FROM_EMAIL = 'angelo@ma-work.co.uk'
 ###########################################################################
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = '<REPLACE:SECRET_KEY>'
+SECRET_KEY = '%(SECRET_KEY)s'
 
 
 ###########################################################################
 #                         development overwrites                          #
 ###########################################################################
 
-# delete those settings in production
-
-DEBUG = True
-TEMPLATE_DEBUG = DEBUG
-
-INTERNAL_IPS = ('127.0.0.1',)
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(path, '../../db.sqlite'),
-    }
-}
-
+#DEBUG = True
+#TEMPLATE_DEBUG = DEBUG
+#
+#INTERNAL_IPS = ('127.0.0.1',)
+#
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.sqlite3',
+#        'NAME': os.path.join(path, '../../db.sqlite'),
+#    }
+#}
+#
 #MIDDLEWARE_CLASSES = MIDDLEWARE_CLASSES + (
 #    'debug_toolbar.middleware.DebugToolbarMiddleware',
 #)
@@ -86,5 +84,5 @@ DATABASES = {
 #INSTALLED_APPS = INSTALLED_APPS + (
 #    'debug_toolbar',
 #)
-
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+#
+#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
