@@ -68,12 +68,10 @@ def update():
 
 def syncdb():
     '''
-    * run syncdb
-    * run migrate
+    * run syncdb --migrate
     '''
     with cd(path):
-        run('bin/python manage.py syncdb --noinput')
-        run('bin/python manage.py migrate --noinput')
+        run('bin/python manage.py syncdb --noinput --migrate')
 
 def reload_webserver():
     '''
@@ -376,8 +374,7 @@ def devinit():
         local(
             'cp -p src/website/local_settings.example.py src/website/local_settings.py',
             capture=False)
-    local('bin/python manage.py syncdb --noinput', capture=False)
-    local('bin/python manage.py migrate --noinput', capture=False)
+    local('bin/python manage.py syncdb --noinput --migrate', capture=False)
     local('bin/python manage.py loaddata config/adminuser.json', capture=False)
     local('bin/python manage.py loaddata config/localsite.json', capture=False)
     # We don't need that, right? In development serving static files should
