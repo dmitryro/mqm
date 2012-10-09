@@ -1,146 +1,38 @@
-Step 1 - Preparation
+Install a new server
 ====================
 
-Putting a project on the server:
+Install these packages::
 
-Run::
+    subversion
+    git
+    python
+    python-dev
+    ipython
+    mysql-server
+    python-mysqldb
+    python-imaging
+    daemontools
 
-    fab replace
+Put the following into /etc/init/svscan.conf::
 
-This will output a list of files and lines that have placeholders in the form
-of <REPLACE:NAME>. These bits of the project need handling before the project
-can be put on the server.
+    # svscan - daemontools
+    #
+    # This service starts daemontools from the point the system is
+    # started until it is shut down again.
 
-You can replace those placeholders project wide with::
+    start on startup
 
-    fab replace:NAME=thevalue
+    start on runlevel 1
+    start on runlevel 2
+    start on runlevel 3
+    start on runlevel 4
+    start on runlevel 5
+    start on runlevel 6
 
-Where ``NAME`` is the placeholder's name and ``thevalue`` is what the
-placeholder should become.
+    stop on shutdown
 
-For artofchange I run the following replacements::
+    exec svscanboot
 
-    fab replace:PROJECT_NAME=artofchange
-    fab replace:DOMAIN=aoc.maworaa.co.uk
-    fab replace:IP=maworaa1.miniserver.com
-    fab replace:PORT=9030
+And run::
 
-Note: ``PORT`` is the port that the WSGI server is using internally behind the
-nginx webserver. That means it must not be used yet on the server by another
-process/project. Make sure it's not used yet with the following command
-(executed on the server)::
-
-    ps aux | grep gunicorn
-
-And see if there is already a listing for this port. E.g. devoted is using the
-port 9011 and it looks like this:
-
-    devoted  21735  0.0  0.3  92384 29208 ?        S    Jul27   1:38 /usr/bin/python bin/django run_gunicorn 127.0.0.1:9011 -w 5
-
-By now ``fab replace`` should only reveal not-yet-handled placeholders for
-``MYSQL_PASSWORD`` and ``SECRET_KEY``.
-
-You now must commit your changes.
-
-Step 2 - Installation
-=====================
-
-Note: the following ``fab`` commands operate on the server. You need to use
-your correct username that you use on the server with ``fab -u <username>``.
-
-First install command looks like::
-
-    fab install:mysql_root_password=<mysql root password>
-
-On maworaa ``<mysql root password>`` is the same as angelo's login password,
-e.g. if it's 1234::
-
-    fab install:mysql_root_password=1234
-
-Run that. This will perform the following things:
-
-* Create a user on the server called like the project
-* Add angelo, martin and gregor to the project's user group
-* Checks out the project in /srv/<PROJECT_NAME>
-* Installs the python dependencies
-* Creates a mysql database for the project
-* Creates a local_settings.py file
-
-At the end of the output there should be a line saying something like::
-
-    The project's mysql password is: abcdef12
-
-Try to remember the password or write it down somewhere.
-
-Step 3 - Configuration
-======================
-
-The project code is on the server now, but we still need to configure the
-local_settings.py for the correct DB, Email settings etc.
-
-You don't need to log into the server for this. Run ``fab conf`` to download
-the server's local settings. They will be downloaded as ``server_settings.py``
-file into your project directory locally.
-
-Now open up this file and make sure that at least the following requirements
-are met:
-
-* Remove everything below the headline *development overwrites*
-* Fill in the mysql password you remember from the end of Step 2
-* Setup the email settings so that errors get emailed to use reliably
-* Generate a secret key locally with ``python manage.py generate_secret_key``
-  and fill it into the ``SECRET_KEY`` setting.
-
-Cool. You can also place a ``DEBUG=True`` right below ``from default_settings
-import *`` until the project runs successfully the first time and you see that
-everything is working.
-
-Upload the ``server_settings.py`` file with::
-
-    fab conf:put
-
-Step 4 - Setting up the project
-===============================
-
-Lets perform the hardwork on the server. Like creating the database tables,
-telling the webserver what files it need to serve and spinning up the site
-itself. But don't worry you only should need to run::
-
-    fab install2
-
-You should now be able to access the project via the domain you've setup in
-Step 1.
-
-There will be a pre-installed admin user called ``admin`` with password
-``admin``.
-
-(if everything is running well, remember to remove ``DEBUG=True`` from the
-server's setting, perform ``fab conf`` to get the settings, remove the
-``DEBUG=True`` and upload the settings again with ``fab conf:put``)
-
-Step 5 - Updates
-================
-
-After a while you propably want to update the project. Commit your changes to
-SVN and run from you local project::
-
-    fab deploy
-
-This:
-
-* updates the server
-* installs all new requirements
-* runs a syncdb
-* collects the static files to be available for the webserver
-* restarts the site
-
-If you haven't made any changes to the DB or to the requirements, then you can
-also simply run::
-
-    fab update restart
-
-That will, do the following tasks (and is quicker as complete ``deploy``):
-
-* updates the server
-* collects the static files to be available for the webserver
-* restarts the site
+    sudo start svscan
