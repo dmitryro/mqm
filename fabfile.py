@@ -422,14 +422,11 @@ def devinit():
     devsetup()
     if not os.path.exists('src/website/local_settings.py'):
         local(
-            'cp -p src/website/local_settings.example.py src/website/local_settings.py',
+            'cp -p src/website/local_settings.development.py src/website/local_settings.py',
             capture=False)
     local('bin/python manage.py syncdb --noinput --migrate', capture=False)
     local('bin/python manage.py loaddata config/adminuser.json', capture=False)
     local('bin/python manage.py loaddata config/localsite.json', capture=False)
-    # We don't need that, right? In development serving static files should
-    # happen automagically
-    #local('bin/python manage.py collectstatic --noinput', capture=False)
 
 def replace(**kwargs):
     if kwargs:

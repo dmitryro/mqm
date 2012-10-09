@@ -5,6 +5,10 @@ import os
 path = os.path.abspath(os.path.dirname(__file__))
 
 
+#DEBUG = True
+TEMPLATE_DEBUG = DEBUG
+
+
 ###########################################################################
 #                            database settings                            #
 ###########################################################################
@@ -59,30 +63,3 @@ EMAIL_PORT = 587
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = '%(SECRET_KEY)s'
-
-
-###########################################################################
-#                         development overwrites                          #
-###########################################################################
-
-#DEBUG = True
-#TEMPLATE_DEBUG = DEBUG
-#
-#INTERNAL_IPS = ('127.0.0.1',)
-#
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.sqlite3',
-#        'NAME': os.path.join(path, '../../db.sqlite'),
-#    }
-#}
-#
-#MIDDLEWARE_CLASSES = MIDDLEWARE_CLASSES + (
-#    'debug_toolbar.middleware.DebugToolbarMiddleware',
-#)
-#
-#INSTALLED_APPS = INSTALLED_APPS + (
-#    'debug_toolbar',
-#)
-#
-#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
