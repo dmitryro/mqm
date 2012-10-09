@@ -2,18 +2,14 @@
 '''
 How to install a server::
 
-    fab replace
-    # replace all occurences of settings that are not yet set
-
-    fab install:<mysql_root_password>
-    fab install2
+    fab install
 '''
 from __future__ import with_statement
 import os
 import sys
 from fabric.colors import blue, green, red, white, yellow
 from fabric import network
-from fabric.api import abort, cd, local, env, run, settings, sudo, get, put
+from fabric.api import abort, cd, local, env, settings, sudo, get, put
 from fabric.api import run as _fabric_run
 from fabric.contrib import files
 
