@@ -6,12 +6,15 @@ How to install a server::
 '''
 from __future__ import with_statement
 import os
+import random
+import re
 import sys
 from fabric.colors import blue, green, red, white, yellow
 from fabric import network
-from fabric.api import abort, cd, local, env, settings, sudo, get, put
+from fabric.api import abort, cd, local, env, settings, sudo, get, put, hide
 from fabric.api import run as _fabric_run
 from fabric.contrib import files
+from fabric.contrib.console import confirm
 
 
 def _project_config():
@@ -260,6 +263,15 @@ def setup_fs_permissions():
         sudo('chmod +x restart')
         for service in config['services']:
             sudo('chmod +x services/%s' % service)
+
+def _find_unused_port():
+    port_available = re.compile(u'Connection refused\s*$', re.IGNORECASE)
+    while True:
+        port = random.randint(10000, 11000)
+        with settings(hide('warnings', 'stdout', 'running'), warn_only=True):
+            result = sudo('echo | telnet localhost %d' % port)
+            if port_available.search(result):
+                return port
 
 def install(mysql_root_password=None):
     u'''
