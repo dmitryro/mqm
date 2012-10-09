@@ -327,11 +327,44 @@ def install(mysql_root_password=None):
 
     conf('get')
     print(
+        green(u'Success') +
+        yellow(
         u'The project should be up and running. You will find the '
         u'local_settings.py used on the server on your local machine as '
         u'`server_settings.py` in the current working directory. Modify it '
-        u'as needed and upload again with:\n'
-        u'fab conf:put')
+        u'as needed and upload again with:\n') +
+        blue(u'fab conf:put'))
+
+def uninstall():
+    if not confirm(u'Do you really want to delete the project from the server?'):
+        print red(u'Aborting')
+        sys.exit(0)
+    delete_db = confirm(u'Do you want to delete the associated database?')
+    mysql_root_password = None
+    while delete_db and not mysql_root_password:
+        mysql_root_password = raw_input(u'Please enter the mysql root password: ')
+    conf(u'get')
+    teardown()
+
+    print(u'rm -rf %(path)s' % config)
+    print(u'deluser --remove-home %(user)s' % config)
+    print(u'delgroup %(user)s' % config)
+    if delete_db:
+        print((
+            u'echo "DROP DATABASE %(project)s;" | '
+            u'mysql --user=root --password=%(root_password)s'
+        ) % {
+            'project': config['project'],
+            'root_password': mysql_root_password,
+        })
+
+    print(
+        green(u'The project was deleted successfully.\n')
+    )
+    if not delete_db:
+        print(
+            yellow(u'The database is still in place. Consider deleting it by hand.')
+        )
 
 def create_database(root_password, user_password=None):
     created = False
