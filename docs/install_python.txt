@@ -10,7 +10,7 @@ This is what we currently do with new macs:
     sudo port selfupdate
     sudo port install python27
     sudo port select --set python python27
-    sudo port install py-setuptools
+    sudo port install py27-distribute
     sudo port install py-pip
     sudo port install py-virtualenv
     sudo port install py-fabric
