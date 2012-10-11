@@ -12,6 +12,8 @@ Install python on MacOS
 
 This is what we currently do with new macs:
 
+* Install latest XCode
+* Open XCode and go to "Preferences > Downloads" and install "Command Line Tools"
 * Install _`macports <install macports>`
 * Make sure macports is installed :)
 * Install python using macports::
@@ -20,9 +22,9 @@ This is what we currently do with new macs:
     sudo port install python27
     sudo port select --set python python27
     sudo port install py27-distribute
-    sudo port install py-pip
-    sudo port install py-virtualenv
-    sudo port install py-fabric
+    sudo port install py27-pip
+    sudo port install py27-virtualenv
+    sudo port install py27-fabric
 
 * Make sure that you use the correct python version::
 
