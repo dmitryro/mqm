@@ -1,46 +1,46 @@
 server {
-    server_name media.<REPLACE:DOMAIN>;
+    server_name media.%(DOMAIN)s;
 
     location /  {
-        root /srv/<REPLACE:PROJECT_NAME>/media;
+        root /srv/%(PROJECT_NAME)s/media;
         access_log  off;
     }
 }
 server {
-    server_name static.<REPLACE:DOMAIN>;
+    server_name static.%(DOMAIN)s;
 
     location /  {
-        root /srv/<REPLACE:PROJECT_NAME>/media/static;
+        root /srv/%(PROJECT_NAME)s/media/static;
         access_log  off;
     }
 }
 server {
-    server_name www.<REPLACE:DOMAIN>;
+    server_name www.%(DOMAIN)s;
 
-    access_log /var/log/nginx/<REPLACE:DOMAIN>.access.log;
+    access_log /var/log/nginx/%(PROJECT_NAME)s.access.log;
     client_max_body_size 100m;
 
     location / {
         #auth_basic            "private";
-        #auth_basic_user_file  /srv/<REPLACE:PROJECT_NAME>/config/htpasswd;
+        #auth_basic_user_file  /srv/%(PROJECT_NAME)s/config/htpasswd;
 
         proxy_set_header X-Forward-For $proxy_add_x_forwarded_for;
         proxy_set_header Host $http_host;
         proxy_redirect off;
-        proxy_pass http://127.0.0.1:<REPLACE:PORT>;
+        proxy_pass http://127.0.0.1:%(PORT)s;
     }
 
     location /static/ {
-        alias /srv/<REPLACE:PROJECT_NAME>/media/static/;
+        alias /srv/%(PROJECT_NAME)s/media/static/;
         access_log off;
     }
 
     location /media/ {
-        alias /srv/<REPLACE:PROJECT_NAME>/media/;
+        alias /srv/%(PROJECT_NAME)s/media/;
         access_log off;
     }
 }
 server {
-    server_name <REPLACE:DOMAIN>;
-    rewrite ^(.*) http://www.<REPLACE:DOMAIN>$1 permanent;
+    server_name %(DOMAIN)s;
+    rewrite ^(.*) http://www.%(DOMAIN)s$1 permanent;
 }
