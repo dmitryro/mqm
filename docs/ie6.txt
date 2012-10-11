@@ -1,3 +1,12 @@
+
+    _/      _/    _/_/    
+   _/_/  _/_/  _/    _/   
+  _/  _/  _/  _/_/_/_/    
+ _/      _/  _/    _/     
+_/      _/  _/    _/      
+                        
+
+
 By Andy Clarke - A IE6 Specific stylesheet:
 
 One, standard, universal stylesheet for Internet Explorer 6. Simply copy one of these Conditional Comments into the head of any web page and you're done.
