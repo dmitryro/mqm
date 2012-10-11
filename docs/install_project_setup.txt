@@ -1,0 +1,126 @@
+
+    _/      _/    _/_/    
+   _/_/  _/_/  _/    _/   
+  _/  _/  _/  _/_/_/_/    
+ _/      _/  _/    _/     
+_/      _/  _/    _/      
+                        
+
+
+Step 1 - Preparation
+====================
+
+- Clone the Skeleton Project
+- Remove clone from version but "keep files"
+- Open up a Shell and 'cd' into the project directory
+- Remove all directories caled .svn - run:
+	
+	rm -rf `find . -type d -name .svn`
+
+
+
+Step 2 - Set Project up on SVN
+==============================
+
+- Login to the Granger server and run the following set of commands:
+
+	ssh granger@68.178.206.139 
+	Gr_102666KUMA
+	su - 
+	svnadmin create /svnroot/(projectName)
+	chmod 777 -R /svnroot/(projectName)
+
+
+
+Step 3 - import the cloned local prject to SVN
+==============================================
+
+- 'cd' into the project directory if your not alresdy there:
+
+	svn import svn+ssh://granger@68.178.206.139/svnroot/(projectName) -m "initial import"
+
+- enter the password for the Granger server:
+
+	Gr_102666KUMA
+
+
+
+Step 4 - Clean up and Checkout the new project
+==============================================
+
+- Remove the initial setup project from and trash it.
+- Using Versions create a new Bookmark and Checkout using the following general settings:
+
+	Angelo:
+	svn+ssh://68.178.206.139/svnroot/(projectName)
+	username: granger
+	password: Gr_102666KUMA
+
+	Martin:
+	svn+ssh://68.178.206.139/svnroot/(projectName)
+	username: martin
+	password: ma040978work
+
+ 
+
+Step 5 - Initial setup and running the project
+==============================================
+
+- 'cd' into the project directory and run:
+
+ 	fab devinit
+
+- project should be running as usual
+
+
+
+Step 6 - Initialising the new project on Maworaa
+================================================
+
+ - open project.ini file in your text editior.
+ - fill out the project 'name' only.
+ - then run: 
+
+ 	Angelo:
+ 	fab install or fab -u angelo install
+ 	102666GHOST (enter the MySQL password on Maworaa1)
+ 	102666GHOST (enter your user account password on Maworaa)
+
+ 	Martin:
+ 	fab install or fab -u martin install
+ 	102666GHOST (enter the MySQL password on Maworaa1)
+ 	ma040978work (enter your user account password on Maworaa)
+
+
+- Output should return the following:
+
+Success!
+http://project1.maworaa.co.uk/
+
+The project should be up and running. You will find the local_settings.py used on the server on your local machine as server_settings.py in the current working directory. Modify it as needed and upload again with:
+fab conf:put
+
+*: (only do this ^ if you've modified the server_settings.py file) - also do NOT commit this file to SVN.
+
+
+
+CURRENT QUIRKS
+==============================================
+
+(if using auto-reload) when you 'quit the server' you might need to run this: 
+ pkill -f runserver
+
+then you can run it again as usual...
+
+You can switch Autoreload off in the django toolbar.
+
+
+==============================================
+
+                                              
+    _/        _/  _/  _/                      
+   _/  _/        _/  _/    _/_/    _/  _/_/   
+  _/_/      _/  _/  _/  _/_/_/_/  _/_/        
+ _/  _/    _/  _/  _/  _/        _/           
+_/    _/  _/  _/  _/    _/_/_/  _/            
+                                    
