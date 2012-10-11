@@ -5,6 +5,7 @@ How to install a server::
     fab install
 '''
 from __future__ import with_statement
+import hashlib
 import os
 import random
 import re
@@ -262,7 +263,8 @@ def setup_fs_permissions():
         sudo('chmod g+s -R .')
         sudo('chmod +x restart')
         for service in config['services']:
-            sudo('chmod +x services/%s' % service)
+            with settings(warn_only=True):
+                sudo('chmod +x services/%s' % service)
 
 def _find_unused_port():
     port_available = re.compile(u'Connection refused\s*$', re.IGNORECASE)
@@ -293,6 +295,9 @@ def install(mysql_root_password=None):
 
     create_user()
 
+    # just in case its already on there ...
+    stop()
+
     # create project directory
     dirname = os.path.dirname(config['path'])
     if not files.exists(dirname):
@@ -311,20 +316,36 @@ def install(mysql_root_password=None):
 
     mysql_user_password = create_database(mysql_root_password)
 
+    port = _find_unused_port()
+    template_config = {
+        u'PROJECT_NAME': project_name,
+        u'DOMAIN': project_config.get('project', 'domain'),
+        u'PORT': port,
+        u'MYSQL_PASSWORD': mysql_user_password,
+        u'SECRET_KEY': _generate_secret_key(),
+    }
     with cd(path):
-        if files.exists('src/website/local_settings.py'):
-            email_user = raw_input(u'Please enter a GMail username for the email setup: ')
-            email_password = raw_input(u'Please enter the GMail password: ')
+        if not files.exists('src/website/local_settings.py'):
+            context = template_config.copy()
+            context['EMAIL_USER'] = raw_input(u'Please enter a GMail username for the email setup: ')
+            context['EMAIL_PASSWORD'] = raw_input(u'Please enter the GMail password: ')
             files.upload_template(
                 u'src/website/local_settings.example.py',
-                context={
-                    u'PROJECT_NAME': project_name,
-                    u'MYSQL_PASSWORD': mysql_user_password,
-                    u'SECRET_KEY': _generate_secret_key(),
-                    u'EMAIL_USER': email_user,
-                    u'EMAIL_PASSWORD': email_password,
-                },
+                context=context,
                 destination=u'src/website/local_settings.py')
+        context = template_config.copy()
+        files.upload_template(
+            u'services/gunicorn.template',
+            context=context,
+            destination=u'services/gunicorn')
+        files.upload_template(
+            u'services/celeryd.template',
+            context=context,
+            destination=u'services/celeryd')
+        files.upload_template(
+            u'config/nginx.conf.template',
+            context=context,
+            destination=u'config/nginx.conf')
 
     syncdb()
 
@@ -338,14 +359,18 @@ def install(mysql_root_password=None):
     setup_fs_permissions()
 
     conf('get')
+    url = u'http://%s/\n' % project_config.get('project', 'domain')
     print(
-        green(u'Success') +
+        green(u'Success!\n') +
+        url + u'\n' +
         yellow(
-        u'The project should be up and running. You will find the '
-        u'local_settings.py used on the server on your local machine as '
-        u'`server_settings.py` in the current working directory. Modify it '
-        u'as needed and upload again with:\n') +
-        blue(u'fab conf:put'))
+            u'The project should be up and running. You will find the '
+            u'local_settings.py used on the server on your local machine as ') +
+        blue(u'server_settings.py') +
+        yellow(u' in the current working directory. Modify it '
+            u'as needed and upload again with:\n') +
+        blue(u'fab conf:put')
+    )
 
 def uninstall():
     if not confirm(u'Do you really want to delete the project from the server?'):
@@ -356,11 +381,14 @@ def uninstall():
     while delete_db and not mysql_root_password:
         mysql_root_password = raw_input(u'Please enter the mysql root password: ')
     conf(u'get')
+
+    stop()
     teardown()
 
     print(u'rm -rf %(path)s' % config)
     print(u'deluser --remove-home %(user)s' % config)
     print(u'delgroup %(user)s' % config)
+
     if delete_db:
         print((
             u'echo "DROP DATABASE %(project)s;" | '
@@ -379,10 +407,9 @@ def uninstall():
         )
 
 def create_database(root_password, user_password=None):
-    created = False
     if user_password is None:
-        user_password = _pwdgen()
-        created = True
+        user_password = hashlib.sha1('%s-%s' % (config['project'], root_password)).hexdigest()
+        user_password = user_password[::-2]
     sudo(
         'echo "CREATE DATABASE IF NOT EXISTS %(project)s CHARACTER SET utf8;"'
         ' | mysql --user=root --password=%(root_password)s' % {
@@ -398,8 +425,6 @@ def create_database(root_password, user_password=None):
             'root_password': root_password,
             'user_password': user_password,
         })
-    if created:
-        print('The project\'s mysql password is: %s' % user_password)
     return user_password
 
 def setup(service=None):

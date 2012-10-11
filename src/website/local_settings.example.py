@@ -51,10 +51,10 @@ EMAIL_PORT = 587
 #                        media / static files urls                        #
 ###########################################################################
 
-#MEDIA_URL = 'http://media.<REPLACE:DOMAIN>/'
+MEDIA_URL = 'http://media.%(DOMAIN)s/'
 
-#STATIC_URL = 'http://static.<REPLACE:DOMAIN>/'
-#COMPRESS_URL = STATIC_URL
+STATIC_URL = 'http://static.%(DOMAIN)s/'
+COMPRESS_URL = STATIC_URL
 
 
 ###########################################################################
