@@ -10,7 +10,7 @@ import os
 import random
 import re
 import sys
-from fabric.colors import blue, green, red, white, yellow
+from fabric.colors import blue, green, red, white, yellow, magenta
 from fabric import network
 from fabric.api import abort, cd, local, env, settings, sudo, get, put, hide
 from fabric.api import run as _fabric_run
@@ -275,6 +275,19 @@ def _find_unused_port():
             if port_available.search(result):
                 return port
 
+def _ascii_art(art, color=magenta):
+    clips = {
+        'killer': '''
+    _/        _/  _/  _/
+   _/  _/        _/  _/    _/_/    _/  _/_/
+  _/_/      _/  _/  _/  _/_/_/_/  _/_/
+ _/  _/    _/  _/  _/  _/        _/
+_/    _/  _/  _/  _/    _/_/_/  _/
+'''
+    }
+    clip = clips[art]
+    print color(clip)
+
 def install(mysql_root_password=None):
     u'''
     * create project user
@@ -329,6 +342,9 @@ def install(mysql_root_password=None):
 
     conf('get')
     url = u'http://%s/\n' % project_config.get('project', 'domain')
+
+    _ascii_art('killer')
+
     print(
         green(u'Success!\n') +
         url + u'\n' +
@@ -503,6 +519,8 @@ def devinit():
     local('bin/python manage.py syncdb --noinput --migrate', capture=False)
     local('bin/python manage.py loaddata config/adminuser.json', capture=False)
     local('bin/python manage.py loaddata config/localsite.json', capture=False)
+
+    _ascii_art('killer')
 
 def replace(**kwargs):
     if kwargs:
