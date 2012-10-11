@@ -6,7 +6,6 @@
 _/      _/  _/    _/      
                         
 
-
 Install python on MacOS
 =======================
 
@@ -25,46 +24,18 @@ This is what we currently do with new macs:
     sudo port install py27-pip
     sudo port install py27-virtualenv
     sudo port install py27-fabric
+    sudo port install py27-pil
+    sudo port select --set virtualenv virtualenv27
+    sudo ln -s /opt/local/bin/pip-2.7 /opt/local/bin/pip
+    sudo ln -s /opt/local/bin/fab-2.7 /opt/local/bin/fab
 
-* Make sure that you use the correct python version::
+* Close your current command line and open a new one.
+* Now make sure that you use the correct python version::
 
     which python
 
-Should return something like this starting with ``/opt/``::
+This should return something like this::
 
     /opt/local/bin/python
 
 .. _install macports: http://www.macports.org/install.php
-
-If all of the above was successfull, then run::
-
-    sudo mv /usr/bin/python /usr/bin/python_original
-    sudo ln -s /usr/bin/python `which python`
-
-This will overwrite the systems python version with the one we just installed
-via macports.
-
-Install PIL (Python Imaging Library)
-------------------------------------
-
-* Install PIL using macports::
-
-    sudo port install py27-pil
-
-* Test if it installed correctly::
-
-    python
-    >>> import PIL
-    >>> import Image
-
-This should not give you any errors.
-
-Install required python libraries
----------------------------------
-
-If you are on a Mac, the commands at the beginning of the page already did
-this for you. On all other platforms, run::
-
-    sudo easy_install pip
-    sudo pip install virtualenv
-    sudo pip install fabric
