@@ -30,12 +30,14 @@ Step 2 - Set Project up on SVN
 	svnadmin create /svnroot/(projectName)
 	chmod 777 -R /svnroot/(projectName)
 
+	(you are finished on the Granger server for now)
+
 
 
 Step 3 - import the cloned local prject to SVN
 ==============================================
 
-- 'cd' into the project directory if your not alresdy there:
+- Locally 'cd' into the project directory if your not already there:
 
 	svn import svn+ssh://granger@68.178.206.139/svnroot/(projectName) -m "initial import"
 
@@ -48,15 +50,15 @@ Step 3 - import the cloned local prject to SVN
 Step 4 - Clean up and Checkout the new project
 ==============================================
 
-- Remove the initial setup project from and trash it.
+- Locally remove the initial setup project and trash it.
 - Using Versions create a new Bookmark and Checkout using the following general settings:
 
-	Angelo:
+	(Angelo:)
 	svn+ssh://68.178.206.139/svnroot/(projectName)
 	username: granger
 	password: Gr_102666KUMA
 
-	Martin:
+	(Martin:)
 	svn+ssh://68.178.206.139/svnroot/(projectName)
 	username: martin
 	password: ma040978work
@@ -70,7 +72,7 @@ Step 5 - Initial setup and running the project
 
  	fab devinit
 
-- project should be running as usual
+- local project should be running as usual/expected
 
 
 
@@ -81,18 +83,18 @@ Step 6 - Initialising the new project on Maworaa
  - fill out the project 'name' only.
  - then run: 
 
- 	Angelo:
- 	fab install or fab -u angelo install
+ 	(Angelo:)
+ 	fab -u angelo install
  	102666GHOST (enter the MySQL password on Maworaa1)
  	102666GHOST (enter your user account password on Maworaa)
 
- 	Martin:
- 	fab install or fab -u martin install
+ 	(Martin:)
+ 	fab -u martin install
  	102666GHOST (enter the MySQL password on Maworaa1)
  	ma040978work (enter your user account password on Maworaa)
 
 
-- Output should return the following:
+- Shell output should return the following:
 
 Success!
 http://project1.maworaa.co.uk/
