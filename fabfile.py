@@ -215,6 +215,7 @@ def status():
         for service_config in _services():
             sudo('svstat /etc/service/%(service_name)s' % service_config)
 
+
 def conf(operation='get', filename=SERVER_SETTINGS_FILE):
     if operation == 'get':
         get('%s/src/website/local_settings.py' % config['path'], SERVER_SETTINGS_FILE)
@@ -225,6 +226,7 @@ def conf(operation='get', filename=SERVER_SETTINGS_FILE):
 def loaddata(apps=None):
     if apps is None:
         apps = project_config.get('development', 'loaddata_apps')
+        apps = ' '.join(apps.split())
     dump_file = '.dump.json'
     server_dump = os.path.join(config['path'], dump_file)
     with cd(path):
@@ -238,7 +240,8 @@ def loaddata(apps=None):
 
 def loadmedia():
     assert len(env['hosts']) == 1
-    local('rsync -r %s:%s/media/media/ media/media/' % (
+    local('rsync -r %s@%s:%s/media/media/ media/media/' % (
+        env.user,
         env['hosts'][0],
         config['path']))
 
