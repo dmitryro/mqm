@@ -11,7 +11,7 @@ Step 1 - Preparation
 ====================
 
 - Clone the Skeleton Project
-- Remove clone from version but "keep files"
+- Remove clone from Versions but "keep files"
 - Open up a Shell and 'cd' into the project directory
 - Remove all directories caled .svn - run:
 	
