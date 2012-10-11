@@ -314,38 +314,8 @@ def install(mysql_root_password=None):
     setup_virtualenv()
     pip_install()
 
-    mysql_user_password = create_database(mysql_root_password)
-
-    port = _find_unused_port()
-    template_config = {
-        u'PROJECT_NAME': project_name,
-        u'DOMAIN': project_config.get('project', 'domain'),
-        u'PORT': port,
-        u'MYSQL_PASSWORD': mysql_user_password,
-        u'SECRET_KEY': _generate_secret_key(),
-    }
-    with cd(path):
-        if not files.exists('src/website/local_settings.py'):
-            context = template_config.copy()
-            context['EMAIL_USER'] = raw_input(u'Please enter a GMail username for the email setup: ')
-            context['EMAIL_PASSWORD'] = raw_input(u'Please enter the GMail password: ')
-            files.upload_template(
-                u'src/website/local_settings.example.py',
-                context=context,
-                destination=u'src/website/local_settings.py')
-        context = template_config.copy()
-        files.upload_template(
-            u'services/gunicorn.template',
-            context=context,
-            destination=u'services/gunicorn')
-        files.upload_template(
-            u'services/celeryd.template',
-            context=context,
-            destination=u'services/celeryd')
-        files.upload_template(
-            u'config/nginx.conf.template',
-            context=context,
-            destination=u'config/nginx.conf')
+    create_database(mysql_root_password)
+    setup(mysql_root_password)
 
     syncdb()
 
@@ -353,7 +323,6 @@ def install(mysql_root_password=None):
         run('bin/python manage.py loaddata config/adminuser.json')
 
     collectstatic()
-    setup()
     start()
     reload_webserver()
     setup_fs_permissions()
@@ -380,19 +349,21 @@ def uninstall():
     mysql_root_password = None
     while delete_db and not mysql_root_password:
         mysql_root_password = raw_input(u'Please enter the mysql root password: ')
-    conf(u'get')
+    with settings(warn_only=True):
+        conf(u'get')
 
     stop()
     teardown()
 
-    print(u'rm -rf %(path)s' % config)
-    print(u'deluser --remove-home %(user)s' % config)
-    print(u'delgroup %(user)s' % config)
+    with settings(warn_only=True):
+        sudo(u'rm -rf %(path)s' % config)
+        sudo(u'deluser --remove-home %(user)s' % config)
+        sudo(u'delgroup %(user)s' % config)
 
     if delete_db:
-        print((
-            u'echo "DROP DATABASE %(project)s;" | '
-            u'mysql --user=root --password=%(root_password)s'
+        sudo((
+            'echo "DROP DATABASE %(project)s;" | '
+            'mysql --user=root --password=%(root_password)s'
         ) % {
             'project': config['project'],
             'root_password': mysql_root_password,
@@ -406,10 +377,12 @@ def uninstall():
             yellow(u'The database is still in place. Consider deleting it by hand.')
         )
 
-def create_database(root_password, user_password=None):
-    if user_password is None:
-        user_password = hashlib.sha1('%s-%s' % (config['project'], root_password)).hexdigest()
-        user_password = user_password[::-2]
+def _get_mysql_password(root_password):
+    user_password = hashlib.sha1('%s-%s' % (config['project'], root_password)).hexdigest()
+    user_password = user_password[::-2]
+
+def create_database(root_password):
+    user_password = _get_mysql_password(root_password)
     sudo(
         'echo "CREATE DATABASE IF NOT EXISTS %(project)s CHARACTER SET utf8;"'
         ' | mysql --user=root --password=%(root_password)s' % {
@@ -427,7 +400,7 @@ def create_database(root_password, user_password=None):
         })
     return user_password
 
-def setup(service=None):
+def setup(mysql_root_password=None):
     '''
     * symlink services to /etc/service/<project_name>-<service>
     * symlink and nginx config to /etc/nginx/sites-available
@@ -435,6 +408,39 @@ def setup(service=None):
       /etc/nginx/sites-enabled
     * reload nginx
     '''
+    port = _find_unused_port()
+    template_config = {
+        u'PROJECT_NAME': project_name,
+        u'DOMAIN': project_config.get('project', 'domain'),
+        u'PORT': port,
+    }
+    with cd(path):
+        if not files.exists('src/website/local_settings.py'):
+            if mysql_root_password:
+                mysql_user_password = _get_mysql_password(mysql_root_password)
+                context = template_config.copy()
+                context.update({
+                    u'MYSQL_PASSWORD': mysql_user_password,
+                    u'SECRET_KEY': _generate_secret_key(),
+                })
+                files.upload_template(
+                    u'src/website/local_settings.example.py',
+                    context=context,
+                    destination=u'src/website/local_settings.py')
+        context = template_config.copy()
+        files.upload_template(
+            u'services/gunicorn.template',
+            context=context,
+            destination=u'services/gunicorn')
+        files.upload_template(
+            u'services/celeryd.template',
+            context=context,
+            destination=u'services/celeryd')
+        files.upload_template(
+            u'config/nginx.conf.template',
+            context=context,
+            destination=u'config/nginx.conf')
+
     with settings(warn_only=True):
         for service_config in _services():
             local_config = config.copy()
