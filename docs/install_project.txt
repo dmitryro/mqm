@@ -11,7 +11,7 @@ Step 1 - Preparation
 ====================
 
 - Clone the Skeleton Project
-- Remove clone from Versions but "keep files"
+- Delete Bookmark from Versions but "keep folder"
 - Open up a Shell and 'cd' into the project directory
 - Remove all directories caled .svn - run:
 	
@@ -29,6 +29,7 @@ Step 2 - Set Project up on SVN
 	su - 
 	svnadmin create /svnroot/(projectName)
 	chmod 777 -R /svnroot/(projectName)
+	exit
 
 	(you are finished on the Granger server for now)
 
@@ -50,7 +51,12 @@ Step 3 - import the cloned local prject to SVN
 Step 4 - Clean up and Checkout the new project
 ==============================================
 
-- Locally remove the initial setup project and trash it.
+- Locally remove the initial setup project and trash it:
+
+	cd ../
+	rm -r (projectName)
+
+
 - Using Versions create a new Bookmark and Checkout using the following general settings:
 
 	(Angelo:)
@@ -80,7 +86,10 @@ Step 6 - Initialising the new project on Maworaa
 ================================================
 
  - open project.ini file in your text editior.
- - fill out the project 'name' only.
+ - fill out the project 'name' only:
+
+ 	name = (projectName)
+
  - then run: 
 
  	(Angelo:)
@@ -97,7 +106,7 @@ Step 6 - Initialising the new project on Maworaa
 - Shell output should return the following:
 
 Success!
-http://project1.maworaa.co.uk/
+http://projec1.maworaa.co.uk/
 
 The project should be up and running. You will find the local_settings.py used on the server on your local machine as server_settings.py in the current working directory. Modify it as needed and upload again with:
 fab conf:put
@@ -106,11 +115,70 @@ fab conf:put
 
 
 
+
+Step 7 - LAUNCH - Changing the domain
+=====================================
+
+- When your ready to switch to the live domain open up your 'project.ini' file and edit the following line:
+
+	domain = %(name)s.maworaa.co.uk
+
+- Save and commit this file to svn then run:
+
+	 fab -u angelo install
+
+- You should also then commit the file to the main SVN repo:
+
+	deploy
+
+
+- NOTE: Media & Static settings will be broken now because the domain has changed, you need to log into Maworaa and change the 'local_setting.py' file to the correct domain:
+
+	MEDIA_URL = 'http://media.project2.maworaa.co.uk/'
+	STATIC_URL = 'http://static.project2.maworaa.co.uk/'
+
+	
+
+
+
+FEATURE: loaddata + loadmedia
+=====================================
+
+- When you want to take data from the server for your local project run the following:
+(change the 'project.ini' 'loaddata_apps =' to add new Apps to the loaddata config)
+
+	(Angelo:)
+	fab -u angelo loaddata
+	102666GHOST
+
+	(Martin:)
+	fab -u martin loadata
+	ma040978work
+
+- When you want to take media from the server for your local project run the following:
+
+	(Angelo:)
+	fab -u angelo loadmedia
+	102666GHOST
+
+	(Martin:)
+	fab -u martin loadmedia
+	ma040978work
+
+
+
+
 CURRENT QUIRKS
 ==============================================
 
+
+1: If
+
 (if using auto-reload) when you 'quit the server' you might need to run this: 
- pkill -f runserver
+	
+	pkill -f runserver
+	or
+	pkill (if you have the alias setup)
 
 then you can run it again as usual...
 
