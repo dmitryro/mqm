@@ -59,7 +59,7 @@ STATICFILES_FINDERS = (
 # django-compressor
 # -----------------
 
-COMPRESS_JS_FILTERS = (
+COMPRESS_CSS_FILTERS = (
     'compressor.filters.css_default.CssAbsoluteFilter',
     'compressor.filters.cssmin.CSSMinFilter',
 )
