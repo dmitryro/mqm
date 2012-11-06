@@ -399,6 +399,7 @@ def uninstall():
 def _get_mysql_password(root_password):
     user_password = hashlib.sha1('%s-%s' % (config['project'], root_password)).hexdigest()
     user_password = user_password[::-2]
+    return user_password
 
 def create_database(root_password):
     user_password = _get_mysql_password(root_password)
