@@ -137,7 +137,23 @@ Step 7 - LAUNCH - Changing the domain
 	MEDIA_URL = 'http://media.project2.maworaa.co.uk/'
 	STATIC_URL = 'http://static.project2.maworaa.co.uk/'
 
+
+NOTES - adding more domains to the config domain
+============================================
+
+If you want to add another domain to the config:
 	
+	open: nginx.conf.template
+
+Add the new domain to line #18 and #44 - something like this:
+
+	server_name www.%(DOMAIN)s lightshow.com;
+
+	(make sure to keep the 's' after %(DOMAIN))
+
+Then push changes to the server:
+
+	fab -u angelo install	
 
 
 
