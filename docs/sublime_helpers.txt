@@ -42,6 +42,9 @@ Packaged installed - usage:
 	p20 (tab) = padding:20px;
 	lorem200 = Lorem ipsum 200 words.
 
+	Go to Edit Point:
+	ctrl+alt (left/right)
+
 
 
 Fetch - Package control
