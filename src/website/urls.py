@@ -16,6 +16,9 @@ urlpatterns = patterns('',
     url(r'^robots.txt$', direct_to_template, {'template': 'robots.txt'},),
     url(r'^humans.txt$', direct_to_template, {'template': 'humans.txt'},),
 
+    # mediastore download counter
+    url(r'^downloads/(?P<slug>[^/]+)/download/(?P<filename>.+)$', 'mediastore.mediatypes.download.views.download_counter', name='mediastore-download-link'),
+
     url(r'^admin/', include(admin.site.urls)),
 )
 
