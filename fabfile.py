@@ -537,3 +537,13 @@ def replace(**kwargs):
             ))
     else:
         local(r'grep -r "<REPLACE:[^>]\+>" . | grep -v ".svn"', capture=False)
+
+def open():
+    '''
+    Open the live site in the default browser.
+    '''
+    import webbrowser
+    domain = project_config.get('project', 'domain')
+    url = 'http://%s/' % domain
+    print "opening %s" % url
+    webbrowser.open(url)
