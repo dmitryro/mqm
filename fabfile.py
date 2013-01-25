@@ -212,6 +212,8 @@ def status():
     * show if services are running
     '''
     with settings(warn_only=True):
+        with cd(path):
+            run('svn info')
         for service_config in _services():
             sudo('svstat /etc/service/%(service_name)s' % service_config)
 
