@@ -45,6 +45,8 @@ Packaged installed - usage:
 	Go to Edit Point:
 	ctrl+alt (left/right)
 
+	Emmet cheat sheet: http://docs.emmet.io/cheat-sheet/
+
 
 
 Fetch - Package control
