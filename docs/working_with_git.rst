@@ -6,6 +6,13 @@
 _/      _/  _/    _/      
                         
 
+Installing git
+==============
+
+On Mac OS, make sure you have MacPorts installed. Then run::
+
+    sudo port install git-core +svn +doc +bash_completion +gitweb
+
 Setting up your environment
 ===========================
 
