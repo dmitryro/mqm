@@ -1,10 +1,11 @@
+::
 
-    _/      _/    _/_/    
-   _/_/  _/_/  _/    _/   
-  _/  _/  _/  _/_/_/_/    
- _/      _/  _/    _/     
-_/      _/  _/    _/      
-                        
+        _/      _/    _/_/    
+       _/_/  _/_/  _/    _/   
+      _/  _/  _/  _/_/_/_/    
+     _/      _/  _/    _/     
+    _/      _/  _/    _/      
+                            
 
 http://css3pie.com/
 
@@ -14,21 +15,23 @@ Inside the unzipped directory, you will find a file named PIE.htc. This is the b
 
 Step 3: Write some CSS3
 
-Assuming you already have a HTML document, let's say you want to give one of its elements rounded corners. Create a CSS rule for that element and give it a border-radius style like so:
+Assuming you already have a HTML document, let's say you want to give one of its elements rounded corners. Create a CSS rule for that element and give it a border-radius style like so::
 
-#myAwesomeElement {
-    border: 1px solid #999;
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    border-radius: 10px;
-}
+    #myAwesomeElement {
+        border: 1px solid #999;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        border-radius: 10px;
+    }
+
 (Note the -webkit- and -moz- prefixed versions; these are necessary to make the rounded corners work in WebKit and Mozilla-based browsers.)
 
 Step 4: Apply PIE
 
-In that same CSS rule, add the following style line:
+In that same CSS rule, add the following style line::
 
-behavior: url(path/to/PIE.htc);
+    behavior: url(path/to/PIE.htc);
+
 Of course you will need to adjust the path to match where you uploaded PIE.htc in step 2. Note: this path is relative to the HTML file being viewed, not the CSS file it is called from.
 
 Step 5: View it in IE
