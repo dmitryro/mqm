@@ -165,3 +165,63 @@ free). Read at least chapter 1 and 2 (Getting Started, Git Basics):
 When you already have a basic understanding of git, try this page:
 
 * http://gitready.com/
+
+Working with branches
+=====================
+
+Sometimes there is a need that the changes you want to make to the project
+won't affect the main line of development. This is what branches of a
+repository are for. By default you work on the ``master`` branch in git. That
+is also where the normal development happens.
+
+To check what branch your local clone is currently working with, type::
+
+    git branch
+
+This will return something like::
+
+      adminwork
+      master
+    * staging
+
+The line with the asterisk in front of it is the branch that you are currently
+working on. The other names are the other local branches that you have.
+
+Create a new branch
+-------------------
+
+TODO ...
+
+Push the branch to the server
+-----------------------------
+
+TODO ...
+
+Change to a different branch
+----------------------------
+
+If you want to change your local repo to work on a different branch, then use::
+
+    git checkout <branch-name>
+
+Working on a branch
+-------------------
+
+If the branch you want to work on is already on bitbucket, then you need to
+get it first into your local copy. By default there will only be the master
+branch from the server available locally. Fetch it by using::
+
+    git fetch --all
+
+Then change into the branch you want to work with::
+
+    git checkout <branch-name>
+
+Now you can work like you are used to work with git. After you've done your
+changes, you stage them, you commit them and push them to the server::
+
+    git add <filename>
+    git commit -m "my recent changes"
+    git push
+
+This will update the branch on the server.
