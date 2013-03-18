@@ -3,3 +3,4 @@ lib
 local
 media/media/
 media/static/
+.dump.json
