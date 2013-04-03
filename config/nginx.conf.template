@@ -1,17 +1,15 @@
 server {
     server_name media.%(DOMAIN)s;
-
-    location /  {
-        root /srv/%(PROJECT_NAME)s/media;
-        access_log  off;
-    }
+    root /srv/%(PROJECT_NAME)s/media;
+    access_log  off;
 }
 server {
     server_name static.%(DOMAIN)s;
+    root /srv/%(PROJECT_NAME)s/media/static;
+    access_log  off;
 
-    location /  {
-        root /srv/%(PROJECT_NAME)s/media/static;
-        access_log  off;
+    location ~* \.(eot|ttf|woff|svg)$ {
+        add_header Access-Control-Allow-Origin *;
     }
 }
 server {
