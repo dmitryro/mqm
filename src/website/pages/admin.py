@@ -2,6 +2,7 @@
 from django import forms
 from django.contrib import admin
 from django.db import models
+from django.utils.html import strip_tags
 from django.utils.translation import ugettext_lazy as _
 from website.pages.models import Page
 from website.pages import get_model
@@ -51,7 +52,8 @@ class PageAdmin(TinyMCEAdminMixin, ModelAdmin):
     )
 
     def content_preview(self, obj):
-        value = obj.content.content
+        value = obj.content
+        value = strip_tags(value)
         if len(value) > 100:
             value = '%s ...' % value[:100]
         return value
