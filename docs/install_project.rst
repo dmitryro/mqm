@@ -125,7 +125,7 @@ Step 7 - LAUNCH - Changing the domain
 
 - Save and commit this file to svn then run:
 
-	 fab -u angelo install
+	 fab -u angelo setup
 
 - You should also then commit the file to the main SVN repo:
 
@@ -153,12 +153,12 @@ Add the new domain to line #18 and #44 - something like this:
 
 Then push changes to the server:
 
-	fab -u angelo install	
+	fab -u angelo setup	
 
 
 
 FEATURE: loaddata + loadmedia
-=====================================
+=============================
 
 - When you want to take data from the server for your local project run the following:
 (change the 'project.ini' 'loaddata_apps =' to add new Apps to the loaddata config)

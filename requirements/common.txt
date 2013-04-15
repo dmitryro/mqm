@@ -20,7 +20,7 @@ django-templatequery == 0.3.0
 django-tinymce == 1.5.1b2
 ghettoq == 0.4.5
 gunicorn == 0.14.3
-pyparsing = 1.5.7
+pyparsing == 1.5.7
 South == 0.7.5
 Whoosh == 2.4.0
 http://pypi-81b384.ma-work.co.uk/media/dists/django-mediastore-0.6.2.tar.gz
