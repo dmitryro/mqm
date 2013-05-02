@@ -95,7 +95,7 @@ Step 6 - Initialising the new project on Maworaa
  	(Angelo:)
  	fab -u angelo install
  	102666GHOST (enter the MySQL password on Maworaa1)
- 	102666GHOST (enter your user account password on Maworaa)
+ 	nabadu38 (enter your user account password on Maworaa)
 
  	(Martin:)
  	fab -u martin install
@@ -165,7 +165,7 @@ FEATURE: loaddata + loadmedia
 
 	(Angelo:)
 	fab -u angelo loaddata
-	102666GHOST
+	nabadu38
 
 	(Martin:)
 	fab -u martin loadata
@@ -175,7 +175,7 @@ FEATURE: loaddata + loadmedia
 
 	(Angelo:)
 	fab -u angelo loadmedia
-	102666GHOST
+	nabadu38
 
 	(Martin:)
 	fab -u martin loadmedia
