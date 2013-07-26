@@ -46,6 +46,7 @@ config = {
     'user': project_name,
     'repo_url': project_config.get('project', 'repository'),
     'services': _services,
+    'port': project_config.get('django', 'port'),
 }
 
 del _services
@@ -271,7 +272,10 @@ def setup_fs_permissions():
             with settings(warn_only=True):
                 sudo('chmod +x services/%s' % service)
 
-def _find_unused_port():
+def _determine_port():
+    port = config['port']
+    if port:
+        return port
     port_available = re.compile(u'Connection refused\s*$', re.IGNORECASE)
     while True:
         port = random.randint(10000, 11000)
@@ -430,7 +434,7 @@ def setup(mysql_root_password=None):
       /etc/nginx/sites-enabled
     * reload nginx
     '''
-    port = _find_unused_port()
+    port = _determine_port()
     template_config = {
         u'PROJECT_NAME': project_name,
         u'DOMAIN': project_config.get('project', 'domain'),
@@ -463,15 +467,19 @@ def setup(mysql_root_password=None):
             context=context,
             destination=u'config/nginx.conf')
 
-    with settings(warn_only=True):
-        for service_config in _services():
-            local_config = config.copy()
-            local_config.update(service_config)
+    for service_config in _services():
+        local_config = config.copy()
+        local_config.update(service_config)
+        if not files.exists('/etc/service/%(service_name)s/run' % local_config):
             sudo('mkdir -p /etc/service/%(service_name)s' % local_config)
             sudo('ln -s %(path)s/services/%(service)s /etc/service/%(service_name)s/run' % local_config)
+    if not files.exists('/etc/nginx/sites-available/%(project)s.conf' % config):
         sudo('ln -s %(path)s/config/nginx.conf /etc/nginx/sites-available/%(project)s.conf' % config)
+    if not files.exists('/etc/nginx/sites-enabled/%(project)s.conf' % config):
         sudo('ln -s /etc/nginx/sites-available/%(project)s.conf /etc/nginx/sites-enabled' % config)
+
     reload_webserver()
+    restart()
 
 def teardown():
     '''
@@ -515,6 +523,7 @@ def _pwdgen():
 def devsetup():
     local('virtualenv . --system-site-packages --python=`which python`')
     local('bin/pip install -r requirements/development.txt')
+    local('bower install')
 
 def devinit():
     devsetup()

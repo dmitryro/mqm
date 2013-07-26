@@ -11,6 +11,13 @@ PROJECT_ROOT = os.path.dirname(
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
+ALLOWED_HOSTS = (
+    'www.|.maworaa.co.uk',
+    '|.maworaa.co.uk',
+    'localhost',
+    '127.0.0.1',
+)
+
 # responsible persons
 # -------------------
 
@@ -23,6 +30,7 @@ MANAGERS = ADMINS
 # Email settings
 # --------------
 
+EMAIL_SUBJECT_PREFIX = '[Django] '
 DEFAULT_FROM_EMAIL = 'angelo@ma-work.co.uk'
 
 # i18n / l10n
@@ -131,6 +139,7 @@ ROOT_URLCONF = 'website.urls'
 
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.doc.XViewMiddleware',

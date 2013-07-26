@@ -1,0 +1,10 @@
+{
+  "name": "website",
+  "version": "1.0.0",
+  "dependencies": {
+    "jquery": "~1.10.2",
+    "underscore": "~1.4.4",
+    "history.js": "~1.8.0",
+    "modernizr": "~2.6.2"
+  }
+}

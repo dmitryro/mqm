@@ -1,6 +1,8 @@
 bin
 lib
 local
+logs
 media/media/
 media/static/
 .dump.json
+static/js/libs
