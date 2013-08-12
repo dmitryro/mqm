@@ -5,8 +5,8 @@
 # simply run `sh watch.sh`.
 
 # No minification
-#sass --watch your-project.scss:your-project.css --style expanded
+#sass --watch your-project.scss:your-project.css --style compressed
 
-sass --watch screen.scss:../css/screen.min.css --style compressed
+sass --watch screen.scss:../css/screen.min.css --style exanded
 
 exit 0
