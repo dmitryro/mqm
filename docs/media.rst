@@ -10,7 +10,7 @@
 Mediastore Documentation
 ==============================
 
-You can take the same code as in /display.html template, but it in where you want it and wrap the code with:
+You can take the same code as in /display.html template, put it in where you want it and wrap the code with:
 
 {% with object.media.all.0.object as object %}
 ... code from display.html ...

@@ -71,7 +71,7 @@ Step 4 - Clean up and Checkout the new project
 
  
 
-Step 5 - Initial setup and running the project
+Step 5A - Initial setup and running the project
 ==============================================
 
 - 'cd' into the project directory and run:
@@ -80,6 +80,14 @@ Step 5 - Initial setup and running the project
 
 - local project should be running as usual/expected
 
+
+
+Step 5B - If Using SASS
+==============================================
+
+run: 
+
+sass --watch screen.scss:../css/screen.min.css --style exanded
 
 
 Step 6 - Initialising the new project on Maworaa
