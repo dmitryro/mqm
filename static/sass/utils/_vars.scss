@@ -44,13 +44,6 @@ $micro-size:        8px!default;
 
 
 /**
- * Brand stuff
- */
-$brand-color:       #C5168C!default;
-$brand-face:        "adobe-garamond-pro", Times, Georgia, sans-serif;
-
-
-/**
  * killer.css will work these next ones out for you.
  *
  * Assign our `$base-line-height` to a new spacing var for more transparency.
@@ -61,20 +54,3 @@ $line-height-ratio: $base-line-height / $base-font-size;
 
 
 
-
-//=VARIABLES - COLOURS
-$directive: #FF4F4F;
-$mint: #7FFFBE;
-$noir: #000000;
-$background: #FFFFFF;
-$grey: #333333;
-$white: #FFFFFF;
-$blue: #3D79D0;
-$red: #FF0000;
-
-
-//=VARIABLES - FONTS
-$font-base: 12px;
-$font-base-line-height: 18px;
-$kerning: 2px;
-$upper: uppercase;
