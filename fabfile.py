@@ -179,6 +179,7 @@ def sass_compile():
     '''
     with cd(path):
         with cd('static/sass'):
+            run('mkdir -p ../css/')
             run('sass screen.scss:../css/screen.min.css --style exanded')
 
 def deploy():
@@ -540,7 +541,7 @@ def devsetup():
     local('virtualenv . --system-site-packages --python=`which python`')
     local('bin/pip install -r requirements/development.txt')
     local('bower install')
-    local('cd static/sass; sass screen.scss:../css/screen.min.css --style exanded')
+    local('cd static/sass; mkdir -p ../css/; sass screen.scss:../css/screen.min.css --style exanded')
 
 def devinit():
     devsetup()
