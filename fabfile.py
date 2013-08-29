@@ -148,6 +148,7 @@ def collectstatic():
     '''
     * run bin/python manage.py collectstatic
     '''
+    sass_compile()
     with cd(path):
         run('bin/python manage.py collectstatic -v0 --noinput')
 
@@ -164,6 +165,21 @@ def pip_install():
     '''
     with cd(path):
         run('bin/pip install -r requirements/live.txt')
+
+def bower_install():
+    '''
+    * install JS dependencies
+    '''
+    with cd(path):
+        run('bower install')
+
+def sass_compile():
+    '''
+    * compiling sass files into css.
+    '''
+    with cd(path):
+        with cd('static/sass'):
+            run('sass screen.scss:../css/screen.min.css --style exanded')
 
 def deploy():
     '''
@@ -524,6 +540,7 @@ def devsetup():
     local('virtualenv . --system-site-packages --python=`which python`')
     local('bin/pip install -r requirements/development.txt')
     local('bower install')
+    local('cd static/sass; sass screen.scss:../css/screen.min.css --style exanded')
 
 def devinit():
     devsetup()
