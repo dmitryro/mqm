@@ -189,6 +189,7 @@ def deploy():
     * restart services
     '''
     update()
+    bower_install()
     pip_install()
     syncdb()
     collectstatic()
@@ -539,16 +540,19 @@ def _pwdgen():
 
 def devsetup():
     local('virtualenv . --system-site-packages --python=`which python`')
+    if not os.path.exists('src/website/local_settings.py'):
+        local(
+            'cp -p src/website/local_settings.development.py src/website/local_settings.py',
+            capture=False)
+
+def devupdate():
     local('bin/pip install -r requirements/development.txt')
     local('bower install')
     local('cd static/sass; mkdir -p ../css/; sass screen.scss:../css/screen.min.css --style exanded')
 
 def devinit():
     devsetup()
-    if not os.path.exists('src/website/local_settings.py'):
-        local(
-            'cp -p src/website/local_settings.development.py src/website/local_settings.py',
-            capture=False)
+    devupdate()
     local('bin/python manage.py syncdb --noinput --migrate', capture=False)
     local('bin/python manage.py loaddata config/adminuser.json', capture=False)
     local('bin/python manage.py loaddata config/localsite.json', capture=False)
