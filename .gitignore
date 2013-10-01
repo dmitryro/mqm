@@ -1,8 +1,10 @@
+.dump.json
 bin
 lib
 local
 logs
 media/media/
 media/static/
-.dump.json
+static/css/screen.min.css
 static/js/libs
+static/sass/.sass-cache/
