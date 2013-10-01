@@ -44,6 +44,8 @@ input, select {
 a img {
   border: 0; }
 
+img { display: block; max-width: 100%; -ms-interpolation-mode: bicubic; }
+
 :focus {
   outline: 0; }
 

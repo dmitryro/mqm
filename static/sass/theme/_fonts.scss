@@ -1,0 +1,39 @@
+/* FONTS
+----------------------------------------------- */
+html {
+	-webkit-font-smoothing: antialiased;
+}
+
+@font-face {
+    font-family: 'noodle';
+    src: url('../assets/fonts/big_noodle_titling-webfont.eot');
+    src: url('../assets/fonts/big_noodle_titling-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../assets/fonts/big_noodle_titling-webfont.woff') format('woff'),
+         url('../assets/fonts/big_noodle_titling-webfont.ttf') format('truetype'),
+         url('../assets/fonts/big_noodle_titling-webfont.svg#bignoodletitlingregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+@font-face {
+    font-family: 'noodleIt';
+    src: url('../assets/fonts/big_noodle_titling_oblique-webfont.eot');
+    src: url('../assets/fonts/big_noodle_titling_oblique-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../assets/fonts/big_noodle_titling_oblique-webfont.woff') format('woff'),
+         url('../assets/fonts/big_noodle_titling_oblique-webfont.ttf') format('truetype'),
+         url('../assets/fonts/big_noodle_titling_oblique-webfont.svg#bignoodletitlingoblique') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+@mixin Garamond(){
+    font-family:'Adobe Garamond Pro 1167025';
+    font-style: normal;
+}
+
+@mixin GaramondIt(){
+    font-family:'Adobe Garamond Pro 1166234';
+    font-style: italic;
+}
