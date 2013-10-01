@@ -111,6 +111,11 @@
 
                         // Set Loading
                         $html.addClass('loading');
+                        var minLoadingTime = parseInt($html.attr('data-ajaxify-loading-min'));
+                        if (isNaN(minLoadingTime)) {
+                            minLoadingTime = 0;
+                        }
+                        var startLoadingTimestamp = new Date().getTime();
 
                         // Ajax Request the Traditional Page
                         $.ajax({
@@ -193,7 +198,16 @@
 
                                             // Complete the change
                                             if ( $body.ScrollTo||false ) { $body.ScrollTo(scrollOptions); } /* http://balupton.com/projects/jquery-scrollto */
-                                            $html.removeClass('loading');
+
+                                            var stopLoading = function () {
+                                                $html.removeClass('loading');
+                                            };
+                                            var sinceLoadingStarted = (new Date().getTime()) - startLoadingTimestamp;
+                                            if (sinceLoadingStarted < minLoadingTime) {
+                                                setTimeout(stopLoading, minLoadingTime - sinceLoadingStarted);   
+                                            } else {
+                                                stopLoading();
+                                            }
 
                                             $window.trigger('ajaxify-ready');
 
