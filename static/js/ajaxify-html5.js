@@ -64,7 +64,8 @@
                         // Prepare
                         var result = String(html)
                                 .replace(/<\!DOCTYPE[^>]*>/i, '')
-                                .replace(/<(html|head|body|title|meta|script)([\s\>])/gi,'<div class="document-$1"$2')
+                                .replace(/<(html|head|body)([\s\>])/gi,'<div data-ajaxify-id="document-$1"$2')
+                                .replace(/<(title|meta|script)([\s\>])/gi,'<div class="document-$1"$2')
                                 .replace(/<\/(html|head|body|title|meta|script)\>/gi,'</div>')
                         ;
 
@@ -119,7 +120,7 @@
                                         // Prepare
                                         var
                                                 $data = $(documentHtml(data)),
-                                                $dataBody = $data.find('.document-body:first'),
+                                                $dataBody = $data.find('[data-ajaxify-id=document-body]:first'),
                                                 $dataContent = $dataBody.find(contentSelector).filter(':first'),
                                                 $menuChildren, contentHtml, $scripts;
 
