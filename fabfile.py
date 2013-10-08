@@ -148,7 +148,8 @@ def collectstatic():
     '''
     * run bin/python manage.py collectstatic
     '''
-    sass_compile()
+    with settings(warn_only=True):
+        sass_compile()
     with cd(path):
         run('bin/python manage.py collectstatic -v0 --noinput')
 
