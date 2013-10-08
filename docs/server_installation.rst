@@ -21,6 +21,14 @@ Install these packages::
     python-mysqldb
     python-imaging
     daemontools
+    ruby
+    rubygems
+    node (maybe from a ppa)
+
+Install more stuff with::
+
+    sudo gem install sass
+    sudo npm install -g bower
 
 Put the following into /etc/init/svscan.conf::
 
@@ -41,6 +49,8 @@ Put the following into /etc/init/svscan.conf::
     stop on shutdown
 
     exec svscanboot
+
+Append ``/var/lib/gems/1.8/bin`` to ``$PATH`` in ``/etc/environment``
 
 And run::
 
