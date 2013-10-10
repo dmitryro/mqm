@@ -47,6 +47,7 @@ config = {
     'repo_url': project_config.get('project', 'repository'),
     'services': _services,
     'port': project_config.get('django', 'port'),
+    'local_settings': project_config.get('django', 'local_settings'),
 }
 
 del _services
@@ -130,7 +131,7 @@ def test():
 
     # check if project has a local_settings file
     with cd(path):
-        if not files.exists('src/website/local_settings.py'):
+        if not files.exists(config['local_settings']):
             print(
                 red(u'Error: ') +
                 u'The project has no ' + yellow(u'local_settings.py') +
@@ -240,9 +241,9 @@ def status():
 
 def conf(operation='get', filename=SERVER_SETTINGS_FILE):
     if operation == 'get':
-        get('%s/src/website/local_settings.py' % config['path'], SERVER_SETTINGS_FILE)
+        get(os.path.join(config['path'], config['local_settings']), SERVER_SETTINGS_FILE)
     if operation == 'put':
-        put(SERVER_SETTINGS_FILE, '%s/src/website/local_settings.py' % config['path'])
+        put(SERVER_SETTINGS_FILE, os.path.join(config['path'], config['local_settings']))
 
 
 def loaddata(apps=None):
@@ -460,7 +461,7 @@ def setup(mysql_root_password=None):
         u'PORT': port,
     }
     with cd(path):
-        if not files.exists('src/website/local_settings.py'):
+        if not files.exists(config['local_settings']):
             if mysql_root_password:
                 mysql_user_password = _get_mysql_password(mysql_root_password)
                 context = template_config.copy()
@@ -471,20 +472,17 @@ def setup(mysql_root_password=None):
                 files.upload_template(
                     u'src/website/local_settings.example.py',
                     context=context,
-                    destination=u'src/website/local_settings.py')
+                    destination=config['local_settings'])
         context = template_config.copy()
-        files.upload_template(
-            u'services/gunicorn.template',
-            context=context,
-            destination=u'services/gunicorn')
-        files.upload_template(
-            u'services/celeryd.template',
-            context=context,
-            destination=u'services/celeryd')
         files.upload_template(
             u'config/nginx.conf.template',
             context=context,
             destination=u'config/nginx.conf')
+        for service in config['services']:
+            files.upload_template(
+                u'services/%s.template' % service,
+                context=context,
+                destination=u'services/%s' % service)
 
     for service_config in _services():
         local_config = config.copy()
@@ -497,6 +495,7 @@ def setup(mysql_root_password=None):
     if not files.exists('/etc/nginx/sites-enabled/%(project)s.conf' % config):
         sudo('ln -s /etc/nginx/sites-available/%(project)s.conf /etc/nginx/sites-enabled' % config)
 
+    setup_fs_permissions()
     reload_webserver()
     restart()
 
