@@ -337,29 +337,28 @@ def install(mysql_root_password=None):
     while not mysql_root_password:
         mysql_root_password = raw_input(u'Please enter the mysql root password: ')
 
-    if False:
-        create_user()
+    create_user()
 
-        # just in case its already on there ...
-        stop()
+    # just in case its already on there ...
+    stop()
 
-        # create project directory
-        dirname = os.path.dirname(config['path'])
-        if not files.exists(dirname):
-            sudo('mkdir -p %s' % os.path.dirname(config['path']))
+    # create project directory
+    dirname = os.path.dirname(config['path'])
+    if not files.exists(dirname):
+        sudo('mkdir -p %s' % os.path.dirname(config['path']))
 
-        # svn checkout
-        sudo('svn checkout %(repo_url)s %(path)s' % config)
+    # svn checkout
+    sudo('svn checkout %(repo_url)s %(path)s' % config)
 
-        setup_fs_permissions()
+    setup_fs_permissions()
 
-        # disconnect from ssh to make new system users/groups available
-        network.disconnect_all()
+    # disconnect from ssh to make new system users/groups available
+    network.disconnect_all()
 
-        setup_virtualenv()
-        pip_install()
+    setup_virtualenv()
+    pip_install()
 
-        create_database(mysql_root_password)
+    create_database(mysql_root_password)
     setup(mysql_root_password)
 
     syncdb()
