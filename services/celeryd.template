@@ -8,5 +8,5 @@ PROJECT_ROOT=`dirname $SCRIPTPATH`
 cd $PROJECT_ROOT
 
 exec \
-    setuidgid %(PROJECT_NAME)s \
+    setuidgid %(USER)s \
     bin/python manage.py celeryd  -B -s celery -E -l INFO -f $PROJECT_ROOT/logs/celeryd.log

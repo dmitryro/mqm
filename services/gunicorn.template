@@ -8,7 +8,7 @@ PROJECT_ROOT=`dirname $SCRIPTPATH`
 cd $PROJECT_ROOT
 
 exec \
-    setuidgid %(PROJECT_NAME)s \
+    setuidgid %(USER)s \
     bin/python manage.py run_gunicorn \
         127.0.0.1:%(PORT)s \
         --workers=9

@@ -42,8 +42,10 @@ _services = _services.split()
 
 config = {
     'path': project_config.get('project', 'path'),
+    'domain': project_config.get('project', 'domain'),
+    'dbname': project_config.get('project', 'dbname'),
     'project': project_name,
-    'user': project_name,
+    'user': project_config.get('project', 'user'),
     'repo_url': project_config.get('project', 'repository'),
     'services': _services,
     'port': project_config.get('django', 'port'),
@@ -276,15 +278,15 @@ def loadmedia():
 
 def create_user():
     with settings(warn_only=True):
-        sudo('useradd --home %(path)s %(project)s' % config)
-        sudo('gpasswd -a www-data %(project)s' % config)
-        sudo('gpasswd -a gregor %s' % (config['project']))
-        sudo('gpasswd -a angelo %s' % (config['project']))
-        sudo('gpasswd -a martin %s' % (config['project']))
+        sudo('useradd --home %(path)s %(user)s' % config)
+        sudo('gpasswd -a www-data %(user)s' % config)
+        sudo('gpasswd -a gregor %(user)s' % config)
+        sudo('gpasswd -a angelo %(user)s' % config)
+        sudo('gpasswd -a martin %(user)s' % config)
 
 def setup_fs_permissions():
     with cd(path):
-        sudo('chown %(project)s:%(project)s -R .' % config)
+        sudo('chown %(user)s:%(user)s -R .' % config)
         sudo('chmod u+rw,g+rw -R .')
         sudo('chmod g+s -R .')
         sudo('chmod +x restart')
@@ -335,28 +337,29 @@ def install(mysql_root_password=None):
     while not mysql_root_password:
         mysql_root_password = raw_input(u'Please enter the mysql root password: ')
 
-    create_user()
+    if False:
+        create_user()
 
-    # just in case its already on there ...
-    stop()
+        # just in case its already on there ...
+        stop()
 
-    # create project directory
-    dirname = os.path.dirname(config['path'])
-    if not files.exists(dirname):
-        sudo('mkdir -p %s' % os.path.dirname(config['path']))
+        # create project directory
+        dirname = os.path.dirname(config['path'])
+        if not files.exists(dirname):
+            sudo('mkdir -p %s' % os.path.dirname(config['path']))
 
-    # svn checkout
-    sudo('svn checkout %(repo_url)s %(path)s' % config)
+        # svn checkout
+        sudo('svn checkout %(repo_url)s %(path)s' % config)
 
-    setup_fs_permissions()
+        setup_fs_permissions()
 
-    # disconnect from ssh to make new system users/groups available
-    network.disconnect_all()
+        # disconnect from ssh to make new system users/groups available
+        network.disconnect_all()
 
-    setup_virtualenv()
-    pip_install()
+        setup_virtualenv()
+        pip_install()
 
-    create_database(mysql_root_password)
+        create_database(mysql_root_password)
     setup(mysql_root_password)
 
     syncdb()
@@ -370,7 +373,7 @@ def install(mysql_root_password=None):
     setup_fs_permissions()
 
     conf('get')
-    url = u'http://%s/\n' % project_config.get('project', 'domain')
+    url = u'http://%(domain)s/\n' % config
 
     _ascii_art('killer')
 
@@ -407,10 +410,10 @@ def uninstall():
 
     if delete_db:
         sudo((
-            'echo "DROP DATABASE %(project)s;" | '
+            'echo "DROP DATABASE %(dbname)s;" | '
             'mysql --user=root --password=%(root_password)s'
         ) % {
-            'project': config['project'],
+            'dbname': config['dbname'],
             'root_password': mysql_root_password,
         })
 
@@ -423,24 +426,24 @@ def uninstall():
         )
 
 def _get_mysql_password(root_password):
-    user_password = hashlib.sha1('%s-%s' % (config['project'], root_password)).hexdigest()
+    user_password = hashlib.sha1('%s-%s' % (config['dbname'], root_password)).hexdigest()
     user_password = user_password[::-2]
     return user_password
 
 def create_database(root_password):
     user_password = _get_mysql_password(root_password)
     sudo(
-        'echo "CREATE DATABASE IF NOT EXISTS %(project)s CHARACTER SET utf8;"'
+        'echo "CREATE DATABASE IF NOT EXISTS %(dbname)s CHARACTER SET utf8;"'
         ' | mysql --user=root --password=%(root_password)s' % {
-            'project': config['project'],
+            'dbname': config['dbname'],
             'root_password': root_password,
         })
     sudo(
         'echo "'
-            'GRANT ALL ON %(project)s.* TO %(project)s IDENTIFIED BY \'%(user_password)s\';'
+            'GRANT ALL ON %(dbname)s.* TO %(dbname)s IDENTIFIED BY \'%(user_password)s\';'
         '"'
         ' | mysql --user=root --password=%(root_password)s' % {
-            'project': config['project'],
+            'dbname': config['dbname'],
             'root_password': root_password,
             'user_password': user_password,
         })
@@ -456,9 +459,12 @@ def setup(mysql_root_password=None):
     '''
     port = _determine_port()
     template_config = {
+        u'USER': config['user'],
         u'PROJECT_NAME': project_name,
-        u'DOMAIN': project_config.get('project', 'domain'),
+        u'DOMAIN': config['domain'],
         u'PORT': port,
+        u'DBNAME': config['dbname'],
+        u'DBUSER': config['dbname'],
     }
     with cd(path):
         if not files.exists(config['local_settings']):
@@ -466,7 +472,7 @@ def setup(mysql_root_password=None):
                 mysql_user_password = _get_mysql_password(mysql_root_password)
                 context = template_config.copy()
                 context.update({
-                    u'MYSQL_PASSWORD': mysql_user_password,
+                    u'DBPASSWORD': mysql_user_password,
                     u'SECRET_KEY': _generate_secret_key(),
                 })
                 files.upload_template(
@@ -574,7 +580,6 @@ def open():
     Open the live site in the default browser.
     '''
     import webbrowser
-    domain = project_config.get('project', 'domain')
-    url = 'http://%s/' % domain
+    url = 'http://%(domain)s/' % config
     print "opening %s" % url
     webbrowser.open(url)
