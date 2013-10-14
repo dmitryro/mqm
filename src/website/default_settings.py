@@ -1,7 +1,22 @@
 # -*- coding: utf-8 -*-
 import os
+
+
 PROJECT_ROOT = os.path.dirname(
     os.path.dirname(os.path.dirname(__file__)))
+
+
+def _project_config():
+    from ConfigParser import SafeConfigParser
+    config_file = os.path.join(PROJECT_ROOT, 'project.ini')
+    project_config = SafeConfigParser()
+    project_config.read(config_file)
+    return project_config
+project_config = _project_config()
+
+
+PROJECT_NAME = project_config.get('project', 'name')
+DOMAIN = project_config.get('project', 'domain')
 
 
 ###########################################################################
@@ -12,8 +27,10 @@ DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ALLOWED_HOSTS = (
-    'www.|.maworaa.co.uk',
-    '|.maworaa.co.uk',
+    '%s' % DOMAIN,
+    '%s.' % DOMAIN,
+    'www.%s' % DOMAIN,
+    'www.%s.' % DOMAIN,
     'localhost',
     '127.0.0.1',
 )
@@ -30,7 +47,7 @@ MANAGERS = ADMINS
 # Email settings
 # --------------
 
-EMAIL_SUBJECT_PREFIX = '[Django] '
+EMAIL_SUBJECT_PREFIX = '[%s] ' % PROJECT_NAME
 DEFAULT_FROM_EMAIL = 'angelo@ma-work.co.uk'
 
 # i18n / l10n
