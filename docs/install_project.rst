@@ -71,23 +71,20 @@ Step 4 - Clean up and Checkout the new project
 
  
 
-Step 5A - Initial setup and running the project
-===============================================
+Step 5 - Initial setup and running the project
+==============================================
 
 - 'cd' into the project directory and run::
 
     fab devinit
 
+- this will download all python and javascript dependencies, compile sass, etc..
 - local project should be running as usual/expected
 
+.. note::
 
-
-Step 5B - If Using SASS
-=======================
-
-run::
-
-    sass --watch screen.scss:../css/screen.min.css --style exanded
+    If something in the projects changes, like dependencies or the sass files,
+    you can retrigger the build with ``fab devupdate``.
 
 
 
