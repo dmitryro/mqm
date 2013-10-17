@@ -366,6 +366,7 @@ def install(mysql_root_password=None):
     with cd(path):
         run('bin/python manage.py loaddata config/adminuser.json')
 
+    bower_install()
     collectstatic()
     start()
     reload_webserver()
@@ -439,7 +440,7 @@ def create_database(root_password):
         })
     sudo(
         'echo "'
-            'GRANT ALL ON %(dbname)s.* TO %(dbname)s IDENTIFIED BY \'%(user_password)s\';'
+            'GRANT ALL ON %(dbname)s.* TO \'%(dbname)s\'@\'localhost\' IDENTIFIED BY \'%(user_password)s\';'
         '"'
         ' | mysql --user=root --password=%(root_password)s' % {
             'dbname': config['dbname'],
