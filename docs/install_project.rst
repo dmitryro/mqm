@@ -88,13 +88,24 @@ Step 5 - Initial setup and running the project
 
 
 
-Step 6 - Initialising the new project on Maworaa
-================================================
+Step 6 - Initialising the new project on the server
+===================================================
 
 - open project.ini file in your text editior.
-- fill out the project 'name' only::
+- fill out the project 'name' setting::
 
     name = (projectName)
+
+- fill out the ``host`` setting as well. This is where the project shall be
+  installed later. You can choose from:
+
+  - ``maworaa1.miniserver.com``
+  - ``maworaa3.miniserver.com``
+
+- set ``domain`` accordingly:
+
+  - for **maworaa1** choose: ``%(name)s.maworaa.co.uk``
+  - for **maworaa3** choose: ``%(name)s.madebyma.com``
 
 - then run::
 
@@ -107,7 +118,6 @@ Step 6 - Initialising the new project on Maworaa
     fab -u martin install
     102666GHOST (enter the MySQL password on Maworaa1)
     ma040978work (enter your user account password on Maworaa)
-
 
 - Shell output should return the following::
 
