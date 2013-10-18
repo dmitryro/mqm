@@ -112,7 +112,7 @@ Step 6 - Initialising the new project on the server
     (Angelo:)
     fab -u angelo install
     102666GHOST (enter the MySQL password on Maworaa1)
-    nabadu38 (enter your user account password on Maworaa)
+    nabadu38 / ghostranch (enter your user account password on Maworaa1/Maworaa2)
 
     (Martin:)
     fab -u martin install

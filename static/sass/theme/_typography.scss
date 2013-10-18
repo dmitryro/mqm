@@ -26,8 +26,7 @@
 #tinymce, .typography, .typography-invert {
 	a { text-decoration: none; }
 	p {
-		color: $light;
-		@include Garamond;
+		color: $directive;
 		@include font-size-copy(18px);
 		margin-bottom: 42px;
 		a {
@@ -35,19 +34,16 @@
 		}
 	}
 	h1,h2,h3 {
-		color:$heading;
-		@include Noodle;
+		color:$directive;
 		margin-bottom: 1px;
 		margin-top: 30px;
 		@include font-size(24px);
 	}
 	h3 {
-		@include Noodle;
 		margin-bottom: 0px;
 		@include font-size(18px);
 	}
 	h4,h5,h6 {
-		@include NoodleIt;
 		margin-bottom: 6px;
 		@include font-size(18px);
 		color:$directive;
@@ -57,13 +53,11 @@
 		height:auto;
 	}
 	em {
-		@include GaramondIt;
 	}
 	ul {
 		margin-bottom: 42px;
 		li {
-			color:$light;
-			@include Garamond;
+			color:$directive;
 			list-style: none;
 			list-style-position: inside;
 			margin-bottom: 15px;
@@ -75,7 +69,6 @@
 	.poster {
 		width: 100%;
 		margin-bottom:18px;
-		@include Noodle;
 		@include font-size(24px);
 		text-transform: uppercase;
 	}
@@ -88,24 +81,20 @@
 	p.quote, .quote {
 		width: 80%;
 		margin: 0 auto 18px auto;
-		@include GaramondIt;
 		@include font-size-copy(15px);
 		text-align: center!important;
 	}
 	p.credit, .credit{
 		margin: 0 0 5px 0;
-		@include Garamond;
 		@include font-size-copy(12px);
 		color:#666;
 	}
 	p.image-credit, .image-credit{
 		margin: 5px 0 14px 0;
-		@include GaramondIt;
 		@include font-size-copy(11px);
 		color:#666;
 	}
 	p.button a, .button a{
-		@include Noodle;
 		@include font-size(12px);
 		@include button($directive, #fff, 13px, "\203A");
 		@include transition;
