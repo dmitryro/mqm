@@ -116,8 +116,8 @@ Step 6 - Initialising the new project on the server
 
     (Martin:)
     fab -u martin install
-    102666GHOST (enter the MySQL password on Maworaa1)
-    ma040978work (enter your user account password on Maworaa)
+    102666GHOST (enter the MySQL password on Maworaa1 & Maworaa3)
+    kexede29 / MA280976work (enter your user account password on Maworaa1/Maworaa3)
 
 - Shell output should return the following::
 
