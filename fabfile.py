@@ -279,6 +279,7 @@ def loadmedia():
 def create_user():
     with settings(warn_only=True):
         sudo('useradd --home %(path)s %(user)s' % config)
+        sudo('gpasswd -a %(user)s projects' % config)
         sudo('gpasswd -a www-data %(user)s' % config)
         sudo('gpasswd -a gregor %(user)s' % config)
         sudo('gpasswd -a angelo %(user)s' % config)
