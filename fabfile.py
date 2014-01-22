@@ -170,6 +170,13 @@ def pip_install():
     with cd(path):
         run('bin/pip install -r requirements/live.txt')
 
+def pip_upgrade():
+    '''
+    * install dependcies
+    '''
+    with cd(path):
+        run('bin/pip install --upgrade -r requirements/live.txt')
+
 def bower_install():
     '''
     * install JS dependencies
@@ -553,7 +560,7 @@ def devsetup():
             capture=False)
 
 def devupdate():
-    local('bin/pip install -r requirements/development.txt')
+    local('bin/pip install --upgrade -r requirements/development.txt')
     local('bower install')
     local('cd static/sass; mkdir -p ../css/; sass screen.scss:../css/screen.min.css --style exanded')
 
