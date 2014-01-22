@@ -11,12 +11,14 @@
 Step 1 - Preparation
 ====================
 
-- Clone the Skeleton Project
-- Delete Bookmark from Versions but "keep folder"
-- Open up a Shell and 'cd' into the project directory
-- Remove all directories called .svn - run:
-	
-    rm -rf `find . -type d -name .svn`
+- Go to bitbucket: https://bitbucket.org/mawork/ma-django-skeleton/downloads
+- Click on *Branches*
+- Click on *zip* for the branch you want to download. As explanation:
+    - *master* contains a django project, including the hot shit like
+      bower, requirejs, sass etc..
+    - *basic-django* contains a raw django project with simple css and
+      javascript files setup.
+- Unpack the downloaded zip into a new, empty project directory
 
 
 
