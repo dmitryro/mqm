@@ -4,7 +4,7 @@ celery == 2.5.5
 Django >= 1.5 , < 1.5.99
 django-celery == 2.5.5
 django_compressor == 1.1.2
-django-contact-form == 0.3
+django-contact-form == 1.0
 django-extensions == 1.1.1
 django-flatblocks == 0.6.0
 django-floppyforms == 1.0.0
