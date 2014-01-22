@@ -7,7 +7,7 @@ project_root = os.path.dirname(os.path.abspath(__file__))
 
 def setup_virtualenv():
     # activate virtualenv
-    activate_this = os.path.join(project_root, 'bin', 'activate_this.py')
+    activate_this = os.path.join(project_root, '.env', 'bin', 'activate_this.py')
     execfile(activate_this, dict(__file__=activate_this))
 
 

@@ -82,7 +82,7 @@ def syncdb():
     * run syncdb --migrate
     '''
     with cd(path):
-        run('bin/python manage.py syncdb --noinput --migrate')
+        run('.env/bin/python manage.py syncdb --noinput --migrate')
 
 def reload_webserver():
     '''
@@ -149,12 +149,12 @@ def test():
 
 def collectstatic():
     '''
-    * run bin/python manage.py collectstatic
+    * run .env/bin/python manage.py collectstatic
     '''
     with settings(warn_only=True):
         sass_compile()
     with cd(path):
-        run('bin/python manage.py collectstatic -v0 --noinput')
+        run('.env/bin/python manage.py collectstatic -v0 --noinput')
 
 def setup_virtualenv():
     '''
@@ -168,14 +168,14 @@ def pip_install():
     * install dependcies
     '''
     with cd(path):
-        run('bin/pip install -r requirements/live.txt')
+        run('.env/bin/pip install -r requirements/live.txt')
 
 def pip_upgrade():
     '''
     * install dependcies
     '''
     with cd(path):
-        run('bin/pip install --upgrade -r requirements/live.txt')
+        run('.env/bin/pip install --upgrade -r requirements/live.txt')
 
 def bower_install():
     '''
@@ -262,12 +262,12 @@ def loaddata(apps=None):
     dump_file = '.dump.json'
     server_dump = os.path.join(config['path'], dump_file)
     with cd(path):
-        run('%s/bin/python manage.py dumpdata --indent=2 --natural --all %s > %s' % (
+        run('%s/.env/bin/python manage.py dumpdata --indent=2 --natural --all %s > %s' % (
             config['path'],
             apps,
             server_dump))
         get(server_dump, dump_file)
-    local('bin/python manage.py loaddata %s' % dump_file)
+    local('.env/bin/python manage.py loaddata %s' % dump_file)
 
 
 def loadmedia():
@@ -372,7 +372,7 @@ def install(mysql_root_password=None):
     syncdb()
 
     with cd(path):
-        run('bin/python manage.py loaddata config/adminuser.json')
+        run('.env/bin/python manage.py loaddata config/adminuser.json')
 
     bower_install()
     collectstatic()
@@ -553,23 +553,25 @@ def _pwdgen():
     return pwd
 
 def devsetup():
-    local('virtualenv . --system-site-packages --python=`which python`')
+    local('virtualenv .env --system-site-packages --python=`which python`')
     if not os.path.exists('src/website/local_settings.py'):
         local(
             'cp -p src/website/local_settings.development.py src/website/local_settings.py',
             capture=False)
 
 def devupdate():
-    local('bin/pip install --upgrade -r requirements/development.txt')
+    local('.env/bin/pip install --upgrade -r requirements/development.txt')
     local('bower install')
     local('cd static/sass; mkdir -p ../css/; sass screen.scss:../css/screen.min.css --style exanded')
 
 def devinit():
+    os.chdir(os.path.dirname(__file__))
+
     devsetup()
     devupdate()
-    local('bin/python manage.py syncdb --noinput --migrate', capture=False)
-    local('bin/python manage.py loaddata config/adminuser.json', capture=False)
-    local('bin/python manage.py loaddata config/localsite.json', capture=False)
+    local('.env/bin/python manage.py syncdb --noinput --migrate', capture=False)
+    local('.env/bin/python manage.py loaddata config/adminuser.json', capture=False)
+    local('.env/bin/python manage.py loaddata config/localsite.json', capture=False)
 
     _ascii_art('killer')
 
