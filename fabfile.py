@@ -152,7 +152,7 @@ def collectstatic():
     * run .env/bin/python manage.py collectstatic
     '''
     with settings(warn_only=True):
-        sass_compile()
+        build()
     with cd(path):
         run('.env/bin/python manage.py collectstatic -v0 --noinput')
 
@@ -184,14 +184,12 @@ def bower_install():
     with cd(path):
         run('bower install')
 
-def sass_compile():
+def build():
     '''
-    * compiling sass files into css.
+    * Running build on the server.
     '''
     with cd(path):
-        with cd('static/sass'):
-            run('mkdir -p ../css/')
-            run('sass screen.scss:../css/screen.min.css --style exanded')
+        run('gulp')
 
 def deploy():
     '''
@@ -561,8 +559,9 @@ def devsetup():
 
 def devupdate():
     local('.env/bin/pip install --upgrade -r requirements/development.txt')
+    local('npm install')
     local('bower install')
-    local('cd static/sass; mkdir -p ../css/; sass screen.scss:../css/screen.min.css --style exanded')
+    local('gulp')
 
 def devinit():
     os.chdir(os.path.dirname(__file__))

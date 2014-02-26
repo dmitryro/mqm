@@ -6,6 +6,10 @@ logs
 media/media/
 media/static/
 static/css/screen.min.css
-static/js/libs
-static/sass/.sass-cache/
 server_settings.py
+static/css/
+
+# bower libs
+static/js/libs
+# node packages
+node_modules/
