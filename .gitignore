@@ -5,9 +5,8 @@ local
 logs
 media/media/
 media/static/
-static/css/screen.min.css
 server_settings.py
-static/css/
+static/dist/
 
 # bower libs
 static/js/libs

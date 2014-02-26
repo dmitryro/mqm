@@ -8,7 +8,7 @@ var paths = {
   scripts: ['static/js/**/*.js'],
   sass: ['static/sass/**/*.scss'],
   sassLibs: [],
-  cssOutput: 'static/css/',
+  cssOutput: 'static/dist/css/',
   templates: ['templates/**/*.*'],
 };
 
@@ -19,7 +19,7 @@ gulp.task('sass', function () {
             includePaths: paths.sassLib
         }))
         .pipe(autoprefixer("last 1 version", "> 1%", "ie 8", "ie 7"))
-        .pipe(gulp.dest('static/css'));
+        .pipe(gulp.dest(paths.cssOutput));
 });
 
 
