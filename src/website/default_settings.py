@@ -147,6 +147,8 @@ INSTALLED_APPS = (
     'tinymce',
     'south',
 
+    'django_runserver',
+
     # project apps
     'website',
     'website.pages',
