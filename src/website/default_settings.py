@@ -79,15 +79,6 @@ STATICFILES_DIRS = (
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    'compressor.finders.CompressorFinder',
-)
-
-# django-compressor
-# -----------------
-
-COMPRESS_CSS_FILTERS = (
-    'compressor.filters.css_default.CssAbsoluteFilter',
-    'compressor.filters.cssmin.CSSMinFilter',
 )
 
 # Template related settings
@@ -128,12 +119,13 @@ INSTALLED_APPS = (
     'django.contrib.webdesign',
 
     # third-party apps
-    'compressor',
     'django_extensions',
     'django_markup',
     'django_mobile',
+    'djangular',
     'contact_form',
     'flatblocks',
+    'rest_framework',
     #'haystack',
     'gunicorn',
     'mailer',
@@ -144,11 +136,10 @@ INSTALLED_APPS = (
     'mediastore.mediatypes.pdf',
     'mediastore.mediatypes.video',
     'sorl.thumbnail',
+    'sortedm2m',
     'taggit',
     'tinymce',
     'south',
-
-    'django_runserver',
 
     # project apps
     'website',
@@ -256,6 +247,16 @@ TINYMCE_JS_URL = '/static/tiny_mce/tiny_mce.js'
 HAYSTACK_SITECONF = 'website.search_sites'
 HAYSTACK_SEARCH_ENGINE = 'whoosh'
 HAYSTACK_WHOOSH_PATH = os.path.join(PROJECT_ROOT, 'search_index')
+
+# rest-framework
+# --------------
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.SessionAuthentication',
+    ),
+    'DEFAULT_FILTER_BACKENDS': ('rest_framework.filters.DjangoFilterBackend',)
+}
 
 
 ###########################################################################

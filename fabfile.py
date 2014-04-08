@@ -35,13 +35,16 @@ env.hosts.extend([
 
 
 project_name = project_config.get('project', 'name')
+repo_manager = project_config.get('project', 'repo_manager')
 
 
 _services = project_config.get('project', 'services')
 _services = _services.split()
 
 config = {
+    'root': project_config.get('project', 'root'),
     'path': project_config.get('project', 'path'),
+    'component': project_config.get('project', 'component'),
     'domain': project_config.get('project', 'domain'),
     'dbname': project_config.get('project', 'dbname'),
     'project': project_name,
@@ -73,7 +76,8 @@ def update():
     * Update the checkout.
     '''
     with cd(path):
-        run('svn update')
+        sudo('git fetch origin', user=repo_manager)
+        sudo('git reset --hard origin/master', user=repo_manager)
         run('mkdir -p logs')
     setup_fs_permissions()
 
@@ -161,7 +165,7 @@ def setup_virtualenv():
     * setup virtualenv
     '''
     with cd(path):
-        run('virtualenv . --system-site-packages')
+        run('virtualenv .env --system-site-packages')
 
 def pip_install():
     '''
@@ -176,6 +180,13 @@ def pip_upgrade():
     '''
     with cd(path):
         run('.env/bin/pip install --upgrade -r requirements/live.txt')
+
+def npm_install():
+    '''
+    * install JS dependencies
+    '''
+    with cd(path):
+        run('npm install')
 
 def bower_install():
     '''
@@ -198,6 +209,7 @@ def deploy():
     * restart services
     '''
     update()
+    npm_install()
     bower_install()
     pip_install()
     syncdb()
@@ -240,17 +252,15 @@ def status():
     * show if services are running
     '''
     with settings(warn_only=True):
-        with cd(path):
-            run('svn info')
         for service_config in _services():
             sudo('svstat /etc/service/%(service_name)s' % service_config)
 
 
 def conf(operation='get', filename=SERVER_SETTINGS_FILE):
     if operation == 'get':
-        get(os.path.join(config['path'], config['local_settings']), SERVER_SETTINGS_FILE)
+        get(os.path.join(path, config['local_settings']), SERVER_SETTINGS_FILE)
     if operation == 'put':
-        put(SERVER_SETTINGS_FILE, os.path.join(config['path'], config['local_settings']))
+        put(SERVER_SETTINGS_FILE, os.path.join(path, config['local_settings']))
 
 
 def loaddata(apps=None):
@@ -258,10 +268,10 @@ def loaddata(apps=None):
         apps = project_config.get('development', 'loaddata_apps')
         apps = ' '.join(apps.split())
     dump_file = '.dump.json'
-    server_dump = os.path.join(config['path'], dump_file)
+    server_dump = os.path.join(path, dump_file)
     with cd(path):
         run('%s/.env/bin/python manage.py dumpdata --indent=2 --natural --all %s > %s' % (
-            config['path'],
+            path,
             apps,
             server_dump))
         get(server_dump, dump_file)
@@ -273,7 +283,7 @@ def loadmedia():
     local('rsync -r %s@%s:%s/media/media/ media/media/' % (
         env.user,
         env['hosts'][0],
-        config['path']))
+        path))
 
 
 ##############################
@@ -289,6 +299,7 @@ def create_user():
         sudo('gpasswd -a gregor %(user)s' % config)
         sudo('gpasswd -a angelo %(user)s' % config)
         sudo('gpasswd -a martin %(user)s' % config)
+        sudo('gpasswd -a mawork-user %(user)s' % config)
 
 def setup_fs_permissions():
     with cd(path):
@@ -348,13 +359,17 @@ def install(mysql_root_password=None):
     # just in case its already on there ...
     stop()
 
-    # create project directory
-    dirname = os.path.dirname(config['path'])
-    if not files.exists(dirname):
-        sudo('mkdir -p %s' % os.path.dirname(config['path']))
+    # create project's parent directory
+    if not files.exists(config['root']):
+        sudo('mkdir -p %s' % config['root'])
+        sudo('chown {user}:{user} -R {root}'.format(**config))
+        sudo('chmod g+w -R {root}'.format(**config))
 
-    # svn checkout
-    sudo('svn checkout %(repo_url)s %(path)s' % config)
+    # git clone
+    if not files.exists(config['path']):
+        sudo('git clone %(repo_url)s %(path)s' % config, user=repo_manager)
+    else:
+        update()
 
     setup_fs_permissions()
 
@@ -466,6 +481,7 @@ def setup(mysql_root_password=None):
     port = _determine_port()
     template_config = {
         u'USER': config['user'],
+        u'PATH': path,
         u'PROJECT_NAME': project_name,
         u'DOMAIN': config['domain'],
         u'PORT': port,
@@ -551,6 +567,8 @@ def _pwdgen():
     return pwd
 
 def devsetup():
+    os.chdir(os.path.dirname(__file__))
+
     local('virtualenv .env --system-site-packages --python=`which python`')
     if not os.path.exists('src/website/local_settings.py'):
         local(
@@ -558,6 +576,8 @@ def devsetup():
             capture=False)
 
 def devupdate():
+    os.chdir(os.path.dirname(__file__))
+
     local('.env/bin/pip install --upgrade -r requirements/development.txt')
     local('npm install')
     local('bower install')
@@ -573,16 +593,6 @@ def devinit():
     local('.env/bin/python manage.py loaddata config/localsite.json', capture=False)
 
     _ascii_art('killer')
-
-def replace(**kwargs):
-    if kwargs:
-        for key, value in kwargs.items():
-            local(r'find -type f | grep -v "^\./\." | grep -v ".svn" | xargs sed -i "s/<REPLACE:%s>/%s/g"' % (
-                key,
-                value.replace('"', r'\"'),
-            ))
-    else:
-        local(r'grep -r "<REPLACE:[^>]\+>" . | grep -v ".svn"', capture=False)
 
 def open():
     '''

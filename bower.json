@@ -2,9 +2,18 @@
   "name": "website",
   "version": "1.0.0",
   "dependencies": {
+    "angular": "1.2.15",
+    "angular-resource": "1.2.15",
+    "angular-cookies": "1.2.15",
+    "angular-sanitize": "1.2.15",
+    "angular-route": "1.2.15",
+    "es5-shim": "~2.1.0",
     "jquery": "~1.10.2",
-    "underscore": "~1.4.4",
-    "history.js": "~1.8.0",
-    "modernizr": "~2.6.2"
+    "lodash": "~2.4.1",
+    "modernizr": "~2.6.2",
+    "sass-bootstrap": "~3.0.2",
+    "danialfarid-angular-file-upload": "~1.2.7",
+    "momentjs": "~2.5.1",
+    "angular-ui-bootstrap-bower": "~0.10.0"
   }
 }

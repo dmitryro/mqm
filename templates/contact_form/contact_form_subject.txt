@@ -1,1 +1,0 @@
-You got a message through {{ site.name }} (from {{ name }})

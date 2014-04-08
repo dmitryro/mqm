@@ -1,7 +1,0 @@
-You received this message through the contact form on {{ site.name }}.
-
-Name: {{ name }}
-Email: {{ email }}
-------------------------------------------------------------
-
-{{ body }}

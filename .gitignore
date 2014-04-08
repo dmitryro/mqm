@@ -1,21 +1,11 @@
-*.pyc
-*.pyo
-*.egg
-*.egg-info
-db.sqlite
-src/website/local_settings.py
-
 .dump.json
 bin
 lib
 local
 logs
-media/media/
-media/static/
-server_settings.py
-static/dist/
-
-# bower libs
-static/js/libs
-# node packages
+media/
 node_modules/
+static/dist/
+static/libs/
+static/styles/.sass-cache/
+server_settings.py

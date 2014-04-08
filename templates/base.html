@@ -6,62 +6,53 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    
-    <title>{% block title %}{% endblock %} Light Show at Hayward Gallery, Southbank Centre</title>
+
+    <title>{% block title %}{% endblock %} | Website</title>
     <meta name="description" content="{% block meta_description %}{% endblock %}" />
     <meta name="keywords" content="{% block meta_keywords %}{% endblock %}" />
-    <meta name="author" content="content: Southbank Centre, Hawyaward Gallery, website: M/A ma-work.co.uk" />
+    <meta name="author" content="content: M/A, website: M/A ma-work.co.uk" />
     <meta name="copyright" content="website (c) Copyright M/A" />
 
     <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, width=device-width" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    
-    <meta property="og:title" content="Light Show at Hayward Gallery, Southbank Centre">
+
+    <meta property="og:title" content="">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="http://haywardlightshow.co.uk">
+    <meta property="og:url" content="">
     <meta property="og:image" content="">
     <meta property="og:locale" content="en_GB">
-    <meta property="og:description" content="Light Show at Hayward Gallery brings together sculptures and artworks that use light in different ways. From atmospheric, interactive pieces to sculptures that you can move around and through">
-
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:creator" content="@southbankcentre">
-    <meta name="twitter:title" content="Hayward Gallery Light Show">
-    <meta name="twitter:description" content="Light Show at Hayward Gallery brings together sculptures and artworks that use light in different ways. From atmospheric, interactive pieces to sculptures that you can move around and through">
-    <meta name="twitter:image" content="http://media.haywardlightshow.co.uk/media/images/poster.png">
+    <meta property="og:description" content="">
 
     {% block extra_css %}
-    <link rel="stylesheet" href="{{ STATIC_URL }}dist/css/screen.css" />
+    <link rel="stylesheet" href="{{ STATIC_URL }}dist/styles/main.css" />
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     {% endblock %}
 
     <link rel="shortcut icon" href="{{ STATIC_URL }}assets/img/favicon/favicon.png">
     <link rel="apple-touch-icon" href="{{ STATIC_URL }}assets/img/device/apple-touch-icon.png">
-    
+
     {% block extra_head %}{% endblock %}
 </head>
 
-<body class="project-name {% block bodyclass %}{% endblock %}" data-controller="page {% block controller %}{% endblock %}" data-leave-animation="{% block leave-animation %}{% endblock %}" data-enter-animation="{% block enter-animation %}{% endblock %}">{% block body %}
+{% block base %}
+<body class="website {% block bodyclass %}{% endblock %}">{% block body %}
 
-<div id="sitewrapper">
-    <header id="header">
-        <h1>site name</h1>
-        <nav><ul>
-            <li><a href="{% url "index" %}">homepage</a></li>
-            <li><a href="{% url "about" %}">about</a></li>
-        </ul></nav>
-    </header>
-    <div id="loading"></div>
-    <section id="frame">
-        {% block content %}{% endblock %}
-    </section>
-    <footer id="footer">
-        {% block footer %}{% endblock %}
-    </footer>
-</div>
+    {% block content %}{% endblock %}
 
 {% block extra_js %}
-<script data-main="{{ STATIC_URL }}js/main" src="{{ STATIC_URL }}js/require.js"></script>
+<!--[if lt IE 9]>
+<script src="{{ STATIC_URL }}libs/es5-shim/es5-shim.js"></script>
+<script src="{{ STATIC_URL }}libs/json3/lib/json3.min.js"></script>
+<![endif]-->
+
+<script src="{{ STATIC_URL }}libs/modernizr/modernizr.js"></script>
+<script src="{{ STATIC_URL }}libs/lodash/dist/lodash.min.js"></script>
+<script src="{{ STATIC_URL }}libs/jquery/jquery.min.js"></script>
 {% endblock %}
 
+{% if debug %}
+    <script src="//localhost:35729/livereload.js"></script>
+{% endif %}
 
 {% block analytics %}
 {% if GOOGLE_ANALYTICS_SITE_ID %}
@@ -82,4 +73,5 @@
   <![endif]-->
 
 {% endblock %}</body>
+{% endblock %}
 </html>
