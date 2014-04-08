@@ -6,9 +6,8 @@
 {% block base %}
 <body class="app {% block bodyclass %}{% endblock %}" ng-app="website" ng-controller="App" ng-cloak>{% block body %}
 
-    {% include "includes/navigation.html" %}
-    <div viewportheight ng-class="{'narrow': narrowSidebar}" class="content-area cf">
-        <div id="frame" ng-view viewportheight></div>
+    <div class="content-area cf">
+        <div id="frame" ng-view></div>
     </div>
 
     {% block extra_js %}

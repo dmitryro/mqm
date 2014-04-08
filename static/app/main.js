@@ -39,7 +39,7 @@
    * Main Controller
    */
 
-  app.controller('App', function ($scope, $routeParams, $location, Project) {
+  app.controller('App', function ($scope) {
 
   });
 
