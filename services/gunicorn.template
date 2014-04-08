@@ -9,6 +9,6 @@ cd $PROJECT_ROOT
 
 exec \
     setuidgid %(USER)s \
-    bin/python manage.py run_gunicorn \
+    .env/bin/python manage.py run_gunicorn \
         127.0.0.1:%(PORT)s \
         --workers=9
