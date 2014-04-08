@@ -1,0 +1,98 @@
+/*------------------------------------*\
+    $MIXINS
+\*------------------------------------*/
+
+
+/**
+ * Create a fully formed type style (sizing and vertical rhythm) by passing in a
+ * 
+   `@include font-size(10px);`
+ * 
+ */
+@mixin font-size($font-size){
+    font-size:$font-size;
+    line-height:ceil($font-size * 1.5);
+}
+
+@mixin font-size-copy($font-size){
+    font-size:$font-size;
+    line-height:ceil($font-size * 1.2);
+}
+
+
+
+/**
+ * Create a vertical centered item
+ * 
+   `@include v-center(200px);`
+ * 
+ */
+@mixin v-center($height) {
+  height:$height;
+  margin: auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+}
+
+
+
+/**
+ * Create vendor-prefixed CSS in one go, e.g.
+ * 
+   `@include vendor(border-radius, 4px);`
+ * 
+ */
+@mixin vendor($property, $value){
+    -webkit-#{$property}:$value;
+       -moz-#{$property}:$value;
+        -ms-#{$property}:$value;
+         -o-#{$property}:$value;
+            #{$property}:$value;
+}
+
+
+
+@mixin transition($duration : 0.5s, $easing : ease-in-out) {
+  -moz-transition: all $duration $easing;
+  -webkit-transition: all $duration $easing;
+  -o-transition: all $duration $easing;
+  transition: all $duration $easing;
+}
+
+
+@mixin border($value : 3px) {
+  -webkit-border-radius: $value;
+  -moz-border-radius: $value;
+  -khtml-border-radius: $value;
+  border-radius: $value;
+}
+
+
+@mixin opacity ($opacity) {
+    //-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=#{$opacity*100})";
+    //filter: alpha(opacity=$opacity*100);
+    -moz-opacity:$opacity;
+    -khtml-opacity: $opacity;
+    -webkit-opacity: $opacity;
+    opacity: $opacity;
+}
+
+
+/* --- Hex-to-RGBA --- */
+
+@mixin rgba($color, $value) {
+ background-color: $color;
+ background-color: rgba($color, $value) 
+}
+
+// @include rgba(#d13400, .3);  
+
+
+
+/* --- BORDER RADIUS --- */
+
+@mixin rounded($side, $radius: 10px) {
+  border-#{$side}-radius: $radius;
+  -moz-border-radius-#{$side}: $radius;
+  -webkit-border-#{$side}-radius: $radius;
+}
