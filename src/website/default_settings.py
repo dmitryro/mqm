@@ -49,6 +49,7 @@ MANAGERS = ADMINS
 
 EMAIL_SUBJECT_PREFIX = '[%s] ' % PROJECT_NAME
 DEFAULT_FROM_EMAIL = 'angelo@ma-work.co.uk'
+SERVER_EMAIL = DEFAULT_FROM_EMAIL
 
 # i18n / l10n
 # ------------
