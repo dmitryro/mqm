@@ -1,11 +1,11 @@
 server {
     server_name media.%(DOMAIN)s;
-    root /srv/%(PROJECT_NAME)s/media;
+    root %(PATH)s/media;
     access_log  off;
 }
 server {
     server_name static.%(DOMAIN)s;
-    root /srv/%(PROJECT_NAME)s/media/static;
+    root %(PATH)s/media/static;
     access_log  off;
 
     location ~* \.(eot|ttf|woff|svg)$ {
@@ -20,7 +20,7 @@ server {
 
     location / {
         #auth_basic            "private";
-        #auth_basic_user_file  /srv/%(PROJECT_NAME)s/config/htpasswd;
+        #auth_basic_user_file  %(PATH)s/config/htpasswd;
 
         proxy_set_header X-Forward-For $proxy_add_x_forwarded_for;
         proxy_set_header Host $http_host;
@@ -29,12 +29,12 @@ server {
     }
 
     location /static/ {
-        alias /srv/%(PROJECT_NAME)s/media/static/;
+        alias %(PATH)s/media/static/;
         access_log off;
     }
 
     location /media/ {
-        alias /srv/%(PROJECT_NAME)s/media/;
+        alias %(PATH)s/media/;
         access_log off;
     }
 }

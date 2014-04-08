@@ -7,8 +7,10 @@ SCRIPTPATH=`dirname $SCRIPT`
 PROJECT_ROOT=`dirname $SCRIPTPATH`
 cd $PROJECT_ROOT
 
+source .env/bin/activate
+
 exec \
     setuidgid %(USER)s \
-    .env/bin/python manage.py run_gunicorn \
+    python manage.py run_gunicorn \
         127.0.0.1:%(PORT)s \
         --workers=9
