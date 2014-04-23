@@ -4,7 +4,7 @@ from django.contrib import admin
 from django.contrib.auth.models import Group as _Group
 from django.utils.translation import ugettext_lazy as _
 
-from .models import User, Group
+from .models import User, Group, ReservedEmail
 
 
 class UserAdmin(admin.ModelAdmin):
@@ -49,7 +49,13 @@ class GroupAdmin(admin.ModelAdmin):
     pass
 
 
+class ReservedEmailAdmin(admin.ModelAdmin):
+    list_display = ('email',)
+    search_fields = ('email',)
+
+
 admin.site.register(User, UserAdmin)
 admin.site.register(Group, GroupAdmin)
+admin.site.register(ReservedEmail, ReservedEmailAdmin)
 
 admin.site.unregister(_Group)

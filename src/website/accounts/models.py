@@ -8,6 +8,8 @@ from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from django_extensions.db.fields import AutoSlugField
 
+from website.utils.fields import EmailField
+
 
 class User(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = 'email'
@@ -16,7 +18,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     first_name = models.CharField(_('first name'), max_length=30, blank=True)
     last_name = models.CharField(_('last name'), max_length=30, blank=True)
-    email = models.EmailField(_('email address'), unique=True)
+    email = EmailField(_('email address'), unique=True)
     job_title = models.CharField(max_length=50, blank=True)
     image = models.ImageField(upload_to='users/avatars/', null=True, blank=True)
     telephone = models.CharField(max_length=50, blank=True)
@@ -59,12 +61,12 @@ class Group(_Group):
         proxy = True
 
 
-#class ReservedEmail(models.Model):
-#    email = models.EmailField(unique=True)
-#
-#    class Meta:
-#        verbose_name = _('Reserved Email')
-#        verbose_name_plural = _('Reserved Emails')
-#
-#    def __unicode__(self):
-#        return self.email
+class ReservedEmail(models.Model):
+    email = EmailField(unique=True)
+
+    class Meta:
+        verbose_name = _('Reserved Email')
+        verbose_name_plural = _('Reserved Emails')
+
+    def __unicode__(self):
+        return self.email
