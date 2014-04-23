@@ -12,8 +12,8 @@ urlpatterns = patterns('',
 
     url(r'^api/', include('website.api.urls')),
 
-    url(r'^login/$', 'django.contrib.auth.views.login', name='login'),
-    url(r'^logout/$', 'django.contrib.auth.views.logout', name='logout'),
+    url(r'^login/$', 'website.accounts.views.login_signup', name='login'),
+    url(r'^logout/$', 'website.accounts.views.logout', name='logout'),
 
     # mediastore download counter
     url(r'^downloads/(?P<slug>[^/]+)/download/(?P<filename>.+)$', 'mediastore.mediatypes.download.views.download_counter', name='mediastore-download-link'),

@@ -1,22 +1,32 @@
 {% extends "base.html" %}
+{% load floppyforms %}
 
-{% block title %}Login{% endblock %}
+
+{% block title %}Login &amp; Signup{% endblock %}
 
 
 {% block content %}
 <div class="login">
-    <form action="" method="post" role="form">{% csrf_token %}
-        <div class="form-group">
-        	<label for="id_username" class="sr-only">Username:</label> 
-        	<input id="id_username" maxlength="254" name="username" type="text" placeholder="username" class="form-control">
-        </div>
-        <div class="form-group">	
-        	<label for="id_password" class="sr-only">Password:</label> 
-        	<input id="id_password" name="password" type="password" placeholder="password" class="form-control">
-        </div>
-        <div class="form-group">	
-        	<button type="submit" class="btn btn-default">Login</button>
-        </div>	
-    </form>
+    {% form login_form using %}
+        {% formconfig row using "forms/row.html" %}
+        <form action="" method="post" role="form">{% csrf_token %}
+            {% formrow form.email with inline_label="Your email" %}
+            {% formrow form.password with inline_label="Password" %}
+
+            {% include "forms/submit.html" with label="Login" name="login" only %}
+        </form>
+    {% endform %}
+</div>
+
+<div class="signup">
+    {% form signup_form using %}
+        {% formconfig row using "forms/row.html" %}
+        <form action="" method="post" role="form">{% csrf_token %}
+            <p>Don't have an account yet?</p>
+
+            {% formrow form.email with inline_label="Your email" %}
+            {% include "forms/submit.html" with label="Signup" name="signup" only %}
+        </form>
+    {% endform %}
 </div>
 {% endblock %}

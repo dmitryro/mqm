@@ -1,0 +1,3 @@
+<div class="form-group">
+    <button type="submit"{% if value %} value="{{ value }}"{% endif %}{% if name %} name="{{ name }}"{% endif %} class="btn btn-{% firstof button_type "default" %}">{% firstof label _('Submit') %}</button>
+</div>

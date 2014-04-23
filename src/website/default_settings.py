@@ -125,6 +125,7 @@ INSTALLED_APPS = (
     'djangular',
     'contact_form',
     'flatblocks',
+    'floppyforms',
     'rest_framework',
     #'haystack',
     'gunicorn',
@@ -143,6 +144,7 @@ INSTALLED_APPS = (
 
     # project apps
     'website',
+    'website.accounts',
     'website.pages',
 )
 
