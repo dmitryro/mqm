@@ -1,20 +1,19 @@
 [
-  {
-    "pk": 1,
-    "model": "auth.user",
-    "fields": {
-      "username": "admin",
-      "first_name": "Test",
-      "last_name": "Admin",
-      "is_active": true,
-      "is_superuser": true,
-      "is_staff": true,
-      "last_login": "2010-01-01 00:00:00",
-      "groups": [],
-      "user_permissions": [],
-      "password": "sha1$18440$08cb5bacf39cab43c6995ca8cddbdd2a45c7a2f3",
-      "email": "angelo@ma-work.co.uk",
-      "date_joined": "2010-01-01 00:00:00"
-    }
+{
+  "pk": 1,
+  "model": "accounts.user",
+  "fields": {
+    "first_name": "Angelo",
+    "last_name": "Petsas",
+    "is_active": true,
+    "is_superuser": true,
+    "is_staff": true,
+    "last_login": "2014-04-23T14:00:18.504",
+    "groups": [],
+    "user_permissions": [],
+    "password": "pbkdf2_sha256$10000$d2yMvmSbfreM$8h4PkTe3+OprmfDPTDZvmHx7mBJ8/8QHUNRLw9EcJRw=",
+    "email": "angelo@ma-work.co.uk",
+    "date_joined": "2014-04-23T14:00:18.504"
   }
+}
 ]

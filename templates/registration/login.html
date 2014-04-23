@@ -8,10 +8,10 @@
 {% block content %}
 <div class="login">
     {% form login_form using %}
-        {% formconfig row using "forms/row.html" %}
         <form action="" method="post" role="form">{% csrf_token %}
-            {% formrow form.email with inline_label="Your email" %}
-            {% formrow form.password with inline_label="Password" %}
+            {% formconfig field with inline_label="Your email" for form.username  %}
+            {% formconfig field with inline_label="Password" for form.password %}
+            {% form login_form using "forms/form.html" with inline_label=1 %}
 
             {% include "forms/submit.html" with label="Login" name="login" only %}
         </form>

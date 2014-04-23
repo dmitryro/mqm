@@ -23,7 +23,7 @@ def login_signup(request):
     redirect_to = request.REQUEST.get('next', '')
 
     if 'login' in request.POST:
-        login_form = LoginForm(request.POST)
+        login_form = LoginForm(data=request.POST)
         if login_form.is_valid():
             # Ensure the user-originating redirection url is safe.
             if not is_safe_url(url=redirect_to, host=request.get_host()):

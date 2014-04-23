@@ -162,6 +162,8 @@ MIDDLEWARE_CLASSES = (
     'website.pages.middleware.PageFallbackMiddleware',
 )
 
+AUTH_USER_MODEL = 'accounts.User'
+
 FIXTURE_DIRS = (
     os.path.join(PROJECT_ROOT, 'fixtures'),
 )

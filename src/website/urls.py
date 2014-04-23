@@ -10,6 +10,7 @@ urlpatterns = patterns('',
     url(r'^robots.txt$', 'django.shortcuts.render', {'template': 'robots.txt'},),
     url(r'^humans.txt$', 'django.shortcuts.render', {'template': 'humans.txt'},),
 
+    url(r'^$', 'website.views.index', name='index'),
     url(r'^api/', include('website.api.urls')),
 
     url(r'^login/$', 'website.accounts.views.login_signup', name='login'),

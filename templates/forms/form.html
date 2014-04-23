@@ -1,0 +1,15 @@
+{% load floppyforms %}{% block formconfig %}{% formconfig row using "forms/row.html" %}{% endblock %}
+
+{% block forms %}{% for form in forms %}
+{% block errors %}
+    {% include "floppyforms/errors.html" with errors=form.non_field_errors %}
+    {% include "floppyforms/errors.html" with errors=form|hidden_field_errors %}
+{% endblock errors %}
+{% block rows %}
+        {% for field in form.visible_fields %}
+            {% if forloop.last %}{% formconfig row with hidden_fields=form.hidden_fields %}{% endif %}
+            {% block row %}{% formrow field %}{% endblock %}
+        {% endfor %}
+        {% if not form.visible_fields %}{% for field in form.hidden_fields %}{% formfield field %}{% endfor %}{% endif %}
+{% endblock %}
+{% endfor %}{% endblock %}

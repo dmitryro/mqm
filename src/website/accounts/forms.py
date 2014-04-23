@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 
 import floppyforms as forms
-from emailusernames.forms import EmailAuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm
 from django.utils.translation import ugettext_lazy as _
 
 
-class LoginForm(EmailAuthenticationForm):
-    email = forms.EmailField(label=_("Email"), max_length=75)
+class LoginForm(AuthenticationForm):
+    username = forms.EmailField(label=_("Email"), max_length=75)
     password = forms.CharField(label=_("Password"), widget=forms.PasswordInput)
 
 
