@@ -9,10 +9,10 @@ from django.utils import six
 
 
 class SignupTokenGenerator(object):
-    def make_token(self, email):
-        return self._make_token_with_timestamp(email, self._num_days(self._today()))
+    def make_token(self, reserved):
+        return self._make_token_with_timestamp(reserved, self._num_days(self._today()))
 
-    def check_token(self, email, token):
+    def check_token(self, reserved, token):
         # Parse the token
         try:
             ts_b36, hash = token.split("-")
@@ -26,7 +26,7 @@ class SignupTokenGenerator(object):
 
         # Check that the timestamp/uid has not been tampered with
         if not constant_time_compare(
-                self._make_token_with_timestamp(email, ts),
+                self._make_token_with_timestamp(reserved, ts),
                 token):
             return False
 
@@ -36,7 +36,7 @@ class SignupTokenGenerator(object):
 
         return True
 
-    def _make_token_with_timestamp(self, email, timestamp):
+    def _make_token_with_timestamp(self, reserved, timestamp):
         # timestamp is number of days since 2001-1-1.  Converted to
         # base 36, this gives us a 3 digit string until about 2121
         ts_b36 = int_to_base36(timestamp)
@@ -45,9 +45,12 @@ class SignupTokenGenerator(object):
         key_salt = "website.accounts.registration.tokens.SignupTokenGenerator"
 
         # Ensure results are consistent across DB backends
-        email = email.lower()
+        email = reserved.email.lower()
 
-        value = (six.text_type(email) + six.text_type(timestamp))
+        value = (
+            six.text_type(reserved.pk) +
+            six.text_type(email) +
+            six.text_type(timestamp))
         hash = salted_hmac(key_salt, value).hexdigest()[::2]
         return "%s-%s" % (ts_b36, hash)
 

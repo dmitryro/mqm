@@ -7,6 +7,7 @@ from django.core.mail import send_mail
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils import timezone
+from django.utils.http import int_to_base36
 from django.utils.translation import ugettext_lazy as _
 from django_extensions.db.fields import AutoSlugField
 from template_email import TemplateEmail
@@ -81,8 +82,11 @@ class ReservedEmail(models.Model):
 
     def send_signup_email(self):
         site = Site.objects.get_current()
-        token = token_generator.make_token(self.email)
-        path = reverse('signup', kwargs={'token': token})
+        token = token_generator.make_token(self)
+        path = reverse('signup', kwargs={
+            'uidb36': int_to_base36(self.pk),
+            'token': token
+        })
         url = 'http://{site.domain}{path}'.format(
             site=site,
             path=path)

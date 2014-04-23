@@ -12,10 +12,11 @@ urlpatterns = patterns('',
 
     url(r'^$', 'website.views.index', name='index'),
     url(r'^signup/confirmation/$', 'website.accounts.registration.views.signup_confirmation', name='signup-confirmation'),
-    url(r'^signup/(?P<token>[^/]+)/$', 'website.accounts.registration.views.signup_wizard', name='signup'),
+    url(r'^signup/(?P<uidb36>[^-/]+)-(?P<token>[^/]+)/$', 'website.accounts.registration.views.signup_wizard', name='signup'),
     url(r'^api/', include('website.api.urls')),
 
     url(r'^login/$', 'website.accounts.views.login_signup', name='login'),
+    url(r'^login/$', 'website.accounts.views.login_signup', name='signup'),
     url(r'^logout/$', 'website.accounts.views.logout', name='logout'),
 
     # mediastore download counter
