@@ -16,7 +16,7 @@ def login_signup(request):
         signup_form = SignupForm(request.POST)
         if signup_form.is_valid():
             signup_form.save()
-            return HttpResponseRedirect(reverse('signup-success'))
+            return HttpResponseRedirect(reverse('signup-confirmation'))
     else:
         signup_form = SignupForm()
 

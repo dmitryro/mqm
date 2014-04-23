@@ -63,6 +63,11 @@ USE_I18N = True
 
 SITE_ID = 1
 
+# Registration process settings
+# -----------------------------
+
+SIGNUP_TIMEOUT_DAYS = 3
+
 # Media/Static file handling
 # --------------------------
 
@@ -139,6 +144,7 @@ INSTALLED_APPS = (
     'sorl.thumbnail',
     'sortedm2m',
     'taggit',
+    'template_email',
     'tinymce',
     'south',
 

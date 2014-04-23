@@ -1,0 +1,13 @@
+{% extends "email/base.html" %}
+{% load email %}
+
+
+{% subject %}Thank you for signing up!{% endsubject %}
+
+
+{% block body %}
+Hi,
+
+thank you for signing up. Please visit the following link to signup with us:
+{{ signup_link }}
+{% endblock %}

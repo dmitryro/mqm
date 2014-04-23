@@ -11,6 +11,8 @@ urlpatterns = patterns('',
     url(r'^humans.txt$', 'django.shortcuts.render', {'template': 'humans.txt'},),
 
     url(r'^$', 'website.views.index', name='index'),
+    url(r'^signup/confirmation/$', 'website.accounts.registration.views.signup_confirmation', name='signup-confirmation'),
+    url(r'^signup/(?P<token>[^/]+)/$', 'website.accounts.registration.views.signup_wizard', name='signup'),
     url(r'^api/', include('website.api.urls')),
 
     url(r'^login/$', 'website.accounts.views.login_signup', name='login'),

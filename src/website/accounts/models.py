@@ -2,13 +2,17 @@
 
 from django.contrib.auth.models import AbstractBaseUser, UserManager, PermissionsMixin
 from django.contrib.auth.models import Group as _Group
+from django.contrib.sites.models import Site
 from django.core.mail import send_mail
+from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from django_extensions.db.fields import AutoSlugField
+from template_email import TemplateEmail
 
 from website.utils.fields import EmailField
+from .registration.tokens import token_generator
 
 
 class User(AbstractBaseUser, PermissionsMixin):
@@ -62,6 +66,10 @@ class Group(_Group):
 
 
 class ReservedEmail(models.Model):
+    '''
+    Holds email addresses that are allowed to sign-up.
+    '''
+
     email = EmailField(unique=True)
 
     class Meta:
@@ -70,3 +78,21 @@ class ReservedEmail(models.Model):
 
     def __unicode__(self):
         return self.email
+
+    def send_signup_email(self):
+        site = Site.objects.get_current()
+        token = token_generator.make_token(self.email)
+        path = reverse('signup', kwargs={'token': token})
+        url = 'http://{site.domain}{path}'.format(
+            site=site,
+            path=path)
+        context = {
+            'email': self.email,
+            'site': site,
+            'signup_link': url,
+        }
+        email = TemplateEmail(
+            to=[self.email],
+            template='email/registration/signup.html',
+            context=context)
+        email.send()
