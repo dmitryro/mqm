@@ -7,6 +7,9 @@ from django_publicmanager.managers import GenericPublicManager, \
     PublicOnlyManager
 from mediastore.fields import MediaField, MultipleMediaField
 
+LOCAL = 'local'
+NATIONAL = 'national'
+PRIVATE = 'private'
 PRIVACY_CHOICES = (
     (LOCAL, _('Local')),
     (NATIONAL, _('National')),
@@ -15,7 +18,9 @@ PRIVACY_CHOICES = (
 class External_News(models.Model):
     title = models.CharField(max_length=120)
     date = models.DateField(null=True, blank=True)
-    #user = models.ForeignKey(User)
+    user = models.ForeignKey('accounts.User', null=True, blank=True,
+        db_index=True,
+        related_name='external_news')
     description = models.TextField(null=True, blank=True)
     source = models.CharField(max_length=120, help_text="Enter a URL to a online source or simply write the publication name and Author")
 
@@ -35,7 +40,9 @@ class External_News(models.Model):
 class Positive_News(models.Model):
     title = models.CharField(max_length=120)
     date = models.DateField(null=True, blank=True)
-    #user = models.ForeignKey(User)
+    user = models.ForeignKey('accounts.User', null=True, blank=True,
+        db_index=True,
+        related_name='positive_news')
     description = models.TextField(null=True, blank=True)
     source = models.CharField(max_length=120)
 

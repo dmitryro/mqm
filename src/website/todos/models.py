@@ -6,8 +6,8 @@ from django_extensions.db.fields import (AutoSlugField, CreationDateTimeField,
 
 
 class Todo(models.Model):
-    project = models.ForeignKey('projects.Project', related_name='todos')
-    revision = models.ForeignKey('revisions.Revision', null=True, blank=True, related_name='todos')
+    #project = models.ForeignKey('projects.Project', related_name='todos')
+    #revision = models.ForeignKey('revisions.Revision', null=True, blank=True, related_name='todos')
 
     slug = AutoSlugField(unique=True, populate_from='text')
     text = models.TextField()
@@ -27,7 +27,7 @@ class Todo(models.Model):
     modified = ModificationDateTimeField()
 
     class Meta:
-        ordering = ('project', 'sort_value',)
+        ordering = ('sort_value',)
         verbose_name = _('Todo')
         verbose_name_plural = _('Todos')
 

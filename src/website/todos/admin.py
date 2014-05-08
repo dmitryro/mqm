@@ -9,8 +9,8 @@ class CommentInline(admin.StackedInline):
 
 
 class TodoAdmin(admin.ModelAdmin):
-    list_display = ('text', 'project', 'revision', 'done', 'due_date', 'assigned_to', 'created_by',)
-    list_filter = ('done', 'project',)
+    list_display = ('text', 'done', 'due_date', 'assigned_to', 'created_by',)
+    list_filter = ('done',)
     inlines = [CommentInline]
 
 

@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
+from django.utils.translation import ugettext_lazy as _
 from .models import Marker, Map
 
 
 class MarkerAdmin(admin.ModelAdmin):
     list_display = (
-        'title')
+        'title',)
     fieldsets = (
         (_('General'), {
             'classes': ('wide',),

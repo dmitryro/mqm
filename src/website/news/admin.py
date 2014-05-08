@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
+from django.utils.translation import ugettext_lazy as _
 from .models import External_News, Positive_News
 
 
@@ -7,6 +8,7 @@ class External_NewsAdmin(admin.ModelAdmin):
     list_display = (
         'title',
         'date',
+        'user',
         'privacy')
     list_editable = ('privacy',)
     list_filter = ('privacy',)
@@ -26,6 +28,7 @@ class External_NewsAdmin(admin.ModelAdmin):
             'classes': ('wide',),
             'fields': (
                 'privacy',
+                'user',
             ),
         }),
     )
@@ -35,6 +38,7 @@ class Positive_NewsAdmin(admin.ModelAdmin):
     list_display = (
         'title',
         'date',
+        'user',
         'privacy')
     list_editable = ('privacy',)
     list_filter = ('privacy',)
@@ -54,6 +58,7 @@ class Positive_NewsAdmin(admin.ModelAdmin):
             'classes': ('wide',),
             'fields': (
                 'privacy',
+                'user',
             ),
         }),
     )

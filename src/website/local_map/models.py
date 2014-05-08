@@ -23,15 +23,20 @@ class Marker(models.Model):
         return self.title
 
 
+LOCAL = 'local'
+NATIONAL = 'national'
+PRIVATE = 'private'
 PRIVACY_CHOICES = (
     (LOCAL, _('Local')),
     (NATIONAL, _('National')),
     (PRIVATE, _('Private')),
 )
 
+CURRENT_PARTNER = 'Current Partner'
+PARTNER_OPPORTUNITY = 'Partner Opportunity'
 RELATIONSHIP_CHOICES = (
     (CURRENT_PARTNER, _('Current Partner')),
-    (PARTNER_OPPORTUNITY, _('Partner Opportunity)')),
+    (PARTNER_OPPORTUNITY, _('Partner Opportunity')),
 )
 
 class Map(models.Model):
