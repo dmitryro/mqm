@@ -151,7 +151,18 @@ INSTALLED_APPS = (
     # project apps
     'website',
     'website.accounts',
+    'website.clinical_research',
+    'website.diary',
+    'website.documents',
+    'website.faq',
+    'website.financial_summary',
+    'website.funding_map',
+    'website.local_map',
+    'website.news',
     'website.pages',
+    'website.todos',
+    'website.updates',
+    'website.videos',
 )
 
 ROOT_URLCONF = 'website.urls'
