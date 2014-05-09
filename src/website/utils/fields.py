@@ -7,3 +7,7 @@ class EmailField(models.EmailField):
         if value is not None:
             value = value.lower()
         return value
+
+
+from south.modelsinspector import add_introspection_rules
+add_introspection_rules([], ["^website\.utils\.fields\.EmailField"])

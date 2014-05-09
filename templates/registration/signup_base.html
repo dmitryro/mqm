@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+<h2>Openhub</h2>
+<h3>Sign up to Openhub</h3>
+
+<div>Section 1/5</div>
+<ol>
+    <li><a href="">Step 1</a></li>
+    <li><a href="">Step 2</a></li>
+    <li><a href="">Step 3</a></li>
+    <li><a href="">Step 4</a></li>
+    <li><a href="">Step 5</a></li>
+</ol>
+
+<form action="" method="post" enctype="multipart/form-data" novalidate>{% csrf_token %}
+    {{ wizard.management_form }}
+
+    {% if wizard.steps.prev %}
+        <button name="wizard_goto_step" type="submit" value="{{ wizard.steps.first }}">first step</button>
+        <button name="wizard_goto_step" type="submit" value="{{ wizard.steps.prev }}">prev step</button>
+    {% endif %}
+
+    {% block section %}
+
+    {% endblock %}
+</form>
+
+{% endblock %}
