@@ -39,6 +39,7 @@ RELATIONSHIP_CHOICES = (
     (PARTNER_OPPORTUNITY, _('Partner Opportunity')),
 )
 
+# Adding KEY PARTNERS
 class Map(models.Model):
     name = models.CharField(max_length=120)
     address = models.TextField(null=True, blank=True)
@@ -47,6 +48,7 @@ class Map(models.Model):
     postcode = models.CharField(max_length=120, help_text="this is how we generate a map")
     marker = models.ForeignKey(Marker)
     relationship = models.CharField(max_length=120, choices=RELATIONSHIP_CHOICES)
+    #category = models.CharField(max_length=120, choices=CATEGORY_CHOICES)
     privacy = models.CharField(max_length=120, choices=PRIVACY_CHOICES)
     created = CreationDateTimeField()
     modified = ModificationDateTimeField()

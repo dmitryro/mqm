@@ -15,6 +15,8 @@ PRIVACY_CHOICES = (
     (NATIONAL, _('National')),
     (PRIVATE, _('Private')),
 )
+
+# opportunity to get funding (updated predominately bt National Mind)
 class Funding(models.Model):
     title = models.CharField(max_length=120)
     start_date = models.DateField(null=True, blank=True)

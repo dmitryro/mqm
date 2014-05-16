@@ -35,8 +35,9 @@ class Clinical_Research(models.Model):
     modified = ModificationDateTimeField()
 
     class Meta:
-        verbose_name = _('External_News')
-        verbose_name_plural = _('External_News')
+        ordering = ('-date',)
+        verbose_name = _('Research')
+        verbose_name_plural = _('Research')
 
     def __unicode__(self):
         return self.title

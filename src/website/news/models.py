@@ -32,6 +32,7 @@ class External_News(models.Model):
     class Meta:
         verbose_name = _('External_News')
         verbose_name_plural = _('External_News')
+        ordering = ('-date',)
 
     def __unicode__(self):
         return self.title
@@ -47,6 +48,7 @@ class Positive_News(models.Model):
     source = models.CharField(max_length=120)
 
     privacy = models.CharField(max_length=120, choices=PRIVACY_CHOICES)
+    #tags = ....
 
     created = CreationDateTimeField()
     modified = ModificationDateTimeField()
@@ -54,6 +56,7 @@ class Positive_News(models.Model):
     class Meta:
         verbose_name = _('Positive_News')
         verbose_name_plural = _('Positive_News')
+        ordering = ('-date',)
 
     def __unicode__(self):
         return self.title
