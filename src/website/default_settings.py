@@ -163,6 +163,7 @@ INSTALLED_APPS = (
     'website.news',
     'website.pages',
     'website.resources',
+    'website.services',
     'website.todos',
     'website.updates',
     'website.videos',

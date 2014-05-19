@@ -30,8 +30,8 @@ class External_News(models.Model):
     modified = ModificationDateTimeField()
 
     class Meta:
-        verbose_name = _('External_News')
-        verbose_name_plural = _('External_News')
+        verbose_name = _('External News')
+        verbose_name_plural = _('External News')
         ordering = ('-date',)
 
     def __unicode__(self):
@@ -54,8 +54,8 @@ class Positive_News(models.Model):
     modified = ModificationDateTimeField()
 
     class Meta:
-        verbose_name = _('Positive_News')
-        verbose_name_plural = _('Positive_News')
+        verbose_name = _('Positive News')
+        verbose_name_plural = _('Positive News')
         ordering = ('-date',)
 
     def __unicode__(self):
