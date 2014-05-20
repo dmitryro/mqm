@@ -162,7 +162,7 @@ INSTALLED_APPS = (
     'website.local_map',
     'website.news',
     'website.pages',
-    'website.todos',
+    'website.tasks',
     'website.updates',
     'website.videos',
 )

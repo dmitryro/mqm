@@ -5,9 +5,8 @@ from django_extensions.db.fields import (AutoSlugField, CreationDateTimeField,
     ModificationDateTimeField)
 
 
-class Todo(models.Model):
-    project = models.ForeignKey('projects.Project', related_name='todos')
-    revision = models.ForeignKey('revisions.Revision', null=True, blank=True, related_name='todos')
+class Task(models.Model):
+    local_mind = models.ForeignKey('local_minds.LocalMind', related_name='tasks')
 
     slug = AutoSlugField(unique=True, populate_from='text')
     text = models.TextField()
@@ -20,16 +19,16 @@ class Todo(models.Model):
     is_priority = models.BooleanField(default=False, db_index=True)
     assigned_to = models.ForeignKey('accounts.User', null=True, blank=True,
         db_index=True,
-        related_name='todos')
-    created_by = models.ForeignKey('accounts.User', related_name='created_todos')
+        related_name='tasks')
+    created_by = models.ForeignKey('accounts.User', related_name='created_tasks')
 
     created = CreationDateTimeField()
     modified = ModificationDateTimeField()
 
     class Meta:
-        ordering = ('project', 'sort_value',)
-        verbose_name = _('Todo')
-        verbose_name_plural = _('Todos')
+        ordering = ('local_mind', 'sort_value',)
+        verbose_name = _('Task')
+        verbose_name_plural = _('Tasks')
 
     def __unicode__(self):
         return self.text
@@ -39,10 +38,10 @@ class Todo(models.Model):
 
 
 class Comment(models.Model):
-    todo = models.ForeignKey('Todo', related_name='comments')
+    task = models.ForeignKey('Task', related_name='comments')
 
+    author = models.ForeignKey('accounts.User', related_name='task_comments')
     text = models.TextField()
-    created_by = models.ForeignKey('accounts.User', related_name='todo_comments')
 
     created = CreationDateTimeField()
     modified = ModificationDateTimeField()
