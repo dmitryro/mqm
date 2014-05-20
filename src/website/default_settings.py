@@ -152,6 +152,7 @@ INSTALLED_APPS = (
     # project apps
     'website',
     'website.accounts',
+    'website.local_minds',
     'website.clinical_research',
     'website.diary',
     'website.documents',
