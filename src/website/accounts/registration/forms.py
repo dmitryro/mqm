@@ -70,8 +70,21 @@ class SignupProfileForm(forms.ModelForm):
         return user
 
 
-class SignupStepThreeForm(forms.Form):
-    step3 = forms.CharField()
+class SignupLocalMindMembers(forms.ModelForm):
+    class Meta:
+        model = LocalMind
+        fields = (
+            'chairman',
+            'chairman_email',
+            'ceo',
+            'ceo_email',
+            'ceo_telephone',
+            'chair_ethnicity',
+            'staff_count',
+            'trustees_count',
+            'volunteers_count',
+            'trustees_active',
+        )
 
 
 class SignupStepFourForm(forms.Form):

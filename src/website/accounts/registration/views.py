@@ -12,7 +12,7 @@ from django.utils.http import base36_to_int
 
 from ..models import ReservedEmail
 from .tokens import token_generator
-from .forms import SignupLocalMindForm, SignupProfileForm, SignupStepThreeForm, SignupStepFourForm, SignupInviteForm
+from .forms import SignupLocalMindForm, SignupProfileForm, SignupLocalMindMembers, SignupStepFourForm, SignupInviteForm
 
 
 class SignupWizardView(NamedUrlSessionWizardView):
@@ -22,10 +22,25 @@ class SignupWizardView(NamedUrlSessionWizardView):
     template_names = {
         'local-mind': 'registration/signup_step_local_mind.html',
         'profile': 'registration/signup_step_profile.html',
-        'step3': 'registration/signup_step_step3.html',
+        'members': 'registration/signup_step_members.html',
         'step4': 'registration/signup_step_step4.html',
         'invites': 'registration/signup_step_invites.html',
     }
+
+    def dispatch(self, request, *args, **kwargs):
+        uidb36 = kwargs['uidb36']
+        token = kwargs['token']
+
+        try:
+            uid_int = base36_to_int(uidb36)
+            self.reserved_email = ReservedEmail.objects.get(pk=uid_int)
+        except (ValueError, OverflowError, ReservedEmail.DoesNotExist):
+            self.reserved_email = None
+
+        if self.reserved_email is None or not token_generator.check_token(self.reserved_email, token):
+            return invalid_url(request)
+
+        return super(SignupWizardView, self).dispatch(request, *args, **kwargs)
 
     def get_template_names(self):
         return [self.template_names[self.steps.current]]
@@ -36,8 +51,7 @@ class SignupWizardView(NamedUrlSessionWizardView):
         return reverse(self.url_name, kwargs=url_kwargs)
 
     def get_context_data(self, **kwargs):
-        reserved_email = self.kwargs['reserved_email']
-        kwargs['email'] = reserved_email.email
+        kwargs['email'] = self.reserved_email.email
         return super(SignupWizardView, self).get_context_data(**kwargs)
 
     def done(self, form_list, **kwargs):
@@ -49,34 +63,16 @@ class SignupWizardView(NamedUrlSessionWizardView):
 signup_forms = (
     ('local-mind', SignupLocalMindForm),
     ('profile', SignupProfileForm),
-    ('step3', SignupStepThreeForm),
+    ('members', SignupLocalMindMembers),
     ('step4', SignupStepFourForm),
     ('invites', SignupInviteForm),
 )
 
 
-wizard = SignupWizardView.as_view(
+signup_wizard = SignupWizardView.as_view(
     signup_forms,
     url_name='signup',
     done_step_name='complete')
-
-
-def signup_wizard(request, uidb36, token, step=None):
-    try:
-        uid_int = base36_to_int(uidb36)
-        reserved_email = ReservedEmail.objects.get(pk=uid_int)
-    except (ValueError, OverflowError, ReservedEmail.DoesNotExist):
-        reserved_email = None
-
-    if reserved_email is None or not token_generator.check_token(reserved_email, token):
-        return invalid_url(request)
-
-    return wizard(
-        request,
-        uidb36=uidb36,
-        token=token,
-        step=step,
-        reserved_email=reserved_email)
 
 
 def invalid_url(request):

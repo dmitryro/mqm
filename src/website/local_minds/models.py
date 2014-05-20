@@ -10,10 +10,6 @@ class LocalMind(models.Model):
         ('charitable-incorporated-organisation', _('Charitable Incorporated Organisation'),),
     )
 
-    ETHNICITY_CHOICES = (
-        ('british', _('British')),
-    )
-
     name = models.CharField(_('Local Mind'), max_length=120)
     slug = AutoSlugField(populate_from=('name',))
 
@@ -39,14 +35,14 @@ class LocalMind(models.Model):
     ceo = models.CharField(_('CEO Name'), max_length=50, blank=True)
     ceo_email = models.EmailField(_('CEO Email'), blank=True)
     ceo_telephone = models.CharField(_('CEO Contact'), max_length=30, blank=True)
-    chair_ethnicity = models.CharField(_('Chair Ethnicity'), max_length=50, choices=ETHNICITY_CHOICES, blank=True)
+    chair_ethnicity = models.ForeignKey('Ethnicity', verbose_name=_('Chair Ethnicity'), related_name='chair_ethnicity+', null=True, blank=True)
     staff_count = models.PositiveIntegerField(_('No Of Staff'), null=True, blank=True)
     trustees_count = models.PositiveIntegerField(_('No Of Trustees'), null=True, blank=True)
     volunteers_count = models.PositiveIntegerField(_('No Of Volunteers'), null=True, blank=True)
     trustees_active = models.PositiveIntegerField(_('No Of Trustees Who Use MH Services'), null=True, blank=True)
-    trustees_ethnicity = models.CharField(_('Trustees Ethnicity'), max_length=50, choices=ETHNICITY_CHOICES, blank=True)
-    volunteers_ethnicity = models.CharField(_('Volunteers Ethnicity'), max_length=50, choices=ETHNICITY_CHOICES, blank=True)
-    staff_ethnicity = models.CharField(_('Staff Ethnicity'), max_length=50, choices=ETHNICITY_CHOICES, blank=True)
+    trustees_ethnicities = models.ManyToManyField('Ethnicity', verbose_name=_('Trustees Ethnicity'), related_name='trustees+', blank=True)
+    volunteers_ethnicities = models.ManyToManyField('Ethnicity', verbose_name=_('Volunteers Ethnicity'), related_name='volunteers+', blank=True)
+    staff_ethnicities = models.ManyToManyField('Ethnicity', verbose_name=_('Staff Ethnicity'), related_name='staff+', blank=True)
 
     created = CreationDateTimeField()
     modified = ModificationDateTimeField()
@@ -60,4 +56,16 @@ class LocalMind(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        return 'localmind', (), {'slug': self.slug}
+        return 'local-mind', (), {'slug': self.slug}
+
+
+class Ethnicity(models.Model):
+    slug = models.SlugField(unique=True)
+    name = models.CharField(max_length=50)
+
+    class Meta:
+        verbose_name = _('Ethnicity')
+        verbose_name_plural = _('Ethnicities')
+
+    def __unicode__(self):
+        return self.name

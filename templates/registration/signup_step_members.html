@@ -1,0 +1,38 @@
+{% extends "registration/signup_base.html" %}
+{% load floppyforms %}
+
+
+{% block section %}
+
+
+    {% form form using %}
+
+        {% formrow form.chairman %}
+        {% formrow form.chairman_email %}
+        {% formrow form.ceo %}
+        {% formrow form.ceo_email %}
+        {% formrow form.ceo_telephone %}
+        {% formrow form.chair_ethnicity %}
+        {% formrow form.ceo_ethnicity %}
+        {% formrow form.staff_count %}
+        {% formrow form.trustees_count %}
+        {% formrow form.volunteers_count %}
+        {% formrow form.trustees_active %}
+
+        <p>TODO: Ethnicity formsets</p>
+
+        <h3>Service informations</h3>
+        <p class="help">Please submit any task below - they will automatically be assigned to you</p>
+
+        <p>TODO: Service informations formset</p>
+
+        <h3>Questions &amp; Answers</h3>
+        <p class="help">Post any questions the network can help answer</p>
+
+        <p>TODO: Questions and Answers formset</p>
+
+    {% endform %}
+
+    <input type="submit" name="submit" value="submit" />
+
+{% endblock %}
