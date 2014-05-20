@@ -20,7 +20,6 @@ class BaseNewsAdmin(admin.ModelAdmin):
             'fields': (
                 'title',
                 'date',
-                'author',
                 'description',
                 'source',
             ),
@@ -29,6 +28,7 @@ class BaseNewsAdmin(admin.ModelAdmin):
             'classes': ('wide',),
             'fields': (
                 'privacy',
+                'author',
             ),
         }),
     )

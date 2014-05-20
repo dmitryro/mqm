@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
-from .models import External_News, Positive_News
+from django.utils.translation import ugettext_lazy as _
+from .models import Clinical_Research
 
 
 class Clinical_ResearchAdmin(admin.ModelAdmin):
     list_display = (
         'title',
         'date',
-        #'user',
+        'user',
         'privacy')
     list_editable = ('privacy',)
     list_filter = ('privacy',)
@@ -34,7 +35,7 @@ class Clinical_ResearchAdmin(admin.ModelAdmin):
             'classes': ('wide',),
             'fields': (
                 'privacy',
-                #'user',
+                'user',
             ),
         }),
     )

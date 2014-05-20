@@ -152,6 +152,7 @@ INSTALLED_APPS = (
     # project apps
     'website',
     'website.accounts',
+    'website.alerts',
     'website.local_minds',
     'website.clinical_research',
     'website.diary',
@@ -164,6 +165,9 @@ INSTALLED_APPS = (
     'website.pages',
     'website.privacy',
     'website.tasks',
+    'website.resources',
+    'website.services',
+    'website.todos',
     'website.updates',
     'website.videos',
 )

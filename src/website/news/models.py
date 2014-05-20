@@ -28,6 +28,7 @@ class BaseNews(models.Model):
 
     class Meta:
         abstract = True
+        ordering = ('-date',)
 
     def __unicode__(self):
         return self.title
@@ -37,9 +38,11 @@ class ExternalNews(BaseNews):
     class Meta:
         verbose_name = _('External News')
         verbose_name_plural = _('External News')
+        ordering = ('-date',)
 
 
 class PositiveNews(BaseNews):
     class Meta:
         verbose_name = _('Positive News')
         verbose_name_plural = _('Positive News')
+        ordering = ('-date',)

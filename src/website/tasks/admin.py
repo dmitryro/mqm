@@ -10,7 +10,7 @@ class CommentInline(admin.StackedInline):
 
 class TaskAdmin(admin.ModelAdmin):
     list_display = ('text', 'local_mind', 'done', 'due_date', 'assigned_to', 'created_by',)
-    list_filter = ('done', 'local_mind',)
+    list_filter = ('done',)
     inlines = [CommentInline]
 
 

@@ -7,6 +7,9 @@ from django_publicmanager.managers import GenericPublicManager, \
     PublicOnlyManager
 from mediastore.fields import MediaField, MultipleMediaField
 
+LOCAL = 'local'
+NATIONAL = 'national'
+PRIVATE = 'private'
 PRIVACY_CHOICES = (
     (LOCAL, _('Local')),
     (NATIONAL, _('National')),
@@ -77,7 +80,7 @@ class Document(models.Model):
     file = MediaField(
         related_name='document_file',
         limit_choices_to={'content_type__model':'download'},)
-    url = URLField(null=True, blank=True, help_text="to share if coming from google docs/dropbox - permission will need to be open")
+    url = models.URLField(null=True, blank=True, help_text="to share if coming from google docs/dropbox - permission will need to be open")
 
     # categorization
     categories = models.ManyToManyField(Category, blank=True, symmetrical=False,)

@@ -7,12 +7,16 @@ from django_publicmanager.managers import GenericPublicManager, \
     PublicOnlyManager
 from mediastore.fields import MediaField, MultipleMediaField
 
-
+LOCAL = 'local'
+NATIONAL = 'national'
+PRIVATE = 'private'
 PRIVACY_CHOICES = (
     (LOCAL, _('Local')),
     (NATIONAL, _('National')),
     (PRIVATE, _('Private')),
 )
+
+# opportunity to get funding (updated predominately bt National Mind)
 class Funding(models.Model):
     title = models.CharField(max_length=120)
     start_date = models.DateField(null=True, blank=True)

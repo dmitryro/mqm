@@ -7,6 +7,9 @@ from django_publicmanager.managers import GenericPublicManager, \
     PublicOnlyManager
 from mediastore.fields import MediaField, MultipleMediaField
 
+LOCAL = 'local'
+NATIONAL = 'national'
+PRIVATE = 'private'
 PRIVACY_CHOICES = (
     (LOCAL, _('Local')),
     (NATIONAL, _('National')),
@@ -15,7 +18,9 @@ PRIVACY_CHOICES = (
 class Question(models.Model):
     question = models.CharField(max_length=140)
     date = models.DateField(null=True, blank=True)
-    #author = models.ForeignKey(User)
+    author = models.ForeignKey('accounts.User', null=True, blank=True,
+        db_index=True,
+        related_name='question')
     notifications = models.BooleanField(default=True)
     privacy = models.CharField(max_length=120, choices=PRIVACY_CHOICES)
 
@@ -35,7 +40,9 @@ class Answer(models.Model):
     question = models.ForeignKey(Question)
     answer = models.TextField()
     date = models.DateField(null=True, blank=True)
-    #author = models.ForeignKey(User)
+    author = models.ForeignKey('accounts.User', null=True, blank=True,
+        db_index=True,
+        related_name='answer')
 
     created = CreationDateTimeField()
     modified = ModificationDateTimeField()

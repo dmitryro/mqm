@@ -3,7 +3,12 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django_extensions.db.fields import (AutoSlugField, CreationDateTimeField,
     ModificationDateTimeField)
+from django_publicmanager.managers import GenericPublicManager, \
+    PublicOnlyManager
 
+LOCAL = 'local'
+NATIONAL = 'national'
+PRIVATE = 'private'
 PRIVACY_CHOICES = (
     (LOCAL, _('Local')),
     (NATIONAL, _('National')),
@@ -20,7 +25,9 @@ class Event(models.Model):
 
     # categorization
     #region = models.ForeignKey(User.Region)
-    #organiser = models.ForeignKey(User)
+    organiser = models.ForeignKey('accounts.User', null=True, blank=True,
+        db_index=True,
+        related_name='event')
     privacy = models.CharField(max_length=120, choices=PRIVACY_CHOICES)
     slug = models.SlugField(unique=True)
 

@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
+from django.utils.translation import ugettext_lazy as _
 from .models import Event
 
 
 class EventAdmin(admin.ModelAdmin):
     list_display = (
         'title',
-        #'region',
-        #'organiser',
+        'organiser',
         'start',
         'end',
         'privacy')
@@ -24,8 +24,7 @@ class EventAdmin(admin.ModelAdmin):
                 'end',
                 'location',
                 'postcode',
-                #'region',
-                #'organiser',
+                'organiser',
             ),
         }),
         (_('Categorisation'), {
@@ -35,10 +34,10 @@ class EventAdmin(admin.ModelAdmin):
                 'slug',
             ),
         }),
-        prepopulated_fields = {
-        'slug': ('title',),
-        }
     )
+    prepopulated_fields = {
+        'slug': ('title',),
+    }
     save_on_top = True
 
 admin.site.register(Event, EventAdmin)

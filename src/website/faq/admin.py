@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
+from django.utils.translation import ugettext_lazy as _
 from .models import Question, Answer
 
 
@@ -7,7 +8,7 @@ class QuestionAdmin(admin.ModelAdmin):
     list_display = (
         'question',
         'date',
-        #'author',
+        'author',
         'notifications',
         'privacy')
     list_editable = ('privacy',)
@@ -20,6 +21,7 @@ class QuestionAdmin(admin.ModelAdmin):
             'fields': (
                 'question',
                 'date',
+                'author',
             ),
         }),
         (_('Categorisation'), {
@@ -37,7 +39,7 @@ class AnswerAdmin(admin.ModelAdmin):
     list_display = (
         'question',
         'date',
-        #'author')
+        'author')
     search_fields = (
         'name',)
     fieldsets = (
@@ -47,7 +49,7 @@ class AnswerAdmin(admin.ModelAdmin):
                 'question',
                 'answer',
                 'date',
-                #'author',
+                'author',
             ),
         }),
     )

@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
+from django.utils.translation import ugettext_lazy as _
 from .models import Tag, Video
 
 
 class TagAdmin(admin.ModelAdmin):
     list_display = (
-        'name')
+        'name',)
     fieldsets = (
         (_('General'), {
             'classes': ('wide',),
@@ -21,6 +22,7 @@ class VideoAdmin(admin.ModelAdmin):
     list_display = (
         'title',
         'date',
+        'user',
         'privacy')
     list_editable = ('privacy',)
     list_filter = ('privacy',)
@@ -33,13 +35,12 @@ class VideoAdmin(admin.ModelAdmin):
                 'title',
                 'date',
                 'description',
-                'source',
             ),
         }),
         (_('Media'), {
             'classes': ('wide',),
             'fields': (
-                'url;,
+                'url',
             ),
         }),
         (_('Categorisation'), {
@@ -47,14 +48,15 @@ class VideoAdmin(admin.ModelAdmin):
             'fields': (
                 'tags',
                 'privacy',
+                'user',
                 'slug',
             ),
         }),
-        prepopulated_fields = {
-        'slug': ('title',),
-        }
     )
+    prepopulated_fields = {
+        'slug': ('title',),
+    }
     save_on_top = True
 
-admin.site.register(External_News, External_NewsAdmin)
-admin.site.register(Positive_News, Positive_NewsAdmin)
+admin.site.register(Tag, TagAdmin)
+admin.site.register(Video, VideoAdmin)
