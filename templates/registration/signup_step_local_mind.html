@@ -1,16 +1,29 @@
 {% extends "registration/signup_base.html" %}
+{% load floppyforms %}
 
 
 {% block section %}
 
-    {% if wizard.form.forms %}
-        {{ wizard.form.management_form }}
-        {% for form in wizard.form.forms %}
-            {{ form.as_p }}
-        {% endfor %}
-    {% else %}
-        {{ wizard.form.as_p }}
-    {% endif %}
+    {% form form using %}
+
+        {% formrow form.name %}
+        {% formrow form.region %}
+        {% formrow form.address %}
+        {% formrow form.postcode %}
+        {% formrow form.income_restricted %}
+        {% formrow form.charity_no %}
+        {% formrow form.charity_type %}
+        {% formrow form.email %}
+        {% formrow form.telephone %}
+        {% formrow form.website %}
+        {% formrow form.income_unrestricted %}
+        {% formrow form.reserves %}
+        {% formrow form.deficit %}
+        {% formrow form.statement %}
+        {% formrow form.group_avatar %}
+        {% formrow form.accept_tos %}
+
+    {% endform %}
 
     <input type="submit" name="submit" value="submit" />
 

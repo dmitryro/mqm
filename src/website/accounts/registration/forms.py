@@ -2,10 +2,34 @@ from django.utils.translation import ugettext_lazy as _
 import floppyforms as forms
 
 from website.accounts.models import User
+from website.local_minds.models import LocalMind
 
 
-class SignupLocalMindForm(forms.Form):
-    local_mind = forms.CharField()
+class SignupLocalMindForm(forms.ModelForm):
+    accept_tos = forms.BooleanField(label=_('Terms'), required=True,
+        help_text=_(
+            'We (above LM) agree to all terms and conditions of the openhub '
+            'site.'))
+
+    class Meta:
+        model = LocalMind
+        fields = (
+            'name',
+            'region',
+            'address',
+            'postcode',
+            'income_restricted',
+            'charity_no',
+            'charity_type',
+            'email',
+            'telephone',
+            'website',
+            'income_unrestricted',
+            'reserves',
+            'deficit',
+            'statement',
+            'group_avatar',
+        )
 
 
 class SignupProfileForm(forms.ModelForm):
