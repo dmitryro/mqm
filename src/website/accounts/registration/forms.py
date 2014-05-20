@@ -70,7 +70,7 @@ class SignupProfileForm(forms.ModelForm):
         return user
 
 
-class SignupLocalMindMembers(forms.ModelForm):
+class SignupLocalMindMembersForm(forms.ModelForm):
     class Meta:
         model = LocalMind
         fields = (
@@ -87,8 +87,8 @@ class SignupLocalMindMembers(forms.ModelForm):
         )
 
 
-class SignupStepFourForm(forms.Form):
-    step4 = forms.CharField()
+class SignupPartnersForm(forms.Form):
+    pass
 
 
 class SignupInviteForm(forms.Form):

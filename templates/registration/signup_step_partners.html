@@ -1,0 +1,28 @@
+{% extends "registration/signup_base.html" %}
+{% load floppyforms %}
+
+
+{% block section %}
+
+    {% form form using %}
+
+        <h3>Resources to share</h3>
+        <p class="help">Please enter any resource you have to share with local community</p>
+
+        <p>TODO: Resources formsets</p>
+
+        <h3>Key partners</h3>
+        <p class="help">Please submit any partner you have</p>
+
+        <p>TODO: Key partners formset</p>
+
+        <h3>Positive news</h3>
+        <p class="help">Tell us about the best thing to happen in the last month</p>
+
+        <p>TODO: Positive news formset</p>
+
+    {% endform %}
+
+    <input type="submit" name="submit" value="submit" />
+
+{% endblock %}

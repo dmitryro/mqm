@@ -6,7 +6,7 @@ from django_extensions.db.fields import (AutoSlugField, CreationDateTimeField,
 from django_publicmanager.managers import GenericPublicManager, \
     PublicOnlyManager
 from mediastore.fields import MediaField, MultipleMediaField
-
+from ..privacy import PrivacyField
 
 
 class Marker(models.Model):
@@ -23,26 +23,29 @@ class Marker(models.Model):
         return self.title
 
 
-PRIVACY_CHOICES = (
-    (LOCAL, _('Local')),
-    (NATIONAL, _('National')),
-    (PRIVATE, _('Private')),
-)
-
-RELATIONSHIP_CHOICES = (
-    (CURRENT_PARTNER, _('Current Partner')),
-    (PARTNER_OPPORTUNITY, _('Partner Opportunity)')),
-)
-
 class Map(models.Model):
-    name = models.CharField(max_length=120)
-    address = models.TextField(null=True, blank=True)
-    telephone = models.CharField(max_length=16,null=True, blank=True)
-    email = models.CharField(max_length=120,null=True, blank=True)
-    postcode = models.CharField(max_length=120, help_text="this is how we generate a map")
-    marker = models.ForeignKey(Marker)
-    relationship = models.CharField(max_length=120, choices=RELATIONSHIP_CHOICES)
-    privacy = models.CharField(max_length=120, choices=PRIVACY_CHOICES)
+    CURRENT_PARTNER = 'current-partner'
+    PARTNER_OPPORTUNITY = 'partner-opportunity'
+    RELATIONSHIP_CHOICES = (
+        (CURRENT_PARTNER, _('Current Partner')),
+        (PARTNER_OPPORTUNITY, _('Partner Opportunity')),
+    )
+
+    CATEGORY_CHOICES = ()
+
+    name = models.CharField(_('Name'), max_length=120)
+    email = models.EmailField(_('Email'), max_length=120, blank=True)
+    address = models.TextField(_('Address'), blank=True)
+    telephone = models.CharField(_('Contact number'), max_length=16, blank=True)
+    postcode = models.CharField(_('Postcode'), max_length=120, blank=True,
+        help_text=_('This is how we generate a map.'))
+    relationship = models.CharField(max_length=120, choices=RELATIONSHIP_CHOICES, blank=True)
+    website = models.URLField(_('Website'), blank=True)
+    category = models.CharField(_('Type'), max_length=50, choices=CATEGORY_CHOICES, blank=True)
+
+    privacy = PrivacyField()
+    marker = models.ForeignKey(Marker, null=True, blank=True)
+
     created = CreationDateTimeField()
     modified = ModificationDateTimeField()
 
@@ -52,3 +55,19 @@ class Map(models.Model):
 
     def __unicode__(self):
         return self.name
+
+
+class Resource(models.Model):
+    title = models.CharField(_('Title'), max_length=50)
+    privacy = PrivacyField()
+
+    class Meta:
+        verbose_name = _('Resource')
+        verbose_name_plural = _('Resources')
+
+    def __unicode__(self):
+        return self.title
+
+    @models.permalink
+    def get_absolute_url(self):
+        return ('', (), {})

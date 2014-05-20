@@ -12,7 +12,7 @@ from django.utils.http import base36_to_int
 
 from ..models import ReservedEmail
 from .tokens import token_generator
-from .forms import SignupLocalMindForm, SignupProfileForm, SignupLocalMindMembers, SignupStepFourForm, SignupInviteForm
+from .forms import SignupLocalMindForm, SignupProfileForm, SignupLocalMindMembersForm, SignupPartnersForm, SignupInviteForm
 
 
 class SignupWizardView(NamedUrlSessionWizardView):
@@ -23,7 +23,7 @@ class SignupWizardView(NamedUrlSessionWizardView):
         'local-mind': 'registration/signup_step_local_mind.html',
         'profile': 'registration/signup_step_profile.html',
         'members': 'registration/signup_step_members.html',
-        'step4': 'registration/signup_step_step4.html',
+        'partners': 'registration/signup_step_partners.html',
         'invites': 'registration/signup_step_invites.html',
     }
 
@@ -63,8 +63,8 @@ class SignupWizardView(NamedUrlSessionWizardView):
 signup_forms = (
     ('local-mind', SignupLocalMindForm),
     ('profile', SignupProfileForm),
-    ('members', SignupLocalMindMembers),
-    ('step4', SignupStepFourForm),
+    ('members', SignupLocalMindMembersForm),
+    ('partners', SignupPartnersForm),
     ('invites', SignupInviteForm),
 )
 

@@ -33,7 +33,7 @@
     </li>
     <li>
         {% if wizard.steps.step1 > 4 %}
-            <a href="{% url "signup" token=view.kwargs.token uidb36=view.kwargs.uidb36 step="step4" %}">Step 4</a>
+            <a href="{% url "signup" token=view.kwargs.token uidb36=view.kwargs.uidb36 step="partners" %}">Step 4</a>
         {% else %}
             Step 4
         {% endif %}

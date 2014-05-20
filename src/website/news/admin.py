@@ -1,12 +1,14 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
-from .models import External_News, Positive_News
+from django.utils.translation import ugettext_lazy as _
+from .models import ExternalNews, PositiveNews
 
 
-class External_NewsAdmin(admin.ModelAdmin):
+class BaseNewsAdmin(admin.ModelAdmin):
     list_display = (
         'title',
         'date',
+        'author',
         'privacy')
     list_editable = ('privacy',)
     list_filter = ('privacy',)
@@ -18,6 +20,7 @@ class External_NewsAdmin(admin.ModelAdmin):
             'fields': (
                 'title',
                 'date',
+                'author',
                 'description',
                 'source',
             ),
@@ -31,33 +34,14 @@ class External_NewsAdmin(admin.ModelAdmin):
     )
     save_on_top = True
 
-class Positive_NewsAdmin(admin.ModelAdmin):
-    list_display = (
-        'title',
-        'date',
-        'privacy')
-    list_editable = ('privacy',)
-    list_filter = ('privacy',)
-    search_fields = (
-        'title', 'description',)
-    fieldsets = (
-        (_('General'), {
-            'classes': ('wide',),
-            'fields': (
-                'title',
-                'date',
-                'description',
-                'source',
-            ),
-        }),
-        (_('Categorisation'), {
-            'classes': ('wide',),
-            'fields': (
-                'privacy',
-            ),
-        }),
-    )
-    save_on_top = True
 
-admin.site.register(External_News, External_NewsAdmin)
-admin.site.register(Positive_News, Positive_NewsAdmin)
+class ExternalNewsAdmin(BaseNewsAdmin):
+    pass
+
+
+class PositiveNewsAdmin(BaseNewsAdmin):
+    pass
+
+
+admin.site.register(ExternalNews, ExternalNewsAdmin)
+admin.site.register(PositiveNews, PositiveNewsAdmin)
