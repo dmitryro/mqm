@@ -23,17 +23,16 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     first_name = models.CharField(_('first name'), max_length=30, blank=True)
     last_name = models.CharField(_('last name'), max_length=30, blank=True)
-    email = EmailField(_('email address'), unique=True)
-    job_title = models.CharField(max_length=50, blank=True)
-    image = models.ImageField(upload_to='users/avatars/', null=True, blank=True)
+    email = EmailField(_('Email'), unique=True)
+    job_title = models.CharField(_('Job Title'), max_length=50, blank=True)
+    user_avatar = models.ImageField(upload_to='users/avatars/', null=True, blank=True)
 
-    telephone = models.CharField(_('Contact number'), max_length=50, blank=True)
+    telephone = models.CharField(_('Contact Number'), max_length=50, blank=True)
     mobile = models.CharField(_('Mobile'), max_length=50, blank=True)
     twitter = models.CharField(_('Twitter'), max_length=15, blank=True)
 
     biography = models.TextField(_('Biography'), blank=True)
-    experience = models.TextField(_('Experience'), blank=True)
-    skills = models.TextField(_('Your skills'), blank=True)
+    skills = models.TextField(_('Your Skills'), blank=True)
 
     is_staff = models.BooleanField(_('staff status'), default=False,
         help_text=_('Designates whether the user can log into this admin '
@@ -66,6 +65,18 @@ class User(AbstractBaseUser, PermissionsMixin):
         Sends an email to this User.
         """
         send_mail(subject, message, from_email, [self.email])
+
+
+class Experience(models.Model):
+    user = models.ForeignKey('User', related_name='experiences')
+    experience = models.CharField(_('Experience'), max_length=250, help_text=_('Limited to 250 characters'))
+
+    class Meta:
+        verbose_name = _('Experience')
+        verbose_name_plural = _('Experiences')
+
+    def __unicode__(self):
+        return self.experience
 
 
 class Group(_Group):
