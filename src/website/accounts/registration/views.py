@@ -35,6 +35,11 @@ class SignupWizardView(NamedUrlSessionWizardView):
         url_kwargs['step'] = step
         return reverse(self.url_name, kwargs=url_kwargs)
 
+    def get_context_data(self, **kwargs):
+        reserved_email = self.kwargs['reserved_email']
+        kwargs['email'] = reserved_email.email
+        return super(SignupWizardView, self).get_context_data(**kwargs)
+
     def done(self, form_list, **kwargs):
         return render_to_response('registration/signup_complete.html', {
 
@@ -59,14 +64,19 @@ wizard = SignupWizardView.as_view(
 def signup_wizard(request, uidb36, token, step=None):
     try:
         uid_int = base36_to_int(uidb36)
-        reserved = ReservedEmail.objects.get(pk=uid_int)
+        reserved_email = ReservedEmail.objects.get(pk=uid_int)
     except (ValueError, OverflowError, ReservedEmail.DoesNotExist):
-        reserved = None
+        reserved_email = None
 
-    if reserved is None or not token_generator.check_token(reserved, token):
+    if reserved_email is None or not token_generator.check_token(reserved_email, token):
         return invalid_url(request)
 
-    return wizard(request, uidb36=uidb36, token=token, step=step)
+    return wizard(
+        request,
+        uidb36=uidb36,
+        token=token,
+        step=step,
+        reserved_email=reserved_email)
 
 
 def invalid_url(request):

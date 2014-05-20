@@ -4,7 +4,19 @@ from django.contrib import admin
 from django.contrib.auth.models import Group as _Group
 from django.utils.translation import ugettext_lazy as _
 
-from .models import User, Group, ReservedEmail
+from ..tasks.models import Task
+from .models import User, Experience, Group, ReservedEmail
+
+
+class ExperienceAdminInline(admin.TabularInline):
+    model = Experience
+    extra = 0
+
+
+class TaskAdminInline(admin.StackedInline):
+    model = Task
+    fk_name = 'assigned_to'
+    extra = 0
 
 
 class UserAdmin(admin.ModelAdmin):
@@ -22,7 +34,7 @@ class UserAdmin(admin.ModelAdmin):
                 'first_name',
                 'last_name',
                 'job_title',
-                'image',
+                'user_avatar',
                 'telephone',
             ),
         }),
@@ -43,6 +55,7 @@ class UserAdmin(admin.ModelAdmin):
             ),
         }),
     )
+    inlines = [ExperienceAdminInline, TaskAdminInline]
 
 
 class GroupAdmin(admin.ModelAdmin):

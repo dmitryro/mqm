@@ -1,24 +1,36 @@
 {% extends "registration/signup_base.html" %}
+{% load floppyforms %}
 
 
 {% block section %}
 
-    <p>
-        TODO: Ordering fields.<br />
-        TODO: Showing email as readonly.
-        TODO: Task Queue formset.
-    </p>
 
-    {% if wizard.form.forms %}
-        {{ wizard.form.management_form }}
-        {% for form in wizard.form.forms %}
-            {{ form.as_p }}
-        {% endfor %}
-    {% else %}
-        {{ wizard.form.as_p }}
-    {% endif %}
+    {% form form using %}
+
+        {% formrow form.first_name %}
+        {% formrow form.last_name %}
+        {% formrow form.job_title %}
+
+        <p>
+        Email: {{ email }}
+        </p>
+
+        {% formrow form.email %}
+        {% formrow form.password1 %}
+        {% formrow form.password2 %}
+        {% formrow form.skills %}
+        {% formrow form.user_avatar %}
+        {% formrow form.biography %}
+        {% formrow form.telephone %}
+        {% formrow form.mobile %}
+        {% formrow form.twitter %}
+
+        <p>TODO: Experiences formset</p>
+
+        <p>TODO: Task formset</p>
+
+    {% endform %}
 
     <input type="submit" name="submit" value="submit" />
 
 {% endblock %}
-
