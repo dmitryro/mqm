@@ -6,14 +6,47 @@
 <h2>Openhub</h2>
 <h3>Sign up to Openhub</h3>
 
-<div>Section 1/5</div>
+{% block progress %}
+<div>Section {{ wizard.steps.step1 }}/5</div>
+
 <ol>
-    <li><a href="">Step 1</a></li>
-    <li><a href="">Step 2</a></li>
-    <li><a href="">Step 3</a></li>
-    <li><a href="">Step 4</a></li>
-    <li><a href="">Step 5</a></li>
+    <li>
+        {% if wizard.steps.step1 > 1 %}
+            <a href="{% url "signup" token=view.kwargs.token uidb36=view.kwargs.uidb36 step="local-mind" %}">Step 1</a>
+        {% else %}
+            Step 1
+        {% endif %}
+    </li>
+    <li>
+        {% if wizard.steps.step1 > 2 %}
+            <a href="{% url "signup" token=view.kwargs.token uidb36=view.kwargs.uidb36 step="profile" %}">Step 2</a>
+        {% else %}
+            Step 2
+        {% endif %}
+    </li>
+    <li>
+        {% if wizard.steps.step1 > 3 %}
+            <a href="{% url "signup" token=view.kwargs.token uidb36=view.kwargs.uidb36 step="step3" %}">Step 3</a>
+        {% else %}
+            Step 3
+        {% endif %}
+    </li>
+    <li>
+        {% if wizard.steps.step1 > 4 %}
+            <a href="{% url "signup" token=view.kwargs.token uidb36=view.kwargs.uidb36 step="step4" %}">Step 4</a>
+        {% else %}
+            Step 4
+        {% endif %}
+    </li>
+    <li>
+        {% if wizard.steps.step1 > 5 %}
+            <a href="{% url "signup" token=view.kwargs.token uidb36=view.kwargs.uidb36 step="invites" %}">Step 5</a>
+        {% else %}
+            Step 5
+        {% endif %}
+    </li>
 </ol>
+{% endblock %}
 
 <form action="" method="post" enctype="multipart/form-data" novalidate>{% csrf_token %}
     {{ wizard.management_form }}
