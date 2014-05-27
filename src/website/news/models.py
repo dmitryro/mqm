@@ -16,7 +16,7 @@ class BaseNews(models.Model):
     author = models.ForeignKey('accounts.User', verbose_name=_('Author'))
     description = models.TextField(blank=True)
     tags = TaggableManager()
-    source = models.CharField(max_length=120,
+    source = models.CharField(max_length=120, blank=True,
         help_text=_(
             'Enter a URL to a online source or simply write the publication '
             'name and author.'))

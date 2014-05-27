@@ -55,7 +55,17 @@ class SignupWizardView(NamedUrlSessionWizardView):
         return super(SignupWizardView, self).get_context_data(**kwargs)
 
     def done(self, form_list, **kwargs):
-        raise NotImplementedError('TODO: Done method not implemented yet.')
+        local_mind_form, profile_form, members_form, partners_form, invites_form = form_list
+
+        local_mind = local_mind_form.save()
+        user = profile_form.save(
+            reserved_email=self.reserved_email,
+            local_mind=local_mind)
+
+        members_form.save(local_mind=local_mind)
+        partners_form.save(local_mind=local_mind, user=user)
+        invites_form.save(local_mind=local_mind)
+
         return render_to_response('registration/signup_complete.html', {
 
         })

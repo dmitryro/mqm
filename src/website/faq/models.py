@@ -17,7 +17,7 @@ class Question(models.Model):
     author = models.ForeignKey('accounts.User', null=True, blank=True,
         db_index=True,
         related_name='question')
-    notifications = models.BooleanField(default=True)
+    notifications = models.BooleanField()
     privacy = PrivacyField()
 
     created = CreationDateTimeField()
