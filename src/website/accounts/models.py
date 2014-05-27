@@ -19,6 +19,12 @@ from .registration.tokens import token_generator
 class User(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = 'email'
 
+    PRIVILEGE_CHOICES = (
+        ('trustee', _('Trustee'),),
+        ('admin', _('Admin'),),
+        ('superuser', _('Superuser'),),
+    )
+
     slug = AutoSlugField(unique=True, populate_from=('first_name', 'last_name'))
     local_mind = models.ForeignKey('local_minds.LocalMind', null=True, blank=True, related_name='users')
 
@@ -41,6 +47,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(_('active'), default=True,
         help_text=_('Designates whether this user should be treated as '
                     'active. Unselect this instead of deleting accounts.'))
+
+    privileges = models.CharField(_('Access level'), max_length=20, choices=PRIVILEGE_CHOICES)
 
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
 
