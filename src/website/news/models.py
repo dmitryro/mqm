@@ -35,6 +35,8 @@ class BaseNews(models.Model):
 
 
 class ExternalNews(BaseNews):
+    local_mind = models.ForeignKey('local_minds.LocalMind', related_name='externalnews')
+
     class Meta:
         verbose_name = _('External News')
         verbose_name_plural = _('External News')
@@ -42,6 +44,8 @@ class ExternalNews(BaseNews):
 
 
 class PositiveNews(BaseNews):
+    local_mind = models.ForeignKey('local_minds.LocalMind', related_name='positivenews')
+
     class Meta:
         verbose_name = _('Positive News')
         verbose_name_plural = _('Positive News')

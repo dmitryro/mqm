@@ -33,6 +33,8 @@ class Map(models.Model):
 
     CATEGORY_CHOICES = ()
 
+    local_mind = models.ForeignKey('local_minds.LocalMind', related_name='partners')
+
     name = models.CharField(_('Name'), max_length=120)
     email = models.EmailField(_('Email'), max_length=120, blank=True)
     address = models.TextField(_('Address'), blank=True)
