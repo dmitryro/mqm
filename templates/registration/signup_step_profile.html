@@ -36,10 +36,20 @@
         <p class="help">Please submit any task below - they will automatically be assigned to you</p>
 
         {% with formset=form.formsets.tasks %}
+        <div data-formset-prefix="{{ formset.prefix }}">
             {{ formset.management_form }}
             {% for form in formset %}
                 {% formrow form.text %}
             {% endfor %}
+
+            <a class="add-another">Add another</a>
+
+            <div class="template">
+            {% with form=formset.empty_form %}
+                {% formrow form.text %}
+            {% endwith %}
+            </div>
+        </div>
         {% endwith %}
 
     {% endform %}

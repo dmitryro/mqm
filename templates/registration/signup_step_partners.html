@@ -10,17 +10,29 @@
         <p class="help">Please enter any resource you have to share with local community</p>
 
         {% with formset=form.formsets.resources %}
+        <div data-formset-prefix="{{ formset.prefix }}">
             {{ formset.management_form }}
             {% for form in formset %}
                 {% formrow form.name %}
                 {% formrow form.privacy %}
             {% endfor %}
+
+            <a class="add-another">Add another</a>
+
+            <div class="template">
+            {% with form=formset.empty_form %}
+                {% formrow form.name %}
+                {% formrow form.privacy %}
+            {% endwith %}
+            </div>
+        </div>
         {% endwith %}
 
         <h3>Key partners</h3>
         <p class="help">Please submit any partner you have</p>
 
         {% with formset=form.formsets.key_partners %}
+        <div data-formset-prefix="{{ formset.prefix }}">
             {{ formset.management_form }}
             {% for form in formset %}
                 {% formrow form.name %}
@@ -33,12 +45,30 @@
                 {% formrow form.website %}
                 {% formrow form.privacy %}
             {% endfor %}
+
+            <a class="add-another">Add another</a>
+
+            <div class="template">
+            {% with form=formset.empty_form %}
+                {% formrow form.name %}
+                {% formrow form.email %}
+                {% formrow form.address %}
+                {% formrow form.telephone %}
+                {% formrow form.relationship %}
+                {% formrow form.postcode %}
+                {% formrow form.category %}
+                {% formrow form.website %}
+                {% formrow form.privacy %}
+            {% endwith %}
+            </div>
+        </div>
         {% endwith %}
 
         <h3>Positive news</h3>
         <p class="help">Tell us about the best thing to happen in the last month</p>
 
         {% with formset=form.formsets.positive_news %}
+        <div data-formset-prefix="{{ formset.prefix }}">
             {{ formset.management_form }}
             {% for form in formset %}
                 {% formrow form.title %}
@@ -46,6 +76,18 @@
                 {% formrow form.date %}
                 {% formrow form.tags %}
             {% endfor %}
+
+            <a class="add-another">Add another</a>
+
+            <div class="template">
+            {% with form=formset.empty_form %}
+                {% formrow form.title %}
+                {% formrow form.description %}
+                {% formrow form.date %}
+                {% formrow form.tags %}
+            {% endwith %}
+            </div>
+        </div>
         {% endwith %}
 
     {% endform %}

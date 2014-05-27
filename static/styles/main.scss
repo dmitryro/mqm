@@ -10,3 +10,15 @@ $icon-font-path: "../../libs/sass-bootstrap/fonts/";
 @import "utils/vars";
 @import "utils/mixins";
 @import "utils/clearfix";
+
+
+
+[data-formset-prefix] {
+    .add-another {
+        cursor: pointer;
+    }
+
+    .template {
+        display: none;
+    }
+}

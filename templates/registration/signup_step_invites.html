@@ -8,6 +8,7 @@
         <h3>Invite colleagues</h3>
 
         {% with formset=form.formsets.invites %}
+        <div data-formset-prefix="{{ formset.prefix }}">
             {{ formset.management_form }}
             {% for form in formset %}
                 {% formrow form.first_name %}
@@ -16,6 +17,19 @@
                 {% formrow form.privileges %}
                 {% formrow form.job_title %}
             {% endfor %}
+
+            <a class="add-another">Add another</a>
+
+            <div class="template">
+            {% with form=formset.empty_form %}
+                {% formrow form.first_name %}
+                {% formrow form.last_name %}
+                {% formrow form.email %}
+                {% formrow form.privileges %}
+                {% formrow form.job_title %}
+            {% endwith %}
+            </div>
+        </div>
         {% endwith %}
 
     {% endform %}
