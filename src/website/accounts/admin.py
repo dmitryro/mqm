@@ -20,10 +20,10 @@ class TaskAdminInline(admin.StackedInline):
 
 
 class UserAdmin(admin.ModelAdmin):
-    list_display = ('email', 'is_active', 'is_staff', 'is_superuser', 'date_joined',)
+    list_display = ('email', 'local_mind', 'is_active', 'is_staff', 'is_superuser', 'date_joined',)
     list_filter = ('is_active', 'is_staff',)
     date_hierarchy = 'date_joined'
-    search_fields = ('email', 'first_name', 'last_name',)
+    search_fields = ('email', 'first_name', 'last_name', 'local_mind__name')
     filter_horizontal = ('user_permissions', 'groups')
     ordering = ('date_joined',)
     fieldsets = (
@@ -41,6 +41,7 @@ class UserAdmin(admin.ModelAdmin):
         (_('Administration'), {
             'classes': ('wide',),
             'fields': (
+                'local_mind',
                 'is_active',
                 'is_staff',
                 'date_joined',

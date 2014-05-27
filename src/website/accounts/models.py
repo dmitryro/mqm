@@ -20,6 +20,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = 'email'
 
     slug = AutoSlugField(unique=True, populate_from=('first_name', 'last_name'))
+    local_mind = models.ForeignKey('local_minds.LocalMind', null=True, blank=True, related_name='users')
 
     first_name = models.CharField(_('first name'), max_length=30, blank=True)
     last_name = models.CharField(_('last name'), max_length=30, blank=True)
