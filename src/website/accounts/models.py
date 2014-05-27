@@ -107,13 +107,18 @@ class ReservedEmail(models.Model):
     def __unicode__(self):
         return self.email
 
+    def get_token(self):
+        return token_generator.make_token(self)
+
+    def get_signup_url(self):
+        return reverse('signup', kwargs={
+            'uidb36': int_to_base36(self.pk),
+            'token': self.get_token()
+        })
+
     def send_signup_email(self):
         site = Site.objects.get_current()
-        token = token_generator.make_token(self)
-        path = reverse('signup', kwargs={
-            'uidb36': int_to_base36(self.pk),
-            'token': token
-        })
+        path = self.get_signup_url()
         url = 'http://{site.domain}{path}'.format(
             site=site,
             path=path)
