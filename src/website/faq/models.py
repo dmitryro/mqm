@@ -6,23 +6,19 @@ from django_extensions.db.fields import (AutoSlugField, CreationDateTimeField,
 from django_publicmanager.managers import GenericPublicManager, \
     PublicOnlyManager
 from mediastore.fields import MediaField, MultipleMediaField
+from ..privacy import PrivacyField
 
-LOCAL = 'local'
-NATIONAL = 'national'
-PRIVATE = 'private'
-PRIVACY_CHOICES = (
-    (LOCAL, _('Local')),
-    (NATIONAL, _('National')),
-    (PRIVATE, _('Private')),
-)
+
 class Question(models.Model):
+    local_mind = models.ForeignKey('local_minds.LocalMind', related_name='questions')
+
     question = models.CharField(max_length=140)
     date = models.DateField(null=True, blank=True)
     author = models.ForeignKey('accounts.User', null=True, blank=True,
         db_index=True,
         related_name='question')
     notifications = models.BooleanField(default=True)
-    privacy = models.CharField(max_length=120, choices=PRIVACY_CHOICES)
+    privacy = PrivacyField()
 
     created = CreationDateTimeField()
     modified = ModificationDateTimeField()
