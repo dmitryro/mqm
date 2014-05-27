@@ -152,14 +152,14 @@ INSTALLED_APPS = (
     # project apps
     'website',
     'website.accounts',
-    'website.alerts',
+#    'website.alerts',
     'website.local_minds',
-    'website.clinical_research',
-    'website.diary',
-    'website.documents',
+#    'website.clinical_research',
+#    'website.diary',
+#    'website.documents',
     'website.faq',
-    'website.financial_summary',
-    'website.funding_map',
+#    'website.financial_summary',
+#    'website.funding_map',
     'website.local_map',
     'website.news',
     'website.pages',
@@ -167,9 +167,8 @@ INSTALLED_APPS = (
     'website.tasks',
     'website.resources',
     'website.services',
-    'website.todos',
-    'website.updates',
-    'website.videos',
+#    'website.updates',
+#    'website.videos',
 )
 
 ROOT_URLCONF = 'website.urls'

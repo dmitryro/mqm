@@ -15,7 +15,7 @@ class LocalMind(models.Model):
 
     region = models.CharField(_('Region'), max_length=50, blank=True)
     address = models.TextField(_('Address'), blank=True)
-    postcode = models.CharField(_('Postcode'), max_length=50)
+    postcode = models.CharField(_('Postcode'), max_length=50, blank=True)
     income_restricted = models.CharField(_('LM Income R'), max_length=50, blank=True)
     income_unrestricted = models.CharField(_('LM Income U'), max_length=50, blank=True)
     charity_no = models.CharField(_('Charity Number'), max_length=30, blank=True)

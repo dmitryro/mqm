@@ -4,7 +4,6 @@
 
 {% block section %}
 
-
     {% form form using %}
 
         {% formrow form.chairman %}
@@ -19,17 +18,56 @@
         {% formrow form.volunteers_count %}
         {% formrow form.trustees_active %}
 
-        <p>TODO: Ethnicity formsets</p>
+        <h3>Ethnicity of trustees</h3>
+
+        {% with formset=form.formsets.trustees_ethnicities %}
+            {{ formset.management_form }}
+            {% for form in formset %}
+                {% formrow form.ethnicity %}
+            {% endfor %}
+        {% endwith %}
+
+        <h3>Ethnicity of volunteers</h3>
+
+        {% with formset=form.formsets.volunteers_ethnicities %}
+            {{ formset.management_form }}
+            {% for form in formset %}
+                {% formrow form.ethnicity %}
+            {% endfor %}
+        {% endwith %}
+
+        <h3>Ethnicity of staff</h3>
+
+        {% with formset=form.formsets.staff_ethnicities %}
+            {{ formset.management_form }}
+            {% for form in formset %}
+                {% formrow form.ethnicity %}
+            {% endfor %}
+        {% endwith %}
 
         <h3>Service informations</h3>
         <p class="help">Please submit any task below - they will automatically be assigned to you</p>
 
-        <p>TODO: Service informations formset</p>
+        {% with formset=form.formsets.services %}
+            {{ formset.management_form }}
+            {% for form in formset %}
+                {% formrow form.name %}
+                {% formrow form.type %}
+                {% formrow form.users_count %}
+            {% endfor %}
+        {% endwith %}
 
         <h3>Questions &amp; Answers</h3>
         <p class="help">Post any questions the network can help answer</p>
 
-        <p>TODO: Questions and Answers formset</p>
+        {% with formset=form.formsets.faqs %}
+            {{ formset.management_form }}
+            {% for form in formset %}
+                {% formrow form.question %}
+                {% formrow form.notifications %}
+                {% formrow form.privacy %}
+            {% endfor %}
+        {% endwith %}
 
     {% endform %}
 

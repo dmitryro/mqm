@@ -1,18 +1,25 @@
 {% extends "registration/signup_base.html" %}
+{% load floppyforms %}
 
 
 {% block section %}
 
-    {% if wizard.form.forms %}
-        {{ wizard.form.management_form }}
-        {% for form in wizard.form.forms %}
-            {{ form.as_p }}
-        {% endfor %}
-    {% else %}
-        {{ wizard.form.as_p }}
-    {% endif %}
+    {% form form using %}
+        <h3>Invite colleagues</h3>
+
+        {% with formset=form.formsets.invites %}
+            {{ formset.management_form }}
+            {% for form in formset %}
+                {% formrow form.first_name %}
+                {% formrow form.last_name %}
+                {% formrow form.email %}
+                {% formrow form.privileges %}
+                {% formrow form.job_title %}
+            {% endfor %}
+        {% endwith %}
+
+    {% endform %}
 
     <input type="submit" name="submit" value="submit" />
 
 {% endblock %}
-

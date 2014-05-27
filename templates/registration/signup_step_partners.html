@@ -9,17 +9,44 @@
         <h3>Resources to share</h3>
         <p class="help">Please enter any resource you have to share with local community</p>
 
-        <p>TODO: Resources formsets</p>
+        {% with formset=form.formsets.resources %}
+            {{ formset.management_form }}
+            {% for form in formset %}
+                {% formrow form.name %}
+                {% formrow form.privacy %}
+            {% endfor %}
+        {% endwith %}
 
         <h3>Key partners</h3>
         <p class="help">Please submit any partner you have</p>
 
-        <p>TODO: Key partners formset</p>
+        {% with formset=form.formsets.key_partners %}
+            {{ formset.management_form }}
+            {% for form in formset %}
+                {% formrow form.name %}
+                {% formrow form.email %}
+                {% formrow form.address %}
+                {% formrow form.telephone %}
+                {% formrow form.relationship %}
+                {% formrow form.postcode %}
+                {% formrow form.category %}
+                {% formrow form.website %}
+                {% formrow form.privacy %}
+            {% endfor %}
+        {% endwith %}
 
         <h3>Positive news</h3>
         <p class="help">Tell us about the best thing to happen in the last month</p>
 
-        <p>TODO: Positive news formset</p>
+        {% with formset=form.formsets.positive_news %}
+            {{ formset.management_form }}
+            {% for form in formset %}
+                {% formrow form.title %}
+                {% formrow form.description %}
+                {% formrow form.date %}
+                {% formrow form.tags %}
+            {% endfor %}
+        {% endwith %}
 
     {% endform %}
 

@@ -55,6 +55,7 @@ class SignupWizardView(NamedUrlSessionWizardView):
         return super(SignupWizardView, self).get_context_data(**kwargs)
 
     def done(self, form_list, **kwargs):
+        raise NotImplementedError('TODO: Done method not implemented yet.')
         return render_to_response('registration/signup_complete.html', {
 
         })

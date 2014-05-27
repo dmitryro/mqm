@@ -9,8 +9,8 @@ class Task(models.Model):
     local_mind = models.ForeignKey('local_minds.LocalMind', related_name='tasks')
 
     slug = AutoSlugField(unique=True, populate_from='text')
-    text = models.TextField()
-    due_date = models.DateField(null=True, blank=True)
+    text = models.TextField(_('Task'))
+    due_date = models.DateField(_('Due Date'), null=True, blank=True)
 
     done = models.BooleanField(default=False, db_index=True)
     done_date = models.DateTimeField(null=True, blank=True)

@@ -33,7 +33,8 @@ class Question(models.Model):
 
 
 class Answer(models.Model):
-    question = models.ForeignKey(Question)
+    question = models.ForeignKey(Question, related_name='answers')
+
     answer = models.TextField()
     date = models.DateField(null=True, blank=True)
     author = models.ForeignKey('accounts.User', null=True, blank=True,

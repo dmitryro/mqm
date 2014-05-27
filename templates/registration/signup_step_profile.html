@@ -25,9 +25,22 @@
         {% formrow form.mobile %}
         {% formrow form.twitter %}
 
-        <p>TODO: Experiences formset</p>
+        {% with formset=form.formsets.experiences %}
+            {{ formset.management_form }}
+            {% for form in formset %}
+                {% formrow form.experience %}
+            {% endfor %}
+        {% endwith %}
 
-        <p>TODO: Task formset</p>
+        <h3>Task Queue</h3>
+        <p class="help">Please submit any task below - they will automatically be assigned to you</p>
+
+        {% with formset=form.formsets.tasks %}
+            {{ formset.management_form }}
+            {% for form in formset %}
+                {% formrow form.text %}
+            {% endfor %}
+        {% endwith %}
 
     {% endform %}
 
