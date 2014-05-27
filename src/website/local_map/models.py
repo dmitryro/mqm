@@ -57,19 +57,3 @@ class Map(models.Model):
 
     def __unicode__(self):
         return self.name
-
-
-class Resource(models.Model):
-    title = models.CharField(_('Title'), max_length=50)
-    privacy = PrivacyField()
-
-    class Meta:
-        verbose_name = _('Resource')
-        verbose_name_plural = _('Resources')
-
-    def __unicode__(self):
-        return self.title
-
-    @models.permalink
-    def get_absolute_url(self):
-        return ('', (), {})
