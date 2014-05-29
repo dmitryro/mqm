@@ -3,7 +3,6 @@ from django.conf import settings
 from django.conf.urls import include, patterns, url
 from django.contrib import admin
 
-
 admin.autodiscover()
 
 urlpatterns = patterns('',
@@ -24,6 +23,12 @@ urlpatterns = patterns('',
     url(r'^downloads/(?P<slug>[^/]+)/download/(?P<filename>.+)$', 'mediastore.mediatypes.download.views.download_counter', name='mediastore-download-link'),
 
     url(r'^admin/', include(admin.site.urls)),
+
+
+    #static design templates
+    url(r'^my-dashboard/$', 'django.shortcuts.render', {'template_name': 'dev/dashboard.html'}),
+    url(r'^local-dashboard/$', 'django.shortcuts.render', {'template_name': 'dev/local-dashboard.html'}),
+
 )
 
 app_patterns = patterns('',

@@ -1,24 +1,23 @@
 /*
 Title:      M/A London @madebyMA
-Author:     name @M/A London http://ma-work.co.uk
+Author:     @M/A London http://ma-work.co.uk
 */
 
+// BOOSTRAP
 $icon-font-path: "../../libs/sass-bootstrap/fonts/";
-
 @import "bootstrap";
 
-@import "utils/vars";
-@import "utils/mixins";
-@import "utils/clearfix";
+// UTILITIES
+@import "utils/vars";                 // locations for all colour and predefined variables
+@import "utils/mixins";               // useful mixins for reusable tasks
+@import "utils/clearfix";             // shorthand clearfix
 
 
+// MIND THEME
+@import "mind/forms";
+@import "mind/devices.scss";
 
-[data-formset-prefix] {
-    .add-another {
-        cursor: pointer;
-    }
 
-    .template {
-        display: none;
-    }
+body {
+  background: url(#{$mind-logo}) repeat-x fixed 0 0;
 }
