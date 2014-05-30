@@ -1,0 +1,182 @@
+/* DASHBOARD NODES
+-------------------------------------------------------- */
+
+.gridster {
+  padding:20px;
+}
+
+.gridster ul {
+  list-style:none !important;
+  list-style-type:none !important;
+  margin:0 !important;
+  padding: 0px;
+}
+
+.widget {
+  height:300px;
+  background:white;
+  width:294px;
+  border-radius:10px;
+  border:solid 1px $blue;
+  overflow:hidden;
+  list-style: none !important;
+  list-style-type: none !important;
+}
+
+.widget-bar {
+  background:#9d9c9c;
+  height:41px;
+  position:relative;
+}
+
+.widget-title {
+  float: left;
+  padding: 11px 11px 10px;
+  color:#fff;
+}
+
+.widget-settings-button {
+  float:right;
+  height:100%;
+  width:40px;
+  background-image:url(../../assets/img/ui/nodes/settings.svg);
+  background-position:center;
+  background-repeat:no-repeat;
+  cursor: pointer;
+}
+
+.widget-bar ul {
+  position: absolute !important;
+  list-style: none;
+  margin: 0px !important;
+  padding: 0px;
+  display: none;
+  top: 41px;
+  right: 0px;
+  width: auto !important;
+  z-index: 1;
+  border-top:solid 1px $blue;
+}
+
+.widget-settings-button:hover{
+  opacity:0.7;
+}
+
+
+.widget-bar ul li{
+  height:40px;
+  background:#fff;
+  margin:0px;
+  width:196px;
+  border-left:solid 1px $blue;
+  border-bottom:solid 1px $blue;
+  position:relative;
+  background-repeat: no-repeat;
+  background-position: 10px center;
+  padding: 11px 10px 10px 10px;
+  cursor:pointer;
+}
+
+.widget-bar ul li:hover {
+  background-color:#eee;
+}
+
+.widget-bar .dropped {
+  background-image:url(../../assets/img/ui/nodes/settings.svg);
+}
+
+.delete-node {
+  background-color:$blue !important;
+  color:#fff;
+  text-align:center;
+}
+
+
+
+/* add widgets */
+
+.meettheteam, .areasofgrowth, .fundingmap, .collectiveimpact, .buddysearch, .eventsdiary {
+  display:none;
+}
+
+
+.media-body {
+margin-top: 13px;
+padding-left: 15px;
+}
+
+
+.media>.pull-left {
+margin: 9px;
+}
+
+.badge {
+  background-color: $blue;
+}
+
+.form-close {
+  float:right;
+  width:30px;
+  height:30px;
+  background-image:url(../../assets/img/ui/base/close.svg);
+  background-repeat: no-repeat;
+  margin-top: -55px;
+  -webkit-transition: all 0.7s;
+  transition: all 0.7;
+}
+
+.form-close:hover {
+  -webkit-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+
+.form-wrap-form {
+  padding: 15px 40px 30px 40px;
+}
+
+#login-descriptionFEF {
+  max-width:523px;
+  color:#585757;
+  text-align:left;
+  margin:50px auto 30px auto;
+  padding-left: 45px;
+}
+
+.skill {
+  margin-bottom: 40px;
+  font-size: 18px;
+  max-width: 650px;
+}
+
+.skills {
+  margin-bottom: 40px;
+  max-width: 650px;
+}
+
+td {
+  vertical-align: top;
+  padding: 3px;
+}
+
+.martin p {margin-bottom: 0px !important;}
+.glyphicon {top:3px;}
+
+h4 {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding-bottom: 7px;
+}
+
+h2 {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.list-group-item-text {
+  padding: 0 15px;
+}
+
+.widget-clinical .panel-footer {
+height: 40px;
+padding: 10px 10px;
+}

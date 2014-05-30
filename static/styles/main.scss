@@ -14,10 +14,12 @@ $icon-font-path: "../../libs/sass-bootstrap/fonts/";
 
 
 // MIND THEME
-@import "mind/forms";
-@import "mind/devices.scss";
+@import "mind/fonts";                 // Avenir font declarations using fonts.com
+@import "mind/forms";                 // Boostrap 3.0 form override styles
 
-
-body {
-  background: url(#{$mind-logo}) repeat-x fixed 0 0;
-}
+@import "mind/base";                  // general and base styles
+@import "mind/navigation";            // main top-bar navigation
+@import "mind/dashboard";             // Dashboard base styles
+@import "mind/dash-sidebar";          // Dashboard 'fly-out' sidebar
+@import "mind/dash-nodes";            // Dshboard node components
+@import "mind/devices";               // Device overrides

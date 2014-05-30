@@ -1,6 +1,357 @@
 {% extends "base.html" %}
 {% load djangular_tags webdesign %}
 
+{% block extra_css %}
+{{ block.super }}
+<link rel="stylesheet" href="{{ STATIC_URL }}dist/styles/gridster.css" />
+{% endblock %}
+
 {% block content %}
-<h1>Dashboard</h1>
+
+{% include "includes/sidebar.html" %}
+
+	<div id="content" class="push">
+
+		<div id="top-bar">
+
+			<div id="sidebar-button"></div>
+
+			<div id="search-bar">
+
+				<input type="text" placeholder="search..." id="search">
+
+			</div>
+
+			<div id="tools">
+
+				<div id="write"></div>
+				<div id="add">
+					<div id="add-icon" class="drop"></div>
+					<ul>
+						<li class="settings-opt" style="background-image:url(../Assets/images/sidebar/icon_svg/service-08.svg)">
+							Add Service
+						</li>
+						<li class="settings-opt" style="background-image:url(../Assets/images/sidebar/icon_svg/contract-09.svg)">
+							Add contract
+						</li>
+						<li class="settings-opt" style="background-image:url(../Assets/images/sidebar/icon_svg/qm-10.svg)">
+							Update Quality Mark
+						</li>
+
+						<li class="settings-opt" style="background-image:url(../Assets/images/sidebar/icon_svg/notes-02.svg)">
+							Monthly Finances
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<div id="profile">
+
+				<div id="person">
+					<a href="team.html"><div class="avatar"></div></a>
+					<div class="username"><storng>Jane Smith</storng> - Openhub</div>
+				</div>
+				<a href="home.html"><div id="logout"></div></a>
+				<div id="settings">
+					<div id="settings-icon" class="drop"></div>
+					<ul>
+						<li class="settings-opt" style="background-image:url(../Assets/images/sidebar/icon_svg/notes-02.svg)">
+							Notifications
+							<div class="notification">3</div>
+						</li>
+						<li class="settings-opt" style="background-image:url(../Assets/images/sidebar/icon_svg/tasks-03.svg)">
+							Task
+							<div class="notification">14</div>
+						</li>
+						<li class="settings-opt" style="background-image:url(../Assets/images/sidebar/icon_svg/alert-01.svg)">
+							Alerts
+							<div class="notification">4</div>
+						</li>
+
+						<li class="settings-opt red">Settings</li>
+
+						<li class="settings-opt" style="background-image:url(../Assets/images/sidebar/icon_svg/profile-04.svg)">
+							Update Profile
+						</li>
+						<li class="settings-opt" style="background-image:url(../Assets/images/sidebar/icon_svg/anchor-05.svg)">
+							Update Plymouth Hub
+						</li>
+						<li class="settings-opt" style="background-image:url(../Assets/images/sidebar/icon_svg/users-06.svg)">
+							Update Hub Users
+						</li>
+						<li class="settings-opt" style="background-image:url(../Assets/images/sidebar/icon_svg/password-07.svg)">
+							<a href="password.html">Change password</a>
+						</li>
+
+					</ul>
+				</div>
+
+			</div>
+
+			</div>
+
+		<div class="gridster">
+
+			<ul>
+				<li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
+					<div class="widget-bar">
+						<div class="widget-title">TASK QUEUE</div>
+						{% include "includes/widget-settings.html" %}
+					</div>
+					<div class='list-group'>
+					</div>
+				</li>
+
+				<li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
+					<div class="widget-bar">
+						<div class="widget-title">
+							QUESTIONS & ANSWERS
+						</div>
+						{% include "includes/widget-settings.html" %}
+					</div>
+					<ul class='list-group'>
+						<a class='li list-group-item' href='#'>
+							<span class='badge'>14</span>Questions for you
+						</a>
+					</ul>
+					<div class='list-group'>
+					</div>
+				</li>
+
+				<li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
+					<div class="widget-bar">
+						<div class="widget-title">
+							QUALITY MARK
+						</div>
+						{% include "includes/widget-settings.html" %}
+					</div>
+					<ul class='list-group'>
+						<li class="list-group-item">
+							<b>70% completed</b>
+							<img src="../Assets/images/nodes/progress.png" alt="progress" width="274" height="26">
+						</li>
+					</ul>
+					<div class='list-group'>
+						<a class='list-group-item' href='#'>
+							<p class='list-group-item-text'></p>
+							<table class="martin">
+							<tr>
+								<td><i class='glyphicon glyphicon-question-sign' style="color:#e5007d;"></i></td>
+								<td><p>7.2: How many of your trustees are women?</p></td>
+							</tr>
+							</table>
+						</a>
+					</div>
+				</li>
+
+				<li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
+					<div class="widget-bar">
+						<div class="widget-title">
+							EXTERNAL NEWS
+						</div>
+						{% include "includes/widget-settings.html" %}
+					</div>
+					<div class='list-group'>
+					</div>
+				</li>
+
+				<li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
+					<div class="widget-bar">
+						<div class="widget-title">
+							ASSETS vs EXPENDITURE (%)
+						</div>
+						{% include "includes/widget-settings.html" %}
+					</div>
+					<img style="margin:25px 0 0 27px;" src="../Assets/images/nodes/graph_services.png" alt="graph_services" width="233" height="192">
+				</li>
+
+				<li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
+					<div class="widget-bar">
+						<div class="widget-title">
+							CLINICAL RESEARCH
+						</div>
+						{% include "includes/widget-settings.html" %}
+					</div>
+					<div id='clinical'>
+						<ul class='list-group'>
+							<li class='list-group-item'>
+							<span class='badge'>32</span>
+							My interests
+							</li>
+						</ul>
+
+						<div class='list-group' style="margin-bottom:0px; max-height: 175px;">
+							<a class='list-group-item' href='#' style="max-height: 175px;">
+							<h4 >The Equality Act 2010 and Adult Mental Health Services</h4>
+							<p>The Royal College of Psychiatrists? Faculties of Old Age and General and Community Psychiatry have issued joint guidance on achieving non-discriminatory, age-appropriate, adult mental health services.</p>
+							</a>
+						</div>
+						<div class='panel-footer' style="z-index: 100000;">
+							<a href='clinres.html'><i class="glyphicon glyphicon-cloud-upload"></i> Upload resource</a>
+						</div>
+					</div>
+				</li>
+
+				<li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
+					<div class="widget-bar">
+						<div class="widget-title">
+							NET CURRENT ASSETS
+						</div>
+						{% include "includes/widget-settings.html" %}
+					</div>
+					<img style="margin:25px 0 0 27px;" src="../Assets/images/nodes/graph_finance.png" alt="graph_finance" width="233" height="192">
+				</li>
+
+				<li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
+					<div class="widget-bar">
+						<div class="widget-title">
+							DOCUMENTS
+						</div>
+						{% include "includes/widget-settings.html" %}
+					</div>
+					<div class='list-group'>
+					</div>
+				</li>
+
+
+				<li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
+					<div class="widget-bar">
+						<div class="widget-title">
+							LATEST VIDEOS
+						</div>
+						<div class="widget-settings-button drop"></div>
+						{% include "includes/widget-settings.html" %}
+					</div>
+					<div id='videos'>
+						<ul class='list-group'>
+						<a class='li list-group-item' href='video.html'>
+							<span class='badge'>74</span>My Channel
+						</a>
+					</ul>
+						<div class='panel-content'>
+							<h5>Tyneside MindWCA Film</h5>
+							<iframe width="292px" src="//www.youtube.com/embed/tTaezvvQfOs" frameborder="0" allowfullscreen></iframe>
+							<p style="padding-left:15px;">Posted by <a href="team.html">Jane Smith</a> on 10 may 2014</p>
+						</div>
+					</div>
+				</li>
+
+				<li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
+					<div class="widget-bar">
+						<div class="widget-title">
+							POSITIVE NEWS
+						</div>
+						{% include "includes/widget-settings.html" %}
+					</div>
+					<div class='list-group'>
+					</div>
+				</li>
+
+				<li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
+					<div class="widget-bar">
+						<div class="widget-title">
+							MY LOCAL CONTEXT
+						</div>
+						{% include "includes/widget-settings.html" %}
+					</div>
+					<img src="../Assets/images/nodes/map.jpg" alt="graph_finance" width="293" height="224">
+				</li>
+
+				<li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
+					<div class="widget-bar">
+						<div class="widget-title">
+							SERVICES
+						</div>
+						{% include "includes/widget-settings.html" %}
+						</div>
+
+					<ul class='list-group'>
+						<a class='li list-group-item' href='#'>
+							<span class='badge'>users</span>Type of service
+						</a>
+					</ul>
+					<div class='list-group'>
+					</div>
+				</li>
+
+			</ul>
+
+		</div>
+
+	</div>
+
+	<div class="overlay">
+		<div class="overlay-close"></div>
+		<div class="pop-up-box">
+			<div class="pop-up-close"></div>
+			<div class="pop-up-content">
+				<div class="pop-up-title"><h3>UPDATE DATA</h3></div>
+				<div class="pop-up-menu">
+					<div class="pop-up-menu-item1"><p class="popup">Positive news</p></div>
+					<div class="pop-up-menu-item2"><p class="popup">Event Diary</p></div>
+					<div class="pop-up-menu-item3"><p class="popup">Tasks</p></div>
+					<div class="pop-up-menu-item4"><p class="popup">Local Map</p></div>
+					<div class="pop-up-menu-item5"><p class="popup">Areas of Growth</p></div>
+					<a href="form.html"><div class="pop-up-menu-item6"><p class="popup">Video</p></div></a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="meettheteam">
+
+		<li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
+			<div class="widget-bar">
+				<div class="widget-title">MEET THE TEAM</div>
+				{% include "includes/widget-settings.html" %}
+			</div>
+		</li>
+
+	</div>
+
+	<div class="areasofgrowth">
+		<li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
+			<div class="widget-bar">
+				<div class="widget-title">AREAS OF GROWTH</div>
+				   {% include "includes/widget-settings.html" %}
+			</div>
+	    </li>
+	</div>
+
+	<div class="fundingmap">
+		<li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
+			<div class="widget-bar">
+				<div class="widget-title">FUNDING MAP</div>
+				{% include "includes/widget-settings.html" %}
+			</div>
+			<img src="../Assets/images/nodes/funding-map.png" alt="graph_finance" width="100%" height="">
+	    </li>
+	</div>
+
+    <div class="eventsdiary">
+		<li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
+			<div class="widget-bar">
+				<div class="widget-title">EVENTS DIARY</div>
+				{% include "includes/widget-settings.html" %}
+			</div>
+		</li>
+	</div>
+
+	<div class="buddysearch">
+		<li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
+			<div class="widget-bar">
+				<div class="widget-title">BUDDY SEARCH</div>
+				{% include "includes/widget-settings.html" %}
+			</div>
+		</li>
+	</div>
+
+	<div class="collectiveimpact">
+		<li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
+			<div class="widget-bar">
+				<div class="widget-title">COLLECTIVE IMPACT</div>
+				{% include "includes/widget-settings.html" %}
+			</div>
+		</li>
+	</div>
 {% endblock %}

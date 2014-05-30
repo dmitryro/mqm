@@ -1,0 +1,33 @@
+/* FONTS -- AVENIR -- FONTS.COM
+-------------------------------------------------------- */
+
+@mixin Avenir-Light(){
+  font-family:'Avenir LT W01 35 Light';
+  font-style: normal;
+}
+
+@mixin Avenir-Light-Italic(){
+  font-family:'AvenirLTW01-35LightObli';
+  font-style: normal;
+}
+
+@mixin Avenir-Roman(){
+  font-family:'Avenir LT W01 55 Roman';
+  font-style: normal;
+}
+
+@mixin Avenir-Medium(){
+  font-family:'Avenir LT W01 65 Medium';
+  font-style: normal;
+}
+
+@mixin Avenir-Medium-Italic(){
+  font-family:'AvenirLTW01-55Oblique';
+  font-style: normal;
+}
+
+
+@mixin Avenir-Heavy-Italic(){
+  font-family:'AvenirLTW01-85HeavyObli';
+  font-style: normal;
+}

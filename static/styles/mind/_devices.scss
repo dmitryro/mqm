@@ -1,2 +1,21 @@
 /* DEVICE OVERRIDES
 -------------------------------------------------------- */
+
+
+@media screen and (max-width: 1024px) {
+//start
+
+  #top-bar #search-bar {
+    width: 250px;
+  }
+
+  #top-bar #profile {
+    width: auto !important;
+  }
+
+  #top-bar #profile #person .username {
+    display: none;
+  }
+
+//end
+}
