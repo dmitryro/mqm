@@ -1,0 +1,265 @@
+{% extends "base.html" %}
+{% load djangular_tags webdesign %}
+
+{% block extra_css %}
+{{ block.super }}
+<link rel="stylesheet" href="{{ STATIC_URL }}dist/styles/gridster.css" />
+{% endblock %}
+
+{% block content %}
+
+{% include "includes/sidebar.html" %}
+	<div id="content" class="clearfix">
+<div id="mind-signup-form">
+        <div class="container">
+          <div class="center-block text-center">
+            <div>(Open Hub Logo)</div>
+            <h2>SIGN UP TO OPEN HUB</h2>
+            <p class="lead">Section 4/5</p>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="col-sm-3"></div>
+              <div class="col-sm-9">
+                <p>RESOURCES TO SHARE</p>
+                <small>Please enter any resources you have to share with local community</small>
+              </div>
+            </div>
+          </div>
+
+
+          <form class="form-horizontal" role="form">
+            
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="input_resource1" class="col-sm-3 control-label">Resource 1</label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="input_resource1" name="input_resource1">
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="input_privacy" class="col-sm-3 control-label">Privacy</label>
+                  <div class="col-sm-9">
+                    <select type="text" class="form-control" id="input_privacy" name="input_privacy">
+                    <option value="National">National</option>
+                    <option value="Private">Private</option>
+                    <option value="Local">Local</option>
+                    <option value="Regional">Regional</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="input_resource2" class="col-sm-3 control-label">Resource 2</label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="input_resource2" name="input_resource2">
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="input_privacy" class="col-sm-3 control-label">Privacy</label>
+                  <div class="col-sm-9">
+                    <select type="text" class="form-control" id="input_privacy" name="input_privacy">
+                    <option value="National">National</option>
+                    <option value="Private">Private</option>
+                    <option value="Local">Local</option>
+                    <option value="Regional">Regional</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="input_resource1" class="col-sm-3 control-label">Resource 3</label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="input_resource1" name="input_resource3">
+                    <br>
+                    <button type="button" class="btn btn-default">Add Another</button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="input_privacy" class="col-sm-3 control-label">Privacy</label>
+                  <div class="col-sm-9">
+                    <select type="text" class="form-control" id="input_privacy" name="input_privacy">
+                    <option value="National">National</option>
+                    <option value="Private">Private</option>
+                    <option value="Local">Local</option>
+                    <option value="Regional">Regional</option>
+                    </select>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="row">
+            <div class="col-md-6">
+              <div class="col-sm-3"></div>
+              <div class="col-sm-9">
+                <p>KEY PARTNERS</p>
+                <small>Please select any partners you have</small>
+              </div>
+            </div>
+          </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="input_name" class="col-sm-3 control-label">Name</label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="input_name" name="input_name">
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="input_email" class="col-sm-3 control-label">Email</label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="input_email" name="input_email">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="input_address" class="col-sm-3 control-label">Address</label>
+                  <div class="col-sm-9">
+                    <textarea rows="5" class="form-control" id="input_address" name="input_address"></textarea>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="input_contactNumber" class="col-sm-3 control-label">Contact Number</label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="input_contactNumber" name="input_contactNumber">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="input_relationship" class="col-sm-3 control-label">Relationship</label>
+                  <div class="col-sm-9">
+                    <select type="text" class="form-control" id="input_relationship" name="input_relationship">
+                      <option value="Current partner">Current partner</option>
+                      <option value="Partner opportunities">Partner opportunities</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="input_postcode" class="col-sm-3 control-label">Postcode</label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="input_postcode" name="input_postcode">
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="input_type" class="col-sm-3 control-label">Type</label>
+                  <div class="col-sm-9">
+                    <select type="text" class="form-control" id="input_type" name="input_type">
+                    <option>Company limited by Gurantee</option>
+                      <option>2</option>
+                      <option>3</option>
+                      <option>4</option>
+                      <option>5</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="input_website" class="col-sm-3 control-label">Website</label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="input_website" name="input_website">
+                    <br>
+                    <button class="btn btn-default">Add Another</button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="input_privacy" class="col-sm-3 control-label">Privacy</label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="input_privacy" name="input_privacy">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="input_title" class="col-sm-3 control-label">Title</label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="input_title" name="input_title">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="input_entryDate" class="col-sm-3 control-label">Entry Date</label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="input_entryDate" name="input_entryDate">
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="input_description" class="col-sm-3 control-label">Description</label>
+                  <div class="col-sm-9">
+                    <textarea rows="5" class="form-control" id="input_description" name="input_description"></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="input_tags" class="col-sm-3 control-label">Tags</label>
+                  <div class="col-sm-9">
+                    <input class="form-control" id="input_tags" name="input_tags"><br>
+                    <button type="button" class="btn btn-default">Add Another</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          <div class="btn-group center-block">
+              <button type="button" class="btn btn-default">Back</button>
+              <button type="button" class="btn btn-default">Next</button>
+          </div>
+
+            </form>
+          </div>
+        </div>
+
+
+
+
+	</div> <!-- CONTENT -->
+{% endblock %}

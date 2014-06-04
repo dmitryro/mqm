@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% load djangular_tags webdesign %}
+
+{% block extra_css %}
+{{ block.super }}
+<link rel="stylesheet" href="{{ STATIC_URL }}dist/styles/gridster.css" />
+{% endblock %}
+
+{% block content %}
+
+{% include "includes/sidebar.html" %}
+	<div id="content" class="clearfix">
+
+		{% include "includes/topbar.html" %}
+
+		<div class="container-fluid">
+
+
+		<div id="team-header">
+			<div class="team-icon"></div>
+			<div class="team-title"><h3>MEET THE TEAM - Jane Smith</h3></div>
+			<a href="index.html"><div class="team-close"></div></a>
+		</div>
+
+		<div id="team-content">
+			<div class="col-md-3 team-side">
+				<div class="large-avatar"><img src="../Assets/images/pageheads/profile.png" alt="profile" width="186" height="186"></div>
+				<div class="lmas"><a href="lm.html">LM: Plymouth</a></div>
+				<div class="lmas">LM: Plymouth Team</div>
+				<div class="add-team-button">ADD NEW TEAM MEMBER</div>
+				<div class="add-team-button">EDIT YOUR PROFILE</div>
+			</div>
+			<div class="col-md-9">
+				<div class="col-md-4 bio-col">
+					<p><span><em>Name:</em></span> Jayne Smith</p>
+					<p><span><em>Local mind:</em></span> Plymouth</p>
+					<p><span><em>Job title:</em></span> Project Management</p>
+					<p><span><em>Website:</em></span> www.plymouthmind.org,uk</p>
+				</div>
+				<div class="col-md-4 bio-col">
+					<p><span><em>Email:</em></span> j.smith@plymouthmind.co.uk</p>
+					<p><span><em>Twitter:</em></span> @jsmith1974</p>
+					<p><span><em>Office number:</em></span> 0171 965 6754</p>
+					<p><span><em>Mobile:</em></span> 07859 794 849</p>
+				</div>
+				<div class="col-md-4 bio-col">
+					<p><span><em>Bio</em></span></p>
+					<p>Lorem ipsum,  dolor sit amet, consectetur adipiscing elit. Suspendisse dictum convallis ante, quis rutrum risus porttitor in. Curabitur sodales, nibh vitae mattis convallis, metus est consectetur mauris, et ultrices massa odio in sem. Morbi a sollicitudin sem. Maecenas malesuada, diam quis sagittis ullamcorper.</p>
+				</div>
+				<div class="bio-divider"></div>
+				<div class="col-md-9 bio"><h5><stong>SKILLS</stong></h5><p class="skill">Lorem ipsum,  dolor sit amet, consectetur adipiscing elit. Suspendisse dictum convallis ante, quis rutrum risus porttitor in. Curabitur sodales, nibh vitae mattis convallis, metus est consectetur mauris, et ultrices massa odio in sem. Morbi a sollicitudin sem. Maecenas malesuada, diam quis sagittis ullamcorper, quam massa hendrerit odio, vel aliquam dolor sapien non odio. Sed pellentesque tincidunt ante, vel mattis metus ultrices sed. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
+				<h5><stong>EXPERIENCE</stong></h5><p class="skills">Lorem ipsum,  dolor sit amet, consectetur adipiscing elit. Suspendisse dictum convallis ante, quis rutrum risus porttitor in. Curabitur sodales, nibh vitae mattis convallis, metus est consectetur mauris, et ultrices massa odio in sem. Morbi a sollicitudin sem. Maecenas malesuada, diam quis sagittis ullamcorper, quam massa hendrerit odio, vel aliquam dolor sapien non odio. Sed pellentesque tincidunt ante, vel mattis metus ultrices sed. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
+				
+				<h5><stong>LATEST ACTIVITY</stong></h5>
+				<ul style="padding:0px">
+					<li style="display:block; padding-bottom:5px;"> <span>New Video Added - on 01/09/14 - <a href="video.html">Mind Cymru Open Day</a></span></li>
+					<li style="display:block; padding-bottom:5px;"><span>New Document Uploaded - on 01/09/14 - <a href="#">10 Top Tips for Tendering</a></span></li>
+					<li style="display:block; padding-bottom:5px;"><span>Quailty Mark Updated - on 28/08/14 - <a href="#">Quality Mark</a></span></li>
+				</ul>
+				
+				</div>
+			</div>
+
+			<div style="clear:both"></div>
+
+		</div>
+		</div>
+	</div> <!-- CONTENT -->
+
+{% endblock %}

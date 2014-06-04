@@ -7,9 +7,11 @@
 #sidebar {
   width:405px;
   float:left;
+  position:fixed;
   background:#1c1c1b;
-  overflow:hidden;
-  -webkit-transition: width 0.3s ease-in-out;
+  overflow:scroll;
+  height: 100%;
+  -webkit-transition: width 0.3s linear;
 }
 
 #sidebar-panel {
@@ -196,5 +198,5 @@
 
 
 .sidebar-colapse {
-  width:0px !important;
+  width:405px !important; display:fixed;
 }

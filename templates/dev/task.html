@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+{% load djangular_tags webdesign %}
+
+{% block extra_css %}
+{{ block.super }}
+<link rel="stylesheet" href="{{ STATIC_URL }}dist/styles/gridster.css" />
+{% endblock %}
+
+{% block content %}
+
+{% include "includes/sidebar.html" %}
+	<div id="content" class="clearfix">
+
+		{% include "includes/topbar.html" %}
+
+		<div class="container-fluid">
+
+
+		<div id="team-header">
+			<div class="team-icon"></div>
+			<div class="team-title"><h3>TASK QUEUE/ TODO’S</h3></div>
+			<a href="index.html"><div class="team-close"></div></a>
+		</div>
+
+		<div class="row">
+			<div class="col-md-12">
+			<h4>Active</h4>
+				<table class="table table-striped">
+				<thead>
+				<tr>
+					<th>&nbsp;</th>
+					<th>Assign to</th>
+					<th>Date added</th>
+					<th>Complete by</th>
+					<th>&nbsp;</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr>
+					<td>Confirm all contact details for key staff are correct</td>
+					<td>Jane Smith</td>
+					<td>23/09/2014</td>
+					<td>23/09/2014</td>
+					<td>Edit</td>
+				</tr>
+				<tr>
+					<td>Confirm all contact details for key staff are correct</td>
+					<td>Jane Smith</td>
+					<td>23/09/2014</td>
+					<td>23/09/2014</td>
+					<td>Edit</td>
+				</tr>
+				<tr>
+					<td>Confirm all contact details for key staff are correct</td>
+					<td>Jane Smith</td>
+					<td>23/09/2014</td>
+					<td>23/09/2014</td>
+					<td>Edit</td>
+				</tr>
+
+				</tbody>
+				</table>
+
+				<hr>
+				<h4>Completed</h4>
+				<table class="table">
+				<thead>
+				<tr>
+					<th>&nbsp;</th>
+					<th>Assign to</th>
+					<th>Date added</th>
+					<th>Complete by</th>
+					<th>&nbsp;</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr>
+					<td>Confirm all contact details for key staff are correct</td>
+					<td>Jane Smith</td>
+					<td>23/09/2014</td>
+					<td>23/09/2014</td>
+					<td>Edit</td>
+				</tr>
+				<tr>
+					<td>Confirm all contact details for key staff are correct</td>
+					<td>Jane Smith</td>
+					<td>23/09/2014</td>
+					<td>23/09/2014</td>
+					<td>Edit</td>
+				</tr>
+				<tr>
+					<td>Confirm all contact details for key staff are correct</td>
+					<td>Jane Smith</td>
+					<td>23/09/2014</td>
+					<td>23/09/2014</td>
+					<td>Edit</td>
+				</tr>
+
+				</tbody>
+				</table>
+
+
+			</div>
+		</div>
+		</div>
+
+	</div> <!-- CONTENT -->
+
+{% endblock %}

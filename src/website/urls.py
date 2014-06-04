@@ -28,6 +28,29 @@ urlpatterns = patterns('',
     #static design templates
     url(r'^my-dashboard/$', 'django.shortcuts.render', {'template_name': 'dev/dashboard.html'}),
     url(r'^local-dashboard/$', 'django.shortcuts.render', {'template_name': 'dev/local-dashboard.html'}),
+    url(r'^video/$', 'django.shortcuts.render', {'template_name': 'dev/video.html'}),
+    url(r'^team/$', 'django.shortcuts.render', {'template_name': 'dev/team.html'}),
+    url(r'^local-mind/$', 'django.shortcuts.render', {'template_name': 'dev/lm.html'}),
+    url(r'^meet-the-team/$', 'django.shortcuts.render', {'template_name': 'dev/meet-the-team.html'}),
+    url(r'^event-diary/$', 'django.shortcuts.render', {'template_name': 'dev/event-diary.html'}),
+    url(r'^local-map/$', 'django.shortcuts.render', {'template_name': 'dev/local-map.html'}),
+    url(r'^log-in/$', 'django.shortcuts.render', {'template_name': 'dev/login.html'}),
+    url(r'^task/$', 'django.shortcuts.render', {'template_name': 'dev/task.html'}),
+    url(r'^q-and-a/$', 'django.shortcuts.render', {'template_name': 'dev/questions-and-answers.html'}),
+    url(r'^invitee/$', 'django.shortcuts.render', {'template_name': 'dev/invitee.html'}),
+    url(r'^documents/$', 'django.shortcuts.render', {'template_name': 'dev/documents.html'}),
+
+    url(r'^sign-up/part1$', 'django.shortcuts.render', {'template_name': 'dev/signup/part1.html'}),
+    url(r'^sign-up/part2$', 'django.shortcuts.render', {'template_name': 'dev/signup/part2.html'}),
+    url(r'^sign-up/part3$', 'django.shortcuts.render', {'template_name': 'dev/signup/part3.html'}),
+    url(r'^sign-up/part4$', 'django.shortcuts.render', {'template_name': 'dev/signup/part4.html'}),
+    url(r'^sign-up/part5$', 'django.shortcuts.render', {'template_name': 'dev/signup/part5.html'}),
+
+    #modals
+    url(r'^_addClinicalResearch/$', 'django.shortcuts.render', {'template_name': 'dev/modals/add-clinical-research.html'}),  
+    url(r'^_addExternalNews/$', 'django.shortcuts.render', {'template_name': 'dev/modals/add-external-news.html'}),
+    url(r'^_addPositiveNews/$', 'django.shortcuts.render', {'template_name': 'dev/modals/add-positive-news.html'}),
+    url(r'^_addService/$', 'django.shortcuts.render', {'template_name': 'dev/modals/add-service.html'}),    
 
 )
 

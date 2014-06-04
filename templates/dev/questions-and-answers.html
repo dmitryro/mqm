@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% load djangular_tags webdesign %}
+
+{% block extra_css %}
+{{ block.super }}
+<link rel="stylesheet" href="{{ STATIC_URL }}dist/styles/gridster.css" />
+{% endblock %}
+
+{% block content %}
+
+{% include "includes/sidebar.html" %}
+	<div id="content" class="clearfix">
+
+		{% include "includes/topbar.html" %}
+
+		<div class="container-fluid">
+
+
+		<div id="team-header">
+			<div class="team-icon"></div>
+			<div class="team-title"><h3>QUESTIONS &amp; ANSWERS</h3></div>
+			<a href="index.html"><div class="team-close"></div></a>
+		</div>
+
+		<div id="team-content">
+			
+			<div class="row">
+			<div class="col-md-6">
+				<h4>YOUR QUESTIONS</h4>
+				<div class="media">
+  <a class="pull-left" href="#">
+    <img class="media-object" src="..." alt="...">
+  </a>
+  <div class="media-body">
+    <p>Jane Smith - plymouth mind - replied on September 16th</p>
+    <h4 class="media-heading">How should we restructure our day serivces provision to include more peerled support groups</h4>
+  </div>
+</div>
+			</div>
+  			<div class="col-md-6">
+  				<h4>ALL OPEN HUB QUESTIONS</h4>
+  				<p>Content for map goes here</p>
+
+<div class="media">
+  <a class="pull-left" href="#">
+    <img class="media-object" src="..." alt="...">
+  </a>
+  <div class="media-body">
+    <h4 class="media-heading">How should we restructure our day serivces provision to include more peerled support groups</h4>
+    <p>Pearl Hope - Bristol - September 14th 2014</p>
+
+<div class="media">
+  <a class="pull-left" href="#">
+    <img class="media-object" src="..." alt="...">
+  </a>
+  <div class="media-body">
+    <p>Jane Smith - plymouth mind - replied on September 16th</p>
+    <h4 class="media-heading">How should we restructure our day serivces provision to include more peerled support groups</h4>
+  </div>
+</div>
+<div class="media">
+  <a class="pull-left" href="#">
+    <img class="media-object" src="..." alt="...">
+  </a>
+  <div class="media-body">
+    <p>Jane Smith - plymouth mind - replied on September 16th</p>
+    <h4 class="media-heading">How should we restructure our day serivces provision to include more peerled support groups</h4>
+  </div>
+</div>
+
+
+  </div>
+</div>
+
+<div class="media">
+  <a class="pull-left" href="#">
+    <img class="media-object" src="..." alt="...">
+  </a>
+  <div class="media-body">
+    <p>Jane Smith - plymouth mind - replied on September 16th</p>
+    <h4 class="media-heading">How should we restructure our day serivces provision to include more peerled support groups</h4>
+  </div>
+</div>
+
+
+
+  			</div>
+  
+			</div>
+
+		</div>
+		</div>
+	</div> <!-- CONTENT -->
+
+{% endblock %}

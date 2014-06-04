@@ -1,0 +1,75 @@
+#team-header {
+	height:75px;
+	margin:20px 0px 40px 0px;
+	padding:20px 20px 20px 25px;
+}
+
+.team-icon {
+	width:94px;
+	height:44px;
+	background-image:url(../images/pageheads/team-01.svg);
+	background-repeat: no-repeat;
+	float:left;
+}
+
+.team-title {
+	float:left;
+	margin-left:30px;
+	margin-top: -5px;
+}
+
+.team-close {
+	float:right;
+	width:30px;
+	height:30px;
+	background-image:url(../images/close.svg);
+	background-repeat: no-repeat;
+	margin-top: 10px;
+	-webkit-transition: all 0.7s;
+	transition: all 0.7;
+}
+
+.team-close:hover {
+	-webkit-transform: rotate(180deg);
+	transform: rotate(180deg);
+}
+
+.large-avatar {
+	width:191px;
+	height:191px;
+	border-radius:191px;
+	border:solid 2px #fff;
+	margin:0 auto 60px;
+}
+
+.bio-divider {
+	width:100%;
+	border-bottom:solid 1px #e5007d;
+	clear: both;
+	margin:20px 0px;
+	padding: 30px 0px;
+	margin-bottom: 30px;
+}
+
+.lmas {
+	width:191px;
+	margin:0 auto 15px;
+}
+
+.add-team-button {
+	margin:25px auto 15px;
+	border-radius:10px;
+	background:#e5007d;
+	color:#fff;
+	text-align:center;
+	padding:10px 0px;
+	max-width:200px;
+}
+
+.bio-col span{
+	color:#6d6968;
+}
+
+
+
+

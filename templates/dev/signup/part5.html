@@ -1,0 +1,270 @@
+{% extends "base.html" %}
+{% load djangular_tags webdesign %}
+
+{% block extra_css %}
+{{ block.super }}
+<link rel="stylesheet" href="{{ STATIC_URL }}dist/styles/gridster.css" />
+{% endblock %}
+
+{% block content %}
+
+{% include "includes/sidebar.html" %}
+	<div id="content" class="clearfix">
+<div id="mind-signup-form">
+        <div class="container">
+          <div class="center-block text-center">
+            <div>(Open Hub Logo)</div>
+            <h2>SIGN UP TO OPEN HUB</h2>
+            <p class="lead">Section 5/5</p>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="col-sm-3"></div>
+              <div class="col-sm-9">
+                <p>INVITE COLLEAGUES</p>
+              </div>
+            </div>
+          </div>
+
+
+          <form class="form-horizontal" role="form">
+            
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="input_firstName" class="col-sm-3 control-label">First Name</label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="input_firstName" name="input_firstName">
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="input_lastName" class="col-sm-3 control-label">Last Name</label>
+                  <div class="col-sm-9">
+                    <input type="email" class="form-control" id="input_lastName" name="input_lastName">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="input_email" class="col-sm-3 control-label">Email</label>
+                  <div class="col-sm-9">
+                    <input type="email" class="form-control" id="input_email" name="input_email">
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="input_accessLevel" class="col-sm-3 control-label">Access Level</label>
+                  <div class="col-sm-9">
+                    <select type="text" class="form-control" id="input_accessLevel" name="input_accessLevel">
+                    <option value="Super user">Super user</option>
+                      <option value="Admin">Admin</option>
+                      <option value="General">General</option>
+                      <option value="Intern">Intern</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="input_jobTitle" class="col-sm-3 control-label">Job Title</label>
+                  <div class="col-sm-9">
+                    <input rows="5" class="form-control" id="input_jobTitle" name="input_jobTitle">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <hr>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="input_firstName" class="col-sm-3 control-label">First Name</label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="input_firstName" name="input_firstName">
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="input_lastName" class="col-sm-3 control-label">Last Name</label>
+                  <div class="col-sm-9">
+                    <input type="email" class="form-control" id="input_lastName" name="input_lastName">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="input_email" class="col-sm-3 control-label">Email</label>
+                  <div class="col-sm-9">
+                    <input type="email" class="form-control" id="input_email" name="input_email">
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="input_accessLevel" class="col-sm-3 control-label">Access Level</label>
+                  <div class="col-sm-9">
+                    <select type="text" class="form-control" id="input_accessLevel" name="input_accessLevel">
+                    <option value="Super user">Super user</option>
+                      <option value="Admin">Admin</option>
+                      <option value="General">General</option>
+                      <option value="Intern">Intern</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="input_jobTitle" class="col-sm-3 control-label">Job Title</label>
+                  <div class="col-sm-9">
+                    <input rows="5" class="form-control" id="input_jobTitle" name="input_jobTitle">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <hr>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="input_firstName" class="col-sm-3 control-label">First Name</label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="input_firstName" name="input_firstName">
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="input_lastName" class="col-sm-3 control-label">Last Name</label>
+                  <div class="col-sm-9">
+                    <input type="email" class="form-control" id="input_lastName" name="input_lastName">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="input_email" class="col-sm-3 control-label">Email</label>
+                  <div class="col-sm-9">
+                    <input type="email" class="form-control" id="input_email" name="input_email">
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="input_accessLevel" class="col-sm-3 control-label">Access Level</label>
+                  <div class="col-sm-9">
+                    <select type="text" class="form-control" id="input_accessLevel" name="input_accessLevel">
+                    <option value="Super user">Super user</option>
+                      <option value="Admin">Admin</option>
+                      <option value="General">General</option>
+                      <option value="Intern">Intern</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="input_jobTitle" class="col-sm-3 control-label">Job Title</label>
+                  <div class="col-sm-9">
+                    <input rows="5" class="form-control" id="input_jobTitle" name="input_jobTitle">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <hr>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="input_firstName" class="col-sm-3 control-label">First Name</label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="input_firstName" name="input_firstName">
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="input_lastName" class="col-sm-3 control-label">Last Name</label>
+                  <div class="col-sm-9">
+                    <input type="email" class="form-control" id="input_lastName" name="input_lastName">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="input_email" class="col-sm-3 control-label">Email</label>
+                  <div class="col-sm-9">
+                    <input type="email" class="form-control" id="input_email" name="input_email">
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="input_accessLevel" class="col-sm-3 control-label">Access Level</label>
+                  <div class="col-sm-9">
+                    <select type="text" class="form-control" id="input_accessLevel" name="input_accessLevel">
+                    <option value="Super user">Super user</option>
+                      <option value="Admin">Admin</option>
+                      <option value="General">General</option>
+                      <option value="Intern">Intern</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="input_jobTitle" class="col-sm-3 control-label">Job Title</label>
+                  <div class="col-sm-9">
+                    <input rows="5" class="form-control" id="input_jobTitle" name="input_jobTitle"><br>
+                    <button class="btn btn-default">Add Another</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            
+
+
+
+              <div class="btn-group center-block">
+              <button type="button" class="btn btn-default">Back</button>
+              <button type="button" class="btn btn-default">Submit</button>
+          </div>
+
+            </form>
+          </div>
+        </div>
+
+
+
+	</div> <!-- CONTENT -->
+{% endblock %}

@@ -10,3 +10,80 @@
         display: none;
     }
 }
+
+
+
+.form-wrap {
+	padding: 30px;
+}
+
+.form-horizontal {
+	//width:636px;
+	margin:30px auto;
+	position: relative;
+
+}
+
+.form-horizontal input {
+	//width:209px;
+}
+
+.form-horizontal .input-xlarge, .form-horizontal textarea {
+	//width:535px;
+	height:40px;
+}
+
+.form-horizontal .control-group {
+	height:40px;
+}
+
+.form-horizontal .control-group .control-label {
+	text-align: right;
+	//width: 85px;
+	padding-top: 10px;
+}
+
+.form-horizontal .control-group .controls {
+	float:right;
+	height:40px;
+}
+
+#Privacy {
+	width:497px;
+}
+
+.control-group {
+	margin-bottom:30px;
+}
+
+.form-horizontal input, .form-horizontal textarea {
+	
+	border:solid 1px #e5007d;
+	outline:none;
+	border-radius:4px;
+	background:#fff;
+	padding-left:20px;
+	box-sizing:border-box;
+}
+
+.form-horizontal textarea {
+	height: initial; //ignore height settings, set via HTML only
+}
+
+
+.modal-close {
+  float:right;
+  width:30px;
+  height:30px;
+  background-image:url(../../assets/img/ui/base/close.svg);
+  background-repeat: no-repeat;
+  position:fixed; right:15px;
+  top:15px;
+  -webkit-transition: all 0.7s;
+  transition: all 0.7;
+}
+
+.modal-close:hover {
+  -webkit-transform: rotate(180deg);
+  transform: rotate(180deg);
+}

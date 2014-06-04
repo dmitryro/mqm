@@ -1,0 +1,104 @@
+#team-header {
+	height:75px;
+	margin-top:20px;
+	padding:20px 20px 20px 25px;
+}
+
+.team-icon {
+	width:66px;
+	height:43px;
+	background-image:url(../images/pageheads/latest-video-01.svg);
+	background-repeat: no-repeat;
+	float:left;
+}
+
+.team-title {
+	float:left;
+	margin-left:30px;
+	margin-top: -5px;
+}
+
+.team-close {
+	float:right;
+	width:30px;
+	height:30px;
+	background-image:url(../images/close.svg);
+	background-repeat: no-repeat;
+	margin-top: 10px;
+	-webkit-transition: all 0.7s;
+	transition: all 0.7;
+}
+
+.team-close:hover {
+	-webkit-transform: rotate(180deg);
+	transform: rotate(180deg);
+}
+
+#video-content {
+	position:relative;
+}
+
+.video-thumb-wrap {
+	padding:10px;
+}
+
+.video-thumb {
+	width:100%;
+	height:100%;
+}
+
+#video-content .add-video-button {
+	margin:0 auto 20px;
+}
+
+.add-video-button {
+	width:141px;
+	height:28px;
+	background:#e5007d;
+	border-radius:28px;
+	padding: 5px;
+	text-align: center;
+	color:#fff;
+}
+
+.add-team-button {
+	margin:25px auto 15px;
+	border-radius:10px;
+	background:#e5007d;
+	color:#fff;
+	text-align:center;
+	padding:10px 0px;
+	max-width:200px;
+}
+
+.add-team-button a:hover {
+	background: #9f005f;
+}
+
+
+
+
+
+.modal-dialog {
+	width: 100%;height: 100%;
+	padding: 0px;
+
+}
+
+.modal-content {
+	height:100%;border-radius:0px;
+}
+
+
+#login-button {
+	width:110px;
+	height:34px;
+	background:#c6c6c5;
+	margin:0 auto;
+	margin-top:40px;
+	border:solid 1px #e5007d;
+	border-radius:4px;
+	padding: 7px 0px;
+	text-align: center;
+	cursor:pointer;
+}

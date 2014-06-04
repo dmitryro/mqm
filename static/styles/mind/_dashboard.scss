@@ -2,11 +2,40 @@
 -------------------------------------------------------- */
 
 #content {
-  -webkit-transition: margin 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
   background:#d8dbdd;
   min-height:100%;
+  position:relative;
+}
+
+
+.container-fluid {
+  padding-top: 60px;
+  padding-right: 40px;
+  padding-left: 40px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@media screen and (max-width:360px) {
+  .container-fluid {
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+}
+
+
+
+.container-fluid:before,
+.container-fluid:after {
+    display: table;
+  content: " ";
 }
 
 .push {
-  margin-left: 405px;
+  //margin-left: 405px;
+  	-ms-transform: translate(405px,0px); /* IE 9 */
+	webkit-transform: translate(405px,0px); /* Chrome, Safari, Opera */
+	transform: translate(405px,0px);
+	-webkit-transition: all 0.3s ease-in-out;
 }

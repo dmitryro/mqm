@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load djangular_tags webdesign %}
+
+{% block extra_css %}
+{{ block.super }}
+<link rel="stylesheet" href="{{ STATIC_URL }}dist/styles/gridster.css" />
+{% endblock %}
+
+{% block content %}
+
+{% include "includes/sidebar.html" %}
+	<div id="content" class="clearfix">
+
+		<div class="container-fluid">
+		<div class="container-fluid">
+
+		<div id="team-header">
+			<div class="team-icon"></div>
+			<div class="team-title"><h3>Local Map</h3></div>
+			<a href="index.html"><div class="team-close"></div></a>
+		</div>
+
+		<div id="team-content">
+			
+			<div class="row">
+			<div class="col-md-3">
+				<div class="add-team-button">ADD A PARTNER</div>
+				<h4>Filter by</h4>
+			</div>
+  			<div class="col-md-8">
+  				<p>Content for map goes here</p>
+  			</div>
+  
+			</div>
+
+		</div>
+		</div>
+	</div> <!-- CONTENT -->
+
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load djangular_tags webdesign %}
+
+{% block extra_css %}
+{{ block.super }}
+<link rel="stylesheet" href="{{ STATIC_URL }}dist/styles/gridster.css" />
+{% endblock %}
+
+{% block content %}
+
+{% include "includes/sidebar.html" %}
+	<div id="content" class="clearfix">
+
+		{% include "includes/topbar.html" %}
+
+		<div class="container-fluid">
+
+		<div id="team-header">
+			<div class="team-icon"></div>
+			<div class="team-title"><h3>EVENT DIARY</h3></div>
+			<a href="index.html"><div class="team-close"></div></a>
+		</div>
+
+		<div id="team-content">
+			
+			<div class="row">
+			<div class="col-md-3">
+				<div class="add-team-button">ADD NEW EVENT</div>
+				<h3>AVALIABLE CALENDARS</h3>
+				<p>Click on the regions below to see them in you calendar</p>
+			</div>
+  			<div class="col-md-8">
+  				<p>Content for calendar goes here</p>
+  			</div>
+  
+			</div>
+
+		</div>
+		</div>
+
+	</div> <!-- CONTENT -->
+
+{% endblock %}

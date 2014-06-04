@@ -1,0 +1,521 @@
+{% extends "base.html" %}
+{% load djangular_tags webdesign %}
+
+{% block extra_css %}
+{{ block.super }}
+<link rel="stylesheet" href="{{ STATIC_URL }}dist/styles/gridster.css" />
+{% endblock %}
+
+{% block content %}
+
+{% include "includes/sidebar.html" %}
+	<div id="content" class="clearfix">
+<div id="mind-signup-form">
+        <div class="container">
+          <div class="center-block text-center">
+            <div>(Open Hub Logo)</div>
+            <h2>SIGN UP TO OPEN HUB</h2>
+            <p class="lead">Section 3/5</p>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="col-sm-3"></div>
+              <div class="col-sm-9">
+                <p>LM FURTHER DETAILS</p>
+              </div>
+            </div>
+          </div>
+
+
+          <form class="form-horizontal" role="form">
+
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="input_chairesName" class="col-sm-3 control-label">Chairs Name</label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="input_chairesName" name="input_chairesName">
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="input_chairsEmail" class="col-sm-3 control-label">Chairs Email</label>
+                  <div class="col-sm-9">
+                    <input type="email" class="form-control" id="input_chairsEmail" name="input_chairsEmail">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="input_ceoName" class="col-sm-3 control-label">CEO Name</label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="input_ceoName" name="input_ceoName">
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="input_ceoEmail" class="col-sm-3 control-label">CEO Email</label>
+                  <div class="col-sm-9">
+                    <input type="email" class="form-control" id="input_ceoEmail" name="input_ceoEmail">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="input_ceoContactNumber" class="col-sm-3 control-label">CEO Contact Number</label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="input_ceoContactNumber" name="input_ceoContactNumber">
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="input_chairsEthnicity" class="col-sm-3 control-label">Chairs Ethnicity</label>
+                  <div class="col-sm-9">
+                    <select class="form-control" id="input_chairsEthnicity" name="input_chairsEthnicity">
+                      <option value="White British">White British</option>
+<option value="White Irish">White Irish</option>
+<option value="Any other White background">Any other White background</option>
+<option value="White and Black African">White and Black African</option>
+<option value="White and Asian">White and Asian</option>
+<option value="White and Black Caribbean">White and Black Caribbean</option>
+<option value="Other mixed background">Other mixed background</option>
+<option value="Indian">Indian</option>
+<option value="Pakistani">Pakistani</option>
+<option value="Bangladeshi">Bangladeshi</option>
+<option value="Any other Asian background">Any other Asian background</option>
+<option value="Caribbean">Caribbean</option>
+<option value="African">African</option>
+<option value="Any other Black background">Any other Black background</option>
+<option value="Chinese">Chinese</option>
+<option value="Gypsy or Traveller">Gypsy or Traveller</option>
+<option value="Other ethnic group">Other ethnic group</option>
+<option value="We do not collect this information">We do not collect this information</option>
+<option value="Other">Other</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="input_ceoEthnicity" class="col-sm-3 control-label">CEO Ethnicity</label>
+                  <div class="col-sm-9">
+                    <select class="form-control" id="input_ceoEthnicity" name="input_ceoEthnicity">
+                      <option value="White British">White British</option>
+<option value="White Irish">White Irish</option>
+<option value="Any other White background">Any other White background</option>
+<option value="White and Black African">White and Black African</option>
+<option value="White and Asian">White and Asian</option>
+<option value="White and Black Caribbean">White and Black Caribbean</option>
+<option value="Other mixed background">Other mixed background</option>
+<option value="Indian">Indian</option>
+<option value="Pakistani">Pakistani</option>
+<option value="Bangladeshi">Bangladeshi</option>
+<option value="Any other Asian background">Any other Asian background</option>
+<option value="Caribbean">Caribbean</option>
+<option value="African">African</option>
+<option value="Any other Black background">Any other Black background</option>
+<option value="Chinese">Chinese</option>
+<option value="Gypsy or Traveller">Gypsy or Traveller</option>
+<option value="Other ethnic group">Other ethnic group</option>
+<option value="We do not collect this information">We do not collect this information</option>
+<option value="Other">Other</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="input_noOfStaff" class="col-sm-3 control-label">No of Staff</label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="input_noOfStaff" name="input_noOfStaff">
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="input_noOfTrustees" class="col-sm-3 control-label">No of Trustees</label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="input_noOfTrustees" name="input_noOfTrustees">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="input_noOfVolunteers" class="col-sm-3 control-label">No of Volunteers</label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="input_noOfVolunteers" name="input_noOfVolunteers">
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="input_trusteesWhoUseMHServices" class="col-sm-3 control-label">Trustees who use MH Services</label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="input_trusteesWhoUseMHServices" name="input_trusteesWhoUseMHServices">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+             <div class="col-md-1"></div>
+             <div class="col-md-3">
+              <div class="form-group">
+                <label for="input_ethnicityOfTrustees">Enthnicity of Trustees</label>
+                <select class="form-control" id="input_ethnicityOfTrustees" name="input_ethnicityOfTrustees">
+                  <option value="White British">White British</option>
+<option value="White Irish">White Irish</option>
+<option value="Any other White background">Any other White background</option>
+<option value="White and Black African">White and Black African</option>
+<option value="White and Asian">White and Asian</option>
+<option value="White and Black Caribbean">White and Black Caribbean</option>
+<option value="Other mixed background">Other mixed background</option>
+<option value="Indian">Indian</option>
+<option value="Pakistani">Pakistani</option>
+<option value="Bangladeshi">Bangladeshi</option>
+<option value="Any other Asian background">Any other Asian background</option>
+<option value="Caribbean">Caribbean</option>
+<option value="African">African</option>
+<option value="Any other Black background">Any other Black background</option>
+<option value="Chinese">Chinese</option>
+<option value="Gypsy or Traveller">Gypsy or Traveller</option>
+<option value="Other ethnic group">Other ethnic group</option>
+<option value="We do not collect this information">We do not collect this information</option>
+<option value="Other">Other</option>
+                </select>
+                <br>
+                <button type="button" class="btn btn-default">Add Another</button>
+
+              </div>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <label for="input_ethnicityOfVolunteers">Enthnicity of Volunteers</label>
+                <select class="form-control" id="input_ethnicityOfVolunteers" name="input_ethnicityOfVolunteers">
+                  <option value="White British">White British</option>
+<option value="White Irish">White Irish</option>
+<option value="Any other White background">Any other White background</option>
+<option value="White and Black African">White and Black African</option>
+<option value="White and Asian">White and Asian</option>
+<option value="White and Black Caribbean">White and Black Caribbean</option>
+<option value="Other mixed background">Other mixed background</option>
+<option value="Indian">Indian</option>
+<option value="Pakistani">Pakistani</option>
+<option value="Bangladeshi">Bangladeshi</option>
+<option value="Any other Asian background">Any other Asian background</option>
+<option value="Caribbean">Caribbean</option>
+<option value="African">African</option>
+<option value="Any other Black background">Any other Black background</option>
+<option value="Chinese">Chinese</option>
+<option value="Gypsy or Traveller">Gypsy or Traveller</option>
+<option value="Other ethnic group">Other ethnic group</option>
+<option value="We do not collect this information">We do not collect this information</option>
+<option value="Other">Other</option>
+                </select>
+                <br>
+                <button type="button" class="btn btn-default">Add Another</button>
+
+              </div>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <label for="input_ethnicityOfStaff">Enthnicity of Trustees</label>
+                <select class="form-control" id="input_ethnicityOfStaff" name="input_ethnicityOfStaff">
+                  <option value="White British">White British</option>
+<option value="White Irish">White Irish</option>
+<option value="Any other White background">Any other White background</option>
+<option value="White and Black African">White and Black African</option>
+<option value="White and Asian">White and Asian</option>
+<option value="White and Black Caribbean">White and Black Caribbean</option>
+<option value="Other mixed background">Other mixed background</option>
+<option value="Indian">Indian</option>
+<option value="Pakistani">Pakistani</option>
+<option value="Bangladeshi">Bangladeshi</option>
+<option value="Any other Asian background">Any other Asian background</option>
+<option value="Caribbean">Caribbean</option>
+<option value="African">African</option>
+<option value="Any other Black background">Any other Black background</option>
+<option value="Chinese">Chinese</option>
+<option value="Gypsy or Traveller">Gypsy or Traveller</option>
+<option value="Other ethnic group">Other ethnic group</option>
+<option value="We do not collect this information">We do not collect this information</option>
+<option value="Other">Other</option>
+                </select>
+                <br>
+                <button type="button" class="btn btn-default">Add Another</button>
+
+              </div>
+            </div>
+          </div>         
+
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="col-sm-3"></div>
+              <div class="col-sm-9">
+                <p>SERVICE INFORMATIONS</p>
+                <small>Please submit any task below, they will automatically assigned to you</small>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+             <div class="col-md-1"></div>
+             <div class="col-md-3">
+              <div class="form-group">
+                <label for="input_service">Service</label>
+                <input class="form-control" id="input_service" name="input_service">
+              </div>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <label for="input_serviceType">Service Type</label>
+                <select class="form-control" id="input_serviceType" name="input_serviceType">
+                  <option>Company limited by Gurantee</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                </select>
+
+              </div>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <label for="input_activeUsers">Active Users</label>
+                <input class="form-control" id="input_activeUsers" name="input_activeUsers">
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+             <div class="col-md-1"></div>
+             <div class="col-md-3">
+              <div class="form-group">
+                <label for="input_service">Service</label>
+                <input class="form-control" id="input_service" name="input_service">
+              </div>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <label for="input_serviceType">Service Type</label>
+                <select class="form-control" id="input_serviceType" name="input_serviceType">
+                  <option>Company limited by Gurantee</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                </select>
+
+              </div>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <label for="input_activeUsers">Active Users</label>
+                <input class="form-control" id="input_activeUsers" name="input_activeUsers">
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+             <div class="col-md-1"></div>
+             <div class="col-md-3">
+              <div class="form-group">
+                <label for="input_service">Service</label>
+                <input class="form-control" id="input_service" name="input_service"><br>
+                <button type="button" class="btn btn-default">Add Another</button>
+              </div>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <label for="input_serviceType">Service Type</label>
+                <select class="form-control" id="input_serviceType" name="input_serviceType">
+                  <option>Company limited by Gurantee</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                </select>
+
+              </div>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <label for="input_activeUsers">Active Users</label>
+                <input class="form-control" id="input_activeUsers" name="input_activeUsers">
+              </div>
+            </div>
+          </div>
+
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="col-sm-3"></div>
+              <div class="col-sm-9">
+                <p>QUESTIONS &amp; ANSWERS</p>
+                <small>Post any questions the network can help answer</small>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="input_question" class="col-sm-3 control-label">Question</label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="input_question" name="input_question">
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="input_privacy" class="col-sm-3 control-label">Privacy</label>
+                  <div class="col-sm-9">
+                    <select class="form-control" id="input_privacy" name="input_privacy">
+                  <option value="National">National</option>
+                    <option value="Private">Private</option>
+                    <option value="Local">Local</option>
+                    <option value="Regional">Regional</option>
+                </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="input_question" class="col-sm-3 control-label">Notification</label>
+                  <div class="col-sm-9">
+                    <label class="radio-inline">
+                      <input type="radio" id="input_notification" value="input_notification_yes"> Yes
+                    </label>
+                    <label class="radio-inline">
+                      <input type="radio" id="input_notification" value="input_notification_no"> No
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="input_question" class="col-sm-3 control-label">Question</label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="input_question" name="input_question">
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="input_privacy" class="col-sm-3 control-label">Privacy</label>
+                  <div class="col-sm-9">
+                    <select class="form-control" id="input_privacy" name="input_privacy">
+                  <option value="National">National</option>
+                    <option value="Private">Private</option>
+                    <option value="Local">Local</option>
+                    <option value="Regional">Regional</option>
+                </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="input_question" class="col-sm-3 control-label">Notification</label>
+                  <div class="col-sm-9">
+                    <label class="radio-inline">
+                      <input type="radio" id="input_notification" value="input_notification_yes"> Yes
+                    </label>
+                    <label class="radio-inline">
+                      <input type="radio" id="input_notification" value="input_notification_no"> No
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="input_question" class="col-sm-3 control-label">Question</label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="input_question" name="input_question">
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="input_privacy" class="col-sm-3 control-label">Privacy</label>
+                  <div class="col-sm-9">
+                    <select class="form-control" id="input_privacy" name="input_privacy">
+                    <option value="National">National</option>
+                    <option value="Private">Private</option>
+                    <option value="Local">Local</option>
+                    <option value="Regional">Regional</option>
+                </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="input_question" class="col-sm-3 control-label">Notification</label>
+                  <div class="col-sm-9">
+                    <label class="radio-inline">
+                      <input type="radio" id="input_notification" value="input_notification_yes"> Yes
+                    </label>
+                    <label class="radio-inline">
+                      <input type="radio" id="input_notification" value="input_notification_no"> No
+                    </label>
+                    <br><br>
+                    <button type="button" class="btn btn-default">Add Another</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+
+          <div class="btn-group center-block">
+            <button type="button" class="btn btn-default">Back</button>
+            <button type="button" class="btn btn-default">Next</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+
+
+
+
+	</div> <!-- CONTENT -->
+{% endblock %}

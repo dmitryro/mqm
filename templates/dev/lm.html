@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+{% load djangular_tags webdesign %}
+
+{% block extra_css %}
+{{ block.super }}
+<link rel="stylesheet" href="{{ STATIC_URL }}dist/styles/gridster.css" />
+{% endblock %}
+
+{% block content %}
+
+{% include "includes/sidebar.html" %}
+	<div id="content" class="clearfix">
+
+		<div id="top-bar">
+			
+			<div id="sidebar-button" class="closed"></div>
+
+			<div id="search-bar">
+				
+				<input type="text" placeholder="search..." id="search">
+
+			</div>
+
+			<div id="tools">
+					
+				<div id="write"></div>
+				<div id="add">
+					<div id="add-icon" class="drop"></div>
+					<ul>
+						<li class="settings-opt" style="background-image:url(../Assets/images/sidebar/icon_svg/service-08.svg)">
+							Add Service
+						</li>
+						<li class="settings-opt" style="background-image:url(../Assets/images/sidebar/icon_svg/contract-09.svg)">
+							Add contract
+						</li>
+						<li class="settings-opt" style="background-image:url(../Assets/images/sidebar/icon_svg/qm-10.svg)">
+							Update Quality Mark
+						</li>
+						
+						<li class="settings-opt" style="background-image:url(../Assets/images/sidebar/icon_svg/notes-02.svg)">
+							Monthly Finances 
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<div id="profile">
+				
+				<div id="person">
+					<a href="team.html"><div class="avatar"></div></a>
+					<div class="username">Jane Smith - Openhub</div>
+				</div>
+				<a href="home.html"><div id="logout"></div></a>
+				<div id="settings">
+					<div id="settings-icon" class="drop"></div>
+					<ul>
+						<li class="settings-opt" style="background-image:url(../Assets/images/sidebar/icon_svg/notes-02.svg)">
+							Notifications
+							<div class="notification">3</div>
+						</li>
+						<li class="settings-opt" style="background-image:url(../Assets/images/sidebar/icon_svg/tasks-03.svg)">
+							Task
+							<div class="notification">14</div>
+						</li>
+						<li class="settings-opt" style="background-image:url(../Assets/images/sidebar/icon_svg/alert-01.svg)">
+							Alerts
+							<div class="notification">4</div>
+						</li>
+						
+						<li class="settings-opt red">Settings</li>
+						
+						<li class="settings-opt" style="background-image:url(../Assets/images/sidebar/icon_svg/profile-04.svg)">
+							Update Profile
+						</li>
+						<li class="settings-opt" style="background-image:url(../Assets/images/sidebar/icon_svg/anchor-05.svg)">
+							Update Plymouth Hub
+						</li>
+						<li class="settings-opt" style="background-image:url(../Assets/images/sidebar/icon_svg/users-06.svg)">
+							Update Hub Users
+						</li>
+					<li class="settings-opt" style="background-image:url(../Assets/images/sidebar/icon_svg/password-07.svg)">
+							<a href="password.html">Change password</a>
+						</li>
+						
+					</ul>
+				</div>
+
+			</div>
+
+		</div>
+
+		<div id="team-header">
+			<div class="team-icon"></div>
+			<div class="team-title"><h3>PLYMOUTH Local Mind</h3></div>
+			<a href="index.html"><div class="team-close"></div></a>
+		</div>
+
+		<div id="team-content">
+			<div class="col-md-3 team-side">
+				<div class="large-avatar"><img src="../Assets/images/pageheads/lm.png" alt="profile" width="186" height="186"></div>
+				<div class="lmas">LM: Plymouth</div>
+				<div class="lmas">LM: Plymouth Team</div>
+				<div class="add-team-button">ADD NEW TEAM MEMBER</div>
+				<div class="add-team-button">EDIT LM's DETAILS</div>
+			</div>
+			<div class="col-md-9">
+				<div class="col-md-4 bio-col">
+					<p><span><em>Local mind:</em></span> Plymoth</p>
+					<p><span><em>Local mind:</em></span> Plymouth</p>
+					<p><span><em>Address</em></span> Mind in Croydon, 26 Pampisford Road, <br/>Purley Surrey CR8 2NE</p>
+					<p><span><em>Website:</em></span> www.plymouthmind.org,uk</p>
+				</div>
+				<div class="col-md-4 bio-col">
+					<p><span><em>Email:</em></span> info@croydonmind.co.uk</p>
+					<p><span><em>Twitter:</em></span> @croydonmind</p>
+					<p><span><em>Office number:</em></span> 020 7928 4640</p>
+					<p><span><em>Website:</em></span> www.plymouthmind.org,uk</p>
+				</div>
+				<div class="col-md-4 bio-col">
+					<p><span><em>Mission Statement</em></span></p>
+					<p>Lorem ipsum,  dolor sit amet, consectetur adipiscing elit. Suspendisse dictum convallis ante, quis rutrum risus porttitor in. Curabitur sodales, nibh vitae mattis convallis, metus est consectetur mauris, et ultrices massa odio in sem. Morbi a sollicitudin sem. Maecenas malesuada, diam quis sagittis ullamcorper.</p>
+				</div>
+				<div class="bio-divider"></div>
+				<div class="col-md-9 bio"><h5>SERVICES</h5><p class="skill">Ecotherapy Services<br/>Couple Counciling<br/>Phone Based Support<br/>Psychological Therapies<br/>Cognitive Therapies<br/>Peer Support Services</p>
+				
+				<h5>BACKEND RESOURCES</h5><p class="skills">Colour Printer<br/>Free office Space<br/>Transit Van</p>
+				
+				<h5>KEY PARTNERS</h5><p class="skills">
+					<span style="color:#666; ">Name</span><span style="padding-left:130px; color:#666; ">Website</span><span style="padding-left:130px; color:#666;">Service</span><br/>
+					<strong>YMCA</strong> <span style="padding-left:120px;"><a hrf="http://www.ymca.org.uk/" target="_blank">ymca.org.uk</a></span> <span style="padding-left:99px;">Opportunity</span><br/>
+					<strong>NHS PLYMOUTH</strong> <span style="padding-left:44px;"><a hrf="http://www.plymouthhospitals.nhs.uk/Pages/Home.aspx" target="_blank">plymouthhospitals.nhs.uk</a></span> <span style="padding-left:17px;">Opportunity</span><br/>
+					<strong>HEALTH CENTRE</strong> <span style="padding-left:41px;"><a hrf="http://www.ymca.org.uk/" target="_blank">healthcentre.co.uk</a></span> <span style="padding-left:60px;">Partner</span><br/>
+					<strong>NATIONAL TRUST</strong> <span style="padding-left:31px;"><a hrf="https://www.nationaltrust.org.uk/" target="_blank">nationaltrust.org.uk</a></span> <span style="padding-left:55px;">Partner</span><br/>
+					<strong>PRIVATE COMPANY</strong> <span style="padding-left:18px;"><a hrf="http://www.ymca.org.uk/" target="_blank">pwc.co.uk</a></span> <span style="padding-left:114px;">Partner</span><br/>
+				</p> </div>
+			</div>
+		</div>
+
+	</div> <!-- CONTENT -->
+
+{% endblock %}

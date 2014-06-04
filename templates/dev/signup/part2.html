@@ -1,0 +1,216 @@
+{% extends "base.html" %}
+{% load djangular_tags webdesign %}
+
+{% block extra_css %}
+{{ block.super }}
+<link rel="stylesheet" href="{{ STATIC_URL }}dist/styles/gridster.css" />
+{% endblock %}
+
+{% block content %}
+
+{% include "includes/sidebar.html" %}
+	<div id="content" class="clearfix">
+<div id="mind-signup-form">
+        <div class="container">
+          <div class="center-block text-center">
+            <div>(Open Hub Logo)</div>
+            <h2>SIGN UP TO OPEN HUB</h2>
+            <p class="lead">Section 2/5</p>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="col-sm-3"></div>
+              <div class="col-sm-9">
+                <p>YOUR PROFILE</p>
+              </div>
+            </div>
+          </div>
+
+
+          <form class="form-horizontal" role="form">
+          
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                  <label for="input_firstName" class="col-sm-3 control-label">First Name</label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="input_firstName" name="input_firstName">
+                  </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                    <label for="input_lastName" class="col-sm-3 control-label">Last Name</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="input_lastName" name="input_lastName">
+                    </div>
+                  </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                  <label for="input_jobTitle" class="col-sm-3 control-label">Job Title</label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="input_jobTitle" name="input_jobTitle">
+                  </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                    <label for="input_email" class="col-sm-3 control-label">Email</label>
+                    <div class="col-sm-9">
+                      <input type="email" class="form-control" id="input_email" name="input_email" readonly="true" value="">
+                    </div>
+                  </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                  <label for="input_password" class="col-sm-3 control-label">Password</label>
+                  <div class="col-sm-9">
+                    <input type="password" class="form-control" id="input_password" name="input_password">
+                  </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                    <label for="input_password2" class="col-sm-3 control-label">Re-enter Password</label>
+                    <div class="col-sm-9">
+                      <input type="password" class="form-control" id="input_password2" name="input_password2">
+                    </div>
+                  </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                  <label for="input_yourSkills" class="col-sm-3 control-label">Your Skills<p class="help-block">comma seperated</p></label>
+                  <div class="col-sm-9">
+                    <textarea rows="5" class="form-control" id="input_yourSkills" name="input_yourSkills"></textarea>
+                  </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                    <label for="input_profileImage" class="col-sm-3 control-label">Profile Image</label>
+                    <div class="col-sm-9">
+                      <input type="file" class="form-control" id="input_profileImage" name="input_profileImage">
+                      <p class="help-block">Maximum size of 500kb. Only JPG, PNG accepted</p>
+                    </div>
+                  </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                    <label for="input_biography" class="col-sm-3 control-label">Biography</label>
+                    <div class="col-sm-9">
+                      <textarea rows="5" class="form-control" id="input_biography" name="input_biography" placeholder="limited to 350 charecters" maxlength="350"></textarea>
+                    </div>
+                  </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                    <label for="input_contactNumber" class="col-sm-3 control-label">Contact Number</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="input_contactNumber" name="input_contactNumber">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="input_twitter" class="col-sm-3 control-label">Twitter</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="input_twitter" name="input_twitter" value="@" placeholder="@">
+                    </div>
+                  </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                  <label for="input_experiences1" class="col-sm-3 control-label">Experiences</label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="input_experiences1" name="input_experiences1" placeholder="limited to 250 characters" maxlength="250">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="input_experiences2" class="col-sm-3 control-label"></label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="input_experiences2" name="input_experiences2" placeholder="limited to 250 characters" maxlength="250">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="input_experiences3" class="col-sm-3 control-label"></label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="input_experiences3" name="input_experiences3" placeholder="limited to 250 characters" maxlength="250">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="input_experiences4" class="col-sm-3 control-label"></label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="input_experiences4" name="input_experiences4" placeholder="limited to 250 characters" maxlength="250">
+                  </div>
+                </div>
+                
+            </div>
+            <div class="col-md-6">
+              
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="col-sm-3"></div>
+              <div class="col-sm-9">
+                <p>TASK QUEUE</p>
+                <small>Please submit any task below, they will automatically be assigned to you</small>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                    <label for="input_description1" class="col-sm-3 control-label">Description</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="input_description1" name="input_description1" placeholder="limited to 141 characters">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="input_description2" class="col-sm-3 control-label"></label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="input_description2" name="input_description2" placeholder="limited to 141 characters">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="input_description3" class="col-sm-3 control-label"></label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="input_description3" name="input_description3" placeholder="limited to 141 characters">
+                    </div>
+                  </div>
+            </div>
+          </div>
+        
+
+          <div class="btn-group center-block">
+              <button type="button" class="btn btn-default">Back</button>
+              <button type="button" class="btn btn-default">Next</button>
+          </div>
+            </form>
+          </div>
+        </div>
+
+
+
+
+
+	</div> <!-- CONTENT -->
+{% endblock %}
