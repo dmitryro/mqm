@@ -1,13 +1,12 @@
-{% block content %}
 <div id="logo-form"></div>
-			<div class="modal-close close" data-dismiss="modal" aria-hidden="true"></div>
+      <div class="modal-close close" data-dismiss="modal" aria-hidden="true"></div>
 
 <form class="form-horizontal" role="form">
 
 
             <div class="row">
               <div class="col-md-6 col-md-offset-3">
-              <h2>ADD A NEW VIDEO</h2>
+              <h2>ADD NEW POST</h2>
 
 
                 <div class="form-group">
@@ -17,44 +16,29 @@
                   </div>
                 </div>
 
-
-              <div class="form-group">
-                  <label for="input_date" class="col-sm-3 control-label">Date</label>
+                <div class="form-group">
+                  <label for="input_description" class="col-sm-3 control-label">Description</label>
                   <div class="col-sm-9">
-                    <input type="text" class="form-control" id="input_date" name="input_date">
+                    <textarea class="form-control" id="input_description" name="input_description"></textarea>
                   </div>
                 </div>
 
 
-              <div class="form-group">
-                  <label for="input_date" class="col-sm-3 control-label">Description</label>
-                  <div class="col-sm-9">
-                    <textarea class="form-control" id="input_date" name="input_date"></textarea>
-                  </div>
-                </div>
-
-              <div class="form-group">
-                  <label for="input_video" class="col-sm-3 control-label">Video URL</label>
-                  <div class="col-sm-9">
-                    <input type="text" class="form-control" id="input_video" name="input_video">
-                  </div>
-                </div>
-
-              <div class="form-group">
+                <div class="form-group">
                   <label for="input_tags" class="col-sm-3 control-label">Tags</label>
                   <div class="col-sm-9">
                     <input type="text" class="form-control" id="input_tags" name="input_tags">
                   </div>
                 </div>
 
-              <div class="form-group">
-                  <label for="input_postedBy" class="col-sm-3 control-label">Posted by</label>
+                <div class="form-group">
+                  <label for="input_source" class="col-sm-3 control-label">Source</label>
                   <div class="col-sm-9">
-                    <input type="text" class="form-control" id="input_postedBy" name="input_postedBy">
+                    <input type="text" class="form-control" id="input_source" name="input_source">
                   </div>
                 </div>
 
-              <div class="form-group">
+                <div class="form-group">
                   <label for="input_postedBy" class="col-sm-3 control-label">Privacy</label>
                   <div class="col-sm-9">
                     <select class="form-control" id="input_postedBy" name="input_postedBy">
@@ -66,10 +50,8 @@
                   </div>
                   </div>
 
-
-                  <button type="button" class="btn btn-default center-block">Submit</button>
+                <button type="button" class="btn btn-default center-block">Submit</button>
 
             </div>
             </div>
 </form>
-{% endblock %}

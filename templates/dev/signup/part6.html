@@ -1,0 +1,394 @@
+{% extends "base.html" %}
+{% load djangular_tags webdesign %}
+
+{% block extra_css %}
+{{ block.super }}
+<link rel="stylesheet" href="{{ STATIC_URL }}dist/styles/gridster.css" />
+<style type="text/css">
+  .smallInput {width: 100px; float: right;}
+  label {margin-top: 8px;}
+  .form-group {width: 100%; padding-bottom: 10px;}
+</style>
+{% endblock %}
+
+{% block content %}
+
+{% include "includes/sidebar.html" %}
+	<div id="content" class="clearfix">
+<div id="mind-signup-form">
+        <div class="container">
+          <div class="center-block text-center">
+            <div>(Open Hub Logo)</div>
+            <h2>SIGN UP TO OPEN HUB</h2>
+            <p class="lead">Section 6/6</p>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+                <h4>Diversity Markers</h4>
+            </div>
+          </div>
+
+
+          <form class="form-inline" role="form">
+          
+          <div class="row">
+          <div class="col-sm-4">
+          <h5>ETHNICITY OF TRUSTEES</h5>
+            <div class="form-group">
+              <label for="input_whiteBritish">White British</label>
+              <input type="number" class="form-control smallInput" id="input_whiteBritish" min="0" value="0">
+            </div>
+            <div class="form-group">
+              <label for="input_whiteIrish">White Irish</label>
+              <input type="number" class="form-control smallInput" id="input_whiteIrish" min="0" value="0">
+            </div>
+            <div class="form-group">
+              <label for="input_otherWhiteBackground">Other White Background</label>
+              <input type="number" class="form-control smallInput" id="input_otherWhiteBackground" min="0" value="0">
+            </div>
+            <div class="form-group">
+              <label for="input_whiteBlackAfrican">White &amp; Black African</label>
+              <input type="number" class="form-control smallInput" id="input_whiteBlackAfrican" min="0" value="0">
+            </div>
+            <div class="form-group">
+              <label for="input_whiteAsian">White &amp; Asian</label>
+              <input type="number" class="form-control smallInput" id="input_whiteAsian" min="0" value="0">
+            </div>
+            <div class="form-group">
+              <label for="input_whiteBlackCaribbean">White &amp; Black Caribbean</label>
+              <input type="number" class="form-control smallInput" id="input_whiteBlackCaribbean" min="0" value="0">
+            </div>
+            <div class="form-group">
+              <label for="input_otherMixedBackground">Other mixed background</label>
+              <input type="number" class="form-control smallInput" id="input_otherMixedBackground" min="0" value="0">
+            </div>
+            <div class="form-group">
+              <label for="input_indian">Indian</label>
+              <input type="number" class="form-control smallInput" id="input_indian" min="0" value="0">
+            </div>
+            <div class="form-group">
+              <label for="input_pakistani">Pakistani</label>
+              <input type="number" class="form-control smallInput" id="input_pakistani" min="0" value="0">
+            </div>
+            <div class="form-group">
+              <label for="input_bangladeshi">Bangladeshi</label>
+              <input type="number" class="form-control smallInput" id="input_bangladeshi" min="0" value="0">
+            </div>
+            <div class="form-group">
+              <label for="input_otherAsianBackground">Other Asian Background</label>
+              <input type="number" class="form-control smallInput" id="input_otherAsianBackground" min="0" value="0">
+            </div>
+            <div class="form-group">
+              <label for="input_caribbean">Caribbean</label>
+              <input type="number" class="form-control smallInput" id="input_caribbean" min="0" value="0">
+            </div>
+            <div class="form-group">
+              <label for="input_african">African</label>
+              <input type="number" class="form-control smallInput" id="input_african" min="0" value="0">
+            </div>
+            <div class="form-group">
+              <label for="input_otherBlackBackground">Other Black Background</label>
+              <input type="number" class="form-control smallInput" id="input_otherBlackBackground" min="0" value="0">
+            </div>
+            <div class="form-group">
+              <label for="input_chinese">Chinese</label>
+              <input type="number" class="form-control smallInput" id="input_chinese" min="0" value="0">
+            </div>
+            <div class="form-group">
+              <label for="input_gypsyOrTraveller">Gypsy or Traveller</label>
+              <input type="number" class="form-control smallInput" id="input_gypsyOrTraveller" min="0" value="0">
+            </div>
+            <div class="form-group">
+              <label for="input_otherEthnicGroup">Other Ethnic Group</label>
+              <input type="number" class="form-control smallInput" id="input_input_otherEthnicGroup" min="0" value="0">
+            </div>
+
+          </div>
+
+          <div class="col-sm-4">
+          <h5>ETHNICITY OF VOLUNTEERS</h5>
+            <div class="form-group">
+              <label for="input_whiteBritish">White British</label>
+              <input type="number" class="form-control smallInput" id="input_whiteBritish" min="0" value="0">
+            </div>
+            <div class="form-group">
+              <label for="input_whiteIrish">White Irish</label>
+              <input type="number" class="form-control smallInput" id="input_whiteIrish" min="0" value="0">
+            </div>
+            <div class="form-group">
+              <label for="input_otherWhiteBackground">Other White Background</label>
+              <input type="number" class="form-control smallInput" id="input_otherWhiteBackground" min="0" value="0">
+            </div>
+            <div class="form-group">
+              <label for="input_whiteBlackAfrican">White &amp; Black African</label>
+              <input type="number" class="form-control smallInput" id="input_whiteBlackAfrican" min="0" value="0">
+            </div>
+            <div class="form-group">
+              <label for="input_whiteAsian">White &amp; Asian</label>
+              <input type="number" class="form-control smallInput" id="input_whiteAsian" min="0" value="0">
+            </div>
+            <div class="form-group">
+              <label for="input_whiteBlackCaribbean">White &amp; Black Caribbean</label>
+              <input type="number" class="form-control smallInput" id="input_whiteBlackCaribbean" min="0" value="0">
+            </div>
+            <div class="form-group">
+              <label for="input_otherMixedBackground">Other mixed background</label>
+              <input type="number" class="form-control smallInput" id="input_otherMixedBackground" min="0" value="0">
+            </div>
+            <div class="form-group">
+              <label for="input_indian">Indian</label>
+              <input type="number" class="form-control smallInput" id="input_indian" min="0" value="0">
+            </div>
+            <div class="form-group">
+              <label for="input_pakistani">Pakistani</label>
+              <input type="number" class="form-control smallInput" id="input_pakistani" min="0" value="0">
+            </div>
+            <div class="form-group">
+              <label for="input_bangladeshi">Bangladeshi</label>
+              <input type="number" class="form-control smallInput" id="input_bangladeshi" min="0" value="0">
+            </div>
+            <div class="form-group">
+              <label for="input_otherAsianBackground">Other Asian Background</label>
+              <input type="number" class="form-control smallInput" id="input_otherAsianBackground" min="0" value="0">
+            </div>
+            <div class="form-group">
+              <label for="input_caribbean">Caribbean</label>
+              <input type="number" class="form-control smallInput" id="input_caribbean" min="0" value="0">
+            </div>
+            <div class="form-group">
+              <label for="input_african">African</label>
+              <input type="number" class="form-control smallInput" id="input_african" min="0" value="0">
+            </div>
+            <div class="form-group">
+              <label for="input_otherBlackBackground">Other Black Background</label>
+              <input type="number" class="form-control smallInput" id="input_otherBlackBackground" min="0" value="0">
+            </div>
+            <div class="form-group">
+              <label for="input_chinese">Chinese</label>
+              <input type="number" class="form-control smallInput" id="input_chinese" min="0" value="0">
+            </div>
+            <div class="form-group">
+              <label for="input_gypsyOrTraveller">Gypsy or Traveller</label>
+              <input type="number" class="form-control smallInput" id="input_gypsyOrTraveller" min="0" value="0">
+            </div>
+            <div class="form-group">
+              <label for="input_otherEthnicGroup">Other Ethnic Group</label>
+              <input type="number" class="form-control smallInput" id="input_input_otherEthnicGroup" min="0" value="0">
+            </div>
+          </div>
+
+          <div class="col-sm-4">
+          <h5>ETHNICITY OF STAFF</h5>
+            <div class="form-group">
+              <label for="input_whiteBritish">White British</label>
+              <input type="number" class="form-control smallInput" id="input_whiteBritish" min="0" value="0">
+            </div>
+            <div class="form-group">
+              <label for="input_whiteIrish">White Irish</label>
+              <input type="number" class="form-control smallInput" id="input_whiteIrish" min="0" value="0">
+            </div>
+            <div class="form-group">
+              <label for="input_otherWhiteBackground">Other White Background</label>
+              <input type="number" class="form-control smallInput" id="input_otherWhiteBackground" min="0" value="0">
+            </div>
+            <div class="form-group">
+              <label for="input_whiteBlackAfrican">White &amp; Black African</label>
+              <input type="number" class="form-control smallInput" id="input_whiteBlackAfrican" min="0" value="0">
+            </div>
+            <div class="form-group">
+              <label for="input_whiteAsian">White &amp; Asian</label>
+              <input type="number" class="form-control smallInput" id="input_whiteAsian" min="0" value="0">
+            </div>
+            <div class="form-group">
+              <label for="input_whiteBlackCaribbean">White &amp; Black Caribbean</label>
+              <input type="number" class="form-control smallInput" id="input_whiteBlackCaribbean" min="0" value="0">
+            </div>
+            <div class="form-group">
+              <label for="input_otherMixedBackground">Other mixed background</label>
+              <input type="number" class="form-control smallInput" id="input_otherMixedBackground" min="0" value="0">
+            </div>
+            <div class="form-group">
+              <label for="input_indian">Indian</label>
+              <input type="number" class="form-control smallInput" id="input_indian" min="0" value="0">
+            </div>
+            <div class="form-group">
+              <label for="input_pakistani">Pakistani</label>
+              <input type="number" class="form-control smallInput" id="input_pakistani" min="0" value="0">
+            </div>
+            <div class="form-group">
+              <label for="input_bangladeshi">Bangladeshi</label>
+              <input type="number" class="form-control smallInput" id="input_bangladeshi" min="0" value="0">
+            </div>
+            <div class="form-group">
+              <label for="input_otherAsianBackground">Other Asian Background</label>
+              <input type="number" class="form-control smallInput" id="input_otherAsianBackground" min="0" value="0">
+            </div>
+            <div class="form-group">
+              <label for="input_caribbean">Caribbean</label>
+              <input type="number" class="form-control smallInput" id="input_caribbean" min="0" value="0">
+            </div>
+            <div class="form-group">
+              <label for="input_african">African</label>
+              <input type="number" class="form-control smallInput" id="input_african" min="0" value="0">
+            </div>
+            <div class="form-group">
+              <label for="input_otherBlackBackground">Other Black Background</label>
+              <input type="number" class="form-control smallInput" id="input_otherBlackBackground" min="0" value="0">
+            </div>
+            <div class="form-group">
+              <label for="input_chinese">Chinese</label>
+              <input type="number" class="form-control smallInput" id="input_chinese" min="0" value="0">
+            </div>
+            <div class="form-group">
+              <label for="input_gypsyOrTraveller">Gypsy or Traveller</label>
+              <input type="number" class="form-control smallInput" id="input_gypsyOrTraveller" min="0" value="0">
+            </div>
+            <div class="form-group">
+              <label for="input_otherEthnicGroup">Other Ethnic Group</label>
+              <input type="number" class="form-control smallInput" id="input_input_otherEthnicGroup" min="0" value="0">
+            </div>
+          </div>
+          </div>
+
+          
+          
+          <div class="row">
+            <div class="col-sm-4">
+            <h5>GENDER OF TRUSTEES</h5>
+              <div class="form-group">
+              <label for="input_female1">Female</label>
+              <input type="number" class="form-control smallInput" id="input_female1" min="0" value="0">
+              </div>
+              <div class="form-group">
+              <label for="input_male1">Male</label>
+              <input type="number" class="form-control smallInput" id="input_male1" min="0" value="0">
+              </div>
+
+            </div>
+            <div class="col-sm-4">
+            <h5>GENDER OF VOLUNTEERS</h5>
+            <div class="form-group">
+              <label for="input_female2">Female</label>
+              <input type="number" class="form-control smallInput" id="input_female2" min="0" value="0">
+              </div>
+              <div class="form-group">
+              <label for="input_male2">Male</label>
+              <input type="number" class="form-control smallInput" id="input_male2" min="0" value="0">
+              </div>
+            </div>
+            <div class="col-sm-4">
+            <h5>GENDER OF STAFF</h5>
+            <div class="form-group">
+              <label for="input_female3">Female</label>
+              <input type="number" class="form-control smallInput" id="input_female3" min="0" value="0">
+              </div>
+              <div class="form-group">
+              <label for="input_male3">Male</label>
+              <input type="number" class="form-control smallInput" id="input_male3" min="0" value="0">
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-4">
+            <h5>AGE OF TRUSTEES</h5>
+              <div class="form-group">
+              <label>18-24</label>
+              <input type="number" class="form-control smallInput" min="0" value="0">
+              </div>
+              <div class="form-group">
+              <label>25-34</label>
+              <input type="number" class="form-control smallInput"  min="0" value="0">
+              </div>
+              <div class="form-group">
+              <label>35-34</label>
+              <input type="number" class="form-control smallInput" min="0" value="0">
+              </div>
+              <div class="form-group">
+              <label>45-54</label>
+              <input type="number" class="form-control smallInput" min="0" value="0">
+              </div>
+              <div class="form-group">
+              <label>55-64</label>
+              <input type="number" class="form-control smallInput" min="0" value="0">
+              </div>
+              <div class="form-group">
+              <label>65+</label>
+              <input type="number" class="form-control smallInput" min="0" value="0">
+              </div>
+            </div>
+            <div class="col-sm-4">
+            <h5>AGE OF VOLUNTEERS</h5>
+            <div class="form-group">
+              <label>18-24</label>
+              <input type="number" class="form-control smallInput" min="0" value="0">
+              </div>
+              <div class="form-group">
+              <label>25-34</label>
+              <input type="number" class="form-control smallInput"  min="0" value="0">
+              </div>
+              <div class="form-group">
+              <label>35-34</label>
+              <input type="number" class="form-control smallInput" min="0" value="0">
+              </div>
+              <div class="form-group">
+              <label>45-54</label>
+              <input type="number" class="form-control smallInput" min="0" value="0">
+              </div>
+              <div class="form-group">
+              <label>55-64</label>
+              <input type="number" class="form-control smallInput" min="0" value="0">
+              </div>
+              <div class="form-group">
+              <label>65+</label>
+              <input type="number" class="form-control smallInput" min="0" value="0">
+              </div>
+            </div>
+            <div class="col-sm-4">
+            <h5>AGE OF STAFF</h5>
+            <div class="form-group">
+              <div class="form-group">
+              <label>18-24</label>
+              <input type="number" class="form-control smallInput" min="0" value="0">
+              </div>
+              <div class="form-group">
+              <label>25-34</label>
+              <input type="number" class="form-control smallInput"  min="0" value="0">
+              </div>
+              <div class="form-group">
+              <label>35-34</label>
+              <input type="number" class="form-control smallInput" min="0" value="0">
+              </div>
+              <div class="form-group">
+              <label>45-54</label>
+              <input type="number" class="form-control smallInput" min="0" value="0">
+              </div>
+              <div class="form-group">
+              <label>55-64</label>
+              <input type="number" class="form-control smallInput" min="0" value="0">
+              </div>
+              <div class="form-group">
+              <label>65+</label>
+              <input type="number" class="form-control smallInput" min="0" value="0">
+              </div>
+            </div>
+          </div>
+        
+
+          <div class="text-center">
+          <div class="btn-group">
+            <button type="button" class="btn btn-default">Back</button>
+            <button type="button" class="btn btn-default">Next</button>
+            </div>
+          </div>
+            </form>
+          </div>
+        </div>
+
+
+
+
+
+	</div> <!-- CONTENT -->
+{% endblock %}
