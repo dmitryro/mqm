@@ -22,32 +22,8 @@ h1,h2,h3,h4,h5,h6 {
   @include Avenir-Roman();
 }
 
- //used for making responsive youtube embeds
-.mediaObject {
-    position: relative;
-    padding-bottom: 56.25%;
-    padding-top: 30px; height: 0; overflow: hidden;
-}
- 
-.mediaObject iframe,
-.mediaObject object,
-.mediaObject embed {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
-
-.withIcon { line-height:43px;color:#4d4d4f; margin: 30px 20px 30px 0px; font-size:20px; font-weight:bold;}
-
-.icon_video {width:66px; height:43px; background:url('/static/assets/img/ui/icons/icon_video.svg'); background-size:contain; background-repeat:no-repeat;
-position:relative;
-display:inline-block;
-float: left;
-margin-right:20px;
-}
-
+ /* Reusable components
+-------------------------------------------------------- */
 .page-close {
   float:right;
   width:30px;
@@ -65,4 +41,55 @@ margin-right:20px;
 .page-close:hover {
   -webkit-transform: rotate(180deg);
   transform: rotate(180deg);
+}
+
+ /* Responsive video
+-------------------------------------------------------- */
+.mediaObject {
+    position: relative;
+    padding-bottom: 56.25%;
+    padding-top: 30px; height: 0; overflow: hidden;
+    margin-bottom: 30px;
+}
+ 
+.mediaObject iframe,
+.mediaObject object,
+.mediaObject embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+ /* Icons
+-------------------------------------------------------- */
+
+.withIcon {color:#4d4d4f; margin: 30px 20px 30px 0px; font-size:20px; font-weight:bold;}
+.withIcon span {position:relative;display:inline-block;float: left;margin-right:20px;}
+
+.withIcon.icon_video span {width:66px; height:43px; background:url('/static/assets/img/ui/icons/icon_video.svg');}
+.withIcon.icon_video span { line-height:43px;}
+
+.withIcon.icon_document span {width:48px; height:48px; background:url('/static/assets/img/ui/icons/icon_document.svg');}
+.withIcon.icon_document { line-height:48px;}
+
+.withIcon.icon_newspaper span {width:62px; height:48px; background:url('/static/assets/img/ui/icons/icon_newspaper.svg');}
+.withIcon.icon_newspaper { line-height:48px;}
+
+.withIcon.icon_map span {width:34px; height:52px; background:url('/static/assets/img/ui/icons/icon_map.svg');}
+.withIcon.icon_map { line-height:52px;}
+
+.withIcon.icon_calendar span {width:51px; height:51px; background:url('/static/assets/img/ui/icons/icon_calendar.svg');}
+.withIcon.icon_calendar { line-height:51px;}
+
+.withIcon.icon_people span {width:92px; height:38px; background:url('/static/assets/img/ui/icons/icon_people.svg');}
+.withIcon.icon_people { line-height:38px;}
+
+
+//to move to a more appropriate home
+.col-md-6.bordered {border-left:2px solid #7f3f98;}
+
+@media screen and (max-width: 992px) {
+  .col-md-6.bordered {border-left:0px; border-top:2px solid #7f3f98; padding-top:5px;}
 }

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Generator: Adobe Illustrator 16.0.4, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
-<svg version="1.0" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 width="35px" height="35px" viewBox="0 0 35 35" enable-background="new 0 0 35 35" xml:space="preserve">
-<circle fill="none" stroke="#EC008C" stroke-width="2" stroke-miterlimit="10" cx="17.728" cy="17.443" r="15.75"/>
+<circle fill="none" stroke="#174787" stroke-width="2" stroke-miterlimit="10" cx="17.728" cy="17.443" r="15.75"/>
 <g>
 	
-		<rect x="15.556" y="11.44" transform="matrix(-0.7066 -0.7076 0.7076 -0.7066 17.5355 41.8213)" fill="#ED1C7F" width="3.765" height="11.671"/>
+		<rect x="15.555" y="11.439" transform="matrix(0.7067 0.7076 -0.7076 0.7067 17.3383 -7.2705)" fill="#174787" width="3.765" height="11.671"/>
 	
-		<rect x="21.12" y="10.179" transform="matrix(-0.7061 -0.7081 0.7081 -0.7061 30.9573 36.2551)" fill="#ED1C7F" width="3.764" height="3.05"/>
-	<polygon fill="#ED1C7F" points="10.046,24.79 14.214,23.278 11.535,20.622 	"/>
+		<rect x="21.121" y="10.178" transform="matrix(0.7061 0.7081 -0.7081 0.7061 15.0467 -12.8487)" fill="#174787" width="3.764" height="3.05"/>
+	<polygon fill="#174787" points="10.046,24.79 14.214,23.277 11.535,20.622 	"/>
 </g>
 </svg>

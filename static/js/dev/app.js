@@ -167,23 +167,23 @@ $(document).ready(function() {
 
 	$('.menu-button').mouseenter(function() {
 		var iconName = $(this).attr('data-iconName');
-		$(this).css('background-image','url(../Assets/images/sidebar/icon_svg/'+iconName+'_hover.svg)')
-		$(this).parent().find('.tt-icon').css({'background-image':'url(../Assets/images/sidebar/info-hover.svg)', 'background-position':'center'});
+		$(this).css('background-image','url({{ STATIC_URL }}/assets/img/ui/icons/'+iconName+'_hover.svg)')
+		$(this).parent().find('.tt-icon').css({'background-image':'url({{ STATIC_URL }}/assets/img/ui/icons/info-hover.svg)', 'background-position':'center'});
 	}).mouseleave(function() {
 		var iconName = $(this).attr('data-iconName');
-		$(this).css('background-image','url(../Assets/images/sidebar/icon_svg/'+iconName+'.svg)');
-		$(this).parent().find('.tt-icon').css({'background-image':'url(../Assets/images/sidebar/info.svg)', 'background-position':'center'});
+		$(this).css('background-image','url({{ STATIC_URL }}/assets/img/ui/icons/'+iconName+'.svg)');
+		$(this).parent().find('.tt-icon').css({'background-image':'url({{ STATIC_URL }}/assets/img/ui/icons/info.svg)', 'background-position':'center'});
 	});
 
 	
 	function menuROver(me) {
 		var iconName = $(me).attr('data-iconName');
-		$(me).addClass('goRed').css({'background-image':'url(../Assets/images/sidebar/icon_svg/'+iconName+'_hover.svg)', 'background-position':'center'})
+		$(me).addClass('goRed').css({'background-image':'url({{ STATIC_URL }}/assets/img/ui/icons/'+iconName+'_hover.svg)', 'background-position':'center'})
 	}
 
 	function menuROut(me) {
 		var iconName = $(me).attr('data-iconName');
-		$(me).removeClass('goRed').css({'background-image':'url(../Assets/images/sidebar/icon_svg/'+iconName+'.svg)', 'background-position':'center'}).removeClass('goRed')
+		$(me).removeClass('goRed').css({'background-image':'url({{ STATIC_URL }}/assets/img/ui/icons/'+iconName+'.svg)', 'background-position':'center'}).removeClass('goRed')
 	}
 
 	// DROP DOWNS 

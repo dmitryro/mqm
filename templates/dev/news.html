@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% load djangular_tags webdesign %}
+
+{% block extra_css %}
+{{ block.super }}
+<link rel="stylesheet" href="{{ STATIC_URL }}dist/styles/gridster.css" />
+{% endblock %}
+
+{% block content %}
+
+{% include "includes/sidebar.html" %}
+	<div id="content" class="clearfix">
+
+		{% include "includes/topbar.html" %}
+
+		<div class="container-fluid">
+
+    <h3 class="withIcon icon_newspaper"><span></span>POSITIVE NEWS / EXTERNAL NEWS</h3>
+      <a href="/" class="page-close"></a>
+
+      <button class="btn btn-default">ADD NEW POST</button>
+<br><br>
+		<div id="team-content">
+			
+			<div class="row">
+			<div class="col-md-8">
+      <form class="form-inline" role="form">
+  <div class="form-group">
+    <label for="filterBy">Filter by</label>
+    <select class="form-control" id="filterBy">
+      <option value="South West">South West</option>
+    </select>
+  </div>
+</form>
+<br>
+				<h4>AN AMAZING DAY WITH LEEDS MIND</h4>
+        <p class="small">September 23rd 2014 - posted by Martin Vowles - Swindon Mind</p>
+        <p>Lorem ipsum,  dolor sit amet, consectetur adipiscing elit. Suspendisse dictum convallis ante, quis rutrum risus porttitor in. Curabitur sodales, nibh vitae mattis convallis, metus est consectetur mauris, et ultrices massa odio in sem. Morbi a sollicitudin sem. Maecenas malesuada, diam. </p>
+        <p>Quis sagittis ullamcorper, quam massa hendrerit odio, vel aliquam dolor sapien non odio. Sed pellentesque tincidunt ante, vel mattis metus ultrices sed. Interdum et malesuada fames ac ante ipsum primis in faucibus. </p>
+        <p>Morbi a sollicitudin sem. Maecenas malesuada, diam quis sagittis ullamcorper, quam massa hendrerit odio, vel aliquam dolor sapien non odio. Sed pellentesque tincidunt ante, vel mattis metus ultrices sed. Interdum et malesuada fames ac ante ipsum primis. Lorem ipsum,  dolor sit amet, consectetur adipiscing elit. Suspendisse dictum convallis ante, quis rutrum risus porttitor in. 
+Curabitur sodales, nibh vitae mattis convallis, metus est consectetur mauris, et ultrices massa odio in sem. Morbi a sollicitudin sem. Maecenas malesuada, diam.</p>
+<p>Quis sagittis ullamcorper, quam massa hendrerit odio, vel aliquam dolor sapien non odio. Sed pellentesque tincidunt ante, vel mattis metus ultrices sed. Interdum et malesuada fames ac ante ipsum primis in faucibus. </p>
+<p>Morbi a sollicitudin sem. Maecenas malesuada, diam quis sagittis ullamcorper, quam massa hendrerit odio, vel aliquam dolor sapien non odio. Sed pellentesque tincidunt ante, vel mattis metus ultrices sed. Interdum et malesuada fames ac ante ipsum primis.</p>
+<hr>
+
+<h4>AN AMAZING DAY WITH LEEDS MIND</h4>
+        <p class="small">September 23rd 2014 - posted by Martin Vowles - Swindon Mind</p>
+        <p>Lorem ipsum,  dolor sit amet, consectetur adipiscing elit. Suspendisse dictum convallis ante, quis rutrum risus porttitor in. Curabitur sodales, nibh vitae mattis convallis, metus est consectetur mauris, et ultrices massa odio in sem. Morbi a sollicitudin sem. Maecenas malesuada, diam. </p>
+        <p>Quis sagittis ullamcorper, quam massa hendrerit odio, vel aliquam dolor sapien non odio. Sed pellentesque tincidunt ante, vel mattis metus ultrices sed. Interdum et malesuada fames ac ante ipsum primis in faucibus. </p>
+        <p>Morbi a sollicitudin sem. Maecenas malesuada, diam quis sagittis ullamcorper, quam massa hendrerit odio, vel aliquam dolor sapien non odio. Sed pellentesque tincidunt ante, vel mattis metus ultrices sed. Interdum et malesuada fames ac ante ipsum primis. Lorem ipsum,  dolor sit amet, consectetur adipiscing elit. Suspendisse dictum convallis ante, quis rutrum risus porttitor in. 
+Curabitur sodales, nibh vitae mattis convallis, metus est consectetur mauris, et ultrices massa odio in sem. Morbi a sollicitudin sem. Maecenas malesuada, diam.</p>
+<p>Quis sagittis ullamcorper, quam massa hendrerit odio, vel aliquam dolor sapien non odio. Sed pellentesque tincidunt ante, vel mattis metus ultrices sed. Interdum et malesuada fames ac ante ipsum primis in faucibus. </p>
+<p>Morbi a sollicitudin sem. Maecenas malesuada, diam quis sagittis ullamcorper, quam massa hendrerit odio, vel aliquam dolor sapien non odio. Sed pellentesque tincidunt ante, vel mattis metus ultrices sed. Interdum et malesuada fames ac ante ipsum primis.</p>
+<hr>
+
+
+			</div>
+  			<div class="col-md-4">
+
+  				<p><strong>AN AMAZING DAY WITH LEEDS MIND</strong><br><span class="small">September 23rd 2014 - posted by Martin Vowles - Swindon Mind</span></p>
+          <br>
+          <p><strong>AN AMAZING DAY WITH LEEDS MIND</strong><br><span class="small">September 23rd 2014 - posted by Martin Vowles - Swindon Mind</span></p>
+          <br>
+          <p><strong>AN AMAZING DAY WITH LEEDS MIND</strong><br><span class="small">September 23rd 2014 - posted by Martin Vowles - Swindon Mind</span></p>
+          <br>
+          <p><strong>AN AMAZING DAY WITH LEEDS MIND</strong><br><span class="small">September 23rd 2014 - posted by Martin Vowles - Swindon Mind</span></p>
+          <br>
+          <p><strong>AN AMAZING DAY WITH LEEDS MIND</strong><br><span class="small">September 23rd 2014 - posted by Martin Vowles - Swindon Mind</span></p>
+          <br>
+          <p><strong>AN AMAZING DAY WITH LEEDS MIND</strong><br><span class="small">September 23rd 2014 - posted by Martin Vowles - Swindon Mind</span></p>
+          <br>
+          <p><strong>AN AMAZING DAY WITH LEEDS MIND</strong><br><span class="small">September 23rd 2014 - posted by Martin Vowles - Swindon Mind</span></p>
+          <br>
+          <p><strong>AN AMAZING DAY WITH LEEDS MIND</strong><br><span class="small">September 23rd 2014 - posted by Martin Vowles - Swindon Mind</span></p>
+          <br>
+          <p><strong>AN AMAZING DAY WITH LEEDS MIND</strong><br><span class="small">September 23rd 2014 - posted by Martin Vowles - Swindon Mind</span></p>
+          <br>
+          <p><strong>AN AMAZING DAY WITH LEEDS MIND</strong><br><span class="small">September 23rd 2014 - posted by Martin Vowles - Swindon Mind</span></p>
+          
+  			</div>
+  
+			</div>
+
+		</div>
+		</div>
+	</div> <!-- CONTENT -->
+
+{% endblock %}

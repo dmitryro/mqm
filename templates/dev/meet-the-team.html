@@ -11,89 +11,17 @@
 {% include "includes/sidebar.html" %}
 	<div id="content" class="clearfix">
 
-		<div id="top-bar">
-			
-			<div id="sidebar-button" class="closed"></div>
+		{% include "includes/topbar.html" %}
 
-			<div id="search-bar">
-				
-				<input type="text" placeholder="search..." id="search">
+		<div class="container-fluid">
 
-			</div>
+		<h3 class="withIcon icon_people"><span></span>MEET THE TEAM</h3>
+			<a href="/" class="page-close"></a>
 
-			<div id="tools">
-					
-				<div id="write"></div>
-				<div id="add">
-					<div id="add-icon" class="drop"></div>
-					<ul>
-						<li class="settings-opt" style="background-image:url(../Assets/images/sidebar/icon_svg/service-08.svg)">
-							Add Service
-						</li>
-						<li class="settings-opt" style="background-image:url(../Assets/images/sidebar/icon_svg/contract-09.svg)">
-							Add contract
-						</li>
-						<li class="settings-opt" style="background-image:url(../Assets/images/sidebar/icon_svg/qm-010.svg)">
-							Update Quality Mark
-						</li>
-						
-						<li class="settings-opt" style="background-image:url(../Assets/images/sidebar/icon_svg/notes-02.svg)">
-							Monthly Finances 
-						</li>
-					</ul>
-				</div>
-			</div>
-
-			<div id="profile">
-				
-				<div id="person">
-					<a href="team.html"><div class="avatar"></div></a>
-					<div class="username">Jane Smith - Openhub</div>
-				</div>
-				<a href="home.html"><div id="logout"></div></a>
-				<div id="settings">
-					<div id="settings-icon" class="drop"></div>
-					<ul>
-						<li class="settings-opt" style="background-image:url(../Assets/images/sidebar/icon_svg/notes-02.svg)">
-							Notifications
-							<div class="notification">3</div>
-						</li>
-						<li class="settings-opt" style="background-image:url(../Assets/images/sidebar/icon_svg/tasks-03.svg)">
-							Task
-							<div class="notification">14</div>
-						</li>
-						<li class="settings-opt" style="background-image:url(../Assets/images/sidebar/icon_svg/alert-01.svg)">
-							Alerts
-							<div class="notification">4</div>
-						</li>
-						
-						<li class="settings-opt red">Settings</li>
-						
-						<li class="settings-opt" style="background-image:url(../Assets/images/sidebar/icon_svg/profile-04.svg)">
-							Update Profile
-						</li>
-						<li class="settings-opt" style="background-image:url(../Assets/images/sidebar/icon_svg/anchor-05.svg)">
-							Update Plymouth Hub
-						</li>
-						<li class="settings-opt" style="background-image:url(../Assets/images/sidebar/icon_svg/users-06.svg)">
-							Update Hub Users
-						</li>
-						<li class="settings-opt" style="background-image:url(../Assets/images/sidebar/icon_svg/password-07.svg)">
-							<a href="password.html">Change password</a>
-						</li>
-						
-					</ul>
-				</div>
-
-			</div>
-
+		<button class="btn btn-default">ADD NEW TEAM MEMBER</button>
+		<br><br>
 		</div>
 
-		<div id="team-header">
-			<div class="team-icon"></div>
-			<div class="team-title"><h3>MEET THE TEAM</h3></div>
-			<a href="index.html"><div class="team-close"></div></a>
-		</div>
 
 		<div id="team-content">
 			
@@ -101,8 +29,7 @@
 			<div class="col-md-3">
 				<div class="large-avatar"><img src="../Assets/images/pageheads/profile.png" alt="profile" width="186" height="186"></div>
 				<div class="lmas"><a href="lm.html">LM: Plymouth</a></div>
-				<div class="lmas">LM: Plymouth Team</div>
-				<div class="add-team-button">ADD NEW TEAM MEMBER</div>
+				<div class="lmas">LM: Plymouth Team</div>	
 			</div>
   			<div class="col-md-8">
   			<div class="row">
@@ -129,7 +56,7 @@
   			</div>
   
 			</div>
-
+			</div>
 		</div>
 
 	</div> <!-- CONTENT -->
