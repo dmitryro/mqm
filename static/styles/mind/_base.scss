@@ -86,6 +86,8 @@ h1,h2,h3,h4,h5,h6 {
 .withIcon.icon_people span {width:92px; height:38px; background:url('/static/assets/img/ui/icons/icon_people.svg');}
 .withIcon.icon_people { line-height:38px;}
 
+.openHubLogo {width:181px; height:79px; background:url(/static/assets/img/brand/openhub-logo.svg);}
+.no-svg .openHubLogo {background:url(/static/assets/img/brand/openhub-logo.png);}
 
 //to move to a more appropriate home
 .col-md-6.bordered {border-left:2px solid #7f3f98;}

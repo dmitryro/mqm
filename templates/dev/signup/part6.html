@@ -374,6 +374,69 @@
               </div>
             </div>
           </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-4">
+            <h5>SEXUAL ORIENTATION OF TRUSTEES</h5>
+              <div class="form-group">
+              <label>Asexual</label>
+              <input type="number" class="form-control smallInput" min="0" value="0">
+              </div>
+              <div class="form-group">
+              <label>Bisexual</label>
+              <input type="number" class="form-control smallInput"  min="0" value="0">
+              </div>
+              <div class="form-group">
+              <label>Heterosexual</label>
+              <input type="number" class="form-control smallInput" min="0" value="0">
+              </div>
+              <div class="form-group">
+              <label>Homosexual</label>
+              <input type="number" class="form-control smallInput" min="0" value="0">
+              </div>
+            </div>
+            <div class="col-sm-4">
+            <h5>SEXUAL ORIENTATION OF VOLUNTEERS</h5>
+            <div class="form-group">
+              <label>Asexual</label>
+              <input type="number" class="form-control smallInput" min="0" value="0">
+              </div>
+              <div class="form-group">
+              <label>Bisexual</label>
+              <input type="number" class="form-control smallInput"  min="0" value="0">
+              </div>
+              <div class="form-group">
+              <label>Heterosexual</label>
+              <input type="number" class="form-control smallInput" min="0" value="0">
+              </div>
+              <div class="form-group">
+              <label>Homosexual</label>
+              <input type="number" class="form-control smallInput" min="0" value="0">
+              </div>
+            </div>
+            <div class="col-sm-4">
+            <h5>SEXUAL ORIENTATION OF STAFF</h5>
+            <div class="form-group">
+              <div class="form-group">
+              <label>Asexual</label>
+              <input type="number" class="form-control smallInput" min="0" value="0">
+              </div>
+              <div class="form-group">
+              <label>Bisexual</label>
+              <input type="number" class="form-control smallInput"  min="0" value="0">
+              </div>
+              <div class="form-group">
+              <label>Heterosexual</label>
+              <input type="number" class="form-control smallInput" min="0" value="0">
+              </div>
+              <div class="form-group">
+              <label>Homosexual</label>
+              <input type="number" class="form-control smallInput" min="0" value="0">
+              </div>
+            </div>
+          </div>
+          </div>
         
 
           <div class="text-center">
@@ -391,4 +454,15 @@
 
 
 	</div> <!-- CONTENT -->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script type="text/javascript">
+
+  $("input").focus(function(){
+    $(this).parent().find("label").css("color", "#174787");
+  });
+  $("input").blur(function(){
+    $(this).parent().find("label").css("color", "");
+  });
+
+  </script>
 {% endblock %}
