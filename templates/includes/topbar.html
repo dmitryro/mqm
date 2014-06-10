@@ -1,6 +1,10 @@
 <div id="top-bar">
             
+            {% if dashboard == "true" %}
             <div id="sidebar-button" class="closed"></div>
+            {% else %}
+            <a href="/my-dashboard"><div id="sidebar-home"></div></a>
+            {% endif %}
 
             <div id="search-bar">
                 

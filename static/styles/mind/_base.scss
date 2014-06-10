@@ -51,6 +51,12 @@ h1,h2,h3,h4,h5,h6 {
     padding-top: 30px; height: 0; overflow: hidden;
     margin-bottom: 30px;
 }
+
+.mapObject {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0; overflow: hidden;
+}
  
 .mediaObject iframe,
 .mediaObject object,

@@ -1,3 +1,4 @@
+var gridster;
 $(document).ready(function() {
 
 
@@ -18,10 +19,11 @@ $(document).ready(function() {
  //      	}
  //    });
 
-	var gridster;
+	
 
 	var widget = '<li class="widget"><div class="widget-bar"></div></li>'
  	
+	
 	var widgets = [
 		[widget, 1, 1],
 		[widget, 1, 1],
@@ -34,6 +36,13 @@ $(document).ready(function() {
 		[widget, 1, 1],
 		[widget, 1, 1],
 		[widget, 1, 1]
+	];
+
+
+	var serialization = [
+	{"col":1,"row":1,"size_x":1,"size_y":1, "name":"collectiveimpact"},
+	{"col":2,"row":1,"size_x":1,"size_y":1, "name":"areasofgrowth"},
+	{"col":3,"row":1,"size_x":1,"size_y":1, "name":"callout"}
 	];
 	
 
@@ -48,6 +57,10 @@ $(document).ready(function() {
         	enabled: true
       	}
     }).data('gridster');
+
+    $.each(serialization, function() {
+            gridster.add_widget($('.'+this.name).html(), this.size_x, this.size_y, this.col, this.row);
+    });
 
     function makeGrid(state, gr) {
 
@@ -167,23 +180,23 @@ $(document).ready(function() {
 
 	$('.menu-button').mouseenter(function() {
 		var iconName = $(this).attr('data-iconName');
-		$(this).css('background-image','url({{ STATIC_URL }}/assets/img/ui/icons/'+iconName+'_hover.svg)')
-		$(this).parent().find('.tt-icon').css({'background-image':'url({{ STATIC_URL }}/assets/img/ui/icons/info-hover.svg)', 'background-position':'center'});
+		$(this).css('background-image','url(/static/assets/img/ui/icons/'+iconName+'_hover.svg)');
+		$(this).parent().find('.tt-icon').css({'background-image':'url(/static//assets/img/ui/icons/info-hover.svg)', 'background-position':'center'});
 	}).mouseleave(function() {
 		var iconName = $(this).attr('data-iconName');
-		$(this).css('background-image','url({{ STATIC_URL }}/assets/img/ui/icons/'+iconName+'.svg)');
-		$(this).parent().find('.tt-icon').css({'background-image':'url({{ STATIC_URL }}/assets/img/ui/icons/info.svg)', 'background-position':'center'});
+		$(this).css('background-image','url(/static//assets/img/ui/icons/'+iconName+'.svg)');
+		$(this).parent().find('.tt-icon').css({'background-image':'url(/static//assets/img/ui/icons/info.svg)', 'background-position':'center'});
 	});
 
 	
 	function menuROver(me) {
 		var iconName = $(me).attr('data-iconName');
-		$(me).addClass('goRed').css({'background-image':'url({{ STATIC_URL }}/assets/img/ui/icons/'+iconName+'_hover.svg)', 'background-position':'center'})
+		$(me).addClass('goRed').css({'background-image':'url(/static//assets/img/ui/icons/'+iconName+'_hover.svg)', 'background-position':'center'})
 	}
 
 	function menuROut(me) {
 		var iconName = $(me).attr('data-iconName');
-		$(me).removeClass('goRed').css({'background-image':'url({{ STATIC_URL }}/assets/img/ui/icons/'+iconName+'.svg)', 'background-position':'center'}).removeClass('goRed')
+		$(me).removeClass('goRed').css({'background-image':'url(/static//assets/img/ui/icons/'+iconName+'.svg)', 'background-position':'center'}).removeClass('goRed')
 	}
 
 	// DROP DOWNS 
@@ -276,6 +289,8 @@ $(document).ready(function() {
     	if ($(this).parent().attr('data-widg')) {
 	    	var widgetName = $(this).parent().attr('data-widg');
 	    	gridster.add_widget( $('.'+widgetName).html(), 1, 1, 1, 1 );
+	    	if(widgetName == "fundingmap") {initializeFundingMap();}
+	    	
 	    	$('.drop').unbind('click');
 	    	$('.drop').bind('click',function() {
 				if ($(this).hasClass('dropped')) {

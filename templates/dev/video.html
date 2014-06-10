@@ -7,88 +7,22 @@
 {% endblock %}
 
 {% block content %}
-
-{% include "includes/sidebar.html" %}
-	<div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
+<div class="modal fade" id="sharedModal" tabindex="-1" role="dialog" aria-labelledby="sharedModal" aria-hidden="true">
+<div class="modal-dialog">
     <div class="modal-content">
-    <div id="logo-form"></div>
-			<div class="modal-close close" data-dismiss="modal" aria-hidden="true"></div>
-
-<form class="form-horizontal" role="form">
-
-
-            <div class="row">
-              <div class="col-md-6 col-md-offset-3">
-              <h2>ADD A NEW VIDEO</h2>
-
-
-                <div class="form-group">
-                  <label for="input_title" class="col-sm-3 control-label">Title</label>
-                  <div class="col-sm-9">
-                    <input type="text" class="form-control" id="input_title" name="input_title">
-                  </div>
-                </div>
-
-
-              <div class="form-group">
-                  <label for="input_date" class="col-sm-3 control-label">Date</label>
-                  <div class="col-sm-9">
-                    <input type="text" class="form-control" id="input_date" name="input_date">
-                  </div>
-                </div>
-
-
-              <div class="form-group">
-                  <label for="input_date" class="col-sm-3 control-label">Description</label>
-                  <div class="col-sm-9">
-                    <textarea class="form-control" id="input_date" name="input_date"></textarea>
-                  </div>
-                </div>
-
-              <div class="form-group">
-                  <label for="input_video" class="col-sm-3 control-label">Video URL</label>
-                  <div class="col-sm-9">
-                    <input type="text" class="form-control" id="input_video" name="input_video">
-                  </div>
-                </div>
-
-              <div class="form-group">
-                  <label for="input_tags" class="col-sm-3 control-label">Tags</label>
-                  <div class="col-sm-9">
-                    <input type="text" class="form-control" id="input_tags" name="input_tags">
-                  </div>
-                </div>
-
-              <div class="form-group">
-                  <label for="input_postedBy" class="col-sm-3 control-label">Posted by</label>
-                  <div class="col-sm-9">
-                    <input type="text" class="form-control" id="input_postedBy" name="input_postedBy">
-                  </div>
-                </div>
-
-              <div class="form-group">
-                  <label for="input_postedBy" class="col-sm-3 control-label">Privacy</label>
-                  <div class="col-sm-9">
-                    <select class="form-control" id="input_postedBy" name="input_postedBy">
-                    <option value="Private">Private</option>
-                    <option value="Local">Local</option>
-                    <option value="Regional">Regional</option>
-                    <option value="National">National</option>
-                    </select>
-                  </div>
-                  </div>
-
-
-                  <button type="button" class="btn btn-default center-block">Submit</button>
-
-            </div>
-            </div>
-</form>
-
-
-    </div>
-  </div>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        <p>One fine body&hellip;</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
 </div>
 	<div id="content">
 
@@ -117,7 +51,7 @@
 			</div>
 
 			<div class="col-md-6">
-			<a href="#addVideo"><div class="add-team-button" id="action_addNewVideo">ADD NEW VIDEO</div></a>
+			<a href="#addVideo"><div class="add-team-button action_addNew" data-type="Video">ADD NEW VIDEO</div></a>
 				<div class="video-thumb-wrap col-md-6">
 					<div class="video-thumb mediaObject">
 						<iframe width="100%" height="156" src="//www.youtube.com/embed/Dg-1dt0t_CE?list=PLw8TLvRgeKJ4U0IbynSzUKojAIeL-EcZ2" frameborder="0" allowfullscreen></iframe>

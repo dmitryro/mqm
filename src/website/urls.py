@@ -40,6 +40,7 @@ urlpatterns = patterns('',
     url(r'^engine-room/$', 'django.shortcuts.render', {'template_name': 'dev/documents.html'}),
     url(r'^external-news/$', 'django.shortcuts.render', {'template_name': 'dev/external-news.html'}),
     url(r'^positive-news/$', 'django.shortcuts.render', {'template_name': 'dev/positive-news.html'}),
+    url(r'^positive-news/$', 'django.shortcuts.render', {'template_name': 'dev/brand.html'}),
 
     url(r'^sign-up/part1$', 'django.shortcuts.render', {'template_name': 'dev/signup/part1.html'}),
     url(r'^sign-up/part2$', 'django.shortcuts.render', {'template_name': 'dev/signup/part2.html'}),

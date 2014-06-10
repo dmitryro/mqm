@@ -12,8 +12,7 @@ $("#action_addNewVideo").click(function(e){
 
 });
 
-$(".action_addNew").click(function(e){
-
+$('body').on("click", ".action_addNew", function(e){
 	//global for dashboard
 	// get type from button -> load remote URL in modal window
 	var type = $(this).attr('data-type');
@@ -24,6 +23,10 @@ $(".action_addNew").click(function(e){
 	}
 	
 	//$(".widget-bar ul").hide(); //you want to hide the dropdown menu here
+});
+
+$('body').on('hidden.bs.modal', '.modal', function () {
+    $(this).removeData('bs.modal'); //very important so that new modals are loaded
 });
 
 /* End of Ismail*/

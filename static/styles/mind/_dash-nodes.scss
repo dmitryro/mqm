@@ -158,7 +158,6 @@ td {
   padding: 3px;
 }
 
-.martin p {margin-bottom: 0px !important;}
 .glyphicon {top:3px;}
 
 h4 {
@@ -180,3 +179,13 @@ h2 {
 height: 40px;
 padding: 10px 10px;
 }
+
+
+.gridster .widget .list-group-item:first-child {border-radius:0px;}
+
+.gridster .widget .list-group-item {border:0px; border-top:1px solid #ddd; ;}
+
+#map-canvas1 {height:257px;}
+
+.list-group-item .showOnHover {opacity:0;}
+.list-group-item:hover .showOnHover {opacity:1}
