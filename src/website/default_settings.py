@@ -155,7 +155,7 @@ INSTALLED_APPS = (
 #    'website.alerts',
     'website.branding',
     'website.local_minds',
-    'website.clinical_research',
+#    'website.clinical_research',
     'website.diary',
     'website.documents',
     'website.faq',

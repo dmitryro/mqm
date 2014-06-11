@@ -47,4 +47,4 @@ class Event(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('document', args=(self.slug,))
+        return reverse('event', args=(self.slug,))

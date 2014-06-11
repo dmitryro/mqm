@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+{% load url from future %}
+
+
+{% block content %}
+
+
+<div class="container">
+    <div class="row">
+
+        <div class="col-lg-12 hidden-xs">
+            <ul class="nav nav-pills">
+              <li class="active"><h2><a href="{% url "news" %}">Reset</a></h2>
+              {% for category in categories %}
+              <li><a href="{{ category.get_absolute_url }}">{{ category }}</a></li>
+              {% endfor %}
+            </ul>
+        </div>
+
+    </div>
+</div>
+
+    {% block pagecontent %}{% endblock %}
+
+
+{% endblock %}

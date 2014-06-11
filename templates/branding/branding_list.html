@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load djangular_tags webdesign %}
+
+
+{% block content %}
+<div id="content">
+
+    {% include "includes/topbar.html" %}
+
+    <div class="container-fluid">
+        <h3>BRANDING ASSETS</h3>
+
+
+        {% for object in object_list %}
+            <h4>{{ object.title }}</h4>
+            <p>{{ object.user }} - {{ object.date }}</p>
+        {% endfor %}
+
+    </div> <!-- CONTENT -->
+
+
+{% endblock %}

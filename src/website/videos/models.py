@@ -70,4 +70,4 @@ class Video(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('video', args=(self.slug,))
+        return reverse('videos', args=(self.slug,))

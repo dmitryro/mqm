@@ -15,6 +15,17 @@ urlpatterns = patterns('',
     url(r'^signup/(?P<uidb36>[^-/]+)-(?P<token>[^/]+)/(?P<step>[^/]+)/$', 'website.accounts.registration.views.signup_wizard', name='signup'),
     url(r'^api/', include('website.api.urls')),
 
+    #ANGELO Generic Views
+    url(r'^stream/$', 'website.videos.views.video_list', name='videos'),
+    url(r'^stream/(?P<pk>\d+)/$', 'website.videos.views.video_detail', name='videos'),
+    url(r'^branding/$', 'website.branding.views.branding_list', name='branding'),
+    url(r'^branding/(?P<pk>\d+)/$', 'website.branding.views.branding_detail', name='branding'),
+    url(r'^diary/$', 'website.diary.views.event_list', name='event'),
+    url(r'^document/$', 'website.documents.views.document_list', name='document'),
+    url(r'^document/\+(?P<category_slug>[^/]+)/$', 'website.documents.views.document_list', name='document'),
+    url(r'^document/(?P<slug>[^/]+)/$', 'website.documents.views.document_detail', name='document'),
+
+
     url(r'^login/$', 'website.accounts.views.login_signup', name='login'),
     url(r'^login/$', 'website.accounts.views.login_signup', name='signup'),
     url(r'^logout/$', 'website.accounts.views.logout', name='logout'),
@@ -49,18 +60,18 @@ urlpatterns = patterns('',
     url(r'^sign-up/part6$', 'django.shortcuts.render', {'template_name': 'dev/signup/part6.html'}),
 
     #modals
-    #url(r'^_addClinicalResearch/$', 'django.shortcuts.render', {'template_name': 'dev/modals/add-clinical-research.html'}),  
+    #url(r'^_addClinicalResearch/$', 'django.shortcuts.render', {'template_name': 'dev/modals/add-clinical-research.html'}),
     #url(r'^_addExternalNews/$', 'django.shortcuts.render', {'template_name': 'dev/modals/add-external-news.html'}),
     url(r'^_addPositiveNews/$', 'django.shortcuts.render', {'template_name': 'dev/modals/add-positive-news.html'}),
     url(r'^_addService/$', 'django.shortcuts.render', {'template_name': 'dev/modals/add-service.html'}),
-    url(r'^_addEvent/$', 'django.shortcuts.render', {'template_name': 'dev/modals/add-event.html'}),   
-    url(r'^_addKeyPartner/$', 'django.shortcuts.render', {'template_name': 'dev/modals/add-key-partner.html'}),    
-    url(r'^_addFunding/$', 'django.shortcuts.render', {'template_name': 'dev/modals/add-funding.html'}),    
-    url(r'^_addTodo/$', 'django.shortcuts.render', {'template_name': 'dev/modals/add-todo.html'}),  
-    url(r'^_addQuestion/$', 'django.shortcuts.render', {'template_name': 'dev/modals/add-question.html'}), 
-    url(r'^_addDocument/$', 'django.shortcuts.render', {'template_name': 'dev/modals/add-document.html'}),    
-    url(r'^_addNews/$', 'django.shortcuts.render', {'template_name': 'dev/modals/add-news.html'}), 
-    url(r'^_addVideo/$', 'django.shortcuts.render', {'template_name': 'dev/modals/add-video.html'}),    
+    url(r'^_addEvent/$', 'django.shortcuts.render', {'template_name': 'dev/modals/add-event.html'}),
+    url(r'^_addKeyPartner/$', 'django.shortcuts.render', {'template_name': 'dev/modals/add-key-partner.html'}),
+    url(r'^_addFunding/$', 'django.shortcuts.render', {'template_name': 'dev/modals/add-funding.html'}),
+    url(r'^_addTodo/$', 'django.shortcuts.render', {'template_name': 'dev/modals/add-todo.html'}),
+    url(r'^_addQuestion/$', 'django.shortcuts.render', {'template_name': 'dev/modals/add-question.html'}),
+    url(r'^_addDocument/$', 'django.shortcuts.render', {'template_name': 'dev/modals/add-document.html'}),
+    url(r'^_addNews/$', 'django.shortcuts.render', {'template_name': 'dev/modals/add-news.html'}),
+    url(r'^_addVideo/$', 'django.shortcuts.render', {'template_name': 'dev/modals/add-video.html'}),
 
 
     #general

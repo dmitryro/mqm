@@ -1,0 +1,73 @@
+{% extends "documents/base.html" %}
+{% load djangular_tags webdesign thumbnail mediastore_tags markup_tags %}
+
+
+{% block pagecontent %}
+<div class="container">
+
+    <div class="row page-header">
+
+        <div class="pull-left">
+            <h1>News
+            </h1>
+        </div>
+        <div class="pull-right">
+            <ul class="nav nav-pills">
+              <li class="active"><a href="{% url "news" %}">Reset</a></li>
+              {% for category in categories %}
+              <li><a href="{{ category.get_absolute_url }}">{{ category }}</a></li>
+              {% endfor %}
+            </ul>
+        </div>
+
+    </div>
+
+    {% for object in object_list %}
+    <div class="row">
+
+        <div class="col-md-2">
+            <p>May 24, 2013</p>
+        </div>
+        <div class="col-md-5">
+            <a href="{{ object.get_absolute_url }}">
+                {% with object.media.all.0.object as object %}
+                <img src="{% thumbnail object.file 600x300 crop,upscale %}" alt="{{ object }}" class="img-responsive" />
+                {% endwith %}
+            </a>
+        </div>
+        <div class="col-md-5">
+            <h3 class="news"><a href="{{ object.get_absolute_url }}">{{ object.title }}</a></h3>
+            <p>{{ object.pub_date|date:"j, F Y" }}</p>
+            {{ object.article|safe }}
+            <a class="btn btn-primary" href="{{ object.get_absolute_url }}">Read More <i class="fa fa-angle-right"></i></a>
+        </div>
+
+    </div>
+
+    <hr>
+    {% endfor %}
+
+
+        {% if is_paginated %}
+        <div class="row">
+
+        <ul class="pager">
+            {% if page_obj.has_previous %}
+            <li class="previous"><a href="?page={{ page_obj.previous_page_number }}">&larr; Older</a></li>
+            {% endif %}
+            {% if page_obj.has_next %}
+            <li class="next"><a href="?page={{ page_obj.next_page_number }}">Newer &rarr;</a></li>
+            {% endif %}
+        </ul>
+      </div>
+      {% endif %}
+
+
+    </div>
+
+</div>
+<!-- /.container -->
+
+
+
+{% endblock %}
