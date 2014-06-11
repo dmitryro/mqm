@@ -27,8 +27,8 @@ class Task(models.Model):
 
     class Meta:
         ordering = ('local_mind', 'sort_value',)
-        verbose_name = _('Task')
-        verbose_name_plural = _('Tasks')
+        verbose_name = _('To Do')
+        verbose_name_plural = _('To Dos')
 
     def __unicode__(self):
         return self.text

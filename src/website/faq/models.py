@@ -24,8 +24,8 @@ class Question(models.Model):
     modified = ModificationDateTimeField()
 
     class Meta:
-        verbose_name = _('Question')
-        verbose_name_plural = _('Questions')
+        verbose_name = _('Callout')
+        verbose_name_plural = _('Callout')
 
     @models.permalink
     def get_absolute_url(self):
@@ -45,8 +45,8 @@ class Answer(models.Model):
     modified = ModificationDateTimeField()
 
     class Meta:
-        verbose_name = _('Answer')
-        verbose_name_plural = _('Answers')
+        verbose_name = _('Callout Answer')
+        verbose_name_plural = _('Callout Answers')
 
     @models.permalink
     def get_absolute_url(self):

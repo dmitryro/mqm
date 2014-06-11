@@ -35,6 +35,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     user_avatar = models.ImageField(upload_to='users/avatars/', null=True, blank=True)
 
     telephone = models.CharField(_('Contact Number'), max_length=50, blank=True)
+    #remove 'mobile'
     mobile = models.CharField(_('Mobile'), max_length=50, blank=True)
     twitter = models.CharField(_('Twitter'), max_length=15, blank=True)
 
