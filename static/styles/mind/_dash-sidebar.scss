@@ -12,6 +12,7 @@
   overflow:scroll;
   height: 100%;
   -webkit-transition: width 0.3s linear;
+  display: none;
 }
 
 #sidebar-panel {
@@ -20,11 +21,11 @@
 }
 
 #sidebar #logo {
-  width: 88px;
+  width: 220px;
   height: 39px;
   margin:0 auto;
   margin-top:12px;
-  background-image:url(../../assets/img/ui/sidebar/logo.svg);
+  background:url(../../assets/img/ui/sidebar/logo.svg) left no-repeat, url(../../assets/img/ui/sidebar/mind-logoW.png) right no-repeat;
 }
 
 #sidebar #people {

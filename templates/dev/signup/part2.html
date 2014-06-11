@@ -8,12 +8,11 @@
 
 {% block content %}
 
-{% include "includes/sidebar.html" %}
 	<div id="content" class="clearfix">
 <div id="mind-signup-form">
         <div class="container">
           <div class="center-block text-center">
-            <div>(Open Hub Logo)</div>
+            <div id="logo-form"></div>
             <h2>SIGN UP TO OPEN HUB</h2>
             <p class="lead">Section 2/5</p>
           </div>
@@ -136,7 +135,7 @@
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
-                  <label for="input_experiences1" class="col-sm-3 control-label" data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">Experiences</label>
+                  <label for="input_experiences1" class="col-sm-3 control-label mypopover" data-container="body" data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">Experiences</label>
                   <div class="col-sm-9">
                     <input type="text" class="form-control" id="input_experiences1" name="input_experiences1" placeholder="limited to 250 characters" maxlength="250">
                   </div>
@@ -209,10 +208,16 @@
             </form>
           </div>
         </div>
-
-
-
-
-
 	</div> <!-- CONTENT -->
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  {% block extra_js %}
+{{ block.super }}
+  <script type="text/javascript">
+  $(".mypopover").popover({
+    trigger:"hover"
+  });
+  </script>
+{% endblock %}
+
 {% endblock %}

@@ -19,10 +19,8 @@ $(document).ready(function() {
  //      	}
  //    });
 
-		
-
-
 	
+
 	var widget = '<li class="widget"><div class="widget-bar"></div></li>'
  	
 	
@@ -40,13 +38,14 @@ $(document).ready(function() {
 		[widget, 1, 1]
 	];
 
-/*
-	{"col":1,"row":1,"size_x":1,"size_y":1, "name":"collectiveimpact"},
-	{"col":2,"row":1,"size_x":1,"size_y":1, "name":"areasofgrowth"},
-*/
 
 	var serialization = [
-	{"col":1,"row":1,"size_x":1,"size_y":1, "name":"callout"}
+	{"col":1,"row":1,"size_x":1,"size_y":1, "name":"meettheteam"},
+	{"col":2,"row":1,"size_x":1,"size_y":1, "name":"collectiveimpact"},
+	{"col":3,"row":1,"size_x":1,"size_y":1, "name":"diagnostic"},
+	{"col":4,"row":1,"size_x":1,"size_y":1, "name":"areasofgrowth"},
+	{"col":1,"row":2,"size_x":1,"size_y":1, "name":"services"},
+	{"col":2,"row":2,"size_x":1,"size_y":1, "name":"openHubUpdates"}
 	];
 	
 
@@ -133,10 +132,6 @@ $(document).ready(function() {
 
 	// SIDEBAR TOGGLE
 
-	window.setTimeout(function(){
-		$("#sidebar").show()	
-	}, 500);
-
 	var menuToggle;
 
 	if($('.sidebar-colapse').length) {
@@ -207,17 +202,6 @@ $(document).ready(function() {
 		$(me).removeClass('goRed').css({'background-image':'url(/static//assets/img/ui/icons/'+iconName+'.svg)', 'background-position':'center'}).removeClass('goRed')
 	}
 
-	// DROP DOWNS 
-
-	$('.drop').bind('click',function() {
-		if ($(this).hasClass('dropped')) {
-			$(this).parent().find('ul').css('display','none');
-			$(this).removeClass('dropped');
-		}else{
-			$(this).parent().find('ul').css('display','block');
-			$(this).addClass('dropped');
-		}
-	});
 
 	//COLAPSE SIDEBAR DESCRIPTION
 
@@ -229,7 +213,23 @@ $(document).ready(function() {
 		$(this).fadeOut(300);
 	});
 
-	
+	//POP UP
+
+	$('#write').click(function() {
+		$('.overlay').fadeIn(400);
+	});
+
+	$('.overlay-close').bind('click', function() {
+		overlayClose();
+	});
+
+	$('.pop-up-close').bind('click', function() {
+		overlayClose();
+	});
+
+	function overlayClose() {
+		$('.overlay').fadeOut(400);
+	}
 
 	//AUTO COMPLETE
 
@@ -263,17 +263,7 @@ $(document).ready(function() {
 
     //HEIGHTS 
     
-    if($('#video-content').length) {
-    	if($('#video-content').height() < $('#sidebar').height()) {
-    		$('#content').css('min-height',$('#sidebar').height() + 70)
-    	}
-    }
-
-    if($('#content').length) {
-    	if($('#content').height() < $('#sidebar').height()) {
-    		$('#content').css('min-height',$('#sidebar').height() + 70)
-    	}
-    }
+    
 
     // add widgets
 

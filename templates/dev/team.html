@@ -1,32 +1,28 @@
 {% extends "base.html" %}
 {% load djangular_tags webdesign %}
 
-{% block extra_css %}
-{{ block.super }}
-<link rel="stylesheet" href="{{ STATIC_URL }}dist/styles/gridster.css" />
-{% endblock %}
-
 {% block content %}
 
-{% include "includes/sidebar.html" %}
-	<div id="content" class="clearfix">
+<div id="content" class="clearfix">
 
-		{% include "includes/topbar.html" %}
+	{% include "includes/topbar.html" %}
 
-		<div class="container-fluid">
+	<div class="container-fluid">
 
 		<h3 class="withIcon icon_people"><span></span>MEET THE TEAM - Jane Smith</h3>
-			<a href="/" class="page-close"></a>
+		<a href="/" class="page-close"></a>
 
 		
 
 		<div id="team-content">
 			<div class="col-md-3 team-side">
 				<div class="large-avatar"><img src="{{ STATIC_URL }}/assets/placeholder.gif" class="img-circle" alt="profile" width="186" height="186"></div>
-				<div class="lmas"><a href="lm.html">LM: Plymouth</a></div>
-				<div class="lmas">LM: Plymouth Team</div>
+				<div class="lmas"><a href="/local-mind/{ name }">LM: Plymouth</a></div>
+				<div class="lmas"><a href="/meet-the-team">LM: Plymouth Team</a></div>
+				{% comment %}
 				<div class="add-team-button">ADD NEW TEAM MEMBER</div>
 				<div class="add-team-button">EDIT YOUR PROFILE</div>
+				{% endcomment %}
 			</div>
 			<div class="col-md-9">
 				<div class="col-md-4 bio-col">
@@ -47,22 +43,22 @@
 				</div>
 				<div class="bio-divider"></div>
 				<div class="col-md-9 bio"><h5><stong>SKILLS</stong></h5><p class="skill">Lorem ipsum,  dolor sit amet, consectetur adipiscing elit. Suspendisse dictum convallis ante, quis rutrum risus porttitor in. Curabitur sodales, nibh vitae mattis convallis, metus est consectetur mauris, et ultrices massa odio in sem. Morbi a sollicitudin sem. Maecenas malesuada, diam quis sagittis ullamcorper, quam massa hendrerit odio, vel aliquam dolor sapien non odio. Sed pellentesque tincidunt ante, vel mattis metus ultrices sed. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
-				<h5><stong>EXPERIENCE</stong></h5><p class="skills">Lorem ipsum,  dolor sit amet, consectetur adipiscing elit. Suspendisse dictum convallis ante, quis rutrum risus porttitor in. Curabitur sodales, nibh vitae mattis convallis, metus est consectetur mauris, et ultrices massa odio in sem. Morbi a sollicitudin sem. Maecenas malesuada, diam quis sagittis ullamcorper, quam massa hendrerit odio, vel aliquam dolor sapien non odio. Sed pellentesque tincidunt ante, vel mattis metus ultrices sed. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
-				
-				<h5><stong>LATEST ACTIVITY</stong></h5>
-				<ul style="padding:0px">
-					<li style="display:block; padding-bottom:5px;"> <span>New Video Added - on 01/09/14 - <a href="video.html">Mind Cymru Open Day</a></span></li>
-					<li style="display:block; padding-bottom:5px;"><span>New Document Uploaded - on 01/09/14 - <a href="#">10 Top Tips for Tendering</a></span></li>
-					<li style="display:block; padding-bottom:5px;"><span>Quailty Mark Updated - on 28/08/14 - <a href="#">Quality Mark</a></span></li>
-				</ul>
-				
+					<h5><stong>EXPERIENCE</stong></h5><p class="skills">Lorem ipsum,  dolor sit amet, consectetur adipiscing elit. Suspendisse dictum convallis ante, quis rutrum risus porttitor in. Curabitur sodales, nibh vitae mattis convallis, metus est consectetur mauris, et ultrices massa odio in sem. Morbi a sollicitudin sem. Maecenas malesuada, diam quis sagittis ullamcorper, quam massa hendrerit odio, vel aliquam dolor sapien non odio. Sed pellentesque tincidunt ante, vel mattis metus ultrices sed. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
+					
+					<h5><stong>LATEST ACTIVITY</stong></h5>
+					<ul style="padding:0px">
+						<li style="display:block; padding-bottom:5px;"> <span>New Video Added - on 01/09/14 - <a href="video.html">Mind Cymru Open Day</a></span></li>
+						<li style="display:block; padding-bottom:5px;"><span>New Document Uploaded - on 01/09/14 - <a href="#">10 Top Tips for Tendering</a></span></li>
+						<li style="display:block; padding-bottom:5px;"><span>Quailty Mark Updated - on 28/08/14 - <a href="#">Quality Mark</a></span></li>
+					</ul>
+					
 				</div>
 			</div>
 
 			<div style="clear:both"></div>
 
 		</div>
-		</div>
-	</div> <!-- CONTENT -->
+	</div>
+</div> <!-- CONTENT -->
 
 {% endblock %}

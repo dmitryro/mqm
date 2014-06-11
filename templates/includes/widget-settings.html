@@ -4,5 +4,7 @@
     <li>Visible to my LMA</li>
     <li>Visible to Regional LMA's</li>
     <li>Visible to National LMA's</li>
+    {% if delatable != "false" %}
     <li class="delete-node">Delete Node</li>
+    {% endif %}
 </ul>
