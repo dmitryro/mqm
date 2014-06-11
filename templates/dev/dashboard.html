@@ -6,6 +6,12 @@
 <link rel="stylesheet" href="{{ STATIC_URL }}dist/styles/gridster.css" />
 {% endblock %}
 
+{% block extra_js %}
+{{ block.super }}
+<script src="{{ STATIC_URL }}js/dev/gridster.js"></script>
+<script src="{{ STATIC_URL }}js/dev/app.js"></script>
+{% endblock %}
+
 {% block content %}
 
 {% include "includes/sidebar.html" %}
@@ -45,30 +51,13 @@
 
 	</div>
 
-	<div class="overlay">
-		<div class="overlay-close"></div>
-		<div class="pop-up-box">
-			<div class="pop-up-close"></div>
-			<div class="pop-up-content">
-				<div class="pop-up-title"><h3>UPDATE DATA</h3></div>
-				<div class="pop-up-menu">
-					<div class="pop-up-menu-item1"><p class="popup">Positive news</p></div>
-					<div class="pop-up-menu-item2"><p class="popup">Event Diary</p></div>
-					<div class="pop-up-menu-item3"><p class="popup">Tasks</p></div>
-					<div class="pop-up-menu-item4"><p class="popup">Local Map</p></div>
-					<div class="pop-up-menu-item5"><p class="popup">Areas of Growth</p></div>
-					<a href="form.html"><div class="pop-up-menu-item6"><p class="popup">Video</p></div></a>
-				</div>
-			</div>
-		</div>
-	</div>
+	{% include "includes/overlay.html" %}
 
 	<div class="meettheteam">
 
 		<li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
 			<div class="widget-bar">
 				<div class="widget-title">MEET THE TEAM</div>
-				{% include "includes/widget-settings.html" %}
 			</div>
 		</li>
 
@@ -77,7 +66,7 @@
 	<div class="callout hidden">
 		<li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
 					<div class="widget-bar">
-						<div class="widget-title">CALL OUT</div>
+						<div class="widget-title"><a href="/call-out">CALL OUT</a></div>
 						{% include "includes/widget-settings.html" with type="Question" delatable="false" %}
 					</div>
 					<ul class='list-group'>
@@ -159,6 +148,16 @@
 				</li>
 	</div>
 
+	<div class="nationalMindNews hidden">
+		<li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
+			<div class="widget-bar">
+				<div class="widget-title">NATIONAL MIND NEWS</div>
+			</div>
+			<div class='list-group'>
+			</div>
+		</li>
+	</div>
+
 	<div class="branding hidden">
 	<li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
 					<div class="widget-bar">
@@ -222,118 +221,117 @@
 
 	<div class="hidden theEngineRoom">
 		<li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
-					<div class="widget-bar">
-						<div class="widget-title">THE ENGINE ROOM</div>
-						{% include "includes/widget-settings.html" with type="Document" %}
-					</div>
-					<div class='list-group'>
-					</div>
-				</li>
+			<div class="widget-bar">
+				<div class="widget-title">THE ENGINE ROOM</div>
+				{% include "includes/widget-settings.html" with type="Document" %}
+			</div>
+			<div class='list-group'>
+			</div>
+		</li>
 	</div>
 
 	<div class="theLabNews hidden">
 		<li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
 					<div class="widget-bar">
 						<div class="widget-title">THE LAB NEWS</div>
-						{% include "includes/widget-settings.html" with type="ClinicalResearch" %}
 					</div>
 					<ul class="list-group" id="feedResults">
 					</ul>
 				</li>
 	</div>
 
-    <div class="eventsdiary hidden">
+	<div class="eventsdiary hidden">
 		<li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
 			<div class="widget-bar">
 				<div class="widget-title">EVENTS DIARY</div>
 				{% include "includes/widget-settings.html" with type="Event" %}
 			</div>
 			<div id="events">
-<table class="table table-bordered">
-<tbody><tr>
-<td>
-<b>M</b>
-</td>
-<td>
-<b>T</b>
-</td>
-<td>
-<b>W</b>
-</td>
-<td>
-<b>T</b>
-</td>
-<td>
-<b>F</b>
-</td>
-<td>
-<b>S</b>
-</td>
-<td>
-<b>S</b>
-</td>
-</tr>
-<tr>
-<td class="past">1</td>
-<td class="past">2</td>
-<td class="past">3</td>
-<td class="past">4</td>
-<td class="past">5</td>
-<td class="past">6</td>
-<td class="past">7</td>
-</tr>
-<tr>
-<td class="past">9</td>
-<td class="past">8</td>
-<td class="past">10</td>
-<td class="past">11</td>
-<td class="today">
-<b>12</b>
-</td>
-<td>13</td>
-<td class="event-day">
-<a href="#">14</a>
-</td>
-</tr>
-<tr>
-<td class="event-day">
-<a href="#">15</a>
-</td>
-<td>16</td>
-<td>17</td>
-<td>18</td>
-<td>19</td>
-<td>20</td>
-<td>21</td>
-</tr>
-<tr>
-<td>22</td>
-<td class="event-day">
-<a href="#">23</a>
-</td>
-<td>24</td>
-<td>25</td>
-<td class="event-day">
-<a href="#">26</a>
-</td>
-<td>27</td>
-<td class="event-day">
-<a href="#">28</a>
-</td>
-</tr>
-<tr>
-<td>29</td>
-<td>30</td>
-<td class="event-day">
-<a href="#">31</a>
-</td>
-<td class="past"></td>
-<td class="past"></td>
-<td class="past"></td>
-<td class="past"></td>
-</tr>
-</tbody></table>
-</div>
+				<table class="table table-bordered">
+					<tbody><tr>
+						<td>
+							<b>M</b>
+						</td>
+						<td>
+							<b>T</b>
+						</td>
+						<td>
+							<b>W</b>
+						</td>
+						<td>
+							<b>T</b>
+						</td>
+						<td>
+							<b>F</b>
+						</td>
+						<td>
+							<b>S</b>
+						</td>
+						<td>
+							<b>S</b>
+						</td>
+					</tr>
+					<tr>
+						<td class="past">1</td>
+						<td class="past">2</td>
+						<td class="past">3</td>
+						<td class="past">4</td>
+						<td class="past">5</td>
+						<td class="past">6</td>
+						<td class="past">7</td>
+					</tr>
+					<tr>
+						<td class="past">9</td>
+						<td class="past">8</td>
+						<td class="past">10</td>
+						<td class="past">11</td>
+						<td class="today">
+							<b>12</b>
+						</td>
+						<td>13</td>
+						<td class="event-day">
+							<a href="#">14</a>
+						</td>
+					</tr>
+					<tr>
+						<td class="event-day">
+							<a href="#">15</a>
+						</td>
+						<td>16</td>
+						<td>17</td>
+						<td>18</td>
+						<td>19</td>
+						<td>20</td>
+						<td>21</td>
+					</tr>
+					<tr>
+						<td>22</td>
+						<td class="event-day">
+							<a href="#">23</a>
+						</td>
+						<td>24</td>
+						<td>25</td>
+						<td class="event-day">
+							<a href="#">26</a>
+						</td>
+						<td>27</td>
+						<td class="event-day">
+							<a href="#">28</a>
+						</td>
+					</tr>
+					<tr>
+						<td>29</td>
+						<td>30</td>
+						<td class="event-day">
+							<a href="#">31</a>
+						</td>
+						<td class="past"></td>
+						<td class="past"></td>
+						<td class="past"></td>
+						<td class="past"></td>
+					</tr>
+				</tbody></table>
+			</div>
 		</li>
 	</div>
 

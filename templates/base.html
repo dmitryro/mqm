@@ -52,29 +52,7 @@
 <script src="{{ STATIC_URL }}js/addanother.js"></script>
 <script src="{{ STATIC_URL }}js/dev/bootstrap.min.js"></script>
 <script src="{{ STATIC_URL }}js/main.js"></script>
-
-
 <script src="{{ STATIC_URL }}js/dev/jquery-ui-1.10.4.custom.min.js"></script>
-<script src="{{ STATIC_URL }}js/dev/gridster.js"></script>
-<script src="{{ STATIC_URL }}js/dev/app.js"></script>
-<script type="text/javascript" src="http://underscorejs.org/underscore-min.js"></script>
-<script type="text/javascript" src="{{ STATIC_URL }}/js/calendar.js"></script>
-<script type="text/javascript">
-$(document).ready(function(){
-var calendar = $('#calendar').calendar({
-    events_source: [
-        {
-            "id": 293,
-            "title": "Event 1",
-            "url": "http://example.com",
-            "class": "event-important",
-            "start": 12039485678000, // Milliseconds
-            "end": 1234576967000 // Milliseconds
-        }
-    ]});      
-});
-</script>
-
 {% endblock %}
 
 {% if debug %}

@@ -1,122 +1,117 @@
 {% extends "base.html" %}
 {% load djangular_tags webdesign %}
 
-{% block extra_css %}
-{{ block.super }}
-<link rel="stylesheet" href="{{ STATIC_URL }}dist/styles/gridster.css" />
-{% endblock %}
-
 {% block content %}
 
 <div class="modal fade" id="sharedModal" tabindex="-1" role="dialog" aria-labelledby="sharedModal" aria-hidden="true">
-<div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title">Modal title</h4>
-      </div>
-      <div class="modal-body">
-        <p>One fine body&hellip;</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">Modal title</h4>
+			</div>
+			<div class="modal-body">
+				<p>One fine body&hellip;</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary">Save changes</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
 </div>
-	<div id="content" class="clearfix">
+<div id="content" class="clearfix">
 
-		{% include "includes/topbar.html" %}
+	{% include "includes/topbar.html" %}
 
-		<div class="container-fluid">
+	<div class="container-fluid">
 
 		<h3 class="withIcon icon_document"><span></span>BRANDING</h3>
-			<a href="/" class="page-close"></a>
+		<a href="/" class="page-close"></a>
 
 
 		
-			
-			<div class="row">
+		
+		<div class="row">
 			<div class="col-md-12">
-<br>
-<form class="form-inline" role="form">
-  <div class="form-group">
-    <label for="filterByArea">Filter by area</label>
-    <select  class="form-control" id="filterByArea">
-    	<option value="National">National</option>
-    </select>
-  </div>
-  <div class="form-group">
-    <label for="filterByType">Filter by type</label>
-    <select class="form-control" id="filterByType">
-    	<option value="Research">Research</option>
-    </select>
-  </div>
-</form>
+				<br>
+				<form class="form-inline" role="form">
+					<div class="form-group">
+						<label for="filterByArea">Filter by area</label>
+						<select  class="form-control" id="filterByArea">
+							<option value="National">National</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="filterByType">Filter by type</label>
+						<select class="form-control" id="filterByType">
+							<option value="Research">Research</option>
+						</select>
+					</div>
+				</form>
 
-<br>
-<table class="table table-striped">
-	<thead>
-		<th>Title</th>
-		<th>Added by</th>
-		<th>Date added</th>
-		<th>File type</th>
-		<th>size</th>
-		<th>Av.Rating</th>
-		<th>Your Rating</th>
-	</thead>
-	<tbody>
-		<tr>
-			<td>Do you pay your manager to be on call?</td>
-			<td>Natioanl Mind</td>
-			<td>23/09/2014</td>
-			<td>DOCX</td>
-			<td>0.5Mb</td>
-			<td>5/5</td>
-			<td>*****</td>
-		</tr>
-		<tr>
-			<td>Do you pay your manager to be on call?</td>
-			<td>Natioanl Mind</td>
-			<td>23/09/2014</td>
-			<td>DOCX</td>
-			<td>0.5Mb</td>
-			<td>5/5</td>
-			<td>*****</td>
-		</tr>
-		<tr>
-			<td>Do you pay your manager to be on call?</td>
-			<td>Natioanl Mind</td>
-			<td>23/09/2014</td>
-			<td>DOCX</td>
-			<td>0.5Mb</td>
-			<td>5/5</td>
-			<td>*****</td>
-		</tr>
-		<tr>
-			<td>Do you pay your manager to be on call?</td>
-			<td>Natioanl Mind</td>
-			<td>23/09/2014</td>
-			<td>DOCX</td>
-			<td>0.5Mb</td>
-			<td>5/5</td>
-			<td>*****</td>
-		</tr>
-	</tbody>
-</table>
+				<br>
+				<table class="table table-striped">
+					<thead>
+						<th>Title</th>
+						<th>Added by</th>
+						<th>Date added</th>
+						<th>File type</th>
+						<th>size</th>
+						<th>Av.Rating</th>
+						<th>Your Rating</th>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Do you pay your manager to be on call?</td>
+							<td>Natioanl Mind</td>
+							<td>23/09/2014</td>
+							<td>DOCX</td>
+							<td>0.5Mb</td>
+							<td>5/5</td>
+							<td>*****</td>
+						</tr>
+						<tr>
+							<td>Do you pay your manager to be on call?</td>
+							<td>Natioanl Mind</td>
+							<td>23/09/2014</td>
+							<td>DOCX</td>
+							<td>0.5Mb</td>
+							<td>5/5</td>
+							<td>*****</td>
+						</tr>
+						<tr>
+							<td>Do you pay your manager to be on call?</td>
+							<td>Natioanl Mind</td>
+							<td>23/09/2014</td>
+							<td>DOCX</td>
+							<td>0.5Mb</td>
+							<td>5/5</td>
+							<td>*****</td>
+						</tr>
+						<tr>
+							<td>Do you pay your manager to be on call?</td>
+							<td>Natioanl Mind</td>
+							<td>23/09/2014</td>
+							<td>DOCX</td>
+							<td>0.5Mb</td>
+							<td>5/5</td>
+							<td>*****</td>
+						</tr>
+					</tbody>
+				</table>
 
 
 
-</div>
-
-			
-  		
-  
 			</div>
 
+			
+			
+			
 		</div>
 
-	</div> <!-- CONTENT -->
+	</div>
+
+</div> <!-- CONTENT -->
 
 {% endblock %}

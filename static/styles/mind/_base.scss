@@ -3,7 +3,7 @@
 
 body {
   font-family: $base-font;
-  background-color: $black;
+  background-color: #d8dbdd;
   //background: url(#{$mind-logo}) repeat-x fixed 0 0;
 }
 
@@ -74,22 +74,22 @@ h1,h2,h3,h4,h5,h6 {
 .withIcon {color:#4d4d4f; margin: 30px 20px 30px 0px; font-size:20px; font-weight:bold;}
 .withIcon span {position:relative;display:inline-block;float: left;margin-right:20px;}
 
-.withIcon.icon_video span {width:66px; height:43px; background:url('/static/assets/img/ui/icons/icon_video.svg');}
+.withIcon.icon_video span, #icon_video {width:66px; height:43px; background:url('/static/assets/img/ui/icons/icon_video.svg');}
 .withIcon.icon_video span { line-height:43px;}
 
-.withIcon.icon_document span {width:48px; height:48px; background:url('/static/assets/img/ui/icons/icon_document.svg');}
+.withIcon.icon_document span,  #icon_document {width:48px; height:48px; background:url('/static/assets/img/ui/icons/icon_document.svg');}
 .withIcon.icon_document { line-height:48px;}
 
-.withIcon.icon_newspaper span {width:62px; height:48px; background:url('/static/assets/img/ui/icons/icon_newspaper.svg');}
+.withIcon.icon_newspaper span, #icon_newspaper {width:62px; height:48px; background:url('/static/assets/img/ui/icons/icon_newspaper.svg');}
 .withIcon.icon_newspaper { line-height:48px;}
 
-.withIcon.icon_map span {width:34px; height:52px; background:url('/static/assets/img/ui/icons/icon_map.svg');}
+.withIcon.icon_map span, #icon_map {width:34px; height:52px; background:url('/static/assets/img/ui/icons/icon_map.svg');}
 .withIcon.icon_map { line-height:52px;}
 
-.withIcon.icon_calendar span {width:51px; height:51px; background:url('/static/assets/img/ui/icons/icon_calendar.svg');}
+.withIcon.icon_calendar span, #icon_calendar {width:51px; height:51px; background:url('/static/assets/img/ui/icons/icon_calendar.svg');}
 .withIcon.icon_calendar { line-height:51px;}
 
-.withIcon.icon_people span {width:92px; height:38px; background:url('/static/assets/img/ui/icons/icon_people.svg');}
+.withIcon.icon_people span, #icon_people {width:92px; height:38px; background:url('/static/assets/img/ui/icons/icon_people.svg');}
 .withIcon.icon_people { line-height:38px;}
 
 .openHubLogo {width:181px; height:79px; background:url(/static/assets/img/brand/openhub-logo.svg);}

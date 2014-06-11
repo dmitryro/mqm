@@ -1,63 +1,58 @@
 {% extends "base.html" %}
 {% load djangular_tags webdesign %}
 
-{% block extra_css %}
-{{ block.super }}
-<link rel="stylesheet" href="{{ STATIC_URL }}dist/styles/gridster.css" />
-{% endblock %}
-
 {% block content %}
 
-	<div id="content" class="clearfix">
+<div id="content" class="clearfix">
 
-		{% include "includes/topbar.html" %}
+	{% include "includes/topbar.html" %}
 
-		<div class="container-fluid">
+	<div class="container-fluid">
 
 		<h3 class="withIcon icon_people"><span></span>MEET THE TEAM</h3>
-			<a href="/" class="page-close"></a>
-
+		<a href="/" class="page-close"></a>
+		{% comment %}
 		<a href="/invitee/" class="btn btn-default">ADD NEW TEAM MEMBER</a>
+		{% endcomment %}
 		<br><br>
-		</div>
+	</div>
 
+	<div id="team-content">
 
-		<div id="team-content">
-			
-			<div class="row">
+		<div class="row">
 			<div class="col-md-3">
 				<div class="large-avatar"><img src="../Assets/images/pageheads/profile.png" alt="profile" width="186" height="186"></div>
 				<div class="lmas"><a href="lm.html">LM: Plymouth</a></div>
 				<div class="lmas">LM: Plymouth Team</div>	
 			</div>
-  			<div class="col-md-8">
-  			<div class="row">
-  			<div class="col-md-3">
-  				<div class="large-avatar"><img src="../Assets/images/pageheads/profile.png" alt="profile" width="186" height="186"></div>
-  				<p>Name: Jayne Smith</p><p>Job title: Operations Manager</p>
-  			</div>
+			<div class="col-md-8">
+				<div class="row">
+					<div class="col-md-3">
+						<div class="large-avatar"><img src="../Assets/images/pageheads/profile.png" alt="profile" width="186" height="186"></div>
+						<p>Name: Jayne Smith</p><p>Job title: Operations Manager</p>
+					</div>
 
-  			<div class="col-md-3">
-  				<div class="large-avatar"><img src="../Assets/images/pageheads/profile.png" alt="profile" width="186" height="186"></div>
-  				<p>Name: Jayne Smith</p><p>Job title: Operations Manager</p>
-  			</div>
+					<div class="col-md-3">
+						<div class="large-avatar"><img src="../Assets/images/pageheads/profile.png" alt="profile" width="186" height="186"></div>
+						<p>Name: Jayne Smith</p><p>Job title: Operations Manager</p>
+					</div>
 
-  			<div class="col-md-3">
-  				<div class="large-avatar"><img src="../Assets/images/pageheads/profile.png" alt="profile" width="186" height="186"></div>
-  				<p>Name: Jayne Smith</p><p>Job title: Operations Manager</p>
-  			</div>
+					<div class="col-md-3">
+						<div class="large-avatar"><img src="../Assets/images/pageheads/profile.png" alt="profile" width="186" height="186"></div>
+						<p>Name: Jayne Smith</p><p>Job title: Operations Manager</p>
+					</div>
 
-  			<div class="col-md-3">
-  				<div class="large-avatar"><img src="../Assets/images/pageheads/profile.png" alt="profile" width="186" height="186"></div>
-  				<p>Name: Jayne Smith</p><p>Job title: Operations Manager</p>
-  			</div>
-  			</div>
-  			</div>
-  
+					<div class="col-md-3">
+						<div class="large-avatar"><img src="../Assets/images/pageheads/profile.png" alt="profile" width="186" height="186"></div>
+						<p>Name: Jayne Smith</p><p>Job title: Operations Manager</p>
+					</div>
+				</div>
 			</div>
-			</div>
+
 		</div>
+	</div>
+</div>
 
-	</div> <!-- CONTENT -->
+</div> <!-- CONTENT -->
 
 {% endblock %}

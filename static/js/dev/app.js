@@ -19,8 +19,10 @@ $(document).ready(function() {
  //      	}
  //    });
 
-	
+		
 
+
+	
 	var widget = '<li class="widget"><div class="widget-bar"></div></li>'
  	
 	
@@ -38,11 +40,13 @@ $(document).ready(function() {
 		[widget, 1, 1]
 	];
 
-
-	var serialization = [
+/*
 	{"col":1,"row":1,"size_x":1,"size_y":1, "name":"collectiveimpact"},
 	{"col":2,"row":1,"size_x":1,"size_y":1, "name":"areasofgrowth"},
-	{"col":3,"row":1,"size_x":1,"size_y":1, "name":"callout"}
+*/
+
+	var serialization = [
+	{"col":1,"row":1,"size_x":1,"size_y":1, "name":"callout"}
 	];
 	
 
@@ -128,6 +132,10 @@ $(document).ready(function() {
      // });
 
 	// SIDEBAR TOGGLE
+
+	window.setTimeout(function(){
+		$("#sidebar").show()	
+	}, 500);
 
 	var menuToggle;
 
@@ -221,23 +229,7 @@ $(document).ready(function() {
 		$(this).fadeOut(300);
 	});
 
-	//POP UP
-
-	$('#write').click(function() {
-		$('.overlay').fadeIn(400);
-	});
-
-	$('.overlay-close').bind('click', function() {
-		overlayClose();
-	});
-
-	$('.pop-up-close').bind('click', function() {
-		overlayClose();
-	});
-
-	function overlayClose() {
-		$('.overlay').fadeOut(400);
-	}
+	
 
 	//AUTO COMPLETE
 

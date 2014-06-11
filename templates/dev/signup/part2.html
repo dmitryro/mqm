@@ -12,7 +12,7 @@
 <div id="mind-signup-form">
         <div class="container">
           <div class="center-block text-center">
-            <div>(Open Hub Logo)</div>
+            <div id="logo-form"></div>
             <h2>SIGN UP TO OPEN HUB</h2>
             <p class="lead">Section 2/5</p>
           </div>
@@ -211,9 +211,13 @@
 	</div> <!-- CONTENT -->
 
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  {% block extra_js %}
+{{ block.super }}
   <script type="text/javascript">
   $(".mypopover").popover({
     trigger:"hover"
   });
   </script>
+{% endblock %}
+
 {% endblock %}

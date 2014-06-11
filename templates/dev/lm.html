@@ -1,21 +1,16 @@
 {% extends "base.html" %}
 {% load djangular_tags webdesign %}
 
-{% block extra_css %}
-{{ block.super }}
-<link rel="stylesheet" href="{{ STATIC_URL }}dist/styles/gridster.css" />
-{% endblock %}
-
 {% block content %}
 
-	<div id="content" class="clearfix">
+<div id="content" class="clearfix">
 
-		{% include "includes/topbar.html" %}
+	{% include "includes/topbar.html" %}
 
-		<div class="container-fluid">
+	<div class="container-fluid">
 
 		<h3 class="withIcon icon_people"><span></span>PLYMOUTH Local Mind</h3>
-			<a href="/" class="page-close"></a>
+		<a href="/" class="page-close"></a>
 
 
 		<div id="team-content">
@@ -23,8 +18,10 @@
 				<div class="large-avatar"><img src="../Assets/images/pageheads/lm.png" alt="profile" width="186" height="186"></div>
 				<div class="lmas">LM: Plymouth</div>
 				<div class="lmas">LM: Plymouth Team</div>
+				{% comment %}
 				<a href="/invitee/"><div class="add-team-button">ADD NEW TEAM MEMBER</div></a>
 				<div class="add-team-button">EDIT LM's DETAILS</div>
+				{% endcomment %}
 			</div>
 			<div class="col-md-9">
 				<div class="col-md-4 bio-col">
@@ -44,11 +41,13 @@
 					<p>Lorem ipsum,  dolor sit amet, consectetur adipiscing elit. Suspendisse dictum convallis ante, quis rutrum risus porttitor in. Curabitur sodales, nibh vitae mattis convallis, metus est consectetur mauris, et ultrices massa odio in sem. Morbi a sollicitudin sem. Maecenas malesuada, diam quis sagittis ullamcorper.</p>
 				</div>
 				<div class="bio-divider"></div>
-				<div class="col-md-9 bio"><h5>SERVICES</h5><p class="skill">Ecotherapy Services<br/>Couple Counciling<br/>Phone Based Support<br/>Psychological Therapies<br/>Cognitive Therapies<br/>Peer Support Services</p>
-				
-				<h5>BACKEND RESOURCES</h5><p class="skills">Colour Printer<br/>Free office Space<br/>Transit Van</p>
-				
-				<h5>KEY PARTNERS</h5><p class="skills">
+				<div class="col-md-9 bio">
+					{% comment %}
+				<h5>SERVICES</h5><p class="skill">Ecotherapy Services<br/>Couple Counciling<br/>Phone Based Support<br/>Psychological Therapies<br/>Cognitive Therapies<br/>Peer Support Services</p>
+				{% endcomment %}	
+					<h5>BACKEND RESOURCES</h5><p class="skills">Colour Printer<br/>Free office Space<br/>Transit Van</p>
+					
+					<h5>KEY PARTNERS</h5><p class="skills">
 					<span style="color:#666; ">Name</span><span style="padding-left:130px; color:#666; ">Website</span><span style="padding-left:130px; color:#666;">Service</span><br/>
 					<strong>YMCA</strong> <span style="padding-left:120px;"><a hrf="http://www.ymca.org.uk/" target="_blank">ymca.org.uk</a></span> <span style="padding-left:99px;">Opportunity</span><br/>
 					<strong>NHS PLYMOUTH</strong> <span style="padding-left:44px;"><a hrf="http://www.plymouthhospitals.nhs.uk/Pages/Home.aspx" target="_blank">plymouthhospitals.nhs.uk</a></span> <span style="padding-left:17px;">Opportunity</span><br/>
@@ -58,7 +57,7 @@
 				</p> </div>
 			</div>
 		</div>
-		</div>
-	</div> <!-- CONTENT -->
+	</div>
+</div> <!-- CONTENT -->
 
 {% endblock %}

@@ -1,15 +1,10 @@
 {% extends "base.html" %}
 {% load djangular_tags webdesign %}
 
-{% block extra_css %}
-{{ block.super }}
-<link rel="stylesheet" href="{{ STATIC_URL }}dist/styles/gridster.css" />
-{% endblock %}
-
 {% block content %}
 
 <div class="modal fade" id="sharedModal" tabindex="-1" role="dialog" aria-labelledby="sharedModal" aria-hidden="true">
-<div class="modal-dialog">
+  <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -25,30 +20,30 @@
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div>
-	<div id="content" class="clearfix">
-		{% include "includes/topbar.html" %}
-		<div class="container-fluid">
+<div id="content" class="clearfix">
+  {% include "includes/topbar.html" %}
+  <div class="container-fluid">
 
-		<h3 class="withIcon icon_map"><span></span>FUNDING MAP</h3>
-			<a href="/" class="page-close"></a>
+    <h3 class="withIcon icon_map"><span></span>FUNDING MAP</h3>
+    <a href="/" class="page-close"></a>
 
-		<button class="btn btn-default action_addNew" data-type="Funding">ADD A FUND</button>
+    <button class="btn btn-default action_addNew" data-type="Funding">ADD A FUND</button>
 
 
-		<div id="team-content">
-			
-			<div class="row">
-  			<div class="col-md-12">
-  				<div class="mediaObject" id="mediaObject">
-            <div id="map-canvas"></div>
-          </div>
-  			</div>
-  
-			</div>
+    <div id="team-content">
+     
+     <div class="row">
+       <div class="col-md-12">
+        <div class="mediaObject" id="mediaObject">
+          <div id="map-canvas"></div>
+        </div>
+      </div>
+      
+    </div>
 
-		</div>
-		</div>
-	</div> <!-- CONTENT -->
+  </div>
+</div>
+</div> <!-- CONTENT -->
 
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcyMGZWQcL-rxiSVvknJuk0AkSSkxEy-o"></script>
 <script type="text/javascript" src="{{ STATIC_URL }}/js/markerclusterer.min.js"></script>
@@ -63,28 +58,28 @@ var mc; //marker cluster var
 function initialize() {
 
 
-document.getElementById("map-canvas").style.height = document.getElementById('mediaObject').clientHeight + "px";
+  document.getElementById("map-canvas").style.height = document.getElementById('mediaObject').clientHeight + "px";
 
 
-        var styles = [
+  var styles = [
   {
     featureType: "all",
     stylers: [
-      { saturation: -75 },
-       { hue: "#174787" },
+    { saturation: -75 },
+    { hue: "#174787" },
     ]
   }
-];
+  ];
 
-        var mapOptions = {
-          center: new google.maps.LatLng(51.5072, 0.1275),
-          zoom: 8,
-          styles: styles
-        };
-        map = new google.maps.Map(document.getElementById("map-canvas"),mapOptions);
+  var mapOptions = {
+    center: new google.maps.LatLng(51.5072, 0.1275),
+    zoom: 8,
+    styles: styles
+  };
+  map = new google.maps.Map(document.getElementById("map-canvas"),mapOptions);
 
-    mc = new MarkerClusterer(map, markers);
-        
+  mc = new MarkerClusterer(map, markers);
+  
 
 //put the markers on the map
 //window.setTimeout(function(){
@@ -95,7 +90,7 @@ document.getElementById("map-canvas").style.height = document.getElementById('me
 
 //information boxes content, the indexes are the same as the marker
 infoBoxes.push(new google.maps.InfoWindow({
-      content: "Some HTML"
+  content: "Some HTML"
 }));
 
 function markerEventListenerDelegate(marker,infobox) {
@@ -103,15 +98,15 @@ function markerEventListenerDelegate(marker,infobox) {
     for(i = 0; i < infoBoxes.length; i++) {
       infoBoxes[i].close();
     }
-      infobox.open(map,marker);
-    });
+    infobox.open(map,marker);
+  });
 }
 
 
 //map markers
 markers.push(new google.maps.Marker({
-    position: new google.maps.LatLng(51.5072, 0.1275),
-    title:"Local Mind - N/A",
+  position: new google.maps.LatLng(51.5072, 0.1275),
+  title:"Local Mind - N/A",
 }));
 
 
@@ -129,7 +124,7 @@ for(i = 0; i < markers.length; i++) {
 
 google.maps.event.addDomListener(window, 'load', initialize);
 
-     
+
 
 </script>
 

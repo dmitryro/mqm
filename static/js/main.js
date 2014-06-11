@@ -31,12 +31,49 @@ $('body').on('hidden.bs.modal', '.modal', function () {
 
 /* End of Ismail*/
 
+if($('#video-content').length) {
+    	if($('#video-content').height() < $('#sidebar').height()) {
+    		$('#content').css('min-height',$('#sidebar').height() + 70)
+    	}
+    }
+
+    if($('#content').length) {
+    	if($('#content').height() < $(window).height()) {
+    		$('#content').css('min-height',$(window).height())
+    	}
+    }
 
 
 
+    // DROP DOWNS 
 
+    $('.drop').bind('click',function() {
+        if ($(this).hasClass('dropped')) {
+            $(this).parent().find('ul').css('display','none');
+            $(this).removeClass('dropped');
+        }else{
+            $(this).parent().find('ul').css('display','block');
+            $(this).addClass('dropped');
+        }
+    });
 
+    //POP UP
 
+    $('#write').click(function() {
+        $('.overlay').fadeIn(400);
+    });
+
+    $('.overlay-close').bind('click', function() {
+        overlayClose();
+    });
+
+    $('.pop-up-close').bind('click', function() {
+        overlayClose();
+    });
+
+    function overlayClose() {
+        $('.overlay').fadeOut(400);
+    }
 
 
 

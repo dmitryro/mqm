@@ -15,6 +15,7 @@
             <div id="tools">
                     
                 <div id="write"></div>
+                {% comment %}
                 <div id="add">
                     <div id="add-icon" class="drop"></div>
                     <ul>
@@ -33,6 +34,7 @@
                         </li>
                     </ul>
                 </div>
+                {% endcomment %}
             </div>
 
             <div id="profile">
@@ -45,37 +47,43 @@
                 <div id="settings">
                     <div id="settings-icon" class="drop"></div>
                     <ul>
+                        {% comment %}
                         <li class="settings-opt" style="background-image:url({{ STATIC_URL }}assets/img/ui/icons/notes-02.svg)">
                             Notifications
                             <div class="notification">3</div>
                         </li>
-                        <li class="settings-opt" style="background-image:url({{ STATIC_URL }}assets/img/ui/icons/tasks-03.svg)">
-                            Task
+                        {% endcomment %}
+                        <a href="/todos"><li class="settings-opt" style="background-image:url({{ STATIC_URL }}assets/img/ui/icons/tasks-03.svg)">
+                            To-Do's
                             <div class="notification">14</div>
-                        </li>
+                        </li></a>
+                        {% comment %}
                         <li class="settings-opt" style="background-image:url({{ STATIC_URL }}assets/img/ui/icons/alert-01.svg)">
                             Alerts
                             <div class="notification">4</div>
                         </li>
-                        
+                        {% endcomment %}
                         <li class="settings-opt red">Settings</li>
                         
-                        <li class="settings-opt" style="background-image:url({{ STATIC_URL }}assets/img/ui/icons/profile-04.svg)">
+                        <a href="/meet-the-team-member/{firstname - lastname}"><li class="settings-opt" style="background-image:url({{ STATIC_URL }}assets/img/ui/icons/profile-04.svg)">
                             Update Profile
-                        </li>
+                        </li></a>
                         <li class="settings-opt" style="background-image:url({{ STATIC_URL }}assets/img/ui/icons/anchor-05.svg)">
-                            Update Plymouth Hub
+                            Update { name }
                         </li>
+                        {% comment %}
                         <li class="settings-opt" style="background-image:url({{ STATIC_URL }}assets/img/ui/icons/users-06.svg)">
                             Update Hub Users
                         </li>
+
                         <li class="settings-opt" style="background-image:url({{ STATIC_URL }}assets/img/ui/icons/password-07.svg)">
                             <a href="password.html">Change password</a>
                         </li>
-                        
+                        {% endcomment %}
                     </ul>
                 </div>
 
             </div>
 
         </div>
+        {% include "includes/overlay.html" %}

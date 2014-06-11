@@ -1,122 +1,121 @@
 {% extends "base.html" %}
 {% load djangular_tags webdesign %}
 
-{% block extra_css %}
-{{ block.super }}
-<link rel="stylesheet" href="{{ STATIC_URL }}dist/styles/gridster.css" />
-{% endblock %}
-
 {% block content %}
 
 <div class="modal fade" id="sharedModal" tabindex="-1" role="dialog" aria-labelledby="sharedModal" aria-hidden="true">
-<div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title">Modal title</h4>
-      </div>
-      <div class="modal-body">
-        <p>One fine body&hellip;</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">Modal title</h4>
+			</div>
+			<div class="modal-body">
+				<p>One fine body&hellip;</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary">Save changes</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
 </div>
-	<div id="content" class="clearfix">
+<div id="content" class="clearfix">
 
-		{% include "includes/topbar.html" %}
+	{% include "includes/topbar.html" %}
 
-		<div class="container-fluid">
-<h3 class="withIcon icon_document"><span></span>TASK QUEUE/ TODO’S</h3>
-      <a href="/" class="page-close"></a>
+	<div class="container-fluid">
+		<h3 class="withIcon icon_document"><span></span>TASK QUEUE/ TODO’S</h3>
+		<a href="/" class="page-close"></a>
 
-      <button class="btn btn-default action_addNew" data-type="Todo">ADD NEW TASK</button>
-      <br><br>
+		<button class="btn btn-default action_addNew" data-type="Todo">ADD NEW TASK</button>
+		<br><br>
 		<div class="row">
 			<div class="col-md-12">
-			<h4>Active</h4>
+				<h4>Active</h4>
 				<table class="table table-striped">
-				<thead>
-				<tr>
-					<th>&nbsp;</th>
-					<th>Assign to</th>
-					<th>Date added</th>
-					<th>Complete by</th>
-					<th>&nbsp;</th>
-				</tr>
-				</thead>
-				<tbody>
-				<tr>
-					<td>Confirm all contact details for key staff are correct</td>
-					<td>Jane Smith</td>
-					<td>23/09/2014</td>
-					<td>23/09/2014</td>
-					<td>Edit</td>
-				</tr>
-				<tr>
-					<td>Confirm all contact details for key staff are correct</td>
-					<td>Jane Smith</td>
-					<td>23/09/2014</td>
-					<td>23/09/2014</td>
-					<td>Edit</td>
-				</tr>
-				<tr>
-					<td>Confirm all contact details for key staff are correct</td>
-					<td>Jane Smith</td>
-					<td>23/09/2014</td>
-					<td>23/09/2014</td>
-					<td>Edit</td>
-				</tr>
+					<thead>
+						<tr>
+							<th>&nbsp;</th>
+							<th>&nbsp;</th>
+							<th>Assign to</th>
+							<th>Date added</th>
+							<th>Complete by</th>
+							<th>&nbsp;</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><input type="checkbox"></td>
+							<td>Confirm all contact details for key staff are correct</td>
+							<td>Jane Smith</td>
+							<td>23/09/2014</td>
+							<td>23/09/2014</td>
+							<td>Edit</td>
+						</tr>
+						<tr>
+							<td><input type="checkbox"></td>
+							<td>Confirm all contact details for key staff are correct</td>
+							<td>Jane Smith</td>
+							<td>23/09/2014</td>
+							<td>23/09/2014</td>
+							<td>Edit</td>
+						</tr>
+						<tr>
+							<td><input type="checkbox"></td>
+							<td>Confirm all contact details for key staff are correct</td>
+							<td>Jane Smith</td>
+							<td>23/09/2014</td>
+							<td>23/09/2014</td>
+							<td>Edit</td>
+						</tr>
 
-				</tbody>
+					</tbody>
 				</table>
 
 				<hr>
 				<h4>Completed</h4>
 				<table class="table table-condensed">
-				<thead>
-				<tr>
-					<th>&nbsp;</th>
-					<th>Assign to</th>
-					<th>Date added</th>
-					<th>Complete by</th>
-					<th>&nbsp;</th>
-				</tr>
-				</thead>
-				<tbody>
-				<tr>
-					<td>Confirm all contact details for key staff are correct</td>
-					<td>Jane Smith</td>
-					<td>23/09/2014</td>
-					<td>23/09/2014</td>
-					<td>Restore</td>
-				</tr>
-				<tr>
-					<td>Confirm all contact details for key staff are correct</td>
-					<td>Jane Smith</td>
-					<td>23/09/2014</td>
-					<td>23/09/2014</td>
-					<td>Restore</td>
-				</tr>
-				<tr>
-					<td>Confirm all contact details for key staff are correct</td>
-					<td>Jane Smith</td>
-					<td>23/09/2014</td>
-					<td>23/09/2014</td>
-					<td>Restore</td>
-				</tr>
+					<thead>
+						<tr>
+							<th>&nbsp;</th>
+							<th>&nbsp;</th>
+							<th>Assign to</th>
+							<th>Date added</th>
+							<th>Complete by</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><input type="checkbox" checked></td>
+							<td>Confirm all contact details for key staff are correct</td>
+							<td>Jane Smith</td>
+							<td>23/09/2014</td>
+							<td>23/09/2014</td>
+						</tr>
+						<tr>
+							<td><input type="checkbox" checked></td>
+							<td>Confirm all contact details for key staff are correct</td>
+							<td>Jane Smith</td>
+							<td>23/09/2014</td>
+							<td>23/09/2014</td>
+						</tr>
+						<tr>
+							<td><input type="checkbox" checked></td>
+							<td>Confirm all contact details for key staff are correct</td>
+							<td>Jane Smith</td>
+							<td>23/09/2014</td>
+							<td>23/09/2014</td>
+						</tr>
 
-				</tbody>
+					</tbody>
 				</table>
 
 
 			</div>
 		</div>
-		</div>
+	</div>
 
-	</div> <!-- CONTENT -->
+</div> <!-- CONTENT -->
 
 {% endblock %}

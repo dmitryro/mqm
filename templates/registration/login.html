@@ -6,6 +6,22 @@
 
 
 {% block content %}
+<div id="content">
+<div class="container-fluid">
+<div class="row">
+            <div class="col-md-4 col-md-offset-4">
+            <div id="logo-form"></div>
+            <br>
+            <p>Welcome to the Open Hub, a place for connecting, collaborating, learning and celebrating. Every year the Mind network delivers XXXX services to XXXXX people a year. That is an amazing amount of work with a huge amount of impact. The Open Hub is here to support and extend that.</p>
+
+<div class="center-block" style="width:92px; margin-bottom:20px">
+<a href="#log-in" data-toggle="tab">Login</a> / <a href="#sign-up" data-toggle="tab">Signup</a>
+</div>
+
+<!-- Tab panes -->
+<div class="tab-content">
+  <div class="tab-pane active" id="log-in">
+
 <div class="login">
     {% form login_form using %}
         <form action="" method="post" role="form">{% csrf_token %}
@@ -18,7 +34,9 @@
     {% endform %}
 </div>
 
-<div class="signup">
+  </div>
+  <div class="tab-pane" id="sign-up">
+    <div class="signup">
     {% form signup_form using %}
         {% formconfig row using "forms/row.html" %}
         <form action="" method="post" role="form">{% csrf_token %}
@@ -28,5 +46,15 @@
             {% include "forms/submit.html" with label="Signup" name="signup" only %}
         </form>
     {% endform %}
+</div>
+  </div>
+</div>
+
+
+
+
+</div>
+</div>
+</div>
 </div>
 {% endblock %}

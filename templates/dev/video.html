@@ -3,93 +3,89 @@
 
 {% block extra_css %}
 {{ block.super }}
-<link rel="stylesheet" href="{{ STATIC_URL }}dist/styles/gridster.css" />
 {% endblock %}
 
 {% block content %}
 <div class="modal fade" id="sharedModal" tabindex="-1" role="dialog" aria-labelledby="sharedModal" aria-hidden="true">
-<div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title">Modal title</h4>
-      </div>
-      <div class="modal-body">
-        <p>One fine body&hellip;</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">Modal title</h4>
+			</div>
+			<div class="modal-body">
+				<p>One fine body&hellip;</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary">Save changes</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
 </div>
-	<div id="content">
+<div id="content">
 
-		{% include "includes/topbar.html" %}
+	{% include "includes/topbar.html" %}
 
-		<div class="container-fluid">
-			<h3 class="withIcon"><span class="icon_video"></span>LATEST VIDEOS</h3>
-			<a href="/" class="page-close"></a>
-		
-
+	<div class="container-fluid">
+		<h3 class="withIcon"><span class="icon_video"></span>LATEST VIDEOS</h3>
+		<a href="/" class="page-close"></a>
+	
 		<div id="video-content">
-		<div class="row">
-			<div class="col-md-6">
-				<div class="mediaObject">
-				<iframe width="100%" height="300px" src="//www.youtube.com/embed/m82jEQXRurg?list=PLw8TLvRgeKJ4U0IbynSzUKojAIeL-EcZ2" frameborder="0" allowfullscreen></iframe>
-				</div>
-				<h4>Talking about... depression</h4>
-				<p>Taunton Mind - 8 Jan 2014</p>
-				<p>Nathan, Hannah, Helen, Rishi and Georgina talk about their experiences of depression, including how it feels, what's helped them and how their friends and family can help. 
-				</p>
-<p>Do you want to be in a Mind video? Go to www.mind.org.uk/video to find out more. </p>
+			<div class="row">
+				<div class="col-md-6">
+					<div class="mediaObject">
+						<iframe width="100%" height="300px" src="//www.youtube.com/embed/m82jEQXRurg?list=PLw8TLvRgeKJ4U0IbynSzUKojAIeL-EcZ2" frameborder="0" allowfullscreen></iframe>
+					</div>
+					<h4>Talking about... depression</h4>
+					<p>Taunton Mind - 8 Jan 2014</p>
+					<p>Nathan, Hannah, Helen, Rishi and Georgina talk about their experiences of depression, including how it feels, what's helped them and how their friends and family can help. 
+					</p>
+					<p>Do you want to be in a Mind video? Go to www.mind.org.uk/video to find out more. </p>
 
-<p>For more information go to www.mind.org.uk/depression</p>
+					<p>For more information go to www.mind.org.uk/depression</p>
 
-<p>We're Mind, the mental health charity. We're here to make sure no one has to face a mental health problem alone.</p>
-			</div>
+					<p>We're Mind, the mental health charity. We're here to make sure no one has to face a mental health problem alone.</p>
+				</div>
 
-			<div class="col-md-6">
-			<a href="#addVideo"><div class="add-team-button action_addNew" data-type="Video">ADD NEW VIDEO</div></a>
-				<div class="video-thumb-wrap col-md-6">
-					<div class="video-thumb mediaObject">
-						<iframe width="100%" height="156" src="//www.youtube.com/embed/Dg-1dt0t_CE?list=PLw8TLvRgeKJ4U0IbynSzUKojAIeL-EcZ2" frameborder="0" allowfullscreen></iframe>
+				<div class="col-md-6">
+					<a href="#addVideo"><div class="add-team-button action_addNew" data-type="Video">ADD NEW VIDEO</div></a>
+					<div class="video-thumb-wrap col-md-6">
+						<div class="video-thumb mediaObject">
+							<iframe width="100%" height="156" src="//www.youtube.com/embed/Dg-1dt0t_CE?list=PLw8TLvRgeKJ4U0IbynSzUKojAIeL-EcZ2" frameborder="0" allowfullscreen></iframe>
+						</div>
+					</div>
+					<div class="video-thumb-wrap col-md-6">
+						<div class="video-thumb mediaObject">
+							<iframe width="100%" height="156" src="//www.youtube.com/embed/Dg-1dt0t_CE?list=PLw8TLvRgeKJ4U0IbynSzUKojAIeL-EcZ2" frameborder="0" allowfullscreen></iframe>
+						</div>
+					</div>
+					<div class="video-thumb-wrap col-md-6">
+						<div class="video-thumb mediaObject">
+							<iframe width="100%" height="156" src="//www.youtube.com/embed/Dg-1dt0t_CE?list=PLw8TLvRgeKJ4U0IbynSzUKojAIeL-EcZ2" frameborder="0" allowfullscreen></iframe>
+						</div>
+					</div>
+					<div class="video-thumb-wrap col-md-6">
+						<div class="video-thumb mediaObject">
+							<iframe width="100%" height="156" src="//www.youtube.com/embed/Dg-1dt0t_CE?list=PLw8TLvRgeKJ4U0IbynSzUKojAIeL-EcZ2" frameborder="0" allowfullscreen></iframe>
+						</div>
+					</div>
+					<div class="video-thumb-wrap col-md-6">
+						<div class="video-thumb mediaObject">
+							<iframe width="100%" height="156" src="//www.youtube.com/embed/Dg-1dt0t_CE?list=PLw8TLvRgeKJ4U0IbynSzUKojAIeL-EcZ2" frameborder="0" allowfullscreen></iframe>
+						</div>
+					</div>
+					<div class="video-thumb-wrap col-md-6">
+						<div class="video-thumb mediaObject">
+							<iframe width="100%" height="156" src="//www.youtube.com/embed/Dg-1dt0t_CE?list=PLw8TLvRgeKJ4U0IbynSzUKojAIeL-EcZ2" frameborder="0" allowfullscreen></iframe>
+						</div>
 					</div>
 				</div>
-				<div class="video-thumb-wrap col-md-6">
-					<div class="video-thumb mediaObject">
-						<iframe width="100%" height="156" src="//www.youtube.com/embed/Dg-1dt0t_CE?list=PLw8TLvRgeKJ4U0IbynSzUKojAIeL-EcZ2" frameborder="0" allowfullscreen></iframe>
-					</div>
-				</div>
-				<div class="video-thumb-wrap col-md-6">
-					<div class="video-thumb mediaObject">
-						<iframe width="100%" height="156" src="//www.youtube.com/embed/Dg-1dt0t_CE?list=PLw8TLvRgeKJ4U0IbynSzUKojAIeL-EcZ2" frameborder="0" allowfullscreen></iframe>
-					</div>
-				</div>
-				<div class="video-thumb-wrap col-md-6">
-					<div class="video-thumb mediaObject">
-						<iframe width="100%" height="156" src="//www.youtube.com/embed/Dg-1dt0t_CE?list=PLw8TLvRgeKJ4U0IbynSzUKojAIeL-EcZ2" frameborder="0" allowfullscreen></iframe>
-					</div>
-				</div>
-				<div class="video-thumb-wrap col-md-6">
-					<div class="video-thumb mediaObject">
-						<iframe width="100%" height="156" src="//www.youtube.com/embed/Dg-1dt0t_CE?list=PLw8TLvRgeKJ4U0IbynSzUKojAIeL-EcZ2" frameborder="0" allowfullscreen></iframe>
-					</div>
-				</div>
-				<div class="video-thumb-wrap col-md-6">
-					<div class="video-thumb mediaObject">
-						<iframe width="100%" height="156" src="//www.youtube.com/embed/Dg-1dt0t_CE?list=PLw8TLvRgeKJ4U0IbynSzUKojAIeL-EcZ2" frameborder="0" allowfullscreen></iframe>
-					</div>
-				</div>
-			</div>
 			</div>
 
 			<div style="clear:both"></div>
 
 		</div>
-		</div>
-	</div> <!-- CONTENT -->
-
-
+	</div>
+</div> <!-- CONTENT -->
 {% endblock %}
