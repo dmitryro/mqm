@@ -31,7 +31,52 @@ class Map(models.Model):
         (PARTNER_OPPORTUNITY, _('Partner Opportunity')),
     )
 
-    CATEGORY_CHOICES = ()
+    NATIONAL_CHARITY = 'National Charity'
+    LOCAL_CHARITY = 'Local Charity'
+    HOUSING_ASSOCIATION = 'Housing Association'
+    LOCAL_AUTHORITY = 'Local Authority'
+    PRIVATE_COMPANY = 'Local Company'
+    NHS_BODY = 'NHS Body'
+    ANOTHER_LOCAL_MIND = 'Another Local Mind'
+    RETHINK = 'Rethink'
+    RELATE = 'Relate'
+    AGEUK = 'Age Uk'
+    REACH = 'Reach'
+    MACMILLAN = 'Macmillan'
+    CAB = 'Cab'
+    TURNING_POINT = 'Turning Point'
+    MENCAP = 'Mencap'
+    CRUSE = 'Cruse'
+    SAMARITANS = 'Samaritans'
+    FAMILY_ACTION = 'Family Action'
+    NATIONAL_TRUST ='National Trust'
+    YMCS = 'YMCA'
+    CHILD_POVERTY_ACTION_GROUP = 'Child Poverty Action Group'
+    ALTERNATIVES_TO_VIOLENCE_PROJECT = 'Alternatives to Voilence Project'
+    CATEGORY_CHOICES = (
+        (NATIONAL_CHARITY, _('National Charity')),
+        (LOCAL_CHARITY, _('Local Charity')),
+        (HOUSING_ASSOCIATION, _('Housing Association')),
+        (LOCAL_AUTHORITY, _('Local Authority')),
+        (PRIVATE_COMPANY, _('Local Company')),
+        (NHS_BODY, _('NHS Body')),
+        (ANOTHER_LOCAL_MIND, _('Another Local Mind')),
+        (RETHINK, _('Rethink')),
+        (RELATE, _('Relate')),
+        (AGEUK, _('Age Uk')),
+        (REACH, _('Reach')),
+        (MACMILLAN, _('Macmillan')),
+        (CAB, _('Cab')),
+        (TURNING_POINT, _('Turning Point')),
+        (MENCAP, _('Mencap')),
+        (CRUSE, _('Cruse')),
+        (SAMARITANS, _('Samaritans')),
+        (FAMILY_ACTION, _('Family Action')),
+        (NATIONAL_TRUST, _('National Trust')),
+        (YMCS, _('YMCA')),
+        (CHILD_POVERTY_ACTION_GROUP, _('Child Poverty Action Group')),
+        (ALTERNATIVES_TO_VIOLENCE_PROJECT, _('Alternatives to Voilence Project')),
+    )
 
     local_mind = models.ForeignKey('local_minds.LocalMind', related_name='partners')
 
@@ -52,8 +97,8 @@ class Map(models.Model):
     modified = ModificationDateTimeField()
 
     class Meta:
-        verbose_name = _('Local Map')
-        verbose_name_plural = _('Local Maps')
+        verbose_name = _('My Local Area')
+        verbose_name_plural = _('My Local Area')
 
     def __unicode__(self):
         return self.name

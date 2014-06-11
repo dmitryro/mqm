@@ -15,16 +15,13 @@ urlpatterns = patterns('',
     url(r'^signup/(?P<uidb36>[^-/]+)-(?P<token>[^/]+)/(?P<step>[^/]+)/$', 'website.accounts.registration.views.signup_wizard', name='signup'),
     url(r'^api/', include('website.api.urls')),
 
-    #ANGELO Generic Views
-    url(r'^stream/$', 'website.videos.views.video_list', name='videos'),
-    url(r'^stream/(?P<pk>\d+)/$', 'website.videos.views.video_detail', name='videos'),
-    url(r'^branding/$', 'website.branding.views.branding_list', name='branding'),
-    url(r'^branding/(?P<pk>\d+)/$', 'website.branding.views.branding_detail', name='branding'),
-    url(r'^diary/$', 'website.diary.views.event_list', name='event'),
-    url(r'^document/$', 'website.documents.views.document_list', name='document'),
-    url(r'^document/\+(?P<category_slug>[^/]+)/$', 'website.documents.views.document_list', name='document'),
-    url(r'^document/(?P<slug>[^/]+)/$', 'website.documents.views.document_detail', name='document'),
-
+    # PRODUCTION ready for Workshop 1 -- GREGOR TO COMPLETE THESE
+    url(r'^my-local-area/$', 'website.local_map.views.map_list', name='local-area'),
+    #url(r'^positive-news/$', 'website.news.views.positive_news_list', name='positive-news'),
+    #url(r'^positive-news/(?P<slug>[^/]+)/$', 'website.news.views.positive_news_detail', name='positive-news'),
+    #url(r'^call-out/$', 'website.faq.views.questions_list', name='questions-answers'),
+    #url(r'^meet-the-team/$', 'django.shortcuts.render', {'template_name': 'dev/meet-the-team.html'}),
+    #url(r'^meet-the-team/(?P<slug>[^/]+)/$', 'django.shortcuts.render', {'template_name': 'dev/team.html'}),
 
     url(r'^login/$', 'website.accounts.views.login_signup', name='login'),
     url(r'^login/$', 'website.accounts.views.login_signup', name='signup'),
@@ -35,6 +32,15 @@ urlpatterns = patterns('',
 
     url(r'^admin/', include(admin.site.urls)),
 
+    # Developemnt Basic Views
+    #url(r'^stream/$', 'website.videos.views.video_list', name='videos'),
+    #url(r'^stream/(?P<pk>\d+)/$', 'website.videos.views.video_detail', name='videos'),
+    #url(r'^branding/$', 'website.branding.views.branding_list', name='branding'),
+    #url(r'^branding/(?P<pk>\d+)/$', 'website.branding.views.branding_detail', name='branding'),
+    #url(r'^diary/$', 'website.diary.views.event_list', name='event'),
+    #url(r'^document/$', 'website.documents.views.document_list', name='document'),
+    #url(r'^document/\+(?P<category_slug>[^/]+)/$', 'website.documents.views.document_list', name='document'),
+    #url(r'^document/(?P<slug>[^/]+)/$', 'website.documents.views.document_detail', name='document'),
 
     # Development static design templates
     url(r'^d/my-dashboard/$', 'django.shortcuts.render', {'template_name': 'dev/dashboard.html'}),
