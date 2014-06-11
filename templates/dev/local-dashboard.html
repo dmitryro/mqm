@@ -1,0 +1,528 @@
+{% extends "base.html" %}
+{% load djangular_tags webdesign %}
+
+{% block extra_css %}
+{{ block.super }}
+<link rel="stylesheet" href="{{ STATIC_URL }}dist/styles/gridster.css" />
+{% endblock %}
+
+{% block extra_js %}
+{{ block.super }}
+<script src="{{ STATIC_URL }}js/dev/gridster.js"></script>
+<script src="{{ STATIC_URL }}js/dev/local-app.js"></script>
+{% endblock %}
+
+{% block content %}
+
+{% include "includes/local-sidebar.html" %}
+<div class="modal fade" id="sharedModal" tabindex="-1" role="dialog" aria-labelledby="sharedModal" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">Modal title</h4>
+			</div>
+			<div class="modal-body">
+				<p>One fine body&hellip;</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary">Save changes</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div>
+<div id="content">
+	{% include "includes/topbar.html" with dashboard="true" %}
+	<div class="gridster"><ul></ul></div><!-- End of gridster -->
+</div>
+
+<div class="overlay">
+	<div class="overlay-close"></div>
+	<div class="pop-up-box">
+		<div class="pop-up-close"></div>
+		<div class="pop-up-content">
+			<div class="pop-up-title"><h3>UPDATE DATA</h3></div>
+			<div class="pop-up-menu">
+				<a class="action_addNew" data-type="PositiveNews"><div class="pop-up-menu-item1"><p class="popup">Positive news</p></div></a>
+				<a class="action_addNew" data-type="Event"><div class="pop-up-menu-item2"><p class="popup">Event Diary</p></div></a>
+				<a class="action_addNew" data-type="Todo"><div class="pop-up-menu-item3"><p class="popup">To-Do</p></div></a>
+				<a class="action_addNew" data-type="KeyPartner"><div class="pop-up-menu-item4"><p class="popup">My Local Area</p></div></a>
+				<a class="action_addNew" data-type="Event"><div class="pop-up-menu-item5"><p class="popup">Design Your Support</p></div></a>
+				<a class="action_addNew" data-type="Video"><div class="pop-up-menu-item6"><p class="popup">Video</p></div></a>
+				<a class="action_addNew" data-type="Video"><div class="pop-up-menu-item6"><p class="popup">no. of volunteers this week</p></div></a>
+				<a class="action_addNew" data-type="Video"><div class="pop-up-menu-item6"><p class="popup">no. of service users this week</p></div></a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="meettheteam">
+
+	<li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
+		<div class="widget-bar">
+			<div class="widget-title">MEET THE TEAM</div>
+			{% include "includes/widget-settings.html" %}
+		</div>
+	</li>
+
+</div>
+
+<div class="callout hidden">
+	<li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
+		<div class="widget-bar">
+			<div class="widget-title">CALL OUT</div>
+			{% include "includes/widget-settings.html" with type="Question" delatable="false" %}
+		</div>
+		<ul class='list-group'>
+			<a class='li list-group-item' href='#'>
+				<span class='badge'>14</span>Questions for you
+			</a>
+		</ul>
+		<div class='list-group'>
+		</div>
+	</li>
+</div>
+
+<div class="hidden todo">
+	<li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
+		<div class="widget-bar">
+			<div class="widget-title"> <span class="badge">14</span> TO-DO LIST</div>
+			{% include "includes/widget-settings.html" with type="Todo" %}
+		</div>
+		<ul class="list-group">
+			<li class="list-group-item">
+				<div class="dropdown pull-right">
+					<a data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-chevron-down small showOnHover"></span></a>
+					<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+						<li role="presentation"><a role="menuitem" tabindex="-1" href="#"><span class="glyphicon glyphicon-ok"></span> Mark as complete</a></li>
+						<li role="presentation"><a role="menuitem" tabindex="-1" href="#"><span class="glyphicon glyphicon-edit"></span> Edit</a></li>
+						<li role="presentation"><a role="menuitem" tabindex="-1" href="#"><span class="glyphicon glyphicon-trash"></span> Delete</a></li>
+					</ul>
+				</div>
+				Confirm all contact details for key staff are correct<small class="text-muted"><br>Due 12th April 2014</small>
+
+			</li>
+			<li class="list-group-item">Confirm all contact details for key staff are correctConfirm all contact details for key staff are correctConfirm all contact details for key staff are correctConfirm all contact details for key staff are correct</li>
+			<li class="list-group-item">Morbi leo risus</li>
+			<li class="list-group-item">Porta ac consectetur ac</li>
+			<li class="list-group-item">Vestibulum at eros</li>
+		</ul>
+	</li>
+
+</div>
+
+<div class="areasofgrowth hidden">
+	<li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
+		<div class="widget-bar">
+			<div class="widget-title">DESIGN YOUR SUPPORT</div>
+			{% include "includes/widget-settings.html" with delatable="false" %}
+		</div>
+	</li>
+</div>
+
+<div class="openHubUpdates hidden">
+	<li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
+		<div class="widget-bar">
+			<div class="widget-title">Open Hub Updates</div>
+			{% include "includes/widget-settings.html" %}
+		</div>
+	</li>
+</div>
+
+<div class="hidden assetsExpenditure">
+	<li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
+		<div class="widget-bar">
+			<div class="widget-title">
+				ASSETS vs EXPENDITURE (%)
+			</div>
+			{% include "includes/widget-settings.html" %}
+		</div>
+		<img style="margin:25px 0 0 27px;" src="../Assets/images/nodes/graph_services.png" alt="graph_services" width="233" height="192">
+	</li>
+</div>
+
+<div class="externalNews hidden">
+	<li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
+		<div class="widget-bar">
+			<div class="widget-title">HOT TOPICS NEWS STREAM</div>
+			{% include "includes/widget-settings.html" with type="ExternalNews" %}
+		</div>
+		<div class='list-group'>
+		</div>
+	</li>
+</div>
+
+<div class="nationalMindNews hidden">
+	<li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
+		<div class="widget-bar">
+			<div class="widget-title">NATIONAL MIND NEWS</div>
+		</div>
+		<div class='list-group'>
+		</div>
+	</li>
+</div>
+
+<div class="branding hidden">
+	<li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
+		<div class="widget-bar">
+			<div class="widget-title">BRANDING</div>
+			{% include "includes/widget-settings.html" with type="Branding" %}
+		</div>
+		<div class='list-group'>
+		</div>
+	</li>
+</div>
+
+<div class="diagnostic hidden">
+	<li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
+		<div class="widget-bar">
+			<div class="widget-title">DIAGNOSTIC</div>
+			{% include "includes/widget-settings.html" %}
+		</div>
+		<ul class='list-group'>
+
+			<li class="list-group-item">
+				<b>70% completed</b>
+				<div class="progress">
+					<div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+						<span class="sr-only">60% Complete</span>
+					</div>
+				</div>
+			</li>
+			<li class="list-group-item">Confirm all contact details for key staff are correctConfirm all contact details for key staff are correctConfirm all contact details for key staff are correctConfirm all contact details for key staff are correct</li>
+			
+		</ul>
+	</li>
+</div>
+
+<div class="services hidden">
+	<li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
+		<div class="widget-bar">
+			<div class="widget-title">OUR SERVICES</div>
+			{% include "includes/widget-settings.html" with type="Service" %}
+		</div>
+
+		<ul class='list-group'>
+			<a class='li list-group-item' href='#'>
+				<span class='badge'>users</span>Type of service
+			</a>
+		</ul>
+		<div class='list-group'>
+		</div>
+	</li>
+
+</div>
+
+<div class="fundingmap hidden">
+	<li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
+		<div class="widget-bar">
+			<div class="widget-title">THE FUNDING MAP</div>
+			{% include "includes/widget-settings.html" with type="Funding" %}
+		</div>
+		<div id="map-canvas1"></div>
+	</li>
+</div>
+
+<div class="hidden theEngineRoom">
+	<li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
+		<div class="widget-bar">
+			<div class="widget-title">THE ENGINE ROOM</div>
+			{% include "includes/widget-settings.html" with type="Document" %}
+		</div>
+		<div class='list-group'>
+		</div>
+	</li>
+</div>
+
+<div class="theLabNews hidden">
+	<li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
+		<div class="widget-bar">
+			<div class="widget-title">THE LAB NEWS</div>
+			{% include "includes/widget-settings.html" with type="ClinicalResearch" %}
+		</div>
+		<ul class="list-group" id="feedResults">
+		</ul>
+	</li>
+</div>
+
+<div class="eventsdiary hidden">
+	<li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
+		<div class="widget-bar">
+			<div class="widget-title">EVENTS DIARY</div>
+			{% include "includes/widget-settings.html" with type="Event" %}
+		</div>
+		<div id="events">
+			<table class="table table-bordered">
+				<tbody><tr>
+					<td>
+						<b>M</b>
+					</td>
+					<td>
+						<b>T</b>
+					</td>
+					<td>
+						<b>W</b>
+					</td>
+					<td>
+						<b>T</b>
+					</td>
+					<td>
+						<b>F</b>
+					</td>
+					<td>
+						<b>S</b>
+					</td>
+					<td>
+						<b>S</b>
+					</td>
+				</tr>
+				<tr>
+					<td class="past">1</td>
+					<td class="past">2</td>
+					<td class="past">3</td>
+					<td class="past">4</td>
+					<td class="past">5</td>
+					<td class="past">6</td>
+					<td class="past">7</td>
+				</tr>
+				<tr>
+					<td class="past">9</td>
+					<td class="past">8</td>
+					<td class="past">10</td>
+					<td class="past">11</td>
+					<td class="today">
+						<b>12</b>
+					</td>
+					<td>13</td>
+					<td class="event-day">
+						<a href="#">14</a>
+					</td>
+				</tr>
+				<tr>
+					<td class="event-day">
+						<a href="#">15</a>
+					</td>
+					<td>16</td>
+					<td>17</td>
+					<td>18</td>
+					<td>19</td>
+					<td>20</td>
+					<td>21</td>
+				</tr>
+				<tr>
+					<td>22</td>
+					<td class="event-day">
+						<a href="#">23</a>
+					</td>
+					<td>24</td>
+					<td>25</td>
+					<td class="event-day">
+						<a href="#">26</a>
+					</td>
+					<td>27</td>
+					<td class="event-day">
+						<a href="#">28</a>
+					</td>
+				</tr>
+				<tr>
+					<td>29</td>
+					<td>30</td>
+					<td class="event-day">
+						<a href="#">31</a>
+					</td>
+					<td class="past"></td>
+					<td class="past"></td>
+					<td class="past"></td>
+					<td class="past"></td>
+				</tr>
+			</tbody></table>
+		</div>
+	</li>
+</div>
+
+<div class="buddysearch hidden">
+	<li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
+		<div class="widget-bar">
+			<div class="widget-title">BUDDY SEARCH</div>
+			{% include "includes/widget-settings.html" %}
+		</div>
+	</li>
+</div>
+
+<div class="netCurrentAssets hidden">
+	<li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
+		<div class="widget-bar">
+			<div class="widget-title">
+				NET CURRENT ASSETS
+			</div>
+			{% include "includes/widget-settings.html" %}
+		</div>
+		<img style="margin:25px 0 0 27px;" src="../Assets/images/nodes/graph_finance.png" alt="graph_finance" width="233" height="192">
+	</li>
+
+</div>
+
+<div class="myLocalArea hidden">
+	<li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
+		<div class="widget-bar">
+			<div class="widget-title">MY LOCAL AREA</div>
+			{% include "includes/widget-settings.html" %}
+		</div>
+		<img src="../Assets/images/nodes/map.jpg" alt="graph_finance" width="293" height="224">
+	</li>
+</div>
+
+
+<div class="hidden videoStream">
+	<li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
+		<div class="widget-bar">
+			<div class="widget-title">VIDEO STREAM</div>
+			{% include "includes/widget-settings.html" with type="Video" %}
+		</div>
+		<div id='videos'>
+			<ul class='list-group'>
+				<a class='li list-group-item' href='video.html'>
+					<span class='badge'>74</span>My Channel
+				</a>
+			</ul>
+			<div class='panel-content'>
+				<h5>Tyneside MindWCA Film</h5>
+				<iframe width="292px" src="//www.youtube.com/embed/tTaezvvQfOs" frameborder="0" allowfullscreen></iframe>
+				<p style="padding-left:15px;">Posted by <a href="team.html">Jane Smith</a> on 10 may 2014</p>
+			</div>
+		</div>
+	</li>
+
+</div>
+
+<div class="positiveNews hidden">
+	<li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
+		<div class="widget-bar">
+			<div class="widget-title">THE LAB NEWS</div>
+			{% include "includes/widget-settings.html" with type="News" %}
+		</div>
+		<div class='list-group'>
+		</div>
+	</li>
+</div>
+
+<div class="collectiveimpact hidden">
+	<li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
+		<div class="widget-bar">
+			<div class="widget-title">COLLECTIVE IMPACT</div>
+		</div>
+	</li>
+</div>
+
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcyMGZWQcL-rxiSVvknJuk0AkSSkxEy-o"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}/js/markerclusterer.min.js"></script>
+<script type="text/javascript">
+
+//global variables
+var markers = Array();
+var infoBoxes = Array();
+var map;
+var mc; //marker cluster var
+
+function initializeFundingMap() {
+
+	var styles = [
+	{
+		featureType: "all",
+		stylers: [
+		{ saturation: -75 },
+		{ hue: "#174787" },
+		]
+	}
+	];
+
+	var mapOptions = {
+		center: new google.maps.LatLng(51.5072, 0.1275),
+		zoom: 8,
+		styles: styles,
+		disableDoubleClickZoom: true,
+		draggable: false,
+		scrollwheel: false,
+		panControl: false,
+		controls:false,
+		mapTypeControl:false,
+		scaleControl:false,
+		streetViewControl:false,
+		overviewMapControl:false,
+		rotateControl:false
+
+	};
+	map = new google.maps.Map(document.getElementById("map-canvas1"),mapOptions);
+
+	mc = new MarkerClusterer(map, markers);
+
+
+//put the markers on the map
+//window.setTimeout(function(){
+  //for(i = 0; i < markers.length; i++) {
+    //markers[i].setMap(map);
+  //}
+//},100);
+
+//information boxes content, the indexes are the same as the marker
+infoBoxes.push(new google.maps.InfoWindow({
+	content: "Some HTML"
+}));
+
+function markerEventListenerDelegate(marker,infobox) {
+	return google.maps.event.addListener(marker, 'click', function() {
+		for(i = 0; i < infoBoxes.length; i++) {
+			infoBoxes[i].close();
+		}
+		infobox.open(map,marker);
+	});
+}
+
+
+//map markers
+markers.push(new google.maps.Marker({
+	position: new google.maps.LatLng(51.5072, 0.1275),
+	title:"Local Mind - N/A",
+}));
+
+
+
+////
+
+for(i = 0; i < markers.length; i++) {
+  //markers[i].setMap(map);
+  mc.addMarker(markers[i]);
+  markerEventListenerDelegate(markers[i], infoBoxes[i]);
+}
+
+
+} //end of init function
+
+google.maps.event.addDomListener(window, 'load', initializeFundingMap);
+
+
+
+</script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script type="text/javascript">
+
+	$(document).ready(function(){
+		$.ajax({
+			type: 'GET',
+			url: 'http://www.thementalelf.net/feed/',
+			dataType: 'xml',
+			success: function (xml) {
+				$(xml).find("item").each(function () {
+					var title = $(this).find("title").text();
+					var description = $(this).find("description").text();
+					var linkUrl = $(this).find("link").text();
+					var link = "<a href='" + linkUrl + "' target='_blank'>Read More<a>";
+					$('#feedResults').append('<a href="'+linkUrl+'" class="list-group-item">'+title+'</li></a>');
+				});
+			}
+		});
+	});
+
+</script>
+{% endblock %}

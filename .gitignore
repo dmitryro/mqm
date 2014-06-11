@@ -7,3 +7,7 @@
 /static/libs/
 /static/styles/.sass-cache/
 /server_settings.py
+.DS_Store
+*.pyc
+db.sqlite
+/src/website/local_settings.py
