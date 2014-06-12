@@ -13,6 +13,28 @@ from website.tasks.models import Task
 
 
 class SignupTests(WebTest):
+    def test_email_signup_form(self):
+        url = reverse('login')
+        response = self.app.get(url)
+
+        response.forms[1]['email'] = 'myemail@example.com'
+        response = response.forms[1].submit('signup')
+        self.assertEqual(response.status_code, 200)
+
+        self.assertTrue(response.context['signup_form'].is_bound)
+        self.assertTrue('email' in response.context['signup_form'].errors)
+
+        reserved_local_mind = ReservedLocalMind.objects.all()[0]
+        reserved_email = ReservedEmail.objects.create(
+            email='myemail@example.com',
+            local_mind=reserved_local_mind)
+
+        response.forms[1]['email'] = 'myemail@example.com'
+        response = response.forms[1].submit('signup')
+        self.assertEqual(response.status_code, 302)
+
+        self.assertEqual(len(mail.outbox), 1)
+
     def test_signup_steps(self):
         white = Ethnicity.objects.get(name='White')
 
