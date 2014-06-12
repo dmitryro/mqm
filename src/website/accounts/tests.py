@@ -75,9 +75,13 @@ class SignupTests(WebTest):
 
         response.form['members-form-ceo_one-name'] = 'A big man'
 
-        response.form['members-formset-services-0-name'] = 'Service information'
-        response.form['members-formset-services-0-type'] = 'type'
-        response.form['members-formset-services-0-users_count'] = 10
+        # Services are temporarily disabled.
+
+#        response.form['members-formset-services-0-name'] = 'Service information'
+#        response.form['members-formset-services-0-type'] = 'type'
+#        response.form['members-formset-services-0-users_count'] = 10
+
+        self.assertRaises(AssertionError, lambda: response.form['members-formset-services-0-name'])
 
         response.form['members-formset-faqs-0-question'] = 'Foo Question'
         response.form['members-formset-faqs-0-notifications'] = True
@@ -171,14 +175,15 @@ class SignupTests(WebTest):
         self.assertEqual(task2.is_priority, False)
 
         services = Service.objects.all()
-        self.assertEqual(len(services), 1)
+#        self.assertEqual(len(services), 1)
+        self.assertEqual(len(services), 0)
 
-        service = services[0]
-        self.assertEqual(service.local_mind, local_mind)
-        self.assertEqual(service.slug, 'service-information')
-        self.assertEqual(service.name, 'Service information')
-        self.assertEqual(service.type, 'type')
-        self.assertEqual(service.users_count, 10)
+#        service = services[0]
+#        self.assertEqual(service.local_mind, local_mind)
+#        self.assertEqual(service.slug, 'service-information')
+#        self.assertEqual(service.name, 'Service information')
+#        self.assertEqual(service.type, 'type')
+#        self.assertEqual(service.users_count, 10)
 
         questions = Question.objects.all()
         self.assertEqual(len(questions), 2)

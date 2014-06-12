@@ -201,12 +201,12 @@ class SignupLocalMindMembersForm(CompositeModelForm):
     ceo_two = ForeignKeyFormField(PersonForm, kwargs={'empty_permitted': True})
     chair = ForeignKeyFormField(PersonForm, kwargs={'empty_permitted': True})
 
-    services = InlineFormSetField(
-        parent_model=LocalMind,
-        model=Service,
-        form=ServiceForm,
-        extra=3,
-        can_delete=False)
+#    services = InlineFormSetField(
+#        parent_model=LocalMind,
+#        model=Service,
+#        form=ServiceForm,
+#        extra=3,
+#        can_delete=False)
     faqs = InlineFormSetField(
         parent_model=LocalMind,
         model=Question,
@@ -235,7 +235,7 @@ class SignupLocalMindMembersForm(CompositeModelForm):
     def save(self, local_mind, *args, **kwargs):
         # Hijack instance with new version.
         self.instance = local_mind
-        self.formsets['services'].instance = local_mind
+#        self.formsets['services'].instance = local_mind
         self.formsets['faqs'].instance = local_mind
 
         instance = super(SignupLocalMindMembersForm, self).save(*args, **kwargs)
