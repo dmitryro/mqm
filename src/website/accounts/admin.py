@@ -65,7 +65,7 @@ class GroupAdmin(admin.ModelAdmin):
 
 
 class ReservedEmailAdmin(admin.ModelAdmin):
-    list_display = ('email',)
+    list_display = ('email', 'local_mind',)
     search_fields = ('email',)
 
 
