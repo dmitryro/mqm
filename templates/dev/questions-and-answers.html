@@ -32,86 +32,216 @@
     <button class="btn btn-default action_addNew" data-type="Question">ADD NEW QUESTION</button>
     <br><br>
     <div id="team-content">
-     
+
      <div class="row">
        <div class="col-md-6">
         <h4>YOUR QUESTIONS</h4>
+        
+        <!-- A Question -->
         <div class="media">
           <a class="pull-left" href="#">
-            <img class="media-object" src="..." alt="...">
+            <!-- show quiestion icon if it is not answered -->
+            <img class="media-object" src="{{ STATIC_URL }}assets/img/ui/icons/icon_tick.png" alt="Answered">
           </a>
+          <!-- hide this a if there is no answers to expand into. number target 1, 2, 3... -->
+          <a class="smallIcon openAccordion" data-toggle="collapse" data-toggle="collapse" data-target="#your-target-1"></a>
           <div class="media-body">
-            <p>Jane Smith - plymouth mind - replied on September 16th</p>
             <h4 class="media-heading">How should we restructure our day serivces provision to include more peerled support groups</h4>
+            <p>Pearl Hope - Bristol - September 14th 2014</p>
+            <p class="small"><a href="#" class="action_addNew" data-type="Answer">+ Answers (1)</a></p>
+            <!-- Start of answers -->
+            <div class="answers collapse" id="your-target-1">
+            <div class="media">
+              <a class="pull-left" href="#">
+                <img class="media-object" src="..." alt="Profile picture">
+              </a>
+              <div class="media-body">
+                <p>Jane Smith - plymouth mind - replied on September 16th</p>
+                <h4 class="media-heading">How should we restructure our day serivces provision to include more peerled support groups</h4>
+              </div>
+            </div>
+            </div>
+            <!-- END OF ANSWERS -->
           </div>
         </div>
+        <!-- End of A Question -->
+
+
       </div>
       <div class="col-md-6 bordered">
 
-
+      <div class="clearfix">
         <form class="form-inline pull-right" role="form">
           <div class="form-group">
             <label for="filterBy">Filter by</label>
             <select type="text" class="form-control" id="input_region" name="input_region" readonly="true">
-                    <option value="East of England">East of England</option>
-                    <option value="East Midlands">East Midlands</option>
-                    <option value="London">London</option>
-                    <option value="North East">North East</option>
-                    <option value="North West">North West</option>
-                    <option value="South East">South East</option>
-                    <option value="South West">South West</option>
-                    <option value="Wales">Wales</option>
-                    <option value="West Midlands">West Midlands</option>
-                    <option value="Yorkshire and The Humber">Yorkshire and The Humber</option>
-                    </select>
+              <option value="East of England">East of England</option>
+              <option value="East Midlands">East Midlands</option>
+              <option value="London">London</option>
+              <option value="North East">North East</option>
+              <option value="North West">North West</option>
+              <option value="South East">South East</option>
+              <option value="South West">South West</option>
+              <option value="Wales">Wales</option>
+              <option value="West Midlands">West Midlands</option>
+              <option value="Yorkshire and The Humber">Yorkshire and The Humber</option>
+            </select>
           </div>
         </form>
 
 
 
         <h4>ALL OPEN HUB QUESTIONS</h4>
-        <p>Content for map goes here</p>
-
-        <div class="media">
+        </div>
+        
+        <!-- A Question -->
+        <div class="media dark">
           <a class="pull-left" href="#">
-            <img class="media-object" src="..." alt="...">
+            <!-- show quiestion icon if it is not answered -->
+            <img class="media-object" src="{{ STATIC_URL }}assets/img/ui/icons/icon_tick.png" alt="Answered">
           </a>
+          <!-- hide this a if there is no answers to expand into. number target 1, 2, 3... -->
+          <a class="smallIcon openAccordion" data-toggle="collapse" data-toggle="collapse" data-target="#target-1"></a>
           <div class="media-body">
             <h4 class="media-heading">How should we restructure our day serivces provision to include more peerled support groups</h4>
             <p>Pearl Hope - Bristol - September 14th 2014</p>
-
+            <p class="small"><a href="#" class="action_addNew" data-type="Answer">+ Answers (2)</a></p>
+            <!-- Start of answers -->
+            <div class="answers collapse" id="target-1">
             <div class="media">
               <a class="pull-left" href="#">
-                <img class="media-object" src="..." alt="...">
+                <img class="media-object" src="..." alt="Profile picture">
               </a>
               <div class="media-body">
                 <p>Jane Smith - plymouth mind - replied on September 16th</p>
                 <h4 class="media-heading">How should we restructure our day serivces provision to include more peerled support groups</h4>
               </div>
             </div>
+            <!-- Another Answer -->
             <div class="media">
               <a class="pull-left" href="#">
-                <img class="media-object" src="..." alt="...">
+                <img class="media-object" src="..." alt="Profile picture">
               </a>
               <div class="media-body">
                 <p>Jane Smith - plymouth mind - replied on September 16th</p>
                 <h4 class="media-heading">How should we restructure our day serivces provision to include more peerled support groups</h4>
               </div>
             </div>
-
-
+            </div>
+            <!-- END OF ANSWERS -->
           </div>
         </div>
+        <!-- End of A Question -->
 
+        <!-- Example of a question not anwered -->
         <div class="media">
           <a class="pull-left" href="#">
-            <img class="media-object" src="..." alt="...">
+            <!-- show quiestion icon if it is not answered -->
+            <img class="media-object" src="{{ STATIC_URL }}assets/img/ui/icons/icon_question.png" alt="Not Answered">
           </a>
+          <!-- hide this a if there is no answers to expand into. number target 1, 2, 3... -->
           <div class="media-body">
-            <p>Jane Smith - plymouth mind - replied on September 16th</p>
             <h4 class="media-heading">How should we restructure our day serivces provision to include more peerled support groups</h4>
+            <p>Pearl Hope - Bristol - September 14th 2014</p>
+            <p class="small"><a href="#" class="action_addNew" data-type="Answer">+ Answers (0)</a></p>
+            <!-- Start of answers -->
+            <!-- END OF ANSWERS -->
           </div>
         </div>
+        <!-- End of A Question -->
+
+        <!-- Example of a question not anwered -->
+        <div class="media dark">
+          <a class="pull-left" href="#">
+            <!-- show quiestion icon if it is not answered -->
+            <img class="media-object" src="{{ STATIC_URL }}assets/img/ui/icons/icon_question.png" alt="Not Answered">
+          </a>
+          <!-- hide this a if there is no answers to expand into. number target 1, 2, 3... -->
+          <div class="media-body">
+            <h4 class="media-heading">How should we restructure our day serivces provision to include more peerled support groups</h4>
+            <p>Pearl Hope - Bristol - September 14th 2014</p>
+            <p class="small"><a href="#" class="action_addNew" data-type="Answer">+ Answers (0)</a></p>
+            <!-- Start of answers -->
+            <!-- END OF ANSWERS -->
+          </div>
+        </div>
+        <!-- End of A Question -->
+
+        <!-- Example of a question not anwered -->
+        <div class="media">
+          <a class="pull-left" href="#">
+            <!-- show quiestion icon if it is not answered -->
+            <img class="media-object" src="{{ STATIC_URL }}assets/img/ui/icons/icon_question.png" alt="Not Answered">
+          </a>
+          <!-- hide this a if there is no answers to expand into. number target 1, 2, 3... -->
+          <div class="media-body">
+            <h4 class="media-heading">How should we restructure our day serivces provision to include more peerled support groups</h4>
+            <p>Pearl Hope - Bristol - September 14th 2014</p>
+            <p class="small"><a href="#" class="action_addNew" data-type="Answer">+ Answers (0)</a></p>
+            <!-- Start of answers -->
+            <!-- END OF ANSWERS -->
+          </div>
+        </div>
+        <!-- End of A Question -->
+
+        <!-- A Question -->
+        <div class="media dark">
+          <a class="pull-left" href="#">
+            <!-- show quiestion icon if it is not answered -->
+            <img class="media-object" src="{{ STATIC_URL }}assets/img/ui/icons/icon_tick.png" alt="Answered">
+          </a>
+          <!-- hide this a if there is no answers to expand into. number target 1, 2, 3... -->
+          <a class="smallIcon openAccordion" data-toggle="collapse" data-toggle="collapse" data-target="#target-4"></a>
+          <div class="media-body">
+            <h4 class="media-heading">How should we restructure our day serivces provision to include more peerled support groups</h4>
+            <p>Pearl Hope - Bristol - September 14th 2014</p>
+            <p class="small"><a href="#" class="action_addNew" data-type="Answer">+ Answers (1)</a></p>
+            <!-- Start of answers -->
+            <div class="answers collapse" id="target-4">
+            <div class="media">
+              <a class="pull-left" href="#">
+                <img class="media-object" src="..." alt="Profile picture">
+              </a>
+              <div class="media-body">
+                <p>Jane Smith - plymouth mind - replied on September 16th</p>
+                <h4 class="media-heading">How should we restructure our day serivces provision to include more peerled support groups</h4>
+              </div>
+            </div>
+            </div>
+            <!-- END OF ANSWERS -->
+          </div>
+        </div>
+        <!-- End of A Question -->
+
+        <!-- A Question -->
+        <div class="media">
+          <a class="pull-left" href="#">
+            <!-- show quiestion icon if it is not answered -->
+            <img class="media-object" src="{{ STATIC_URL }}assets/img/ui/icons/icon_tick.png" alt="Answered">
+          </a>
+          <!-- hide this a if there is no answers to expand into. number target 1, 2, 3... -->
+          <a class="smallIcon openAccordion" data-toggle="collapse" data-toggle="collapse" data-target="#target-5"></a>
+          <div class="media-body">
+            <h4 class="media-heading">How should we restructure our day serivces provision to include more peerled support groups</h4>
+            <p>Pearl Hope - Bristol - September 14th 2014</p>
+            <p class="small"><a href="#" class="action_addNew" data-type="Answer">+ Answers (1)</a></p>
+            <!-- Start of answers -->
+            <div class="answers collapse" id="target-5">
+            <div class="media">
+              <a class="pull-left" href="#">
+                <img class="media-object" src="..." alt="Profile picture">
+              </a>
+              <div class="media-body">
+                <p>Jane Smith - plymouth mind - replied on September 16th</p>
+                <h4 class="media-heading">How should we restructure our day serivces provision to include more peerled support groups</h4>
+              </div>
+            </div>
+            </div>
+            <!-- END OF ANSWERS -->
+          </div>
+        </div>
+        <!-- End of A Question -->
+
 
 
 

@@ -98,9 +98,27 @@ h1,h2,h3,h4,h5,h6 {
 .openHubLogo {width:181px; height:79px; background:url(/static/assets/img/brand/openhub-logo.svg);}
 .no-svg .openHubLogo {background:url(/static/assets/img/brand/openhub-logo.png);}
 
+
+.smallIcon {width:18px; height:18px; display:block; float:right; margin:10px;}
+.smallIcon.openAccordion {background:url(/static/assets/img/ui/icons/icon_plus.png); position:pointer;}
+.smallIcon.closeAccordion {background:url(/static/assets/img/ui/icons/icon_close.png); position:pointer;}
+
+
+
+
 //to move to a more appropriate home
-.col-md-6.bordered {border-left:2px solid #7f3f98;}
+.col-md-6.bordered {border-left:2px solid $blue;}
 
 @media screen and (max-width: 992px) {
   .col-md-6.bordered {border-left:0px; border-top:2px solid #7f3f98; padding-top:5px;}
 }
+
+
+.media.dark {background: #bfc1c3}
+.media-heading {padding-right:7px;}
+
+
+
+
+
+

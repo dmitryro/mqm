@@ -13,6 +13,7 @@ $("#action_addNewVideo").click(function(e){
 });
 
 $('body').on("click", ".action_addNew", function(e){
+    e.preventDefault();
 	//global for dashboard
 	// get type from button -> load remote URL in modal window
 	var type = $(this).attr('data-type');
@@ -74,6 +75,14 @@ if($('#video-content').length) {
         $('.overlay').fadeOut(400);
     }
 
+$('body').on("click", ".smallIcon.openAccordion", function(e){
+    $(this).removeClass("openAccordion").addClass("closeAccordion");
+});
+
+
+$('body').on("click", ".smallIcon.closeAccordion", function(e){
+    $(this).removeClass("closeAccordion").addClass("openAccordion");
+});
 
 
 
