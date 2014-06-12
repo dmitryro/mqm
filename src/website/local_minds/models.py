@@ -26,6 +26,8 @@ class LocalMind(models.Model):
     reserves = models.CharField(_('LM Reserves'), max_length=50, blank=True)
     deficit = models.CharField(_('LM Surplus/Deficit'), max_length=50, blank=True)
     statement = models.TextField(_('Mission Statement'), blank=True)
+    # adding
+    # hours = models.TextField(_('Opening Hours'), blank=True)
     group_avatar = models.ImageField(_('LM Profile Image'), upload_to='localminds/avatars/', blank=True)
 
     # Data, entered in Step 3.
