@@ -99,13 +99,6 @@ class ReservedEmail(models.Model):
     Holds email addresses that are allowed to sign-up.
     '''
 
-    CURRENT_PARTNER = 'current-partner'
-    PARTNER_OPPORTUNITY = 'partner-opportunity'
-    RELATIONSHIP_CHOICES = (
-        (CURRENT_PARTNER, _('Current Partner')),
-        (PARTNER_OPPORTUNITY, _('Partner Opportunity')),
-    )
-
     email = EmailField(unique=True)
 
     class Meta:
