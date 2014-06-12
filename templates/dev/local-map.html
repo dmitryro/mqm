@@ -9,6 +9,11 @@
 	#map-canvas { height: 100%; width: 100%;}
 	#mediaObject {padding-top: 0px;}
 
+	#mapKey {}
+	#mapKey ul {list-style: none; margin:0; padding: 0;}
+	#mapKey ul li {float: left; margin-right: 40px; margin-top: 10px;}
+	#mapKey ul li img {display: block; margin: 0 auto; margin-bottom: 10px;}
+
 </style>
 {% endblock %}
 
@@ -85,11 +90,19 @@
 				</div>
 				<div>
 					<h4>Key:</h4>
-					<div id="mapKey">
+					<div id="mapKey" class="clearfix">
 						<ul>
 							<li>
 								<img class="media-object" src="{{ STATIC_URL }}assets/img/ui/icons/map-markers/local-mind.png" alt="Local Mind Icon">
-								<p>Local Mind</p>
+								<p>Local<br>Mind</p>
+							</li>
+							<li>
+								<img class="media-object" src="{{ STATIC_URL }}assets/img/ui/icons/map-markers/current.png" alt="Current Partners Icon">
+								<p>Current<br>Partners</p>
+							</li>
+							<li>
+								<img class="media-object" src="{{ STATIC_URL }}assets/img/ui/icons/map-markers/potential.png" alt="Potential Partners Icon">
+								<p>Potential<br>Partners</p>
 							</li>
 						</ul>
 					</div>
@@ -152,7 +165,7 @@ function initialize() {
 
 //information boxes content, the indexes are the same as the marker
 infoBoxes.push(new google.maps.InfoWindow({
-	content: "Some HTML"
+	content: '<p>NAME OF PARTNER</p><br><p><span class="text-muted">Type:</span> Local Authority</p><p><span class="text-muted">Email:</span> email address</p>	<p><span class="text-muted">Telephone:</span> 014 4454 5000</p><p><span class="text-muted">website:</span> www</p><p><span class="text-muted">Address:</span> address</p>'
 }));
 infoBoxes.push(new google.maps.InfoWindow({
 	content: "Some HTML 2"

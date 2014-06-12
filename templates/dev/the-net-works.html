@@ -24,10 +24,10 @@
   {% include "includes/topbar.html" %}
   <div class="container-fluid">
 
-    <h3 class="withIcon icon_map"><span></span>THE FUNDING MAP</h3>
+    <h3 class="withIcon icon_national"><span></span>THE NET WORKS</h3>
     <a href="/" class="page-close"></a>
 
-    <button class="btn btn-default action_addNew" data-type="Funding">ADD A FUND</button>
+    <button class="btn btn-default action_addNew" data-type="Resource">ADD A RESOURCE</button>
 
 
     <div id="team-content">
@@ -47,6 +47,11 @@
 
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcyMGZWQcL-rxiSVvknJuk0AkSSkxEy-o"></script>
 <script type="text/javascript" src="{{ STATIC_URL }}/js/markerclusterer.min.js"></script>
+<style type="text/css">
+  .twocol {}
+  .twocol span {float: left;}
+  .twocol p {float: right; padding-left: 5px;}
+</style>
 <script type="text/javascript">
 
 //global variables
@@ -90,7 +95,7 @@ function initialize() {
 
 //information boxes content, the indexes are the same as the marker
 infoBoxes.push(new google.maps.InfoWindow({
-  content: '<p>NAME OF FUND</p><br><p><span class="text-muted">Closes:</span>7th April 2014, 13.00 -15.00</p><p><span class="text-muted">Location:</span> Plymouth Offices</p> <p><span class="text-muted">Created by:</span> Jane Smith</p>'
+  content: '<p>BRISTOL MIND</p><div class="twocol"><span class="text-muted">Resources:</span><p>Item One<br>Item Two<br>Item Three</p></div>'
 }));
 
 function markerEventListenerDelegate(marker,infobox) {
@@ -106,7 +111,7 @@ function markerEventListenerDelegate(marker,infobox) {
 //map markers
 markers.push(new google.maps.Marker({
   position: new google.maps.LatLng(51.5072, 0.1275),
-  icon: '/static/assets/img/ui/icons/map-markers/funding.png',
+  icon: '/static/assets/img/ui/icons/map-markers/local-mind.png',
   title:"Local Mind - N/A",
 }));
 

@@ -58,6 +58,7 @@ urlpatterns = patterns('',
     url(r'^d/external-news/$', 'django.shortcuts.render', {'template_name': 'dev/external-news.html'}),
     url(r'^d/positive-news/$', 'django.shortcuts.render', {'template_name': 'dev/positive-news.html'}),
     url(r'^d/brand/$', 'django.shortcuts.render', {'template_name': 'dev/brand.html'}),
+    url(r'^d/the-net-works/$', 'django.shortcuts.render', {'template_name': 'dev/the-net-works.html'}),
 
     url(r'^sign-up/part1$', 'django.shortcuts.render', {'template_name': 'dev/signup/part1.html'}),
     url(r'^sign-up/part2$', 'django.shortcuts.render', {'template_name': 'dev/signup/part2.html'}),
@@ -80,6 +81,7 @@ urlpatterns = patterns('',
     url(r'^_addNews/$', 'django.shortcuts.render', {'template_name': 'dev/modals/add-news.html'}),
     url(r'^_addVideo/$', 'django.shortcuts.render', {'template_name': 'dev/modals/add-video.html'}),
     url(r'^_addPassword/$', 'django.shortcuts.render', {'template_name': 'dev/modals/change-password.html'}),
+    url(r'^_addResource/$', 'django.shortcuts.render', {'template_name': 'dev/modals/add-resource.html'}),
 
 
     #general
