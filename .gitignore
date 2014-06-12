@@ -10,4 +10,8 @@
 .DS_Store
 *.pyc
 db.sqlite
+<<<<<<< HEAD
 /src/website/local_settings.py
+=======
+/src/website/local_settings.py
+>>>>>>> 0ae64ce2ad68dc4ea8017b3b45d49afd25eb6649
