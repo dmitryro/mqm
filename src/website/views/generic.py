@@ -1,12 +1,15 @@
+from django.core.urlresolvers import reverse
+from django.http import HttpResponseRedirect
+
+
 class LoginRequiredMixin(object):
     login_required = True
-    access_denied_template = '403.html'
 
     def access_denied(self, request):
-        return self.response_class(
-            request=self.request,
-            template=self.access_denied_template,
-            status=403)
+        return HttpResponseRedirect(
+            '{login}?next={next}'.format(
+                login=reverse('login'),
+                next=request.path))
 
     def dispatch(self, request, *args, **kwargs):
         if self.login_required and not request.user.is_authenticated():
