@@ -3,9 +3,11 @@
 import os
 
 from django.conf import settings
+from django.contrib import auth
 from django.contrib.formtools.wizard.views import NamedUrlSessionWizardView
 from django.core.files.storage import FileSystemStorage
 from django.core.urlresolvers import reverse
+from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.utils.http import base36_to_int
@@ -73,9 +75,12 @@ class SignupWizardView(NamedUrlSessionWizardView):
         partners_form.save(local_mind=local_mind, user=user)
         invites_form.save(local_mind=local_mind)
 
-        return render_to_response('registration/signup_complete.html', {
+        user = auth.authenticate(
+            email=self.reserved_email.email,
+            password=profile_form.cleaned_data['password1'])
+        auth.login(self.request, user)
 
-        })
+        return HttpResponseRedirect(reverse('dashboard'))
 
 
 signup_forms = (

@@ -1,4 +1,5 @@
 import autofixture
+from django.core.urlresolvers import reverse
 from django_webtest import WebTest
 from website.accounts.models import User, Experience, ReservedEmail
 from website.faq.models import Question
@@ -110,10 +111,13 @@ class SignupTests(WebTest):
         response = response.form.submit()
         response = response.follow()
 
-        # We reached the complete page. Here we check if everything was saved
-        # correctly.
+        # We are done.Here we check if everything was saved
+        # correctly and that we are redirected to the dashboard.
 
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 302)
+
+        response = response.follow()
+        self.assertEqual(response.request.path, reverse('dashboard'))
 
         local_mind = LocalMind.objects.get(name='My Local Mind')
 
