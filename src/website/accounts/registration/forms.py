@@ -1,13 +1,13 @@
 from django.forms.formsets import formset_factory
 from django.forms.models import inlineformset_factory
 from django.utils.translation import ugettext_lazy as _
-from django_compositeform import CompositeModelForm, FormSetField, InlineFormSetField
+from django_compositeform import CompositeModelForm, ForeignKeyFormField, FormSetField, InlineFormSetField
 import floppyforms as forms
 
 from website.accounts.models import User, Experience
 from website.faq.models import Question
 from website.local_map.models import Map
-from website.local_minds.models import LocalMind, Ethnicity
+from website.local_minds.models import LocalMind, Ethnicity, Person
 from website.news.models import PositiveNews
 from website.resources.models import Resource
 from website.services.models import Service
@@ -37,6 +37,7 @@ class SignupLocalMindForm(forms.ModelForm):
             'reserves',
             'deficit',
             'statement',
+            'hours',
             'group_avatar',
         )
 
@@ -153,10 +154,23 @@ class QuestionForm(forms.ModelForm):
         )
 
 
+class PersonForm(forms.ModelForm):
+    class Meta:
+        model = Person
+        significant_fields = ('name',)
+        fields = (
+            'name',
+            'ethnicity',
+            'gender',
+            'email',
+            'telephone',
+        )
+
+
 class SignupLocalMindMembersForm(CompositeModelForm):
-    trustees_ethnicities = FormSetField(EthnicityFormSet)
-    volunteers_ethnicities = FormSetField(EthnicityFormSet)
-    staff_ethnicities = FormSetField(EthnicityFormSet)
+    ceo_one = ForeignKeyFormField(PersonForm, kwargs={'empty_permitted': True})
+    ceo_two = ForeignKeyFormField(PersonForm, kwargs={'empty_permitted': True})
+    chair = ForeignKeyFormField(PersonForm, kwargs={'empty_permitted': True})
 
     services = InlineFormSetField(
         parent_model=LocalMind,
@@ -174,16 +188,12 @@ class SignupLocalMindMembersForm(CompositeModelForm):
     class Meta:
         model = LocalMind
         fields = (
-            'chairman',
-            'chairman_email',
-            'ceo',
-            'ceo_email',
-            'ceo_telephone',
-            'chair_ethnicity',
             'staff_count',
             'trustees_count',
             'volunteers_count',
             'trustees_active',
+            'area_of_benefit',
+            'average_volunteer_hours',
         )
 
     def get_objects_from_formset(self, name):
@@ -200,9 +210,6 @@ class SignupLocalMindMembersForm(CompositeModelForm):
         self.formsets['faqs'].instance = local_mind
 
         instance = super(SignupLocalMindMembersForm, self).save(*args, **kwargs)
-        instance.trustees_ethnicities = self.get_objects_from_formset('trustees_ethnicities')
-        instance.volunteers_ethnicities = self.get_objects_from_formset('volunteers_ethnicities')
-        instance.staff_ethnicities = self.get_objects_from_formset('staff_ethnicities')
         return instance
 
 

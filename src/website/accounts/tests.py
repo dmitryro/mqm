@@ -24,6 +24,7 @@ class SignupTests(WebTest):
         # First step. Local Mind.
 
         response.form['local-mind-name'] = 'My Local Mind'
+        response.form['local-mind-hours'] = '11 am to 5pm'
 
         response = response.form.submit()
         self.assertTrue(response.context['form'].errors['accept_tos'])
@@ -63,9 +64,7 @@ class SignupTests(WebTest):
 
         # Third step. Members.
 
-        response.form['members-formset-trustees_ethnicities-0-ethnicity'] = white.pk
-        response.form['members-formset-volunteers_ethnicities-0-ethnicity'] = white.pk
-        response.form['members-formset-staff_ethnicities-0-ethnicity'] = white.pk
+        response.form['members-form-ceo_one-name'] = 'A big man'
 
         response.form['members-formset-services-0-name'] = 'Service information'
         response.form['members-formset-services-0-type'] = 'type'
@@ -111,9 +110,14 @@ class SignupTests(WebTest):
 
         local_mind = LocalMind.objects.get(name='My Local Mind')
 
-        self.assertEqual(list(local_mind.trustees_ethnicities.all()), [white])
-        self.assertEqual(list(local_mind.volunteers_ethnicities.all()), [white])
-        self.assertEqual(list(local_mind.trustees_ethnicities.all()), [white])
+        self.assertEqual(local_mind.hours, '11 am to 5pm')
+
+        self.assertEqual(local_mind.ceo_two, None)
+        self.assertEqual(local_mind.chair, None)
+
+        self.assertNotEqual(local_mind.ceo_one, None)
+        self.assertEqual(local_mind.ceo_one.name, 'A big man')
+
         # TODO: Test more local mind fields.
 
         user = User.objects.get(email=reserved_email.email)

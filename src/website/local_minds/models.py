@@ -3,6 +3,17 @@ from django.utils.translation import ugettext_lazy as _
 from django_extensions.db.fields import AutoSlugField, CreationDateTimeField, ModificationDateTimeField
 
 
+class ReservedLocalMind(models.Model):
+    name = models.CharField(_('Local Mind'), max_length=120)
+
+    class Meta:
+        verbose_name = _('Reserved Local Mind')
+        verbose_name_plural = _('Reserved Local Minds')
+
+    def __unicode__(self):
+        return self.name
+
+
 class LocalMind(models.Model):
     CHARITY_TYPE_CHOICES = (
         ('unincorporated', _('Unincorporated'),),
@@ -10,6 +21,7 @@ class LocalMind(models.Model):
         ('charitable-incorporated-organisation', _('Charitable Incorporated Organisation'),),
     )
 
+    reserved_local_mind = models.OneToOneField('ReservedLocalMind', null=True, blank=True)
     name = models.CharField(_('Local Mind'), max_length=120)
     slug = AutoSlugField(populate_from=('name',))
 
@@ -26,45 +38,20 @@ class LocalMind(models.Model):
     reserves = models.CharField(_('LM Reserves'), max_length=50, blank=True)
     deficit = models.CharField(_('LM Surplus/Deficit'), max_length=50, blank=True)
     statement = models.TextField(_('Mission Statement'), blank=True)
-    # adding
-    # hours = models.TextField(_('Opening Hours'), blank=True)
+    hours = models.TextField(_('Opening Hours'), blank=True)
     group_avatar = models.ImageField(_('LM Profile Image'), upload_to='localminds/avatars/', blank=True)
 
     # Data, entered in Step 3.
-    # remove 'chairman, chairman_email, ceo, ceo_email, ceo_telephone, chair ethnicity'
-    chairman = models.CharField(_('Chairs name'), max_length=50, blank=True)
-    chairman_email = models.EmailField(_('Email'), blank=True)
-    ceo = models.CharField(_('CEO Name'), max_length=50, blank=True)
-    ceo_email = models.EmailField(_('CEO Email'), blank=True)
-    ceo_telephone = models.CharField(_('CEO Contact'), max_length=30, blank=True)
-    chair_ethnicity = models.ForeignKey('Ethnicity', verbose_name=_('Chair Ethnicity'), related_name='chair_ethnicity+', null=True, blank=True)
-    # adding
-    # ceo_one = models.CharField(_('CEO One Name'), max_length=50, blank=True)
-    # ceo_one_ethnicity = models.ForeignKey('Ethnicity', verbose_name=_('Chair Ethnicity'), related_name='chair_ethnicity+', null=True, blank=True)
-    # ceo_one_gender = model COICES
-    # ceo_one_email = models.EmailField(_('CEO Email'), blank=True)
-    # ceo_one_telephone = models.CharField(_('CEO Contact'), max_length=30, blank=True)
-    # ceo_two = models.CharField(_('CEO One Name'), max_length=50, blank=True)
-    # ceo_two_ethnicity = models.ForeignKey('Ethnicity', verbose_name=_('Chair Ethnicity'), related_name='chair_ethnicity+', null=True, blank=True)
-    # ceo_two_gender = model COICES
-    # ceo_two_email = models.EmailField(_('CEO Email'), blank=True)
-    # ceo_two_telephone = models.CharField(_('CEO Contact'), max_length=30, blank=True)
-    # chair = models.CharField(_('CEO One Name'), max_length=50, blank=True)
-    # chair_ethnicity = models.ForeignKey('Ethnicity', verbose_name=_('Chair Ethnicity'), related_name='chair_ethnicity+', null=True, blank=True)
-    # chair_gender = model COICES
-    # chair_email = models.EmailField(_('CEO Email'), blank=True)
-    # chair_telephone = models.CharField(_('CEO Contact'), max_length=30, blank=True)
+    ceo_one = models.ForeignKey('Person', related_name='ceo_one_of', null=True, blank=True)
+    ceo_two = models.ForeignKey('Person', related_name='ceo_two_of', null=True, blank=True)
+    chair = models.ForeignKey('Person', related_name='chair_one_of', null=True, blank=True)
+
     staff_count = models.PositiveIntegerField(_('No Of Staff'), null=True, blank=True)
     trustees_count = models.PositiveIntegerField(_('No Of Trustees'), null=True, blank=True)
     volunteers_count = models.PositiveIntegerField(_('No Of Volunteers'), null=True, blank=True)
     trustees_active = models.PositiveIntegerField(_('No Of Trustees Who Use MH Services'), null=True, blank=True)
-    #remove 'trustees_ethnicities', 'volunteers_ethnicities', 'staff_ethnicities'.
-    trustees_ethnicities = models.ManyToManyField('Ethnicity', verbose_name=_('Trustees Ethnicity'), related_name='trustees+', blank=True)
-    volunteers_ethnicities = models.ManyToManyField('Ethnicity', verbose_name=_('Volunteers Ethnicity'), related_name='volunteers+', blank=True)
-    staff_ethnicities = models.ManyToManyField('Ethnicity', verbose_name=_('Staff Ethnicity'), related_name='staff+', blank=True)
-    # adding
-    # area_of_benefit = models.CharField(_('max_length=50, blank=True)
-    # average_volunteer_hours = models.CharField(_('max_length=50, blank=True)
+    area_of_benefit = models.CharField(_('Area of benefit'), max_length=50, blank=True)
+    average_volunteer_hours = models.CharField(_('Average volunteer hours'), max_length=50, blank=True)
 
     created = CreationDateTimeField()
     modified = ModificationDateTimeField()
@@ -91,3 +78,16 @@ class Ethnicity(models.Model):
 
     def __unicode__(self):
         return self.name
+
+
+class Person(models.Model):
+    GENDER_CHOICES = (
+        ('female', _('Female')),
+        ('male', _('Male')),
+    )
+
+    name = models.CharField(max_length=50)
+    ethnicity = models.ForeignKey('Ethnicity', null=True, blank=True)
+    gender = models.CharField(max_length=30, choices=GENDER_CHOICES, blank=True)
+    email = models.EmailField(blank=True)
+    telephone = models.CharField(max_length=30, blank=True)
