@@ -45,6 +45,11 @@ def login_signup(request):
     }, context_instance=RequestContext(request))
 
 
+def signup_confirmation(request):
+    return render_to_response('registration/signup_confirmation.html', {
+    }, context_instance=RequestContext(request))
+
+
 logout = auth_views.logout
 
 

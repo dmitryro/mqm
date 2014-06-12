@@ -34,7 +34,7 @@ class SignupLogicMixin(object):
             obj = None
 
         if obj is None or not token_generator.check_token(obj, token):
-            return invalid_url(request)
+            return invalid_url(self.request)
 
     def dispatch(self, request, *args, **kwargs):
         response = self.check_token()
@@ -71,19 +71,6 @@ class SignupWizardView(SignupLogicMixin, NamedUrlSessionWizardView):
             obj = None
         self.reserved_email = obj
         return obj
-
-    def check_token(self):
-        uidb36 = self.kwargs['uidb36']
-        token = self.kwargs['token']
-
-        try:
-            uid_int = base36_to_int(uidb36)
-            self.reserved_email = ReservedEmail.objects.get(pk=uid_int)
-        except (ValueError, OverflowError, ReservedEmail.DoesNotExist):
-            self.reserved_email = None
-
-        if self.reserved_email is None or not token_generator.check_token(self.reserved_email, token):
-            return invalid_url(request)
 
     def get_template_names(self):
         return [self.template_names[self.steps.current]]
