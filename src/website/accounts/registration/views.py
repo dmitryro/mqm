@@ -11,13 +11,48 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.utils.http import base36_to_int
+from django.views.generic import FormView
 
-from ..models import ReservedEmail
+from ..models import User, ReservedEmail
 from .tokens import token_generator
 from .forms import SignupLocalMindForm, SignupProfileForm, SignupLocalMindMembersForm, SignupPartnersForm, SignupInviteForm
+from .forms import SignupUserProfileForm
 
 
-class SignupWizardView(NamedUrlSessionWizardView):
+class SignupLogicMixin(object):
+    def get_token_object(self, uid_int):
+        raise NotImplementedError()
+
+    def check_token(self):
+        uidb36 = self.kwargs['uidb36']
+        token = self.kwargs['token']
+
+        try:
+            uid_int = base36_to_int(uidb36)
+            obj = self.get_token_object(uid_int)
+        except (ValueError, OverflowError):
+            obj = None
+
+        if obj is None or not token_generator.check_token(obj, token):
+            return invalid_url(request)
+
+    def dispatch(self, request, *args, **kwargs):
+        response = self.check_token()
+        if response:
+            return response
+        return super(SignupLogicMixin, self).dispatch(request, *args, **kwargs)
+
+    def login_user(self, email, password):
+        user = auth.authenticate(
+            username=email,
+            password=password)
+        auth.login(self.request, user)
+
+    def get_success_url(self):
+        return reverse('dashboard')
+
+
+class SignupWizardView(SignupLogicMixin, NamedUrlSessionWizardView):
     file_storage = FileSystemStorage(
         location=os.path.join(settings.MEDIA_ROOT, 'signup'))
 
@@ -29,9 +64,17 @@ class SignupWizardView(NamedUrlSessionWizardView):
         'invites': 'registration/signup_step_invites.html',
     }
 
-    def dispatch(self, request, *args, **kwargs):
-        uidb36 = kwargs['uidb36']
-        token = kwargs['token']
+    def get_token_object(self, uid_int):
+        try:
+            obj = ReservedEmail.objects.get(pk=uid_int)
+        except ReservedEmail.DoesNotExist:
+            obj = None
+        self.reserved_email = obj
+        return obj
+
+    def check_token(self):
+        uidb36 = self.kwargs['uidb36']
+        token = self.kwargs['token']
 
         try:
             uid_int = base36_to_int(uidb36)
@@ -41,8 +84,6 @@ class SignupWizardView(NamedUrlSessionWizardView):
 
         if self.reserved_email is None or not token_generator.check_token(self.reserved_email, token):
             return invalid_url(request)
-
-        return super(SignupWizardView, self).dispatch(request, *args, **kwargs)
 
     def get_template_names(self):
         return [self.template_names[self.steps.current]]
@@ -68,19 +109,18 @@ class SignupWizardView(NamedUrlSessionWizardView):
 
         local_mind = local_mind_form.save(reserved_email=self.reserved_email)
         user = profile_form.save(
-            reserved_email=self.reserved_email,
+            email=self.reserved_email.email,
             local_mind=local_mind)
 
         members_form.save(local_mind=local_mind)
         partners_form.save(local_mind=local_mind, user=user)
         invites_form.save(local_mind=local_mind)
 
-        user = auth.authenticate(
-            email=self.reserved_email.email,
-            password=profile_form.cleaned_data['password1'])
-        auth.login(self.request, user)
+        self.login_user(
+            user.email,
+            profile_form.cleaned_data['password1'])
 
-        return HttpResponseRedirect(reverse('dashboard'))
+        return HttpResponseRedirect(self.get_success_url())
 
 
 signup_forms = (
@@ -98,16 +138,42 @@ signup_wizard = SignupWizardView.as_view(
     done_step_name='complete')
 
 
+class SignupUserProfileView(SignupLogicMixin, FormView):
+    form_class = SignupUserProfileForm
+    template_name = 'registration/signup_user_profile.html'
+
+    def get_token_object(self, uid_int):
+        try:
+            obj = User.objects.get(pk=uid_int)
+        except User.DoesNotExist:
+            obj = None
+
+        if obj and obj.date_joined is not None:
+            obj = None
+
+        self.user = obj
+        return obj
+
+    def get_context_data(self, **kwargs):
+        kwargs['user'] = self.user
+        return super(SignupUserProfileView, self).get_context_data(**kwargs)
+
+    def get_form_kwargs(self):
+        kwargs = super(SignupUserProfileView, self).get_form_kwargs()
+        kwargs['instance'] = self.user
+        return kwargs
+
+    def form_valid(self, form):
+        user = form.save()
+        self.login_user(
+            user.email,
+            form.cleaned_data['password1'])
+        return HttpResponseRedirect(self.get_success_url())
+
+
+signup_profile = SignupUserProfileView.as_view()
+
+
 def invalid_url(request):
     return render_to_response('registration/invalid_url.html', {
-    }, context_instance=RequestContext(request))
-
-
-def signup_confirmation(request):
-    '''
-    This view will be used after a user has successfully requested a
-    registration link via the signup form.
-    '''
-
-    return render_to_response('registration/signup_confirmation.html', {
     }, context_instance=RequestContext(request))

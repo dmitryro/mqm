@@ -1,5 +1,6 @@
 import autofixture
 from django.core.urlresolvers import reverse
+from django.core import mail
 from django_webtest import WebTest
 from website.accounts.models import User, Experience, ReservedEmail
 from website.faq.models import Question
@@ -231,3 +232,46 @@ class SignupTests(WebTest):
         self.assertEqual(john.last_name, 'Doe')
         self.assertEqual(john.email, 'john.doe@example.com')
         self.assertEqual(john.privileges, 'admin')
+        self.assertEqual(john.local_mind, local_mind)
+        self.assertEqual(john.date_joined, None)
+
+        # An invitation email was sent.
+        self.assertEqual(len(mail.outbox), 1)
+        email = mail.outbox[0]
+        self.assertEqual(email.to, [john.email])
+
+    def test_profile_signup(self):
+        local_mind = autofixture.create_one(LocalMind)
+        user = User.objects.create(
+            local_mind=local_mind,
+            email='foo@example.com',
+            date_joined=None)
+
+        url = user.get_signup_url()
+
+        response = self.app.get(url)
+
+        self.assertEqual(response.status_code, 200)
+
+        response.form['password1'] = 'TestPassword'
+        response.form['password2'] = 'NonEqual'
+
+        response = response.form.submit()
+
+        self.assertFalse('password1' in response.context['form'].errors)
+        self.assertTrue('password2' in response.context['form'].errors)
+
+        response.form['password1'] = 'TestPassword'
+        response.form['password2'] = 'TestPassword'
+
+        response = response.form.submit()
+
+        # We are done.
+
+        response = response.follow()
+        self.assertEqual(response.request.path, reverse('dashboard'))
+
+        user = User.objects.get(pk=user.pk)
+
+        self.assertTrue(user.check_password('TestPassword'))
+        self.assertTrue(user.date_joined is not None)

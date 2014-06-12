@@ -1,0 +1,64 @@
+{% extends "registration/signup_base.html" %}
+{% load floppyforms %}
+
+
+{% block progress %}{% endblock %}
+
+
+{% block subheadline %}Invitation to signup{% endblock %}
+
+
+{% block section %}
+
+    {% form form using %}
+
+        {% formrow form.first_name %}
+        {% formrow form.last_name %}
+        {% formrow form.job_title %}
+
+        <p>
+        Email: {{ user.email }}
+        </p>
+
+        {% formrow form.email %}
+        {% formrow form.password1 %}
+        {% formrow form.password2 %}
+        {% formrow form.skills %}
+        {% formrow form.user_avatar %}
+        {% formrow form.biography %}
+        {% formrow form.telephone %}
+        {% formrow form.mobile %}
+        {% formrow form.twitter %}
+
+        {% with formset=form.formsets.experiences %}
+            {{ formset.management_form }}
+            {% for form in formset %}
+                {% formrow form.experience %}
+            {% endfor %}
+        {% endwith %}
+
+        <h3>Task Queue</h3>
+        <p class="help">Please submit any task below - they will automatically be assigned to you</p>
+
+        {% with formset=form.formsets.tasks %}
+        <div data-formset-prefix="{{ formset.prefix }}">
+            {{ formset.management_form }}
+            {% for form in formset %}
+                {% formrow form.text %}
+            {% endfor %}
+
+            <a class="add-another">Add another</a>
+
+            <div class="template">
+            {% with form=formset.empty_form %}
+                {% formrow form.text %}
+            {% endwith %}
+            </div>
+        </div>
+        {% endwith %}
+
+    {% endform %}
+
+    <input type="submit" name="submit" value="submit" />
+
+{% endblock %}

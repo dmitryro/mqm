@@ -1,0 +1,13 @@
+{% extends "email/base.html" %}
+{% load email %}
+
+
+{% subject %}You got invited to {{ site.name }}!{% endsubject %}
+
+
+{% block body %}
+Hi,
+
+you got invited to join your local mind {{ local_mind }} on {{ site.name }}. Please visit the following link to signup:
+{{ signup_link }}
+{% endblock %}

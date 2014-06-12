@@ -19,10 +19,13 @@ from .registration.tokens import token_generator
 class User(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = 'email'
 
+    TRUSTEE = 'trustee'
+    ADMIN = 'admin'
+    SUPERUSER = 'superuser'
     PRIVILEGE_CHOICES = (
-        ('trustee', _('Trustee'),),
-        ('admin', _('Admin'),),
-        ('superuser', _('Superuser'),),
+        (TRUSTEE, _('Trustee'),),
+        (ADMIN, _('Admin'),),
+        (SUPERUSER, _('Superuser'),),
     )
 
     slug = AutoSlugField(unique=True, populate_from=('first_name', 'last_name'))
@@ -51,7 +54,9 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     privileges = models.CharField(_('Access level'), max_length=20, choices=PRIVILEGE_CHOICES)
 
-    date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
+    # If user does not have a date_joined yet, it is available for signup via
+    # the invitation process still.
+    date_joined = models.DateTimeField(_('date joined'), default=timezone.now, null=True, blank=True)
 
     objects = UserManager()
 
@@ -75,6 +80,32 @@ class User(AbstractBaseUser, PermissionsMixin):
         Sends an email to this User.
         """
         send_mail(subject, message, from_email, [self.email])
+
+    def get_token(self):
+        return token_generator.make_token(self)
+
+    def get_signup_url(self):
+        return reverse('signup-profile', kwargs={
+            'uidb36': int_to_base36(self.pk),
+            'token': self.get_token()
+        })
+
+    def send_invitation(self):
+        site = Site.objects.get_current()
+        url = 'http://{site.domain}{path}'.format(
+            site=site,
+            path=self.get_signup_url())
+        context = {
+            'local_mind': self.local_mind,
+            'user': self,
+            'site': site,
+            'signup_link': url,
+        }
+        email = TemplateEmail(
+            to=[self.email],
+            template='email/registration/invitation.html',
+            context=context)
+        email.send()
 
 
 class Experience(models.Model):
@@ -120,10 +151,9 @@ class ReservedEmail(models.Model):
 
     def send_signup_email(self):
         site = Site.objects.get_current()
-        path = self.get_signup_url()
         url = 'http://{site.domain}{path}'.format(
             site=site,
-            path=path)
+            path=self.get_signup_url())
         context = {
             'email': self.email,
             'site': site,

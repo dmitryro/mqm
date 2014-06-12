@@ -68,6 +68,13 @@ class ReservedEmailAdmin(admin.ModelAdmin):
     list_display = ('email', 'local_mind',)
     search_fields = ('email',)
 
+    def save_model(self, request, obj, form, change):
+        saved_obj = super(ReservedEmailAdmin, self).save_model(request, obj, form, change)
+        # This means the email was just created.
+        if not change:
+            self.send_signup_email()
+        return saved_obj
+
 
 admin.site.register(User, UserAdmin)
 admin.site.register(Group, GroupAdmin)

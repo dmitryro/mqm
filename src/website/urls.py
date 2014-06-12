@@ -2,6 +2,7 @@
 from django.conf import settings
 from django.conf.urls import include, patterns, url
 from django.contrib import admin
+from django.http import HttpResponseRedirect
 
 admin.autodiscover()
 
@@ -10,7 +11,7 @@ urlpatterns = patterns('',
     url(r'^humans.txt$', 'django.shortcuts.render', {'template': 'humans.txt'},),
 
     url(r'^$', 'website.views.index', name='index'),
-    url(r'^signup/confirmation/$', 'website.accounts.registration.views.signup_confirmation', name='signup-confirmation'),
+    url(r'^signup/profile/(?P<uidb36>[^-/]+)-(?P<token>[^/]+)/$', 'website.accounts.registration.views.signup_profile', name='signup-profile'),
     url(r'^signup/(?P<uidb36>[^-/]+)-(?P<token>[^/]+)/$', 'website.accounts.registration.views.signup_wizard', name='signup'),
     url(r'^signup/(?P<uidb36>[^-/]+)-(?P<token>[^/]+)/(?P<step>[^/]+)/$', 'website.accounts.registration.views.signup_wizard', name='signup'),
     url(r'^api/', include('website.api.urls')),
@@ -25,6 +26,7 @@ urlpatterns = patterns('',
     #url(r'^meet-the-team/(?P<slug>[^/]+)/$', 'django.shortcuts.render', {'template_name': 'dev/team.html'}),
 
     url(r'^login/$', 'website.accounts.views.login_signup', name='login'),
+    url(r'^login/signup/$', lambda r: HttpResponseRedirect(reverse('login') + '#signup'), name='login-signup'),
     url(r'^login/$', 'website.accounts.views.login_signup', name='signup'),
     url(r'^logout/$', 'website.accounts.views.logout', name='logout'),
 
