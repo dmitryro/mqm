@@ -6,17 +6,31 @@
 
     {% form form using %}
 
-        {% formrow form.chairman %}
-        {% formrow form.chairman_email %}
-        {% formrow form.ceo %}
-        {% formrow form.ceo_email %}
-        {% formrow form.ceo_telephone %}
-        {% formrow form.chair_ethnicity %}
-        {% formrow form.ceo_ethnicity %}
         {% formrow form.staff_count %}
         {% formrow form.trustees_count %}
         {% formrow form.volunteers_count %}
         {% formrow form.trustees_active %}
+
+        <h3>Chairman</h3>
+        {% formrow form.forms.chair.name %}
+        {% formrow form.forms.chair.ethnicity %}
+        {% formrow form.forms.chair.gender %}
+        {% formrow form.forms.chair.email %}
+        {% formrow form.forms.chair.telephone %}
+
+        <h3>Ceo One</h3>
+        {% formrow form.forms.ceo_one.name %}
+        {% formrow form.forms.ceo_one.ethnicity %}
+        {% formrow form.forms.ceo_one.gender %}
+        {% formrow form.forms.ceo_one.email %}
+        {% formrow form.forms.ceo_one.telephone %}
+
+        <h3>Ceo Two</h3>
+        {% formrow form.forms.ceo_two.name %}
+        {% formrow form.forms.ceo_two.ethnicity %}
+        {% formrow form.forms.ceo_two.gender %}
+        {% formrow form.forms.ceo_two.email %}
+        {% formrow form.forms.ceo_two.telephone %}
 
         <h3>Ethnicity of trustees</h3>
 

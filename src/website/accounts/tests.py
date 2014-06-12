@@ -63,6 +63,8 @@ class SignupTests(WebTest):
 
         # Third step. Members.
 
+        response.form['members-form-ceo_one-name'] = 'A big man'
+
         response.form['members-formset-trustees_ethnicities-0-ethnicity'] = white.pk
         response.form['members-formset-volunteers_ethnicities-0-ethnicity'] = white.pk
         response.form['members-formset-staff_ethnicities-0-ethnicity'] = white.pk
@@ -110,6 +112,12 @@ class SignupTests(WebTest):
         self.assertEqual(response.status_code, 200)
 
         local_mind = LocalMind.objects.get(name='My Local Mind')
+
+        self.assertEqual(local_mind.ceo_two, None)
+        self.assertEqual(local_mind.chair, None)
+
+        self.assertNotEqual(local_mind.ceo_one, None)
+        self.assertEqual(local_mind.ceo_one.name, 'A big man')
 
         self.assertEqual(list(local_mind.trustees_ethnicities.all()), [white])
         self.assertEqual(list(local_mind.volunteers_ethnicities.all()), [white])
