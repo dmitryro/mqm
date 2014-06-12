@@ -46,7 +46,6 @@ if($('#video-content').length) {
 
 
     // DROP DOWNS 
-
     $('.drop').bind('click',function() {
         if ($(this).hasClass('dropped')) {
             $(this).parent().find('ul').css('display','none');

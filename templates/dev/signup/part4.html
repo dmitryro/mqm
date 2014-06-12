@@ -1,11 +1,6 @@
 {% extends "base.html" %}
 {% load djangular_tags webdesign %}
 
-{% block extra_css %}
-{{ block.super }}
-<link rel="stylesheet" href="{{ STATIC_URL }}dist/styles/gridster.css" />
-{% endblock %}
-
 {% block content %}
 
 	<div id="content" class="clearfix">
@@ -15,13 +10,14 @@
             <div id="logo-form"></div>
             <h2>SIGN UP TO OPEN HUB</h2>
             <p class="lead">Section 4/5</p>
+            <ul id="dots" class="clearfix"><li class="filled"></li><li class="filled"></li><li class="filled"></li><li class="filled"></li><li></li></ul>
           </div>
 
           <div class="row">
             <div class="col-md-6">
               <div class="col-sm-3"></div>
               <div class="col-sm-9">
-                <p>RESOURCES TO SHARE</p>
+                <h4>RESOURCES TO SHARE</h4>
                 <small>Please enter any resources you have to share with local community</small>
               </div>
             </div>
@@ -111,7 +107,7 @@
             <div class="col-md-6">
               <div class="col-sm-3"></div>
               <div class="col-sm-9">
-                <p>KEY PARTNERS</p>
+                <h4>KEY PARTNERS</h4>
                 <small>Please select any partners you have</small>
               </div>
             </div>
@@ -232,7 +228,7 @@
             <div class="col-md-6">
               <div class="col-sm-3"></div>
               <div class="col-sm-9">
-                <p>Positive News</p>
+                <h4>Positive News</h4>
                 <small>Please select any partners you have</small>
               </div>
             </div>

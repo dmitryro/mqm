@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 {% load djangular_tags webdesign %}
 
-
 {% block content %}
 	<div id="content" class="clearfix">
 <div id="mind-signup-form">
@@ -10,13 +9,14 @@
             <div id="logo-form"></div>
             <h2>SIGN UP TO OPEN HUB</h2>
             <p class="lead">Section 1/5</p>
+            <ul id="dots" class="clearfix"><li class="filled"></li><li></li><li></li><li></li><li></li></ul>
           </div>
 
           <div class="row">
             <div class="col-md-6">
               <div class="col-sm-3"></div>
               <div class="col-sm-9">
-                <p>LOCAL MIND DETAILS</p>
+                <h4>LOCAL MIND DETAILS</h4>
               </div>
             </div>
           </div>
@@ -176,13 +176,19 @@
                     </select>
                   </div>
                 </div>
-              </div>
-              <div class="col-md-6">
                 <div class="form-group">
                   <label for="input_lmProfileImage" class="col-sm-3 control-label">LM Profile Image</label>
                   <div class="col-sm-9">
                     <input type="file" class="form-control" id="input_lmProfileImage" name="input_lmProfileImage">
                     <p class="help-block">Maximum size of 500kb. Only JPG, PNG accepted</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="input_openingHours" class="col-sm-3 control-label">Opening Hours</label>
+                  <div class="col-sm-9">
+                    <textarea rows="5" class="form-control" id="input_openingHours" name="input_openingHours" readonly="true"></textarea>
                   </div>
                 </div>
               </div>

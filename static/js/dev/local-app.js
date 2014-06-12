@@ -141,6 +141,7 @@ $(document).ready(function() {
 	}
 
 	$('#sidebar-button').bind('click', function() {
+		$("#sidebar").show();
 		if(menuToggle == false) {
 			menuToggle = true;
 			$('#sidebar').removeClass('sidebar-colapse');

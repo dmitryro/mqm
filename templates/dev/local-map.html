@@ -35,7 +35,7 @@
 	{% include "includes/topbar.html" %}
 	<div class="container-fluid">
 
-		<h3 class="withIcon icon_map"><span></span>LOCAL MAP</h3>
+		<h3 class="withIcon icon_map"><span></span>MY LOCAL AREA</h3>
 		<a href="/" class="page-close"></a>
 		
 		<div class="row">
@@ -83,6 +83,18 @@
 				<div class="mediaObject" id="mediaObject">
 					<div id="map-canvas"></div>
 				</div>
+				<div>
+					<h4>Key:</h4>
+					<div id="mapKey">
+						<ul>
+							<li>
+								<img class="media-object" src="{{ STATIC_URL }}assets/img/ui/icons/map-markers/local-mind.png" alt="Local Mind Icon">
+								<p>Local Mind</p>
+							</li>
+						</ul>
+					</div>
+
+				</div>
 			</div>
 			
 		</div>
@@ -106,16 +118,20 @@ function initialize() {
 
 	document.getElementById("map-canvas").style.height = document.getElementById('mediaObject').clientHeight + "px";
 
-
 	var styles = [
-	{
-		featureType: "all",
-		stylers: [
-		{ saturation: -75 },
-		{ hue: "#174787" },
-		]
-	}
-	];
+  {
+    "stylers": [
+      { "hue": "#174787" },
+      { "saturation": -75 }
+    ]
+  },{
+    "featureType": "road.highway",
+    "elementType": "labels.icon",
+    "stylers": [
+      { "visibility": "off" }
+    ]
+  }
+]
 
 	var mapOptions = {
 		center: new google.maps.LatLng(51.5072, 0.1275),
@@ -180,14 +196,15 @@ function markerEventListenerDelegate(marker,infobox) {
 //map markers
 markers.push(new google.maps.Marker({
 	position: new google.maps.LatLng(51.5072, 0.1275),
+	icon: '/static/assets/img/ui/icons/map-markers/local-mind.png',
 	title:"Local Mind - N/A",
 	filterName: "Local Mind",
 	partnerTypes: "N/A"
-	/*icon: 'images/beachflag.png'*/
 }));
 
 markers.push(new google.maps.Marker({
 	position: new google.maps.LatLng(51.5072, -0.1275),
+	icon: '/static/assets/img/ui/icons/map-markers/local-mind.png',
 	title:"Local Mind - N/A",
 	filterName: "Local Mind",
 	partnerTypes: "N/A"
@@ -196,6 +213,7 @@ markers.push(new google.maps.Marker({
 
 markers.push(new google.maps.Marker({
 	position: new google.maps.LatLng(51.645294, -0.549316),
+	icon: '/static/assets/img/ui/icons/map-markers/local-mind.png',
 	title:"Local Mind - N/A",
 	filterName: "Local Mind",
 	partnerTypes: "N/A"
@@ -204,6 +222,7 @@ markers.push(new google.maps.Marker({
 
 markers.push(new google.maps.Marker({
 	position: new google.maps.LatLng(51.296276, -1.84021),
+	icon: '/static/assets/img/ui/icons/map-markers/current/cab.png',
 	title:"Current Partners - CAB",
 	filterName: "Current Partners",
 	partnerTypes: "CAB"
@@ -212,6 +231,7 @@ markers.push(new google.maps.Marker({
 
 markers.push(new google.maps.Marker({
 	position: new google.maps.LatLng(51.910391, -0.620728),
+	icon: '/static/assets/img/ui/icons/map-markers/current/ymca.png',
 	title:"Current Partners - YMCA",
 	filterName: "Current Partners",
 	partnerTypes: "YMCA"
@@ -220,6 +240,7 @@ markers.push(new google.maps.Marker({
 
 markers.push(new google.maps.Marker({
 	position: new google.maps.LatLng(53.660916, -0.966797),
+	icon: '/static/assets/img/ui/icons/map-markers/current/age-uk.png',
 	title:"Current Partners - Age UK",
 	filterName: "Current Partners",
 	partnerTypes: "Age UK"
@@ -228,6 +249,7 @@ markers.push(new google.maps.Marker({
 
 markers.push(new google.maps.Marker({
 	position: new google.maps.LatLng(51.388923, -0.357056),
+	icon: '/static/assets/img/ui/icons/map-markers/potential/reach.png',
 	title:"Potential Partners - Reach",
 	filterName: "Potential Partners",
 	partnerTypes: "Reach"
@@ -235,6 +257,7 @@ markers.push(new google.maps.Marker({
 
 markers.push(new google.maps.Marker({
 	position: new google.maps.LatLng(51.18623, -0.052185),
+	icon: '/static/assets/img/ui/icons/map-markers/potential/nhs-body.png',
 	title:"Potential Partners - NHS Body",
 	filterName: "Potential Partners",
 	partnerTypes: "NHS Body"
@@ -243,6 +266,7 @@ markers.push(new google.maps.Marker({
 
 markers.push(new google.maps.Marker({
 	position: new google.maps.LatLng(51.623132,0.318604),
+	icon: '/static/assets/img/ui/icons/map-markers/potential/cab.png',
 	title:"Potential Partners - CAB",
 	filterName: "Potential Partners",
 	partnerTypes: "CAB"
@@ -251,6 +275,7 @@ markers.push(new google.maps.Marker({
 
 markers.push(new google.maps.Marker({
 	position: new google.maps.LatLng(51.716819, -0.296631),
+	icon: '/static/assets/img/ui/icons/map-markers/potential/cab.png',
 	title:"Potential Partners - CAB",
 	filterName: "Potential Partners",
 	partnerTypes: "CAB"

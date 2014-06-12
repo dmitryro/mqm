@@ -79,6 +79,7 @@ urlpatterns = patterns('',
     url(r'^_addDocument/$', 'django.shortcuts.render', {'template_name': 'dev/modals/add-document.html'}),
     url(r'^_addNews/$', 'django.shortcuts.render', {'template_name': 'dev/modals/add-news.html'}),
     url(r'^_addVideo/$', 'django.shortcuts.render', {'template_name': 'dev/modals/add-video.html'}),
+    url(r'^_addPassword/$', 'django.shortcuts.render', {'template_name': 'dev/modals/change-password.html'}),
 
 
     #general

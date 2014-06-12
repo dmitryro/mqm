@@ -1,11 +1,6 @@
 {% extends "base.html" %}
 {% load djangular_tags webdesign %}
 
-{% block extra_css %}
-{{ block.super }}
-<link rel="stylesheet" href="{{ STATIC_URL }}dist/styles/gridster.css" />
-{% endblock %}
-
 {% block content %}
 
 	<div id="content" class="clearfix">
@@ -15,13 +10,14 @@
             <div id="logo-form"></div>
             <h2>SIGN UP TO OPEN HUB</h2>
             <p class="lead">Section 2/5</p>
+            <ul id="dots" class="clearfix"><li class="filled"></li><li class="filled"></li><li></li><li></li><li></li></ul>
           </div>
 
           <div class="row">
             <div class="col-md-6">
               <div class="col-sm-3"></div>
               <div class="col-sm-9">
-                <p>YOUR PROFILE</p>
+                <h4>YOUR PROFILE</h4>
               </div>
             </div>
           </div>
@@ -146,7 +142,11 @@
                     <input type="text" class="form-control" id="input_experiences2" name="input_experiences2" placeholder="limited to 250 characters" maxlength="250">
                   </div>
                 </div>
-                <div class="form-group">
+                
+                
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
                   <label for="input_experiences3" class="col-sm-3 control-label"></label>
                   <div class="col-sm-9">
                     <input type="text" class="form-control" id="input_experiences3" name="input_experiences3" placeholder="limited to 250 characters" maxlength="250">
@@ -158,10 +158,6 @@
                     <input type="text" class="form-control" id="input_experiences4" name="input_experiences4" placeholder="limited to 250 characters" maxlength="250">
                   </div>
                 </div>
-                
-            </div>
-            <div class="col-md-6">
-              
             </div>
           </div>
 
@@ -169,8 +165,8 @@
             <div class="col-md-6">
               <div class="col-sm-3"></div>
               <div class="col-sm-9">
-                <p>TASK QUEUE</p>
-                <small>Please submit any task below, they will automatically be assigned to you</small>
+                <h4>TASK QUEUE</h4>
+                <small>Please submit any task below, they will automatically be assigned to you</small><br><br>
               </div>
             </div>
           </div>
@@ -189,7 +185,10 @@
                       <input type="text" class="form-control" id="input_description2" name="input_description2" placeholder="limited to 141 characters">
                     </div>
                   </div>
-                  <div class="form-group">
+                  
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
                     <label for="input_description3" class="col-sm-3 control-label"></label>
                     <div class="col-sm-9">
                       <input type="text" class="form-control" id="input_description3" name="input_description3" placeholder="limited to 141 characters">
