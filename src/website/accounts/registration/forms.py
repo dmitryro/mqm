@@ -3,7 +3,10 @@ from django.forms.formsets import formset_factory
 from django.forms.models import inlineformset_factory
 from django.utils.translation import ugettext_lazy as _
 from django_compositeform import CompositeModelForm, ForeignKeyFormField, FormSetField, InlineFormSetField
-import floppyforms as forms
+
+import website.floppyforms_patch
+from floppyforms.__future__.models import ModelForm
+import floppyforms.__future__ as forms
 
 from website.accounts.models import User, Experience
 from website.faq.models import Question
@@ -15,7 +18,7 @@ from website.services.models import Service
 from website.tasks.models import Task
 
 
-class SignupLocalMindForm(forms.ModelForm):
+class SignupLocalMindForm(ModelForm):
     accept_tos = forms.BooleanField(label=_('Terms'), required=True,
         help_text=_(
             'We (above LM) agree to all terms and conditions of the openhub '
@@ -49,13 +52,13 @@ class SignupLocalMindForm(forms.ModelForm):
         return super(SignupLocalMindForm, self).save(*args, **kwargs)
 
 
-class ExperienceForm(forms.ModelForm):
+class ExperienceForm(ModelForm):
     class Meta:
         model = Experience
         fields = ('experience',)
 
 
-class TaskForm(forms.ModelForm):
+class TaskForm(ModelForm):
     class Meta:
         model = Task
         fields = ('text',)
@@ -163,7 +166,7 @@ EthnicityFormSet = formset_factory(
     extra=1)
 
 
-class ServiceForm(forms.ModelForm):
+class ServiceForm(ModelForm):
     class Meta:
         model = Service
         fields = (
@@ -173,7 +176,7 @@ class ServiceForm(forms.ModelForm):
         )
 
 
-class QuestionForm(forms.ModelForm):
+class QuestionForm(ModelForm):
     class Meta:
         model = Question
         fields = (
@@ -183,7 +186,7 @@ class QuestionForm(forms.ModelForm):
         )
 
 
-class PersonForm(forms.ModelForm):
+class PersonForm(ModelForm):
     class Meta:
         model = Person
         significant_fields = ('name',)
@@ -242,7 +245,7 @@ class SignupLocalMindMembersForm(CompositeModelForm):
         return instance
 
 
-class ResourceForm(forms.ModelForm):
+class ResourceForm(ModelForm):
     class Meta:
         model = Resource
         fields = (
@@ -251,7 +254,7 @@ class ResourceForm(forms.ModelForm):
         )
 
 
-class MapForm(forms.ModelForm):
+class MapForm(ModelForm):
     class Meta:
         model = Map
         fields = (
@@ -267,7 +270,7 @@ class MapForm(forms.ModelForm):
         )
 
 
-class PositiveNewsForm(forms.ModelForm):
+class PositiveNewsForm(ModelForm):
     class Meta:
         model = PositiveNews
         fields = (
@@ -314,7 +317,7 @@ class SignupPartnersForm(CompositeModelForm):
         return super(SignupPartnersForm, self).save(*args, **kwargs)
 
 
-class InvitationForm(forms.ModelForm):
+class InvitationForm(ModelForm):
     class Meta:
         model = User
         fields = (

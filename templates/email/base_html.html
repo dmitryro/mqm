@@ -1,0 +1,27 @@
+{% extends "email/base.html" %}
+{% load email %}
+
+
+{% bodyhtml %}
+    <div id="content">
+    <div class="container-fluid">
+        <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <img class="center-block" src="{{STATIC_URL}}assets/img/brand/mind-logo.png">
+            <br>
+            <div id="logo-form"></div>
+            <br>
+
+            {% block html %}{% endblock %}
+            {% block htmlfooter %}
+            <p>
+                Sincerely,
+                <br />
+                The Team
+            </p>
+            {% endblock %}
+        </div>
+        </div>
+    </div>
+    </div>
+{% endbodyhtml %}

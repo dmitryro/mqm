@@ -8,7 +8,7 @@ django-contact-form == 1.0
 django-extensions == 1.1.1
 django-filter == 0.7
 django-flatblocks == 0.6.0
-django-floppyforms == 1.1.1
+django-floppyforms == 1.2.0
 django-haystack == 1.2.7
 django-mailer == 0.1.0
 django-markup == 0.3

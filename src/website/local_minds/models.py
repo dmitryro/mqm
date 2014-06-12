@@ -21,11 +21,24 @@ class LocalMind(models.Model):
         ('charitable-incorporated-organisation', _('Charitable Incorporated Organisation'),),
     )
 
+    REGION_CHOICES = (
+        ('east-of-england', _('East of England')),
+        ('east-midlands', _('East Midlands')),
+        ('london', _('London')),
+        ('north-east', _('North East')),
+        ('north-west', _('North West')),
+        ('south-east', _('South East')),
+        ('south-west', _('South West')),
+        ('wales', _('Wales')),
+        ('west-midlands', _('West Midlands')),
+        ('yorkshire-and-the-humber', _('Yorkshire and The Humber')),
+    )
+
     reserved_local_mind = models.OneToOneField('ReservedLocalMind', null=True, blank=True)
     name = models.CharField(_('Local Mind'), max_length=120)
     slug = AutoSlugField(populate_from=('name',))
 
-    region = models.CharField(_('Region'), max_length=50, blank=True)
+    region = models.CharField(_('Region'), max_length=50, choices=REGION_CHOICES, blank=True)
     address = models.TextField(_('Address'), blank=True)
     postcode = models.CharField(_('Postcode'), max_length=50, blank=True)
     income_restricted = models.CharField(_('LM Income R'), max_length=50, blank=True)
