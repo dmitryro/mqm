@@ -3,9 +3,11 @@
 import os
 
 from django.conf import settings
+from django.contrib import auth
 from django.contrib.formtools.wizard.views import NamedUrlSessionWizardView
 from django.core.files.storage import FileSystemStorage
 from django.core.urlresolvers import reverse
+from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.utils.http import base36_to_int
@@ -50,6 +52,13 @@ class SignupWizardView(NamedUrlSessionWizardView):
         url_kwargs['step'] = step
         return reverse(self.url_name, kwargs=url_kwargs)
 
+    def get_form_initial(self, step):
+        initial = super(SignupWizardView, self).get_form_initial(step)
+        if step == 'local-mind':
+            if self.reserved_email.local_mind:
+                initial['name'] = self.reserved_email.local_mind.name
+        return initial
+
     def get_context_data(self, **kwargs):
         kwargs['email'] = self.reserved_email.email
         return super(SignupWizardView, self).get_context_data(**kwargs)
@@ -57,7 +66,7 @@ class SignupWizardView(NamedUrlSessionWizardView):
     def done(self, form_list, **kwargs):
         local_mind_form, profile_form, members_form, partners_form, invites_form = form_list
 
-        local_mind = local_mind_form.save()
+        local_mind = local_mind_form.save(reserved_email=self.reserved_email)
         user = profile_form.save(
             reserved_email=self.reserved_email,
             local_mind=local_mind)
@@ -66,9 +75,12 @@ class SignupWizardView(NamedUrlSessionWizardView):
         partners_form.save(local_mind=local_mind, user=user)
         invites_form.save(local_mind=local_mind)
 
-        return render_to_response('registration/signup_complete.html', {
+        user = auth.authenticate(
+            email=self.reserved_email.email,
+            password=profile_form.cleaned_data['password1'])
+        auth.login(self.request, user)
 
-        })
+        return HttpResponseRedirect(reverse('dashboard'))
 
 
 signup_forms = (

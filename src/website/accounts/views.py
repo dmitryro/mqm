@@ -11,6 +11,9 @@ from django.utils.http import is_safe_url
 from .forms import LoginForm, SignupForm
 
 
+LOGIN_SUCCESS_URLNAME = 'dashboard'
+
+
 def login_signup(request):
     if 'signup' in request.POST:
         signup_form = SignupForm(request.POST)
@@ -27,7 +30,7 @@ def login_signup(request):
         if login_form.is_valid():
             # Ensure the user-originating redirection url is safe.
             if not is_safe_url(url=redirect_to, host=request.get_host()):
-                redirect_to = reverse('index')
+                redirect_to = reverse(LOGIN_SUCCESS_URLNAME)
             # Okay, security check complete. Log the user in.
             auth_login(request, login_form.get_user())
             if request.session.test_cookie_worked():

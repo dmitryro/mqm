@@ -41,6 +41,12 @@ class SignupLocalMindForm(forms.ModelForm):
             'group_avatar',
         )
 
+    def save(self, *args, **kwargs):
+        reserved_email = kwargs.pop('reserved_email')
+        if reserved_email.local_mind:
+            self.instance.reserved_local_mind = reserved_email.local_mind
+        return super(SignupLocalMindForm, self).save(*args, **kwargs)
+
 
 class ExperienceForm(forms.ModelForm):
     class Meta:

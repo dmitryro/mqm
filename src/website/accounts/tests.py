@@ -1,9 +1,10 @@
 import autofixture
+from django.core.urlresolvers import reverse
 from django_webtest import WebTest
-from website.accounts.models import User, Experience
+from website.accounts.models import User, Experience, ReservedEmail
 from website.faq.models import Question
 from website.local_map.models import Map
-from website.local_minds.models import LocalMind, Ethnicity
+from website.local_minds.models import ReservedLocalMind, LocalMind, Ethnicity
 from website.news.models import PositiveNews
 from website.resources.models import Resource
 from website.services.models import Service
@@ -14,7 +15,11 @@ class SignupTests(WebTest):
     def test_signup_steps(self):
         white = Ethnicity.objects.get(name='White')
 
-        reserved_email = autofixture.create_one('accounts.ReservedEmail')
+        reserved_local_mind = ReservedLocalMind.objects.all()[0]
+        reserved_email = ReservedEmail.objects.create(
+            email='myemail@example.com',
+            local_mind=reserved_local_mind)
+
         url = reserved_email.get_signup_url()
 
         response = self.app.get(url)
@@ -22,6 +27,9 @@ class SignupTests(WebTest):
         self.assertEqual(response.status_code, 200)
 
         # First step. Local Mind.
+
+        # Check prefilled local mind name
+        self.assertEqual(response.form['local-mind-name'].value, reserved_local_mind.name)
 
         response.form['local-mind-name'] = 'My Local Mind'
         response.form['local-mind-hours'] = '11 am to 5pm'
@@ -103,13 +111,17 @@ class SignupTests(WebTest):
         response = response.form.submit()
         response = response.follow()
 
-        # We reached the complete page. Here we check if everything was saved
-        # correctly.
+        # We are done.Here we check if everything was saved
+        # correctly and that we are redirected to the dashboard.
 
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 302)
+
+        response = response.follow()
+        self.assertEqual(response.request.path, reverse('dashboard'))
 
         local_mind = LocalMind.objects.get(name='My Local Mind')
 
+        self.assertEqual(local_mind.reserved_local_mind, reserved_local_mind)
         self.assertEqual(local_mind.hours, '11 am to 5pm')
 
         self.assertEqual(local_mind.ceo_two, None)
