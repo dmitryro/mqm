@@ -66,7 +66,7 @@ SITE_ID = 1
 # Registration process settings
 # -----------------------------
 
-SIGNUP_TIMEOUT_DAYS = 3
+SIGNUP_TIMEOUT_DAYS = 1
 
 # Media/Static file handling
 # --------------------------
