@@ -29,6 +29,10 @@ urlpatterns = patterns('',
     url(r'^login/signup/$', lambda r: HttpResponseRedirect(reverse('login') + '#signup'), name='login-signup'),
     url(r'^login/$', 'website.accounts.views.login_signup', name='signup'),
     url(r'^logout/$', 'website.accounts.views.logout', name='logout'),
+    url(r'^forgot/$', 'website.accounts.views.password_reset', name='password-reset'),
+    url(r'^forgot/done/$', 'website.accounts.views.password_reset_done', name='password-reset-done'),
+    url(r'^forgot/confirm/(?P<uidb36>[0-9A-Za-z]+)-(?P<token>.+)/$', 'website.accounts.views.password_reset_confirm', name='password-reset-confirm'),
+    url(r'^forgot/complete/$', 'website.accounts.views.password_reset_complete', name='password-reset-complete'),
 
     # mediastore download counter
     url(r'^downloads/(?P<slug>[^/]+)/download/(?P<filename>.+)$', 'mediastore.mediatypes.download.views.download_counter', name='mediastore-download-link'),

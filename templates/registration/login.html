@@ -1,58 +1,51 @@
-{% extends "base.html" %}
+{% extends "base_page.html" %}
 {% load floppyforms %}
 
 
 {% block title %}Login &amp; Signup{% endblock %}
 
 
-{% block content %}
-<div id="content">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-4 col-md-offset-4">
-        <img class="center-block" src="{{STATIC_URL}}assets/img/brand/mind-logo.png">
-        <br>
-        <div id="logo-form"></div>
-        <br>
-        <p>Welcome to the Open Hub, a place for connecting, collaborating, learning and celebrating. Every year the Mind network delivers XXXX services to XXXXX people a year. That is an amazing amount of work with a huge amount of impact. The Open Hub is here to support and extend that.</p>
+{% block pagecontent %}
+<div id="logo-form"></div>
+<br>
+<p>Welcome to the Open Hub, a place for connecting, collaborating, learning and celebrating. Every year the Mind network delivers XXXX services to XXXXX people a year. That is an amazing amount of work with a huge amount of impact. The Open Hub is here to support and extend that.</p>
 
-        <div class="center-block" style="width:92px; margin-bottom:20px">
-          <a href="#log-in" data-toggle="tab">Login</a> / <a href="#sign-up" data-toggle="tab">Signup</a>
-        </div>
+<div class="center-block" style="width:92px; margin-bottom:20px">
+    <a href="#log-in" data-toggle="tab">Login</a> / <a href="#sign-up" data-toggle="tab">Signup</a>
+</div>
 
-        <!-- Tab panes -->
-        <div class="tab-content">
-          <div class="tab-pane active" id="log-in">
+<!-- Tab panes -->
+<div class="tab-content">
+    <div class="tab-pane active" id="log-in">
 
-            <div class="login">
-              {% form login_form using %}
-              <form action="" method="post" role="form">{% csrf_token %}
-                {% formconfig field with inline_label="Your email" for form.username  %}
-                {% formconfig field with inline_label="Password" for form.password %}
-                {% form login_form using "forms/form.html" with inline_label=1 %}
+    <div class="login">
+        {% form login_form using %}
+        <form action="" method="post" role="form">{% csrf_token %}
+        {% formconfig field with inline_label="Your email" for form.username  %}
+        {% formconfig field with inline_label="Password" for form.password %}
 
-                {% include "forms/submit.html" with label="Login" name="login" only %}
-              </form>
-              {% endform %}
-            </div>
+        {% form login_form using "forms/form.html" with inline_label=1 %}
 
-          </div>
-          <div class="tab-pane" id="sign-up">
-            <div class="signup">
-              {% form signup_form using %}
-              {% formconfig row using "forms/row.html" %}
-              <form action="" method="post" role="form">{% csrf_token %}
-                <p>Don't have an account yet?</p>
+        <p><a href="{% url "password-reset" %}">Password forgotten?</a></p>
 
-                {% formrow form.email with inline_label="Your email" %}
-                {% include "forms/submit.html" with label="Signup" name="signup" only %}
-              </form>
-              {% endform %}
-            </div>
-          </div>
-        </div>
-      </div>
+        {% include "forms/submit.html" with label="Login" name="login" only %}
+        </form>
+        {% endform %}
     </div>
-  </div>
+
+    </div>
+    <div class="tab-pane" id="sign-up">
+    <div class="signup">
+        {% form signup_form using %}
+        {% formconfig row using "forms/row.html" %}
+        <form action="" method="post" role="form">{% csrf_token %}
+        <p>Don't have an account yet?</p>
+
+        {% formrow form.email with inline_label="Your email" %}
+        {% include "forms/submit.html" with label="Signup" name="signup" only %}
+        </form>
+        {% endform %}
+    </div>
+    </div>
 </div>
 {% endblock %}

@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 
 from django.contrib.auth import login as auth_login
-from django.contrib.auth.views import logout as auth_logout_view
+import django.contrib.auth.views as auth_views
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.utils.http import is_safe_url
 
-from .forms import LoginForm, SignupForm
+from .forms import LoginForm, SignupForm, PasswordResetForm
 
 
 LOGIN_SUCCESS_URLNAME = 'dashboard'
@@ -45,4 +45,25 @@ def login_signup(request):
     }, context_instance=RequestContext(request))
 
 
-logout = auth_logout_view
+logout = auth_views.logout
+
+
+def password_reset(request):
+    return auth_views.password_reset(
+        request,
+        password_reset_form=PasswordResetForm,
+        post_reset_redirect=reverse('password-reset-done'))
+
+
+password_reset_done = auth_views.password_reset_done
+
+
+def password_reset_confirm(request, uidb36, token):
+    return auth_views.password_reset_confirm(
+        request,
+        uidb36=uidb36,
+        token=token,
+        post_reset_redirect=reverse('password-reset-complete'))
+
+
+password_reset_complete = auth_views.password_reset_complete
