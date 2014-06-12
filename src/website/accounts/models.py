@@ -100,6 +100,7 @@ class ReservedEmail(models.Model):
     '''
 
     email = EmailField(unique=True)
+    local_mind = models.OneToOneField('local_minds.ReservedLocalMind', null=True, blank=True)
 
     class Meta:
         verbose_name = _('Reserved Email')

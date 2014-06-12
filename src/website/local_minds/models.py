@@ -3,6 +3,17 @@ from django.utils.translation import ugettext_lazy as _
 from django_extensions.db.fields import AutoSlugField, CreationDateTimeField, ModificationDateTimeField
 
 
+class ReservedLocalMind(models.Model):
+    name = models.CharField(_('Local Mind'), max_length=120)
+
+    class Meta:
+        verbose_name = _('Reserved Local Mind')
+        verbose_name_plural = _('Reserved Local Minds')
+
+    def __unicode__(self):
+        return self.name
+
+
 class LocalMind(models.Model):
     CHARITY_TYPE_CHOICES = (
         ('unincorporated', _('Unincorporated'),),
@@ -10,6 +21,7 @@ class LocalMind(models.Model):
         ('charitable-incorporated-organisation', _('Charitable Incorporated Organisation'),),
     )
 
+    reserved_local_mind = models.OneToOneField('ReservedLocalMind', null=True, blank=True)
     name = models.CharField(_('Local Mind'), max_length=120)
     slug = AutoSlugField(populate_from=('name',))
 
