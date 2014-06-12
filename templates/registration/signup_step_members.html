@@ -10,6 +10,8 @@
         {% formrow form.trustees_count %}
         {% formrow form.volunteers_count %}
         {% formrow form.trustees_active %}
+        {% formrow form.area_of_benefit %}
+        {% formrow form.average_volunteer_hours %}
 
         <h3>Chairman</h3>
         {% formrow form.forms.chair.name %}
@@ -31,63 +33,6 @@
         {% formrow form.forms.ceo_two.gender %}
         {% formrow form.forms.ceo_two.email %}
         {% formrow form.forms.ceo_two.telephone %}
-
-        <h3>Ethnicity of trustees</h3>
-
-        {% with formset=form.formsets.trustees_ethnicities %}
-        <div data-formset-prefix="{{ formset.prefix }}">
-            {{ formset.management_form }}
-            {% for form in formset %}
-                {% formrow form.ethnicity %}
-            {% endfor %}
-
-            <a class="add-another">Add another</a>
-
-            <div class="template">
-            {% with form=formset.empty_form %}
-                {% formrow form.ethnicity %}
-            {% endwith %}
-            </div>
-        </div>
-        {% endwith %}
-
-        <h3>Ethnicity of volunteers</h3>
-
-        {% with formset=form.formsets.volunteers_ethnicities %}
-        <div data-formset-prefix="{{ formset.prefix }}">
-            {{ formset.management_form }}
-            {% for form in formset %}
-                {% formrow form.ethnicity %}
-            {% endfor %}
-
-            <a class="add-another">Add another</a>
-
-            <div class="template">
-            {% with form=formset.empty_form %}
-                {% formrow form.ethnicity %}
-            {% endwith %}
-            </div>
-        </div>
-        {% endwith %}
-
-        <h3>Ethnicity of staff</h3>
-
-        {% with formset=form.formsets.staff_ethnicities %}
-        <div data-formset-prefix="{{ formset.prefix }}">
-            {{ formset.management_form }}
-            {% for form in formset %}
-                {% formrow form.ethnicity %}
-            {% endfor %}
-
-            <a class="add-another">Add another</a>
-
-            <div class="template">
-            {% with form=formset.empty_form %}
-                {% formrow form.ethnicity %}
-            {% endwith %}
-            </div>
-        </div>
-        {% endwith %}
 
         <h3>Service informations</h3>
         <p class="help">Please submit any task below - they will automatically be assigned to you</p>

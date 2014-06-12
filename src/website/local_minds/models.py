@@ -26,8 +26,7 @@ class LocalMind(models.Model):
     reserves = models.CharField(_('LM Reserves'), max_length=50, blank=True)
     deficit = models.CharField(_('LM Surplus/Deficit'), max_length=50, blank=True)
     statement = models.TextField(_('Mission Statement'), blank=True)
-    # adding
-    # hours = models.TextField(_('Opening Hours'), blank=True)
+    hours = models.TextField(_('Opening Hours'), blank=True)
     group_avatar = models.ImageField(_('LM Profile Image'), upload_to='localminds/avatars/', blank=True)
 
     # Data, entered in Step 3.
@@ -39,13 +38,8 @@ class LocalMind(models.Model):
     trustees_count = models.PositiveIntegerField(_('No Of Trustees'), null=True, blank=True)
     volunteers_count = models.PositiveIntegerField(_('No Of Volunteers'), null=True, blank=True)
     trustees_active = models.PositiveIntegerField(_('No Of Trustees Who Use MH Services'), null=True, blank=True)
-    #remove 'trustees_ethnicities', 'volunteers_ethnicities', 'staff_ethnicities'.
-    trustees_ethnicities = models.ManyToManyField('Ethnicity', verbose_name=_('Trustees Ethnicity'), related_name='trustees+', blank=True)
-    volunteers_ethnicities = models.ManyToManyField('Ethnicity', verbose_name=_('Volunteers Ethnicity'), related_name='volunteers+', blank=True)
-    staff_ethnicities = models.ManyToManyField('Ethnicity', verbose_name=_('Staff Ethnicity'), related_name='staff+', blank=True)
-    # adding
-    # area_of_benefit = models.CharField(_('max_length=50, blank=True)
-    # average_volunteer_hours = models.CharField(_('max_length=50, blank=True)
+    area_of_benefit = models.CharField(_('Area of benefit'), max_length=50, blank=True)
+    average_volunteer_hours = models.CharField(_('Average volunteer hours'), max_length=50, blank=True)
 
     created = CreationDateTimeField()
     modified = ModificationDateTimeField()

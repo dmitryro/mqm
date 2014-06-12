@@ -37,6 +37,7 @@ class SignupLocalMindForm(forms.ModelForm):
             'reserves',
             'deficit',
             'statement',
+            'hours',
             'group_avatar',
         )
 
@@ -167,10 +168,6 @@ class PersonForm(forms.ModelForm):
 
 
 class SignupLocalMindMembersForm(CompositeModelForm):
-    trustees_ethnicities = FormSetField(EthnicityFormSet)
-    volunteers_ethnicities = FormSetField(EthnicityFormSet)
-    staff_ethnicities = FormSetField(EthnicityFormSet)
-
     ceo_one = ForeignKeyFormField(PersonForm, kwargs={'empty_permitted': True})
     ceo_two = ForeignKeyFormField(PersonForm, kwargs={'empty_permitted': True})
     chair = ForeignKeyFormField(PersonForm, kwargs={'empty_permitted': True})
@@ -195,6 +192,8 @@ class SignupLocalMindMembersForm(CompositeModelForm):
             'trustees_count',
             'volunteers_count',
             'trustees_active',
+            'area_of_benefit',
+            'average_volunteer_hours',
         )
 
     def get_objects_from_formset(self, name):
@@ -211,9 +210,6 @@ class SignupLocalMindMembersForm(CompositeModelForm):
         self.formsets['faqs'].instance = local_mind
 
         instance = super(SignupLocalMindMembersForm, self).save(*args, **kwargs)
-        instance.trustees_ethnicities = self.get_objects_from_formset('trustees_ethnicities')
-        instance.volunteers_ethnicities = self.get_objects_from_formset('volunteers_ethnicities')
-        instance.staff_ethnicities = self.get_objects_from_formset('staff_ethnicities')
         return instance
 
 
