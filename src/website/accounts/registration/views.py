@@ -99,12 +99,11 @@ class SignupWizardView(SignupLogicMixin, NamedUrlSessionWizardView):
         url_kwargs['step'] = step
         return reverse(self.url_name, kwargs=url_kwargs)
 
-    def get_form_initial(self, step):
-        initial = super(SignupWizardView, self).get_form_initial(step)
-        if step == 'local-mind':
-            if self.reserved_email.local_mind:
-                initial['name'] = self.reserved_email.local_mind.name
-        return initial
+    def get_form_kwargs(self, step):
+        kwargs = super(SignupWizardView, self).get_form_kwargs(step)
+        if step in ('local-mind', 'members'):
+            kwargs['instance'] = self.reserved_email.local_mind
+        return kwargs
 
     def get_context_data(self, **kwargs):
         kwargs['email'] = self.reserved_email.email

@@ -49,6 +49,9 @@ class SignupTests(WebTest):
         white = Ethnicity.objects.get(name='White')
 
         local_mind = LocalMind.objects.all()[0]
+        local_mind.ceo_two = Person.objects.create(name='CEO Name')
+        local_mind.save()
+
         reserved_email = ReservedEmail.objects.create(
             email='myemail@example.com',
             local_mind=local_mind)
@@ -108,6 +111,7 @@ class SignupTests(WebTest):
         # Third step. Members.
 
         response.form['members-form-ceo_one-name'] = 'A big man'
+        self.assertEqual(response.form['members-form-ceo_two'].value, 'CEO Name')
 
         # Services are temporarily disabled.
 
@@ -162,11 +166,13 @@ class SignupTests(WebTest):
 
         self.assertEqual(local_mind.hours, '11 am to 5pm')
 
-        self.assertEqual(local_mind.ceo_two, None)
-        self.assertEqual(local_mind.chair, None)
-
         self.assertNotEqual(local_mind.ceo_one, None)
         self.assertEqual(local_mind.ceo_one.name, 'A big man')
+
+        self.assertNotEqual(local_mind.ceo_two, None)
+        self.assertEqual(local_mind.ceo_two.name, 'CEO Name')
+
+        self.assertEqual(local_mind.chair, None)
 
         # TODO: Test more local mind fields.
 
