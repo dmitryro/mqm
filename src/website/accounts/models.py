@@ -131,7 +131,7 @@ class ReservedEmail(models.Model):
     '''
 
     email = EmailField(unique=True)
-    local_mind = models.OneToOneField('local_minds.ReservedLocalMind', null=True, blank=True)
+    local_mind = models.OneToOneField('local_minds.LocalMind')
 
     class Meta:
         verbose_name = _('Reserved Email')

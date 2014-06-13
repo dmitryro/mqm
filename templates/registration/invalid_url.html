@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "base_page.html" %}
 
 
 {% comment %}
@@ -7,7 +7,7 @@
 {% endcomment %}
 
 
-{% block content %}
+{% block pagecontent %}
     <h1>Signup</h1>
     <p>
     Seems like this link is not a valid signup link or has already expired. Please <a href="{% url "signup" %}">try to get a new one on the sign up page</a>.

@@ -1,0 +1,19 @@
+{% extends "base_page.html" %}
+
+
+{% comment %}
+    This template is shown if you click on a signup link for a reserved email
+    which's local mind has already been signed up.
+{% endcomment %}
+
+
+{% block pagecontent %}
+    <h1>Signup</h1>
+    <p>
+        Seems like your local mind {{ local_mind }} has already be signed up.
+        {% if local_mind.email %}
+            Please get in touch with your local mind by using the following email address: <a href="mailto:{{ local_mind.email }}">{{ local_mind.email }}</a>
+        {% endif %}
+    </p>
+{% endblock %}
+

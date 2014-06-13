@@ -2,6 +2,7 @@
 from django.conf import settings
 from django.conf.urls import include, patterns, url
 from django.contrib import admin
+from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 
 admin.autodiscover()
