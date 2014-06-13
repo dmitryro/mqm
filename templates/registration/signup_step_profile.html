@@ -4,53 +4,112 @@
 
 {% block section %}
 
+    <div class="row">
+      <div class="col-md-6">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-9">
+          <h4>YOUR PROFILE</h4>
+          <br/>
+        </div>
+      </div>
+    </div>
 
     {% form form using %}
+        {% formconfig row using "forms/signup_row.html" %}
 
-        {% formrow form.first_name %}
-        {% formrow form.last_name %}
-        {% formrow form.job_title %}
+        <div class="row">
+            <div class="col-md-6">
+                {% formrow form.first_name %}
+            </div>
+            <div class="col-md-6">
+                {% formrow form.last_name %}
+            </div>
+        </div>
 
-        <p>
-        Email: {{ email }}
-        </p>
+        <div class="row">
+            <div class="col-md-6">
+                {% formrow form.job_title %}
+            </div>
+            <div class="col-md-6">
+                <div class="col-md-9 col-md-offset-3">Email: {{ email }}</div>
+                {% formrow form.email %}
+            </div>
+        </div>
 
-        {% formrow form.email %}
-        {% formrow form.password1 %}
-        {% formrow form.password2 %}
-        {% formrow form.skills %}
-        {% formrow form.user_avatar %}
-        {% formrow form.biography %}
-        {% formrow form.telephone %}
-        {% formrow form.mobile %}
-        {% formrow form.twitter %}
+        <div class="row">
+            <div class="col-md-6">
+                {% formrow form.password1 %}
+            </div>
+            <div class="col-md-6">
+                {% formrow form.password2 %}
+            </div>
+        </div>
 
+        <div class="row">
+            <div class="col-md-6">
+                {% formrow form.skills %}
+            </div>
+            <div class="col-md-6">
+                {% formrow form.user_avatar %}
+                <p class="help-block">Maximum size of 500kb. Only JPG, PNG accepted</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                {% formrow form.biography %}
+            </div>
+            <div class="col-md-6">
+                {% formrow form.telephone %}
+                {% formrow form.mobile %}
+                {% formrow form.twitter %}
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-6">
         {% with formset=form.formsets.experiences %}
             {{ formset.management_form }}
             {% for form in formset %}
                 {% formrow form.experience %}
             {% endfor %}
         {% endwith %}
-
-        <h3>Task Queue</h3>
-        <p class="help">Please submit any task below - they will automatically be assigned to you</p>
-
-        {% with formset=form.formsets.tasks %}
-        <div data-formset-prefix="{{ formset.prefix }}">
-            {{ formset.management_form }}
-            {% for form in formset %}
-                {% formrow form.text %}
-            {% endfor %}
-
-            <a class="add-another">Add another</a>
-
-            <div class="template">
-            {% with form=formset.empty_form %}
-                {% formrow form.text %}
-            {% endwith %}
             </div>
         </div>
-        {% endwith %}
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-9">
+              <h3>Task Queue</h3>
+              <small>Please submit any task below - they will automatically be assigned to you</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+        <div class="col-md-6">
+            {% with formset=form.formsets.tasks %}
+            <div data-formset-prefix="{{ formset.prefix }}">
+                {{ formset.management_form }}
+                {% for form in formset %}
+                    {% formrow form.text %}
+                {% endfor %}
+
+            <div class="col-md-6 col-md-offset-3">
+                <a class="add-another"><i class="fa fa-plus-square"></i> &nbsp;Add another</a>
+            </div>
+
+                <div class="template">
+                {% with form=formset.empty_form %}
+                    {% formrow form.text %}
+                {% endwith %}
+                </div>
+            </div>
+            {% endwith %}
+        </div>
+        </div>
 
     {% endform %}
 
