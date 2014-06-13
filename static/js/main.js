@@ -2,7 +2,7 @@
     $(document).ready(function () {
 
         // DROP DOWNS 
-        $('.drop').bind('click', function () {
+        $('body').on('click', '.drop', function () {
             if ($(this).hasClass('dropped')) {
                 $(this).parent().find('ul').css('display', 'none');
                 $(this).removeClass('dropped');
