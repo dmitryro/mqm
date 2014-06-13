@@ -32,9 +32,6 @@ class Migration(DataMigration):
         for name in self.names:
             LocalMind.objects.get_or_create(name=name)
 
-        print LocalMind.objects.all()
-        print LocalMind.objects.count()
-
     def backwards(self, orm):
         "Write your backwards methods here."
 
