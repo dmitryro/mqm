@@ -1,10 +1,6 @@
 {% extends "base.html" %}
 {% load djangular_tags webdesign %}
-
-{% block extra_css %}
-{{ block.super }}
-<link rel="stylesheet" href="{{ STATIC_URL }}dist/styles/gridster.css" />
-{% endblock %}
+{% load url from future %}
 
 {% block extra_js %}
 {{ block.super }}
@@ -133,7 +129,7 @@
                         </div>
                         {% include "includes/widget-settings.html" %}
                     </div>
-                    <img style="margin:25px 0 0 27px;" src="../Assets/images/nodes/graph_services.png" alt="graph_services" width="233" height="192">
+                    <img style="margin:25px 0 0 27px;" src="" alt="graph_services" width="233" height="192">
                 </li>
     </div>
 
@@ -352,7 +348,7 @@
                         </div>
                         {% include "includes/widget-settings.html" %}
                     </div>
-                    <img style="margin:25px 0 0 27px;" src="../Assets/images/nodes/graph_finance.png" alt="graph_finance" width="233" height="192">
+                    <img style="margin:25px 0 0 27px;" src="" alt="graph_finance" width="233" height="192">
                 </li>
 
     </div>
@@ -363,7 +359,7 @@
                         <div class="widget-title">MY LOCAL AREA</div>
                         {% include "includes/widget-settings.html" %}
                     </div>
-                    <img src="../Assets/images/nodes/map.jpg" alt="graph_finance" width="293" height="224">
+                    <img src="" alt="graph_finance" width="293" height="224">
                 </li>
     </div>
 

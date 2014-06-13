@@ -1,5 +1,5 @@
 <div id="top-bar">
-            
+
             {% if dashboard == "true" %}
             <div id="sidebar-button" class="closed"></div>
             {% else %}
@@ -7,13 +7,13 @@
             {% endif %}
 
             <div id="search-bar">
-                
+
                 <input type="text" placeholder="search..." id="search">
 
             </div>
 
             <div id="tools">
-                    
+
                 <div id="write"></div>
                 {% comment %}
                 <div id="add">
@@ -28,9 +28,9 @@
                         <li class="settings-opt" style="background-image:url({{ STATIC_URL }}assets/img/ui/icons/qm-10.svg)">
                             Update Quality Mark
                         </li>
-                        
+
                         <li class="settings-opt" style="background-image:url({{ STATIC_URL }}assets/img/ui/icons/notes-02.svg)">
-                            Monthly Finances 
+                            Monthly Finances
                         </li>
                     </ul>
                 </div>
@@ -38,12 +38,16 @@
             </div>
 
             <div id="profile">
-                
+
                 <div id="person">
-                    <a href="team.html"><div class="avatar"></div></a>
-                    <div class="username">Jane Smith - Openhub</div>
+                    <a href="team.html">
+                        <div class="avatar">
+                            <img src="{{ STATIC_URL }}assets/img/placeholder/killer-avatar.jpg" class="img-circle">
+                        </div>
+                    </a>
+                    <div class="username">{ user.name } - Openhub</div>
                 </div>
-                <a href="home.html"><div id="logout"></div></a>
+                <a href="{% url "logout" %}"><div id="logout"></div></a>
                 <div id="settings">
                     <div id="settings-icon" class="drop"></div>
                     <ul>
@@ -64,7 +68,7 @@
                         </li>
                         {% endcomment %}
                         <li class="settings-opt red">Settings</li>
-                        
+
                         <a href="/meet-the-team-member/{firstname - lastname}"><li class="settings-opt" style="background-image:url({{ STATIC_URL }}assets/img/ui/icons/profile-04.svg)">
                             Update Profile
                         </li></a>
@@ -79,7 +83,7 @@
                         <li class="settings-opt action_addNew" data-type="Password" style="background-image:url({{ STATIC_URL }}assets/img/ui/icons/password-07.svg)">
                            Change password
                         </li>
-                        
+
                     </ul>
                 </div>
 
