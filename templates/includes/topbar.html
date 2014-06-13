@@ -70,20 +70,21 @@
                         <li class="settings-opt red">Settings</li>
 
                         <a href="/meet-the-team-member/{firstname - lastname}"><li class="settings-opt" style="background-image:url({{ STATIC_URL }}assets/img/ui/icons/profile-04.svg)">
-                            Update Profile
+                            Update Profile <!-- this should go to pre-puplated page 8 (invitee) in the sign up process -->
                         </li></a>
-                        <li class="settings-opt" style="background-image:url({{ STATIC_URL }}assets/img/ui/icons/anchor-05.svg)">
-                            Update { name }
+                        <li class="settings-opt" style="background-image:url({{ STATIC_URL }}assets/img/ui/icons/anchor-05.svg)" data-access="super">
+                            Update { local_mind.name } <!-- this should go to pre-puplated page 1 in the sign up process (only accessible to super-users)-->
                         </li>
                         {% comment %}
                         <li class="settings-opt" style="background-image:url({{ STATIC_URL }}assets/img/ui/icons/users-06.svg)">
                             Update Hub Users
                         </li>
                         {% endcomment %}
+                        {% comment %}
                         <li class="settings-opt action_addNew" data-type="Password" style="background-image:url({{ STATIC_URL }}assets/img/ui/icons/password-07.svg)">
-                           Change password
+                           <a href="#">Change password</a>
                         </li>
-
+                        {% endcomment %}
                     </ul>
                 </div>
 

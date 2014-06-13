@@ -1,7 +1,16 @@
-{% extends "base.html" %}
+{% extends "base_page.html" %}
+
 
 {% block title %}You're logged out now{% endblock %}
 
-{% block content %}
-<h1>You're logged out now</h1>
+
+{% block pagecontent %}
+<div id="logo-form"></div>
+<br>
+<p>Thank you - you have logged out successfully</p>
+
+<div class="center-block" style="width:100px; margin-bottom:20px">
+    <a href="{% url "login" %}">Login</a>
+</div>
+
 {% endblock %}
