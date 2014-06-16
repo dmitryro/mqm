@@ -3,7 +3,7 @@
             {% if dashboard == "true" %}
             <div id="sidebar-button" class="closed"></div>
             {% else %}
-            <a href="/my-dashboard"><div id="sidebar-home"></div></a>
+            <a href="{% url "dashboard" %}"><div id="sidebar-home"></div></a>
             {% endif %}
 
             <div id="search-bar">
@@ -69,7 +69,7 @@
                         {% endcomment %}
                         <li class="settings-opt red">Settings</li>
 
-                        <a href="/meet-the-team-member/{firstname - lastname}"><li class="settings-opt" style="background-image:url({{ STATIC_URL }}assets/img/ui/icons/profile-04.svg)">
+                        <a href="{% url "profile-form" %}"><li class="settings-opt" style="background-image:url({{ STATIC_URL }}assets/img/ui/icons/profile-04.svg)">
                             Update Profile <!-- this should go to pre-puplated page 8 (invitee) in the sign up process -->
                         </li></a>
                         <li class="settings-opt" style="background-image:url({{ STATIC_URL }}assets/img/ui/icons/anchor-05.svg)" data-access="super">

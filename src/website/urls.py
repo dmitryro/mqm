@@ -19,6 +19,7 @@ urlpatterns = patterns('',
 
     # PRODUCTION ready for Workshop 1 -- GREGOR TO COMPLETE THESE
     url(r'^my-dashboard/$', 'website.accounts.dashboard.views.dashboard', name='dashboard'),
+    url(r'^my-profile/$', 'website.accounts.dashboard.views.profile_form', name='profile-form'),
     url(r'^my-local-area/$', 'website.local_map.views.map_list', name='local-area'),
     url(r'^positive-news/$', 'website.news.views.positive_news_list', name='positive-news'),
     url(r'^positive-news/(?P<slug>[^/]+)/$', 'website.news.views.positive_news_detail', name='positive-news'),

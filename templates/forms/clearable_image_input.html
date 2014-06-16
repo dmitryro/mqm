@@ -1,0 +1,9 @@
+{% load i18n thumbnail %}{% if value.url %}<img src="{% thumbnail value.name 200x200 crop %}" class="img-circle" alt="">
+{% if not required %}
+{% comment %}
+<input type="checkbox" name="{{ checkbox_name }}" id="{{ checkbox_id }}">
+<label for="{{ checkbox_id }}">{% trans "Clear" %}</label>
+{% endcomment %}
+{% endif %}<br />
+{% endif %}
+<input type="{{ type }}" name="{{ name }}"{% if required %} required{% endif %}{% include "floppyforms/attrs.html" %}>
