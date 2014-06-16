@@ -149,6 +149,8 @@ class SignupTests(WebTest):
         response.form['partners-formset-resources-2-privacy'] = 'local'
 
         response.form['partners-formset-key_partners-0-name'] = 'An excellent partner'
+        response.form['partners-formset-key_partners-0-category'] = Map.CHILD_POVERTY_ACTION_GROUP
+        response.form['partners-formset-key_partners-0-relationship'] = Map.CURRENT_PARTNER
 
         response.form['partners-formset-positive_news-0-title'] = 'Good News: We had success'
         response.form['partners-formset-positive_news-0-tags'] = 'positive, news'

@@ -76,9 +76,9 @@ class Map(PrivacyMixin, PostcodeLocationMixin, models.Model):
     telephone = models.CharField(_('Contact number'), max_length=16, blank=True)
     postcode = models.CharField(_('Postcode'), max_length=120, help_text=_('This is how we generate a map.'))
 
-    relationship = models.CharField(max_length=120, choices=RELATIONSHIP_CHOICES, blank=True)
+    relationship = models.CharField(max_length=120, choices=RELATIONSHIP_CHOICES)
     website = models.URLField(_('Website'), blank=True)
-    category = models.CharField(_('Type'), max_length=50, choices=CATEGORY_CHOICES, blank=True)
+    category = models.CharField(_('Type'), max_length=50, choices=CATEGORY_CHOICES)
 
     created = CreationDateTimeField()
     modified = ModificationDateTimeField()
