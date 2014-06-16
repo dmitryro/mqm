@@ -31,9 +31,15 @@ class Question(PrivacyMixin, models.Model):
     def get_absolute_url(self):
         return 'questions', (self.pk,), {}
 
+    @property
+    def answers_count(self):
+        if not hasattr(self, '_answers_count'):
+            self._answers_count = self.answers.count()
+        return self._answers_count
+
 
 class Answer(models.Model):
-    user = models.ForeignKey('accounts.User', db_index=True, related_name='answer')
+    user = models.ForeignKey('accounts.User', db_index=True, related_name='answers')
 
     question = models.ForeignKey(Question, related_name='answers')
 

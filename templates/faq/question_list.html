@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% load djangular_tags floppyforms thumbnail %}
+
+{% block content %}
+
+<div id="content" class="clearfix">
+
+  {% include "includes/topbar.html" %}
+
+  <div class="container-fluid">
+
+    <h3 class="withIcon icon_document"><span></span>CALL OUT</h3>
+    <a href="/" class="page-close"></a>
+
+    <button class="btn btn-default action_addNew" data-target="#modal-form"{% if show_form %} data-open{% endif %}>ADD NEW QUESTION</button>
+
+    {% include "faq/_question_form.html" with id="modal-form" form=form %}
+
+    <br><br>
+    <div id="team-content">
+
+     <div class="row">
+       <div class="col-md-6">
+        <h4>YOUR QUESTIONS</h4>
+        
+        <!-- A Question -->
+        {% for question in my_questions %}
+            {% include "faq/_question_object.html" with question=question css_class="" %}
+        {% endfor %}
+        <!-- End of A Question -->
+
+
+      </div>
+      <div class="col-md-6 bordered">
+
+      <div class="clearfix">
+        <form class="form-inline pull-right instant-submit" role="form" action="" method="get">
+          <div class="form-group">
+            <label for="filterBy">Filter by</label>
+            {% form search_form using %}
+                {% formfield form.region %}
+            {% endform %}
+          </div>
+        </form>
+
+
+
+        <h4>ALL OPEN HUB QUESTIONS</h4>
+        </div>
+        
+        {% for question in question_list %}
+            {% cycle "dark" "" as css_class silent %}
+            {% include "faq/_question_object.html" with question=question css_class=css_class %}
+        {% endfor %}
+
+      </div>
+      
+    </div>
+
+  </div>
+</div>
+</div> <!-- CONTENT -->
+
+{% endblock %}
