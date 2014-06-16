@@ -113,6 +113,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django_mobile.context_processors.flavour',
     'website.context_processors.site',
     'website.context_processors.api_keys',
+    'website.tasks.context_processors.tasks',
 )
 
 INSTALLED_APPS = (

@@ -56,9 +56,9 @@
                             <div class="notification">3</div>
                         </li>
                         {% endcomment %}
-                        <a href="/todos"><li class="settings-opt" style="background-image:url({{ STATIC_URL }}assets/img/ui/icons/tasks-03.svg)">
+                        <a href="{% url "tasks" %}"><li class="settings-opt" style="background-image:url({{ STATIC_URL }}assets/img/ui/icons/tasks-03.svg)">
                             To-Do's
-                            <div class="notification">14</div>
+                            <div class="notification">{{ my_tasks.count }}</div>
                         </li></a>
                         {% comment %}
                         <li class="settings-opt" style="background-image:url({{ STATIC_URL }}assets/img/ui/icons/alert-01.svg)">
