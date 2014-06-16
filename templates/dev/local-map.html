@@ -155,14 +155,6 @@ function initialize() {
 
     mc = new MarkerClusterer(map, markers);
 
-
-//put the markers on the map
-//window.setTimeout(function(){
-    //for(i = 0; i < markers.length; i++) {
-        //markers[i].setMap(map);
-    //}
-//},100);
-
 //information boxes content, the indexes are the same as the marker
 infoBoxes.push(new google.maps.InfoWindow({
     content: '<p>NAME OF PARTNER</p><br><p><span class="text-muted">Type:</span> Local Authority</p><p><span class="text-muted">Email:</span> email address</p>    <p><span class="text-muted">Telephone:</span> 014 4454 5000</p><p><span class="text-muted">website:</span> www</p><p><span class="text-muted">Address:</span> address</p>'

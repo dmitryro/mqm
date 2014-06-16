@@ -235,6 +235,17 @@
     </div>
     {% endcomment %}
 
+        <div class="theNetWorks hidden">
+      <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
+        <div class="widget-bar">
+          <div class="widget-title"><a href="/the-net-works">THE NET WORKS</a></div>
+          {% include "includes/widget-settings.html" %}
+        </div>
+         <!-- this will be a map -->
+         <div id="map-canvas-network-map"></div>
+      </li>
+    </div>
+
 
     <div class="theLabNews hidden">
         <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
@@ -373,6 +384,7 @@
                         {% include "includes/widget-settings.html" %}
                     </div>
                     <!-- for loop of on line #486 [ long, lat, title ] -->
+                    <div id="map-canvas-local-area"></div>
                 </li>
     </div>
 
@@ -424,97 +436,137 @@
 
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_MAPS_API_KEY }}"></script>
 <script type="text/javascript" src="{{ STATIC_URL }}/js/markerclusterer.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
 <script type="text/javascript">
+  function initializeLocalMap() {
 
-//global variables
-var markers = Array();
-var infoBoxes = Array();
-var map;
-var mc; //marker cluster var
-
-function initializeFundingMap() {
+    var markers = Array();
+    var infoBoxes = Array();
+    var map;
+    var mc; //marker cluster var
 
         var styles = [
-  {
-    featureType: "all",
-    stylers: [
-      { saturation: -75 },
-       { hue: "#174787" },
-    ]
-  }
-];
+        {
+            "stylers": [
+            { "hue": "#174787" },
+            { "saturation": -75 }
+            ]
+        },{
+            "featureType": "road.highway",
+            "elementType": "labels.icon",
+            "stylers": [
+            { "visibility": "off" }
+            ]
+        }
+        ]
 
-        var mapOptions = {
+
+        mapOptions = {
           center: new google.maps.LatLng(51.5072, 0.1275),
           zoom: 8,
           styles: styles,
           disableDoubleClickZoom: true,
-          draggable: false,
-          scrollwheel: false,
-          panControl: false,
-          controls:false,
-          mapTypeControl:false,
-          scaleControl:false,
-          streetViewControl:false,
-          overviewMapControl:false,
-          rotateControl:false
+            draggable: false,
+            scrollwheel: false,
+            panControl: false,
+            controls:false,
+            mapTypeControl:false,
+            scaleControl:false,
+            streetViewControl:false,
+            overviewMapControl:false,
+            rotateControl:false
+      };
+      map = new google.maps.Map(document.getElementById("map-canvas-local-area"),
+        mapOptions);
 
-        };
-        map = new google.maps.Map(document.getElementById("map-canvas1"),mapOptions);
+      mc = new MarkerClusterer(map, markers);
 
-    mc = new MarkerClusterer(map, markers);
+//loop markers for local map
+      markers.push(new google.maps.Marker({
+        position: new google.maps.LatLng(51.5072, 0.1275),
+        icon: '/static/assets/img/ui/icons/map-markers/local-mind.png',
+        title:"Local Mind - N/A",
+        filterName: "Local Mind",
+        partnerTypes: "N/A"
+    }));
 
-
-//put the markers on the map
-//window.setTimeout(function(){
-  //for(i = 0; i < markers.length; i++) {
-    //markers[i].setMap(map);
-  //}
-//},100);
-
-//information boxes content, the indexes are the same as the marker
-infoBoxes.push(new google.maps.InfoWindow({
-      content: "Some HTML"
-}));
-
-function markerEventListenerDelegate(marker,infobox) {
-  return google.maps.event.addListener(marker, 'click', function() {
-    for(i = 0; i < infoBoxes.length; i++) {
-      infoBoxes[i].close();
+      for(i = 0; i < markers.length; i++) {
+     mc.addMarker(markers[i]);
     }
-      infobox.open(map,marker);
-    });
+
 }
 
-
-//map markers
-markers.push(new google.maps.Marker({
-    position: new google.maps.LatLng(51.5072, 0.1275),
-    title:"Local Mind - N/A",
-}));
-
-
-
-////
-
-for(i = 0; i < markers.length; i++) {
-  //markers[i].setMap(map);
-  mc.addMarker(markers[i]);
-  markerEventListenerDelegate(markers[i], infoBoxes[i]);
-}
-
-
-} //end of init function
-
-google.maps.event.addDomListener(window, 'load', initializeFundingMap);
-
-
-
+google.maps.event.addDomListener(window, 'load', initializeLocalMap);
 </script>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script type="text/javascript">
 
+<script type="text/javascript">
+  function initializeNetworkMap() {
+
+    var markers = Array();
+    var infoBoxes = Array();
+    var map;
+    var mc; //marker cluster var
+
+        var styles = [
+        {
+            "stylers": [
+            { "hue": "#174787" },
+            { "saturation": -75 }
+            ]
+        },{
+            "featureType": "road.highway",
+            "elementType": "labels.icon",
+            "stylers": [
+            { "visibility": "off" }
+            ]
+        }
+        ]
+
+
+        mapOptions = {
+          center: new google.maps.LatLng(51.5072, 0.1275),
+          zoom: 8,
+          styles: styles,
+          disableDoubleClickZoom: true,
+            draggable: false,
+            scrollwheel: false,
+            panControl: false,
+            controls:false,
+            mapTypeControl:false,
+            scaleControl:false,
+            streetViewControl:false,
+            overviewMapControl:false,
+            rotateControl:false
+      };
+      map = new google.maps.Map(document.getElementById("map-canvas-network-map"),
+        mapOptions);
+
+      mc = new MarkerClusterer(map, markers);
+
+//loop markers for local map
+      markers.push(new google.maps.Marker({
+        position: new google.maps.LatLng(51.1072, 0.1275),
+        icon: '/static/assets/img/ui/icons/map-markers/local-mind.png',
+        title:"Local Mind Network Resource"
+    }));
+
+
+
+      for(i = 0; i < markers.length; i++) {
+     mc.addMarker(markers[i]);
+    }
+
+}
+
+google.maps.event.addDomListener(window, 'load', initializeNetworkMap);
+</script>
+
+
+
+<script type="text/javascript">
 $(document).ready(function(){
+    /* FEED WILL EVENTUALLY GO HERE, SILENCING ERR
   $.ajax({
             type: 'GET',
             url: 'http://www.thementalelf.net/feed/',
@@ -528,7 +580,7 @@ $(document).ready(function(){
                     $('#feedResults').append('<a href="'+linkUrl+'" class="list-group-item">'+title+'</li></a>');
                 });
             }
-        });
+        });*/
 });
 
 </script>

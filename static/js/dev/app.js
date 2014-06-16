@@ -281,6 +281,8 @@ $(document).ready(function() {
 	    	var widgetName = $(this).parent().attr('data-widg');
 	    	gridster.add_widget( $('.'+widgetName).html(), 1, 1, 1, 1 );
 	    	if(widgetName == "fundingmap") {initializeFundingMap();}
+	    	if(widgetName == "myLocalArea") {initializeLocalMap();}
+	    	if(widgetName == "theNetWorks") {initializeNetworkMap();}
 	    	
 	    	/*
 	    	$('.drop').unbind('click');
