@@ -1,7 +1,7 @@
 from django.core.urlresolvers import reverse
 from django.views.generic import TemplateView, UpdateView
 from website.views.generic import CommonViewMixin
-from .forms import ProfileForm
+from .forms import LocalMindForm, ProfileForm
 
 
 class DashboardView(CommonViewMixin, TemplateView):
@@ -24,7 +24,22 @@ class DashboardView(CommonViewMixin, TemplateView):
 dashboard = DashboardView.as_view()
 
 
-class ProfileFormView(CommonViewMixin, UpdateView):
+class LocalMindUpdateView(CommonViewMixin, UpdateView):
+    form_class = LocalMindForm
+    template_name = 'dashboard/local_mind_form.html'
+    context_object_name = 'local_mind'
+
+    def get_object(self, queryset=None):
+        return self.request.user.local_mind
+
+    def get_success_url(self):
+        return reverse('dashboard')
+
+
+local_mind_form = LocalMindUpdateView.as_view()
+
+
+class ProfileUpdateView(CommonViewMixin, UpdateView):
     form_class = ProfileForm
     template_name = 'dashboard/profile_form.html'
 
@@ -35,4 +50,4 @@ class ProfileFormView(CommonViewMixin, UpdateView):
         return reverse('dashboard')
 
 
-profile_form = ProfileFormView.as_view()
+profile_form = ProfileUpdateView.as_view()

@@ -1,0 +1,212 @@
+{% extends "base.html" %}
+{% load floppyforms %}
+
+
+{% block content %}
+
+<div id="content" class="clearfix">
+
+  {% include "includes/topbar.html" %}
+
+  <div class="container-fluid">
+
+    <h3 class="withIcon icon_newspaper"><span></span>{{ local_mind }}</h3>
+    <a href="/" class="page-close"></a>
+{% comment %}
+    <button class="btn btn-default action_addNew" data-type="News">ADD NEW POST</button>
+    {% endcomment %}
+
+
+    <form class="form-horizontal" role="form" action="" method="post" enctype="multipart/form-data" novalidate>{% csrf_token %}
+
+    {% form form using %}
+        {% formconfig row using "forms/signup_row.html" %}
+        {% formconfig field using "forms/clearable_image_input.html" for form.group_avatar %}
+
+        <div class="row">
+            <div class="col-md-6">
+                {% formrow form.name %}
+            </div>
+            <div class="col-md-6">
+                {% formrow form.email %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                {% formrow form.region %}
+            </div>
+            <div class="col-md-6">
+                {% formrow form.telephone %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                {% formrow form.address %}
+            </div>
+            <div class="col-md-6">
+                {% formrow form.website %}
+                {% formrow form.income_unrestricted %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                {% formrow form.postcode %}
+            </div>
+            <div class="col-md-6">
+                {% formrow form.reserves %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                {% formrow form.income_unrestricted %}
+            </div>
+            <div class="col-md-6">
+                {% formrow form.deficit %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                Expenditure?<br />
+                {% formrow form.charity_no %}
+            </div>
+            <div class="col-md-6">
+                {% formrow form.statement %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                {% formrow form.charity_type %}
+                {% formrow form.group_avatar using "forms/signup_row_file_field.html" %}
+            </div>
+            <div class="col-md-6">
+                {% formrow form.hours %}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+              <div class="col-sm-3"></div>
+              <div class="col-sm-9">
+                <h4>LM FURTHER DETAILS</h4>
+              </div>
+            </div>
+        </div>
+
+        {# CEO 1 #}
+        <div class="row">
+            <div class="col-md-6">
+                {% formrow form.forms.ceo_one.name with label="CEO One Name" %}
+            </div>
+            <div class="col-md-6">
+                {% formrow form.forms.ceo_one.ethnicity with label="CEO One Ethnicity" %}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                {% formrow form.forms.ceo_one.gender with label="CEO One Gender" %}
+            </div>
+            <div class="col-md-6">
+                {% formrow form.forms.ceo_one.email with label="CEO One Email" %}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                {% formrow form.forms.ceo_one.telephone with label="CEO One Contact Number" %}
+            </div>
+            <div class="col-md-6">
+            </div>
+        </div>
+
+        {# CEO 2 #}
+        <div class="row">
+            <div class="col-md-6">
+                {% formrow form.forms.ceo_two.name with label="CEO Two Name" %}
+            </div>
+            <div class="col-md-6">
+                {% formrow form.forms.ceo_two.ethnicity with label="CEO Two Ethnicity" %}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                {% formrow form.forms.ceo_two.gender with label="CEO Two Gender" %}
+            </div>
+            <div class="col-md-6">
+                {% formrow form.forms.ceo_two.email with label="CEO Two Email" %}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                {% formrow form.forms.ceo_two.telephone with label="CEO Two Contact Number" %}
+            </div>
+            <div class="col-md-6">
+            </div>
+        </div>
+
+        {# Other #}
+        <div class="row">
+            <div class="col-md-6">
+                {% formrow form.staff_count %}
+            </div>
+            <div class="col-md-6">
+                {% formrow form.trustees_count %}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                {% formrow form.volunteers_count %}
+            </div>
+            <div class="col-md-6">
+                {% formrow form.trustees_active %}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                {% formrow form.area_of_benefit %}
+            </div>
+            <div class="col-md-6">
+                {% formrow form.average_volunteer_hours %}
+            </div>
+        </div>
+
+        {# Chair #}
+        <div class="row">
+            <div class="col-md-6">
+                {% formrow form.forms.chair.name with label="Chair Name" %}
+            </div>
+            <div class="col-md-6">
+                {% formrow form.forms.chair.ethnicity with label="Chair Ethnicity" %}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                {% formrow form.forms.chair.gender with label="Chair Gender" %}
+            </div>
+            <div class="col-md-6">
+                {% formrow form.forms.chair.email with label="Chair Email" %}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                {% formrow form.forms.chair.telephone with label="Chair Contact Number" %}
+            </div>
+            <div class="col-md-6">
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-default">Save</button>
+
+    {% endform %}
+    </form>
+
+
+  </div> <!-- CONTENT -->
+
+{% endblock %}

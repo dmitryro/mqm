@@ -11,6 +11,7 @@ import floppyforms.__future__ as forms
 from website.accounts.models import User, Experience
 from website.faq.models import Question
 from website.local_map.models import Map
+from website.local_minds.forms import PersonForm
 from website.local_minds.models import LocalMind, Ethnicity, Person
 from website.news.models import PositiveNews
 from website.resources.models import Resource
@@ -199,19 +200,6 @@ class QuestionForm(ModelForm):
         )
 
 
-class PersonForm(ModelForm):
-    class Meta:
-        model = Person
-        significant_fields = ('name',)
-        fields = (
-            'name',
-            'ethnicity',
-            'gender',
-            'email',
-            'telephone',
-        )
-
-
 class SignupLocalMindMembersForm(CompositeModelForm):
     formfield_callback = formfield_callback
 
@@ -242,13 +230,6 @@ class SignupLocalMindMembersForm(CompositeModelForm):
             'area_of_benefit',
             'average_volunteer_hours',
         )
-
-    def get_objects_from_formset(self, name):
-        formset = self.formsets[name]
-        return [
-            form.cleaned_data['ethnicity']
-            for form in formset.forms
-            if form.is_valid() and 'ethnicity' in form.cleaned_data]
 
     def save(self, local_mind, *args, **kwargs):
         # Hijack instance with new version.
