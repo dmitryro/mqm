@@ -59,7 +59,7 @@
                         <h5>BACKEND RESOURCES</h5>
                         <p class="skills">
                         {% for resource in local_mind.resources.all %}
-                            Colour Printer
+                            {{ resource }}
                             {% if not forloop.last %}<br/>{% endif %}
                         {% endfor %}
                         </p>
