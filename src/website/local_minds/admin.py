@@ -4,7 +4,6 @@ from .models import LocalMind, Person, Ethnicity
 
 class LocalMindAdmin(admin.ModelAdmin):
     list_display = ('name', 'slug',)
-    raw_id_fields = ('ceo_one', 'ceo_two', 'chair',)
 
 
 class PersonAdmin(admin.ModelAdmin):
