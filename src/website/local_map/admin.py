@@ -29,12 +29,6 @@ class MapAdmin(admin.ModelAdmin):
                 'email',
             ),
         }),
-        (_('Media'), {
-            'classes': ('wide',),
-            'fields': (
-                'marker',
-            ),
-        }),
         (_('Categorisation'), {
             'classes': ('wide',),
             'fields': (
