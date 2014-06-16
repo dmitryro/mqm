@@ -23,6 +23,19 @@ class LocalMind(models.Model):
         ('yorkshire-and-the-humber', _('Yorkshire and The Humber')),
     )
 
+    TRUSTEES_ACTIVE_CHOICES = (
+        ('0-10', _('0 - 10%')),
+        ('11-20', _('11 - 20%')),
+        ('21-30', _('21 - 30%')),
+        ('31-40', _('31 - 40%')),
+        ('41-50', _('41 - 50%')),
+        ('51-60', _('51 - 60%')),
+        ('61-70', _('61 - 70%')),
+        ('71-80', _('71 - 80%')),
+        ('81-90', _('81 - 90%')),
+        ('91-100', _('91 - 100%')),
+    )
+
     name = models.CharField(_('Local Mind'), max_length=120)
     slug = AutoSlugField(populate_from=('name',))
 
@@ -50,7 +63,7 @@ class LocalMind(models.Model):
     staff_count = models.PositiveIntegerField(_('No Of Staff'), null=True, blank=True)
     trustees_count = models.PositiveIntegerField(_('No Of Trustees'), null=True, blank=True)
     volunteers_count = models.PositiveIntegerField(_('No Of Volunteers'), null=True, blank=True)
-    trustees_active = models.PositiveIntegerField(_('No Of Trustees Who Use MH Services'), null=True, blank=True)
+    trustees_active = models.CharField(_('No Of Trustees Who Use MH Services'), max_length=20, choices=TRUSTEES_ACTIVE_CHOICES, null=True, blank=True)
     area_of_benefit = models.CharField(_('Area of benefit'), max_length=50, blank=True)
     average_volunteer_hours = models.CharField(_('Average volunteer hours'), max_length=50, blank=True)
 
