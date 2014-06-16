@@ -106,8 +106,16 @@ class SignupTests(WebTest):
         self.assertFalse('password1' in response.context['form'].errors)
         self.assertTrue('password2' in response.context['form'].errors)
 
+        # First/Last name are required.
+        self.assertTrue('first_name' in response.context['form'].errors)
+        self.assertTrue('last_name' in response.context['form'].errors)
+
+        response.form['profile-first_name'] = 'Maxwell'
+        response.form['profile-last_name'] = 'McCog'
+
         response.form['profile-password1'] = 'TestPassword'
         response.form['profile-password2'] = 'TestPassword'
+
 
         response = response.form.submit()
         response = response.follow()
@@ -185,6 +193,10 @@ class SignupTests(WebTest):
         user = User.objects.get(email=reserved_email.email)
         self.assertEqual(user.privileges, 'superuser')
         self.assertEqual(user.local_mind, local_mind)
+        self.assertEqual(user.first_name, 'Maxwell')
+        self.assertEqual(user.last_name, 'McCog')
+        self.assertTrue(user.check_password('TestPassword'))
+
         # TODO: Test more user fields.
 
         experiences = Experience.objects.all()
@@ -311,6 +323,11 @@ class SignupTests(WebTest):
 
         self.assertFalse('password1' in response.context['form'].errors)
         self.assertTrue('password2' in response.context['form'].errors)
+        self.assertTrue('first_name' in response.context['form'].errors)
+        self.assertTrue('last_name' in response.context['form'].errors)
+
+        response.form['first_name'] = 'Foo'
+        response.form['last_name'] = 'Bar'
 
         response.form['password1'] = 'TestPassword'
         response.form['password2'] = 'TestPassword'
@@ -324,6 +341,8 @@ class SignupTests(WebTest):
 
         user = User.objects.get(pk=user.pk)
 
+        self.assertEqual(user.first_name, 'Foo')
+        self.assertEqual(user.last_name, 'Bar')
         self.assertTrue(user.check_password('TestPassword'))
         self.assertTrue(user.date_joined is not None)
 
