@@ -32,17 +32,19 @@
         {% endcomment %}
         <br>
 
-        {% for news in positivenews_list|slice:":2" %}
+        {% for news in news_list|slice:":2" %}
             <h4><a href="{{ news.get_absolute_url }}">{{ news.title }}</a></h4>
-            <p class="small">{{ news.date|date }} - posted by {{ news.user }} - {{ news.local_mind }}</p>
+            <p class="small">
+                {% if news.date %}{{ news.date|date }} - {% endif %}
+                posted by {{ news.user }} - {{ news.local_mind }}</p>
             {{ news.description|linebreaks|urlize }}
         {% endfor %}
         <hr>
 
       </div>
       <div class="col-md-4">
-        {% for news in positivenews_list|slice:"2:" %}
-            <p><strong><a href="{{ news.get_absolute_url }}">{{ news.title }}</a></strong><br><span class="small">{{ news.date|date }} - posted by {{ news.user }} - {{ news.local_mind }}</span></p>
+        {% for news in news_list|slice:"2:" %}
+            <p><strong><a href="{{ news.get_absolute_url }}">{{ news.title }}</a></strong><br><span class="small">{% if news.date %}{{ news.date|date }} - {% endif %}posted by {{ news.user }} - {{ news.local_mind }}</span></p>
         {% endfor %}
       </div>
 

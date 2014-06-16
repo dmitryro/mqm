@@ -7,6 +7,7 @@ from .forms import PositiveNewsForm
 
 
 class PositiveNewsListView(CommonPrivacyViewMixin, ListCreateView):
+    context_object_name = 'news_list'
     form_class = PositiveNewsForm
     queryset = PositiveNews.objects.order_by('-created')
 
@@ -15,6 +16,7 @@ positive_news_list = PositiveNewsListView.as_view()
 
 
 class PositiveNewsDetailView(CommonPrivacyViewMixin, DetailView):
+    context_object_name = 'news'
     queryset = PositiveNews.objects.order_by('-created')
 
 

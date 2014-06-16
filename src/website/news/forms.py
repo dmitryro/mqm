@@ -1,3 +1,4 @@
+from datetime import date
 import floppyforms.__future__ as forms
 from floppyforms.__future__.models import ModelForm
 
@@ -18,6 +19,7 @@ class PositiveNewsForm(ModelForm):
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user')
         super(PositiveNewsForm, self).__init__(*args, **kwargs)
+        self.initial.setdefault('date', date.today())
 
     def save(self, *args, **kwargs):
         self.instance.user = self.user
