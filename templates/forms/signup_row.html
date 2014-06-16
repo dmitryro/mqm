@@ -3,7 +3,7 @@
         <div class="form-group{% if field.errors %} has-error has-feedback{% endif %}">
             {% with classes=field.css_classes label=label|default:field.label help_text=help_text|default:field.help_text %}
             {% block label %}
-                {% if field|id %}<label class="col-sm-3 control-label{% if inline_label %} sr-only{% endif %}" for="{{ field|id }}">{% endif %}
+                <label class="col-sm-3 control-label{% if inline_label %} sr-only{% endif %}"{% if field|id %} for="{{ field|id }}"{% endif %}{% if tooltip %} data-container="body" data-toggle="popover" data-placement="top" data-content="{{ tooltip }}"{% endif %}>
                     {{ label }}
                     {% comment %}
                     {% if field.field.required %} <span class="required">*</span>{% endif %}
@@ -13,7 +13,7 @@
                             <p class="help-block">{{ field.help_text }}</p>
                         {% endif %}
                     {% endblock %}
-                {% if field|id %}</label>{% endif %}
+                </label>
             {% endblock %}
 
             {% block field %}

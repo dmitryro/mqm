@@ -1,7 +1,7 @@
 (function ($) {
     $(document).ready(function () {
 
-        // DROP DOWNS 
+        // DROP DOWNS
         $('body').on('click', '.drop', function () {
             if ($(this).hasClass('dropped')) {
                 $(this).parent().find('ul').css('display', 'none');
@@ -16,6 +16,10 @@
         $('.add-another').addanother();
 
 
+        // Label tooltips
+        $("label[data-content]").popover({
+            trigger: "hover"
+        });
 
         /* Ismail */
 
@@ -59,7 +63,7 @@
 
 
 
-        
+
 
         //POP UP
 

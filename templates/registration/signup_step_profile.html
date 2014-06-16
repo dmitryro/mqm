@@ -19,7 +19,7 @@
 
         <div class="row">
             <div class="col-md-6">
-                {% formrow form.first_name %}
+                {% formrow form.first_name with tooltip="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." %}
             </div>
             <div class="col-md-6">
                 {% formrow form.last_name %}
@@ -74,7 +74,7 @@
             {{ formset.management_form }}
             <div class="row">
                 <div class="col-md-6">
-                    {% formrow formset.forms.0.experience using "forms/signup_row_inline_help.html" %}
+                    {% formrow formset.forms.0.experience using "forms/signup_row_inline_help.html" with tooltip="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." %}
                 </div>
                 <div class="col-md-6">
                     {% formrow formset.forms.1.experience using "forms/signup_row_inline_help.html" %}
