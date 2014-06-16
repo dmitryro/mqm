@@ -96,11 +96,15 @@ class Map(PrivacyMixin, PostcodeLocationMixin, models.Model):
 
     @property
     def marker_icon(self):
+        if not self.relationship or not self.category:
+            return None
         file_template = '{base_path}/{relationship}/{category}.png'
         if self.relationship == self.CURRENT_PARTNER:
             relationship = 'current'
         elif self.relationship == self.PARTNER_OPPORTUNITY:
             relationship = 'potential'
+        else:
+            return None
         category = self.category.replace(' ', '-').lower()
         return os.path.join(
             settings.STATIC_URL,
