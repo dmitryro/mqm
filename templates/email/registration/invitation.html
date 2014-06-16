@@ -2,7 +2,7 @@
 {% load email %}
 
 
-{% subject %}You got invited to {{ site.name }}!{% endsubject %}
+{% block subject %}You got invited to {{ site.name }}!{% endblock %}
 
 
 {% block body %}

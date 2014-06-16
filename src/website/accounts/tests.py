@@ -44,6 +44,8 @@ class SignupTests(WebTest):
         self.assertEqual(response.status_code, 302)
 
         self.assertEqual(len(mail.outbox), 1)
+        email = mail.outbox[0]
+        self.assertTrue(email.subject)
 
     def test_signup_steps(self):
         white = Ethnicity.objects.get(name='White')
@@ -287,6 +289,7 @@ class SignupTests(WebTest):
         self.assertEqual(len(mail.outbox), 1)
         email = mail.outbox[0]
         self.assertEqual(email.to, [john.email])
+        self.assertTrue(email.subject)
 
     def test_profile_signup(self):
         local_mind = autofixture.create_one(LocalMind)

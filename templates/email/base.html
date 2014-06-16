@@ -1,6 +1,9 @@
 {% load email %}
 
 
+{% subject %}{% block subject %}{% endblock %}{% endsubject %}
+
+
 {% body %}
 {% block body %}{% endblock %}
 {% block footer %}
