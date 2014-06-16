@@ -1,3 +1,5 @@
+import os
+from django.conf import settings
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django_extensions.db.fields import AutoSlugField, CreationDateTimeField, ModificationDateTimeField
@@ -82,6 +84,17 @@ class LocalMind(PostcodeLocationMixin, models.Model):
     @models.permalink
     def get_absolute_url(self):
         return 'local-mind', (), {'slug': self.slug}
+
+    @property
+    def marker_icon(self):
+        return os.path.join(
+            settings.STATIC_URL,
+            'assets',
+            'img',
+            'ui',
+            'icons',
+            'map-markers',
+            'local-mind.png')
 
 
 class Ethnicity(models.Model):

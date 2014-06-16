@@ -40,7 +40,7 @@ urlpatterns = patterns('',
     url(r'^todos/add/$', 'website.tasks.views.task_list', {'show_form': True}, name='tasks-add'),
     url(r'^todos/(?P<pk>\d+)/done/$', 'website.tasks.views.task_done', {'done': True}, name='tasks-done'),
     url(r'^todos/(?P<pk>\d+)/undone/$', 'website.tasks.views.task_done', {'done': False}, name='tasks-undone'),
-    url(r'^the-net-works/$', 'django.shortcuts.render', {'template_name': 'dev/the-net-works.html'}, name='net-works'),
+    url(r'^the-net-works/$', 'website.resources.views.resource_list', name='net-works'),
 
     url(r'^login/$', 'website.accounts.views.login_signup', name='login'),
     url(r'^login/signup/$', lambda r: HttpResponseRedirect(reverse('login') + '#signup'), name='signup'),
