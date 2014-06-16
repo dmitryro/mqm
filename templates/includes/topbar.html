@@ -1,3 +1,4 @@
+{% load thumbnail %}
 <div id="top-bar">
 
             {% if dashboard == "true" %}
@@ -40,11 +41,9 @@
             <div id="profile">
 
                 <div id="person">
-                    <a href="team.html">
-                        <div class="avatar">
-                            <img src="{{ STATIC_URL }}assets/img/placeholder/killer-avatar.jpg" class="img-circle">
-                        </div>
-                    </a>
+                    <div class="avatar">
+                        <img src="{% thumbnail user.user_avatar 40x40 crop %}" class="img-circle">
+                    </div>
                     <div class="username">{{ user.get_full_name|default:user.email }}'s - Openhub</div>
                 </div>
                 <a href="{% url "logout" %}"><div id="logout"></div></a>
