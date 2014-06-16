@@ -1,15 +1,14 @@
 # -*- coding: utf-8 -*-
 from django.conf import settings
 from django.db import models
-from django.db.models.signals import pre_save
 from django.utils.translation import ugettext_lazy as _
 from django_extensions.db.fields import (AutoSlugField, CreationDateTimeField,
     ModificationDateTimeField)
 from django_publicmanager.managers import GenericPublicManager, \
     PublicOnlyManager
-import geocoder
 
 from ..privacy import PrivacyMixin
+from ..utils.models import PostcodeLocationMixin
 
 
 class Marker(models.Model):
@@ -24,7 +23,7 @@ class Marker(models.Model):
         return self.title
 
 
-class Map(PrivacyMixin, models.Model):
+class Map(PrivacyMixin, PostcodeLocationMixin, models.Model):
     CURRENT_PARTNER = 'current-partner'
     PARTNER_OPPORTUNITY = 'partner-opportunity'
     RELATIONSHIP_CHOICES = (
@@ -89,9 +88,6 @@ class Map(PrivacyMixin, models.Model):
     postcode = models.CharField(_('Postcode'), max_length=120, blank=True,
         help_text=_('This is how we generate a map.'))
 
-    _latitude_postcode = models.CharField(max_length=32, null=True, blank=True)
-    _longitude_postcode = models.CharField(max_length=32, null=True, blank=True)
-
     relationship = models.CharField(max_length=120, choices=RELATIONSHIP_CHOICES, blank=True)
     website = models.URLField(_('Website'), blank=True)
     category = models.CharField(_('Type'), max_length=50, choices=CATEGORY_CHOICES, blank=True)
@@ -107,30 +103,3 @@ class Map(PrivacyMixin, models.Model):
 
     def __unicode__(self):
         return self.name
-
-    @property
-    def latitude(self):
-        return self._latitude_postcode
-
-    @property
-    def longitude(self):
-        return self._longitude_postcode
-
-    def calculate_position(self, commit=False):
-        if self.postcode:
-            response = geocoder.google(
-                '{}, United Kingdom'.format(self.postcode),
-                api_key=settings.GOOGLE_MAPS_API_KEY)
-            assert response.ok, response.status
-            self._latitude_postcode = response.latitude
-            self._longitude_postcode = response.longitude
-        else:
-            self._latitude_postcode = None
-            self._longitude_postcode = None
-
-
-def update_position(sender, instance, **kwargs):
-    instance.calculate_position()
-
-
-pre_save.connect(update_position, sender=Map)

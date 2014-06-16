@@ -2,8 +2,10 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django_extensions.db.fields import AutoSlugField, CreationDateTimeField, ModificationDateTimeField
 
+from website.utils.models import PostcodeLocationMixin
 
-class LocalMind(models.Model):
+
+class LocalMind(PostcodeLocationMixin, models.Model):
     CHARITY_TYPE_CHOICES = (
         ('unincorporated', _('Unincorporated'),),
         ('company-limited-by-guarantee', _('Company Limited by Guarantee'),),
