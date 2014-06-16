@@ -119,7 +119,6 @@ class BaseSignupProfileForm(CompositeModelForm):
             'user_avatar',
             'biography',
             'telephone',
-            'mobile',
             'twitter',
         )
 

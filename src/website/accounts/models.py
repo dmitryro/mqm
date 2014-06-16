@@ -38,8 +38,6 @@ class User(AbstractBaseUser, PermissionsMixin):
     user_avatar = models.ImageField(_('Profile Image'), upload_to='users/avatars/', null=True, blank=True, help_text=_('Maximum size of 500kb. Only JPG, PNG accepted'))
 
     telephone = models.CharField(_('Contact Number'), max_length=50, blank=True)
-    #remove 'mobile'
-    mobile = models.CharField(_('Mobile'), max_length=50, blank=True)
     twitter = models.CharField(_('Twitter'), max_length=15, blank=True)
 
     biography = models.TextField(_('Biography'), max_length=350, blank=True, help_text=_('limited to 350 characters'))
