@@ -55,7 +55,13 @@
             e.preventDefault();
 
             var modalSelector = $(this).attr('data-target');
+            var action = $(this).attr('data-action');
             var $modalContent = $(modalSelector);
+
+            if (action) {
+                $modalContent.find('form').attr('action', action);
+            }
+
 
             openModal($modalContent);
 

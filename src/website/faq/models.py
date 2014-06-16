@@ -25,7 +25,7 @@ class Question(PrivacyMixin, models.Model):
         verbose_name_plural = _('Callout')
 
     def __unicode__(self):
-        return self.question
+        return unicode(self.question)
 
     @models.permalink
     def get_absolute_url(self):
@@ -53,6 +53,9 @@ class Answer(models.Model):
         verbose_name = _('Callout Answer')
         verbose_name_plural = _('Callout Answers')
 
+    def __unicode__(self):
+        return unicode(self.answer)
+
     @models.permalink
     def get_absolute_url(self):
-        return ('answer', (self.pk,), {})
+        return 'questions', (self.question_id,), {}

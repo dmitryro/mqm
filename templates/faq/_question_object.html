@@ -1,32 +1,33 @@
 {% load static thumbnail %}
 <div class="media {{ css_class }}">
     <a class="pull-left" href="#">
-    <!-- show quiestion icon if it is not answered -->
-    {% if question.answers_count %}
-    <img class="media-object" src="{% static "assets/img/ui/icons/icon_tick.png" %}" alt="Answered">
-    {% else %}
-    <img class="media-object" src="{% static "assets/img/ui/icons/icon_question.png" %}" alt="Unanswered">
-    {% endif %}
+        <!-- show quiestion icon if it is not answered -->
+        {% if question.answers_count %}
+        <img class="media-object" src="{% static "assets/img/ui/icons/icon_tick.png" %}" alt="Answered">
+        {% else %}
+        <img class="media-object" src="{% static "assets/img/ui/icons/icon_question.png" %}" alt="Unanswered">
+        {% endif %}
     </a>
 
     <!-- hide this a if there is no answers to expand into. number target 1, 2, 3... -->
-    {% if question.answers_count %}
+    {% if not show_answers and question.answers_count %}
     <a class="smallIcon openAccordion" data-toggle="collapse" data-toggle="collapse" data-target="#answers-{{ question.pk }}"></a>
     {% endif %}
 
     <div class="media-body">
     <h4 class="media-heading">{{ question.question }}</h4>
     <p>{{ question.user }} - {{ question.user.local_mind }} - {{ question.created|date }}</p>
-    <p class="small"><a href="#" class="action_addNew" data-type="Answer">+ Answers ({{ question.answers_count }})</a></p>
+    <p class="small"><a href="javascript:void(0);" class="action_addNew" data-target="#answer-form"{% if show_answer_form %} data-open{% endif %} data-action="{% url "questions-add-answer" question.pk %}">+ Answers ({{ question.answers_count }})</a></p>
 
     <!-- Start of answers -->
     {% if question.answers_count %}
-    <div class="answers collapse" id="answers-{{ question.pk }}">
+    <div class="answers{% if not show_answers %} collapse{% endif %}" id="answers-{{ question.pk }}">
         {% for answer in question.answers.all %}
             <div class="media">
             {% if answer.user.user_avatar %}
             <a class="pull-left" href="{{ answer.user.get_absolute_url }}">
                 <img class="media-object" src="{% thumbnail answer.user.user_avatar 40x40 crop %}" alt="Profile picture of {{ answer.user }}">
+            </a>
 
             {% endif %}
             <div class="media-body">

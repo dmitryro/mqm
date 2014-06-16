@@ -7,6 +7,8 @@
 
   {% include "includes/topbar.html" %}
 
+  {% include "faq/_answer_form.html" with id="answer-form" form=form %}
+
   <div class="container-fluid">
 
     <h3 class="withIcon icon_document"><span></span>CALL OUT</h3>
@@ -18,7 +20,7 @@
 
        <div class="col-md-6">
         
-        {% include "faq/_question_object.html" with question=question css_class="" %}
+        {% include "faq/_question_object.html" with question=question css_class="" show_answers=True show_answer_form=show_form %}
 
       </div>
       
