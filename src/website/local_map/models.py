@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 from django.db import models
-from django.db.models.signals import post_save
+from django.db.models.signals import pre_save
 from django.utils.translation import ugettext_lazy as _
 from django_extensions.db.fields import (AutoSlugField, CreationDateTimeField,
     ModificationDateTimeField)
 from django_publicmanager.managers import GenericPublicManager, \
     PublicOnlyManager
+import geocoder
+
 from ..privacy import PrivacyField
 
 
@@ -114,12 +116,18 @@ class Map(models.Model):
         return self._longitude_postcode
 
     def calculate_position(self, commit=False):
-        pass
+        if self.postcode:
+            response = geocoder.google('{}, United Kingdom'.format(self.postcode))
+            assert response.ok, response.status
+            self._latitude_postcode = response.latitude
+            self._longitude_postcode = response.longitude
+        else:
+            self._latitude_postcode = None
+            self._longitude_postcode = None
 
 
 def update_position(sender, instance, **kwargs):
-    instance.calculate_position(commit=True)
-    assert 0,0
+    instance.calculate_position()
 
 
-post_save.connect(update_position, sender=Map)
+pre_save.connect(update_position, sender=Map)

@@ -110,6 +110,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request',
     'django_mobile.context_processors.flavour',
     'website.context_processors.site',
+    'website.context_processors.api_keys',
 )
 
 INSTALLED_APPS = (
@@ -286,6 +287,15 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_FILTER_BACKENDS': ('rest_framework.filters.DjangoFilterBackend',)
 }
+
+
+
+##############################################################
+#                          API KEYS                          #
+##############################################################
+
+
+GOOGLE_MAPS_API_KEY = None
 
 
 ###########################################################################

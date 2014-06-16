@@ -24,6 +24,7 @@ django-template-email == 0.1
 django-templatequery == 0.3.0
 django-tinymce == 1.5.1b2
 ghettoq == 0.4.5
+geocoder == 0.5.9
 gunicorn == 0.14.3
 Markdown == 2.3.1
 pyparsing == 1.5.7
