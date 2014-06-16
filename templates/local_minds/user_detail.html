@@ -14,8 +14,12 @@
 
 		<div id="team-content">
 			<div class="col-md-3 team-side">
-				<div class="large-avatar"><img class="img-circle" src="{{ STATIC_URL }}/assets/placeholder.gif" class="img-circle" alt="profile" width="186" height="186"></div>
-                <div class="lmas"><a href="{{ user.local_mind.get_absolute_url }}">LM: {{ user.local_mind }}</a></div>
+				{% if member.user_avatar %}
+				<div class="large-avatar"><img class="img-circle" src="{% thumbnail member.user_avatar 186x186 crop %}" alt="profile" width="186" height="186"></div>
+				{% else %}
+				<div class="large-avatar"><img class="img-circle" src="{{ STATIC_URL }}assets/img/placeholder/base-avatar.png" alt="profile" width="186" height="186"></div>
+				{% endif %}
+        <div class="lmas"><a href="{{ user.local_mind.get_absolute_url }}">LM: {{ user.local_mind }}</a></div>
 
 				{% comment %}
 				<div class="add-team-button">ADD NEW TEAM MEMBER</div>
@@ -62,7 +66,7 @@
                             <p class="skills">{{ experience }}</p>
                         {% endfor %}
                     {% endif %}
-					
+
                     {% comment %}
 					<h5><stong>LATEST ACTIVITY</stong></h5>
 					<ul style="padding:0px">
@@ -71,7 +75,7 @@
 						<li style="display:block; padding-bottom:5px;"><span>Quailty Mark Updated - on 28/08/14 - <a href="#">Quality Mark</a></span></li>
 					</ul>
                     {% endcomment %}
-					
+
 				</div>
 			</div>
 
@@ -82,4 +86,3 @@
 </div> <!-- CONTENT -->
 
 {% endblock %}
-
