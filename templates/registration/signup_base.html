@@ -34,7 +34,10 @@
                 {% block section %}{% endblock %}
 
                 {% block submit_row %}
+                <div class="button-row">
+                    <button type="submit" class="btn btn-default center-block" name="wizard_goto_step" value="{{ wizard.steps.prev }}">Back</button>
                     <button type="submit" class="btn btn-default center-block">Next</button>
+                </div>
                 {% endblock %}
             </form>
 
