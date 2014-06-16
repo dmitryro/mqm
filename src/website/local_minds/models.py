@@ -81,7 +81,7 @@ class LocalMind(PostcodeLocationMixin, models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        return 'local-mind', (), {'slug': self.slug}
+        return 'team', (), {'slug': self.slug}
 
 
 class Ethnicity(models.Model):
