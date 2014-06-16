@@ -6,19 +6,16 @@ from django_extensions.db.fields import (AutoSlugField, CreationDateTimeField,
 from django_publicmanager.managers import GenericPublicManager, \
     PublicOnlyManager
 from mediastore.fields import MediaField, MultipleMediaField
-from ..privacy import PrivacyField
+from ..privacy import PrivacyMixin
 
 
-class Question(models.Model):
+class Question(PrivacyMixin, models.Model):
     local_mind = models.ForeignKey('local_minds.LocalMind', related_name='questions')
+    user = models.ForeignKey('accounts.User', db_index=True, related_name='questions')
 
     question = models.CharField(max_length=140)
     date = models.DateField(null=True, blank=True)
-    author = models.ForeignKey('accounts.User', null=True, blank=True,
-        db_index=True,
-        related_name='question')
     notifications = models.BooleanField(help_text=_('Notify me of updates'))
-    privacy = PrivacyField()
 
     created = CreationDateTimeField()
     modified = ModificationDateTimeField()
@@ -33,13 +30,12 @@ class Question(models.Model):
 
 
 class Answer(models.Model):
+    user = models.ForeignKey('accounts.User', db_index=True, related_name='answer')
+
     question = models.ForeignKey(Question, related_name='answers')
 
     answer = models.TextField()
     date = models.DateField(null=True, blank=True)
-    author = models.ForeignKey('accounts.User', null=True, blank=True,
-        db_index=True,
-        related_name='answer')
 
     created = CreationDateTimeField()
     modified = ModificationDateTimeField()

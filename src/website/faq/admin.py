@@ -8,7 +8,7 @@ class QuestionAdmin(admin.ModelAdmin):
     list_display = (
         'question',
         'date',
-        'author',
+        'user',
         'notifications',
         'privacy')
     list_editable = ('privacy',)
@@ -21,7 +21,7 @@ class QuestionAdmin(admin.ModelAdmin):
             'fields': (
                 'question',
                 'date',
-                'author',
+                'user',
             ),
         }),
         (_('Categorisation'), {
@@ -39,7 +39,7 @@ class AnswerAdmin(admin.ModelAdmin):
     list_display = (
         'question',
         'date',
-        'author')
+        'user')
     search_fields = (
         'name',)
     fieldsets = (
@@ -49,7 +49,7 @@ class AnswerAdmin(admin.ModelAdmin):
                 'question',
                 'answer',
                 'date',
-                'author',
+                'user',
             ),
         }),
     )
