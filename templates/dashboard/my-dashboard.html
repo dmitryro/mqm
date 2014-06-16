@@ -567,8 +567,6 @@
 //loop markers for local map
 
 
-/* You will need to bind the data for the resources section here */
-
     {% for map in map_list %}
     markers.push(new google.maps.Marker({
         position: new google.maps.LatLng({{ map.latitude }}, {{ map.longitude }}),
@@ -577,7 +575,6 @@
     }));
     {% endfor %}
 
-/*  *  */
 
       for(i = 0; i < markers.length; i++) {
      mc.addMarker(markers[i]);
@@ -632,12 +629,17 @@ google.maps.event.addDomListener(window, 'load', initializeLocalMap);
 
       mc = new MarkerClusterer(map, markers);
 
-//loop markers for local map
-      markers.push(new google.maps.Marker({
-        position: new google.maps.LatLng(51.1072, 0.1275),
-        icon: '/static/assets/img/ui/icons/map-markers/local-mind.png',
-        title:"Local Mind Network Resource"
+     /* You will need to bind the data for the resources section here */
+
+    {% for map in map_list %}
+    markers.push(new google.maps.Marker({
+        position: new google.maps.LatLng({{ map.latitude }}, {{ map.longitude }}),
+        icon: '{{ map.marker.icon.url }}',
+        title:"{{ map.name }}"
     }));
+    {% endfor %}
+
+    /*  *  */
 
 
 
