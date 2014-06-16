@@ -153,7 +153,7 @@
                             <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><span class="glyphicon glyphicon-trash"></span> Delete</a></li>
                           </ul>
                         </div>
-    
+
                       Confirm all contact details for key staff are correct<small class="text-muted"><br>Due 12th April 2014</small>
 
                       </li>
@@ -164,7 +164,7 @@
                         <li class="list-group-item">
                             {% if task.done %}
                             <span class="glyphicon glyphicon-ok-sign text-success pull-right"></span>
-                            {% else %} 
+                            {% else %}
                             <span class="glyphicon glyphicon-record pull-right"></span>
                             {% endif %}
                             <span class="glyphicon glyphicon-asterisk"></span> {{ task.text }}
@@ -494,11 +494,11 @@
     </div>
     {% endcomment %}
 
-    
+
     <div class="positiveNews hidden">
         <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
                     <div class="widget-bar">
-                        <div class="widget-title">POSITIVE NEWS</div>
+                        <div class="widget-title"><a href="{% url "positive-news" %}">POSITIVE NEWS</a></div>
                         {% include "includes/widget-settings.html" with type="News" %}
                     </div>
                     {% for news in positivenews_list %}
