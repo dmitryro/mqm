@@ -307,7 +307,7 @@
         <div class="theNetWorks hidden">
       <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
         <div class="widget-bar">
-          <div class="widget-title"><a href="/the-net-works">THE NET WORKS</a></div>
+            <div class="widget-title"><a href="{% url "net-works" %}">THE NET WORKS</a></div>
           {% include "includes/widget-settings.html" %}
         </div>
          <!-- this will be a map -->
@@ -638,11 +638,11 @@ google.maps.event.addDomListener(window, 'load', initializeLocalMap);
 
      /* You will need to bind the data for the resources section here */
 
-    {% for map in map_list %}
+    {% for map in net_works %}
     markers.push(new google.maps.Marker({
         position: new google.maps.LatLng({{ map.latitude }}, {{ map.longitude }}),
-        icon: '{{ map.marker.icon.url }}',
-        title:"{{ map.name }}"
+        icon: '',
+        title: "{{ map.name }}"
     }));
     {% endfor %}
 

@@ -31,6 +31,7 @@ urlpatterns = patterns('',
     url(r'^meet-the-team/$', 'django.shortcuts.render', {'template_name': 'dev/meet-the-team.html'}, name='team'),
     url(r'^meet-the-team/(?P<slug>[^/]+)/$', 'django.shortcuts.render', {'template_name': 'dev/team.html'}, name='team'),
     url(r'^meet-the-team/(?P<local_mind_slug>[^/]+)/(?P<slug>[^/]+)/$', 'django.shortcuts.render', {'template_name': 'dev/team.html'}, name='team'),
+    url(r'^the-net-works/$', 'django.shortcuts.render', {'template_name': 'dev/the-net-works.html'}, name='net-works'),
 
     url(r'^login/$', 'website.accounts.views.login_signup', name='login'),
     url(r'^login/signup/$', lambda r: HttpResponseRedirect(reverse('login') + '#signup'), name='signup'),

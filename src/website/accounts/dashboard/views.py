@@ -2,6 +2,7 @@ from django.core.urlresolvers import reverse
 from django.views.generic import TemplateView, UpdateView
 from website.views.generic import CommonViewMixin
 from website.news.models import PositiveNews
+from website.local_minds.models import LocalMind
 from .forms import LocalMindForm, ProfileForm
 
 
@@ -19,6 +20,11 @@ class DashboardView(CommonViewMixin, TemplateView):
         partners = partners.exclude(_latitude_postcode=None, _longitude_postcode=None)
         partners = partners.privacy(user)
         kwargs['map_list'] = partners
+
+        net_works = LocalMind.objects.all()
+        net_works = net_works.exclude(_latitude_postcode=None, _longitude_postcode=None)
+        kwargs['net_works'] = net_works
+
         kwargs['local_mind_users'] = user.local_mind.users.all()
         return super(DashboardView, self).get_context_data(**kwargs)
 
