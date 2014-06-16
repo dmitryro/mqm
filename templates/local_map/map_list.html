@@ -149,12 +149,12 @@ function initialize() {
 {% for map in map_list %}
 infoBoxes.push(new google.maps.InfoWindow({
     content: (
-        '<p>{{ map.name }}</p><br>' + 
+        '<p>{{ map.name }}</p><br>' +
         {% if map.category %}
         '<p><span class="text-muted">Type:</span> {{ map.get_category_display|escapejs }}</p>' +
         {% endif %}
         {% if map.email %}
-        '<p><span class="text-muted">Email:</span> {{ map.email|escapejs }}</p>    ' + 
+        '<p><span class="text-muted">Email:</span> {{ map.email|escapejs }}</p>    ' +
         {% endif %}
         {% if map.telephone %}
         '<p><span class="text-muted">Telephone:</span> {{ map.telephone|escapejs }}</p>' +
@@ -187,9 +187,7 @@ function markerEventListenerDelegate(marker,infobox) {
 {% for map in map_list %}
 markers.push(new google.maps.Marker({
     position: new google.maps.LatLng({{ map.latitude }}, {{ map.longitude }}),
-    {% if map.marker %}
-    icon: '{{ map.marker.icon.url|escapejs }}',
-    {% endif %}
+    icon: '{{ map.marker_icon }}',
     title: '{{ map.get_relationship_display|escapejs }} - {{ map.get_category_display|escapejs }}',
     filterName: '{{ map.get_relationship_display|escapejs }}',
     partnerTypes: '{{ map.get_category_display|escapejs }}'

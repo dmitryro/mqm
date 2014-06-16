@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+import os
+from django.conf import settings
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django_extensions.db.fields import (AutoSlugField, CreationDateTimeField,
@@ -8,18 +10,6 @@ from django_publicmanager.managers import GenericPublicManager, \
 
 from ..privacy import PrivacyMixin
 from ..utils.models import PostcodeLocationMixin
-
-
-class Marker(models.Model):
-    title = models.CharField(max_length=120)
-    icon = models.ImageField(upload_to='local_map/markers/')
-
-    class Meta:
-        verbose_name = _('Map Marker')
-        verbose_name_plural = _('Map Markers')
-
-    def __unicode__(self):
-        return self.title
 
 
 class Map(PrivacyMixin, PostcodeLocationMixin, models.Model):
@@ -84,14 +74,11 @@ class Map(PrivacyMixin, PostcodeLocationMixin, models.Model):
     email = models.EmailField(_('Email'), max_length=120, blank=True)
     address = models.TextField(_('Address'), blank=True)
     telephone = models.CharField(_('Contact number'), max_length=16, blank=True)
-    postcode = models.CharField(_('Postcode'), max_length=120, blank=True,
-        help_text=_('This is how we generate a map.'))
+    postcode = models.CharField(_('Postcode'), max_length=120, help_text=_('This is how we generate a map.'))
 
-    relationship = models.CharField(max_length=120, choices=RELATIONSHIP_CHOICES, blank=True)
+    relationship = models.CharField(max_length=120, choices=RELATIONSHIP_CHOICES)
     website = models.URLField(_('Website'), blank=True)
-    category = models.CharField(_('Type'), max_length=50, choices=CATEGORY_CHOICES, blank=True)
-
-    marker = models.ForeignKey(Marker, null=True, blank=True)
+    category = models.CharField(_('Type'), max_length=50, choices=CATEGORY_CHOICES)
 
     created = CreationDateTimeField()
     modified = ModificationDateTimeField()
@@ -106,3 +93,21 @@ class Map(PrivacyMixin, PostcodeLocationMixin, models.Model):
     @models.permalink
     def get_absolute_url(self):
         return 'local-map', (), {}
+
+    @property
+    def marker_icon(self):
+        file_template = '{base_path}/{relationship}/{category}.png'
+        if self.relationship == self.CURRENT_PARTNER:
+            relationship = 'current'
+        elif self.relationship == self.PARTNER_OPPORTUNITY:
+            relationship = 'potential'
+        category = self.category.replace(' ', '-').lower()
+        return os.path.join(
+            settings.STATIC_URL,
+            'assets',
+            'img',
+            'ui',
+            'icons',
+            'map-markers',
+            relationship,
+            '{}.png'.format(category))

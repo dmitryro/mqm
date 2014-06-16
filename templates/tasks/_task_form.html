@@ -13,6 +13,8 @@
 
         {% formrow form.text %}
         {% formrow form.due_date %}
-        {% formrow form.assigned_to %}
+        {% if form.assigned_to %}
+            {% formrow form.assigned_to %}
+        {% endif %}
     {% endform %}
 {% endblock %}
