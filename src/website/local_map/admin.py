@@ -36,6 +36,7 @@ class MapAdmin(admin.ModelAdmin):
             'classes': ('wide',),
             'fields': (
                 'name',
+                'local_mind',
                 'category',
                 'address',
                 'postcode',

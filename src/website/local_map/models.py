@@ -1,19 +1,17 @@
 # -*- coding: utf-8 -*-
 from django.db import models
+from django.db.models.signals import post_save
 from django.utils.translation import ugettext_lazy as _
 from django_extensions.db.fields import (AutoSlugField, CreationDateTimeField,
     ModificationDateTimeField)
 from django_publicmanager.managers import GenericPublicManager, \
     PublicOnlyManager
-from mediastore.fields import MediaField, MultipleMediaField
 from ..privacy import PrivacyField
 
 
 class Marker(models.Model):
     title = models.CharField(max_length=120)
-    icon = MediaField(
-        related_name='marker_image',
-        limit_choices_to={'content_type__model': 'image'},)
+    icon = models.ImageField(upload_to='local_map/markers/')
 
     class Meta:
         verbose_name = _('Map Marker')
@@ -86,6 +84,10 @@ class Map(models.Model):
     telephone = models.CharField(_('Contact number'), max_length=16, blank=True)
     postcode = models.CharField(_('Postcode'), max_length=120, blank=True,
         help_text=_('This is how we generate a map.'))
+
+    _latitude_postcode = models.CharField(max_length=32, blank=True)
+    _longitude_postcode = models.CharField(max_length=32, blank=True)
+
     relationship = models.CharField(max_length=120, choices=RELATIONSHIP_CHOICES, blank=True)
     website = models.URLField(_('Website'), blank=True)
     category = models.CharField(_('Type'), max_length=50, choices=CATEGORY_CHOICES, blank=True)
@@ -102,3 +104,22 @@ class Map(models.Model):
 
     def __unicode__(self):
         return self.name
+
+    @property
+    def latitude(self):
+        return self._latitude_postcode
+
+    @property
+    def longitude(self):
+        return self._longitude_postcode
+
+    def calculate_position(self, commit=False):
+        pass
+
+
+def update_position(sender, instance, **kwargs):
+    instance.calculate_position(commit=True)
+    assert 0,0
+
+
+post_save.connect(update_position, sender=Map)
