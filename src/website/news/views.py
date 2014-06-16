@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 from django.shortcuts import get_object_or_404
-from django.views.generic.detail import DetailView
-from django.views.generic.list import ListView
+from django.views.generic import DetailView, ListView
 from website.news.models import BaseNews, ExternalNews, PositiveNews
-from website.views.generic import CommonPrivacyViewMixin
+from website.views.generic import CommonPrivacyViewMixin, ListCreateView
+from .forms import PositiveNewsForm
 
 
-class PositiveNewsListView(CommonPrivacyViewMixin, ListView):
+class PositiveNewsListView(CommonPrivacyViewMixin, ListCreateView):
+    form_class = PositiveNewsForm
     queryset = PositiveNews.objects.order_by('-created')
 
 

@@ -57,7 +57,7 @@
 }
 
 .form-horizontal input, .form-horizontal textarea {
-	
+
 	border:solid 1px $blue;
 	outline:none;
 	border-radius:4px;
@@ -90,8 +90,8 @@
   transform: rotate(180deg);
 }
 
-#logo-form {
-	width: 181px;
+#logo-form, .logo-form {
+  width: 181px;
   height: 79px;
   background: url(/static/assets/img/brand/openhub-logo.svg);
   margin:0 auto;
@@ -108,12 +108,18 @@
 
 .modal-content .modal-icon {opacity:0.7;}
 
-.modal-content #logo-form {float: left;width:100%;background-repeat: no-repeat; margin-bottom:40px;}
+.modal-content {
+   #logo-form, .logo-form {
+    float: left;width:100%;background-repeat: no-repeat; margin-bottom:40px;
+  }
+}
 
 .modal-close, .modal-close:hover {opacity: 1;}
 
 
-#mind-signup-form #logo-form {margin-top:50px;}
+#mind-signup-form {
+    #logo-form, .logo-form { margin-top:50px; }
+}
 
 
 #dots { list-style:none;width:120px; margin:0 auto;padding:0px;}

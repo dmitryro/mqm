@@ -29,18 +29,29 @@
 
         });
 
+        var openModal = function ($element) {
+            $element.modal({
+
+            });
+        };
+
         $('body').on("click", ".action_addNew", function (e) {
             e.preventDefault();
-            //global for dashboard
-            // get type from button -> load remote URL in modal window
-            var type = $(this).attr('data-type');
-            if (type != "") {
-                $("#sharedModal").modal({
-                    remote: "/_add" + type + "/"
-                });
-            }
+
+            var modalSelector = $(this).attr('data-target');
+            var $modalContent = $(modalSelector);
+
+            openModal($modalContent);
 
             //$(".widget-bar ul").hide(); //you want to hide the dropdown menu here
+        });
+
+        // Open up modals on load if they have the ``data-open`` attribute.
+        $('body').find('.action_addNew[data-open]').each(function () {
+            var $that = $(this);
+            $($that.attr('data-target')).modal({
+
+            });
         });
 
         $('body').on('hidden.bs.modal', '.modal', function () {
