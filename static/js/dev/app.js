@@ -282,6 +282,7 @@ $(document).ready(function() {
 	    	gridster.add_widget( $('.'+widgetName).html(), 1, 1, 1, 1 );
 	    	if(widgetName == "fundingmap") {initializeFundingMap();}
 	    	
+	    	/*
 	    	$('.drop').unbind('click');
 	    	$('.drop').bind('click',function() {
 				if ($(this).hasClass('dropped')) {
@@ -292,6 +293,7 @@ $(document).ready(function() {
 					$(this).addClass('dropped');
 				}
 			});
+			*/
 			$('.delete-node').bind('click');
 			$('.delete-node').bind('click', function() {
 		    	var widgetName = $(this).parent().parent().parent();

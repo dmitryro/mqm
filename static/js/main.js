@@ -17,7 +17,7 @@
 
 
         // Label tooltips
-        $("label[data-content]").popover({
+        $("label[data-content], .titlePopOver").popover({
             trigger: "hover"
         });
 
