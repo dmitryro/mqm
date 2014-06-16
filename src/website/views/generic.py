@@ -1,6 +1,6 @@
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
-from django.views.generic import ListView
+from django.views.generic import DetailView, ListView
 from django.views.generic.edit import ModelFormMixin
 from website.privacy import PrivacyViewMixin
 
@@ -34,7 +34,8 @@ class CreateMixin(ModelFormMixin):
         """
         Handles GET requests and instantiates a blank version of the form.
         """
-        self.object = None
+        if not hasattr(self, 'object'):
+            self.object = None
         form_class = self.get_form_class()
         form = self.get_form(form_class)
         return self.render_to_response(self.get_context_data(form=form))
@@ -44,7 +45,8 @@ class CreateMixin(ModelFormMixin):
         Handles POST requests, instantiating a form instance with the passed
         POST variables and then checked for validity.
         """
-        self.object = None
+        if not hasattr(self, 'object'):
+            self.object = None
         form_class = self.get_form_class()
         form = self.get_form(form_class)
 
@@ -52,6 +54,35 @@ class CreateMixin(ModelFormMixin):
             return self.form_valid(form)
         else:
             return self.form_invalid(form)
+
+
+class DetailCreateView(CreateMixin, DetailView):
+    show_form = False
+
+    def dispatch(self, request, *args, **kwargs):
+        self.show_form = kwargs.pop('show_form', self.show_form)
+        return super(DetailCreateView, self).dispatch(request, *args, **kwargs)
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        return super(DetailCreateView, self).get(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        return super(DetailCreateView, self).post(request, *args, **kwargs)
+
+    def get_form_kwargs(self):
+        kwargs = super(DetailCreateView, self).get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
+
+    def get_context_object_name(self, obj):
+        return DetailView.get_context_object_name(self, obj)
+
+    def get_context_data(self, **kwargs):
+        context = DetailView.get_context_data(self, **kwargs)
+        context['show_form'] = self.show_form or context['form'].is_bound
+        return context
 
 
 class ListCreateView(CreateMixin, ListView):

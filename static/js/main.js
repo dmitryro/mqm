@@ -32,6 +32,11 @@
             });
         });
 
+        // Instant submit forms, for example filter in call-out.
+        $('.instant-submit :input').change(function () {
+            $(this).parents('form:first').submit();
+        });
+
         /* Ismail */
 
         $("#action_addNewVideo").click(function (e) {
@@ -50,7 +55,13 @@
             e.preventDefault();
 
             var modalSelector = $(this).attr('data-target');
+            var action = $(this).attr('data-action');
             var $modalContent = $(modalSelector);
+
+            if (action) {
+                $modalContent.find('form').attr('action', action);
+            }
+
 
             openModal($modalContent);
 

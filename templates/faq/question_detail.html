@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load djangular_tags floppyforms thumbnail %}
+
+{% block content %}
+
+<div id="content" class="clearfix">
+
+  {% include "includes/topbar.html" %}
+
+  {% include "faq/_answer_form.html" with id="answer-form" form=form %}
+
+  <div class="container-fluid">
+
+    <h3 class="withIcon icon_document"><span></span>CALL OUT</h3>
+    <a href="/" class="page-close"></a>
+
+    <div id="team-content">
+
+     <div class="row">
+
+       <div class="col-md-6">
+        
+        {% include "faq/_question_object.html" with question=question css_class="" show_answers=True show_answer_form=show_form %}
+
+      </div>
+      
+    </div>
+
+  </div>
+</div>
+</div> <!-- CONTENT -->
+
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "forms/_base_modal.html" %}
+{% load floppyforms %}
+
+
+{% block headline %}
+<div class="modal-icon" id="icon_document"></div><h2>ADD QUESTION</h2>
+{% endblock %}
+
+
+{% block fields %}
+    {% form form using %}
+        {% formconfig row using "forms/signup_row.html" %}
+
+        {% formrow form.question %}
+        {% formrow form.notifications using "forms/checkbox_row.html" %}
+        {% formrow form.privacy %}
+    {% endform %}
+{% endblock %}
