@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.conf import settings
 from django.conf.urls import include, patterns, url
+from django.views.generic import RedirectView
 from django.contrib import admin
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
@@ -11,7 +12,8 @@ urlpatterns = patterns('',
     url(r'^robots.txt$', 'django.shortcuts.render', {'template': 'robots.txt'},),
     url(r'^humans.txt$', 'django.shortcuts.render', {'template': 'humans.txt'},),
 
-    url(r'^$', 'website.views.index', name='index'),
+    #url(r'^$', 'website.views.index', name='index'),
+    url(r'^$', RedirectView.as_view(url='/login/')),
     url(r'^signup/profile/(?P<uidb36>[^-/]+)-(?P<token>[^/]+)/$', 'website.accounts.registration.views.signup_profile', name='signup-profile'),
     url(r'^signup/(?P<uidb36>[^-/]+)-(?P<token>[^/]+)/$', 'website.accounts.registration.views.signup_wizard', name='signup'),
     url(r'^signup/(?P<uidb36>[^-/]+)-(?P<token>[^/]+)/(?P<step>[^/]+)/$', 'website.accounts.registration.views.signup_wizard', name='signup'),
