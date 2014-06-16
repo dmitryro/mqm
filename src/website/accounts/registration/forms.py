@@ -131,6 +131,12 @@ class BaseSignupProfileForm(CompositeModelForm):
                 self.error_messages['password_mismatch'])
         return password2
 
+    def clean_twitter(self):
+        value = self.cleaned_data['twitter']
+        if value:
+            value = value.lstrip('@')
+        return value
+
     def save(self, *args, **kwargs):
         self.instance.set_password(self.cleaned_data["password1"])
         self.instance.privileges = self.user_privileges

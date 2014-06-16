@@ -64,8 +64,7 @@
             </div>
             <div class="col-md-6">
                 {% formrow form.telephone %}
-                {% formrow form.mobile %}
-                {% formrow form.twitter %}
+                {% formrow form.twitter with placeholder="@" %}
             </div>
         </div>
 
@@ -95,7 +94,7 @@
             <div class="col-sm-3"></div>
             <div class="col-sm-9">
               <h4>Task Queue</h4>
-              <small>Please submit any task below - they will automatically be assigned to you</small>
+              <small>Please submit any task below, they will automatically be assigned to you</small>
             </div>
           </div>
         </div>
@@ -112,11 +111,7 @@
                 {% endfor %}
             </div>
 
-            <div class="row">
-                <div class="col-md-6 col-md-offset-3">
-                    <a class="add-another"><i class="fa fa-plus-square"></i> &nbsp;Add another</a>
-                </div>
-            </div>
+            {% include "forms/add_another_button.html" %}
 
             {% with form=formset.empty_form %}
                 <div class="col-md-6 formset-form template">
