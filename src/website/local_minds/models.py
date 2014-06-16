@@ -105,3 +105,6 @@ class Person(models.Model):
     gender = models.CharField(max_length=30, choices=GENDER_CHOICES, blank=True)
     email = models.EmailField(blank=True)
     telephone = models.CharField(max_length=30, blank=True)
+
+    def __unicode__(self):
+        return self.name
