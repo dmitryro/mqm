@@ -3,6 +3,7 @@
 /logs
 /media/_autofixture/
 /media/mediastore/
+/media/users/
 /media/signup/
 /node_modules/
 /static/dist/

@@ -1,9 +1,10 @@
+{% load thumbnail %}
 <div id="top-bar">
 
             {% if dashboard == "true" %}
             <div id="sidebar-button" class="closed"></div>
             {% else %}
-            <a href="/my-dashboard"><div id="sidebar-home"></div></a>
+            <a href="{% url "dashboard" %}"><div id="sidebar-home"></div></a>
             {% endif %}
 
             <div id="search-bar">
@@ -40,11 +41,9 @@
             <div id="profile">
 
                 <div id="person">
-                    <a href="team.html">
-                        <div class="avatar">
-                            <img src="{{ STATIC_URL }}assets/img/placeholder/killer-avatar.jpg" class="img-circle">
-                        </div>
-                    </a>
+                    <div class="avatar">
+                        <img src="{% thumbnail user.user_avatar 40x40 crop %}" class="img-circle">
+                    </div>
                     <div class="username">{{ user.get_full_name|default:user.email }}'s - Openhub</div>
                 </div>
                 <a href="{% url "logout" %}"><div id="logout"></div></a>
@@ -69,7 +68,7 @@
                         {% endcomment %}
                         <li class="settings-opt red">Settings</li>
 
-                        <a href="/meet-the-team-member/{firstname - lastname}"><li class="settings-opt" style="background-image:url({{ STATIC_URL }}assets/img/ui/icons/profile-04.svg)">
+                        <a href="{% url "profile-form" %}"><li class="settings-opt" style="background-image:url({{ STATIC_URL }}assets/img/ui/icons/profile-04.svg)">
                             Update Profile <!-- this should go to pre-puplated page 8 (invitee) in the sign up process -->
                         </li></a>
                         <li class="settings-opt" style="background-image:url({{ STATIC_URL }}assets/img/ui/icons/anchor-05.svg)" data-access="super">
