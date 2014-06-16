@@ -14,6 +14,7 @@
                 var destination = self.attr('data-destination');
                 var formset = self.parents('[data-formset-prefix]');
                 var templateSelector = formset.attr('data-template') || '.template';
+                var formListSelector = formset.attr('data-formset-form-list') || null;
                 var prefix = formset.attr('data-formset-prefix');
 
                 var template = formset.find(templateSelector).clone(),
@@ -34,7 +35,11 @@
 
                 template.find('.form-counter').text(totalForms.val());
 
-                self.before(template);
+                if (formListSelector === null) {
+                    self.before(template);
+                } else {
+                    formset.find(formListSelector).append(template);
+                }
             });
 
             return this;

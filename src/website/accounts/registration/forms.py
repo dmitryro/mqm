@@ -5,7 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 from django_compositeform import CompositeModelForm, ForeignKeyFormField, FormSetField, InlineFormSetField
 
 import website.floppyforms_patch
-from floppyforms.__future__.models import ModelForm
+from floppyforms.__future__.models import ModelForm, formfield_callback
 import floppyforms.__future__ as forms
 
 from website.accounts.models import User, Experience
@@ -84,6 +84,8 @@ class InlineTaskFormSetField(InlineFormSetField):
 
 
 class BaseSignupProfileForm(CompositeModelForm):
+    formfield_callback = formfield_callback
+
     user_privileges = None
 
     error_messages = {
@@ -97,7 +99,9 @@ class BaseSignupProfileForm(CompositeModelForm):
         parent_model=User,
         model=Experience,
         form=ExperienceForm,
-        can_delete=False)
+        can_delete=False,
+        extra=4,
+        max_num=4)
     tasks = InlineTaskFormSetField(
         parent_model=User,
         model=Task,
@@ -134,6 +138,8 @@ class BaseSignupProfileForm(CompositeModelForm):
 
 
 class SignupProfileForm(BaseSignupProfileForm):
+    formfield_callback = formfield_callback
+
     user_privileges = User.SUPERUSER
 
     def save(self, email, local_mind, *args, **kwargs):
@@ -147,6 +153,8 @@ class SignupUserProfileForm(BaseSignupProfileForm):
     This profile form is used for single persons that only get to see this
     form, not the whole signup process.
     '''
+
+    formfield_callback = formfield_callback
 
     user_privileges = User.TRUSTEE
 

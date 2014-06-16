@@ -1,0 +1,15 @@
+{% extends "forms/signup_row.html" %}
+
+
+{% block row %}
+{% with hide_help_text=True %}
+    {{ block.super }}
+{% endwith %}
+{% endblock %}
+
+
+{% block field %}
+{% with placeholder=field.help_text %}
+    {{ block.super }}
+{% endwith %}
+{% endblock %}

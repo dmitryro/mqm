@@ -31,8 +31,12 @@
                 {% formrow form.job_title %}
             </div>
             <div class="col-md-6">
-                <div class="col-md-9 col-md-offset-3">Email: {{ email }}</div>
-                {% formrow form.email %}
+                <div class="form-group">
+                    <label for="input_email" class="col-sm-3 control-label">Email</label>
+                    <div class="col-sm-9">
+                        <input type="email" class="form-control" id="id_email" name="email" readonly="true" value="{{ email }}" disabled>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -50,14 +54,13 @@
                 {% formrow form.skills %}
             </div>
             <div class="col-md-6">
-                {% formrow form.user_avatar %}
-                <p class="help-block">Maximum size of 500kb. Only JPG, PNG accepted</p>
+                {% formrow form.user_avatar using "forms/signup_row_file_field.html" %}
             </div>
         </div>
 
         <div class="row">
             <div class="col-md-6">
-                {% formrow form.biography %}
+                {% formrow form.biography using "forms/signup_row_inline_help.html" %}
             </div>
             <div class="col-md-6">
                 {% formrow form.telephone %}
@@ -67,49 +70,61 @@
         </div>
 
 
-        <div class="row">
-            <div class="col-md-6">
         {% with formset=form.formsets.experiences %}
             {{ formset.management_form }}
-            {% for form in formset %}
-                {% formrow form.experience %}
-            {% endfor %}
-        {% endwith %}
+            <div class="row">
+                <div class="col-md-6">
+                    {% formrow formset.forms.0.experience using "forms/signup_row_inline_help.html" %}
+                </div>
+                <div class="col-md-6">
+                    {% formrow formset.forms.1.experience using "forms/signup_row_inline_help.html" %}
+                </div>
             </div>
-        </div>
+            <div class="row">
+                <div class="col-md-6">
+                    {% formrow formset.forms.2.experience using "forms/signup_row_inline_help.html" %}
+                </div>
+                <div class="col-md-6">
+                    {% formrow formset.forms.3.experience using "forms/signup_row_inline_help.html" %}
+                </div>
+            </div>
+        {% endwith %}
 
         <div class="row">
           <div class="col-md-6">
             <div class="col-sm-3"></div>
             <div class="col-sm-9">
-              <h3>Task Queue</h3>
+              <h4>Task Queue</h4>
               <small>Please submit any task below - they will automatically be assigned to you</small>
             </div>
           </div>
         </div>
 
-        <div class="row">
-        <div class="col-md-6">
-            {% with formset=form.formsets.tasks %}
-            <div data-formset-prefix="{{ formset.prefix }}">
-                {{ formset.management_form }}
-                {% for form in formset %}
-                    {% formrow form.text %}
-                {% endfor %}
+        {% with formset=form.formsets.tasks %}
+        <div data-formset-prefix="{{ formset.prefix }}" data-formset-form-list=".row:first">
+            {{ formset.management_form }}
 
-            <div class="col-md-6 col-md-offset-3">
-                <a class="add-another"><i class="fa fa-plus-square"></i> &nbsp;Add another</a>
+            <div class="row">
+                {% for form in formset %}
+                    <div class="col-md-6 formset-form">
+                    {% formrow form.text using "forms/signup_row_inline_help.html" %}
+                    </div>
+                {% endfor %}
             </div>
 
-                <div class="template">
-                {% with form=formset.empty_form %}
-                    {% formrow form.text %}
-                {% endwith %}
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3">
+                    <a class="add-another"><i class="fa fa-plus-square"></i> &nbsp;Add another</a>
                 </div>
             </div>
+
+            {% with form=formset.empty_form %}
+                <div class="col-md-6 formset-form template">
+                    {% formrow form.text using "forms/signup_row_inline_help.html" %}
+                </div>
             {% endwith %}
         </div>
-        </div>
+        {% endwith %}
 
     {% endform %}
 

@@ -35,15 +35,15 @@ class User(AbstractBaseUser, PermissionsMixin):
     last_name = models.CharField(_('last name'), max_length=30, blank=True)
     email = EmailField(_('Email'), unique=True)
     job_title = models.CharField(_('Job Title'), max_length=50, blank=True)
-    user_avatar = models.ImageField(upload_to='users/avatars/', null=True, blank=True)
+    user_avatar = models.ImageField(_('Profile Image'), upload_to='users/avatars/', null=True, blank=True, help_text=_('Maximum size of 500kb. Only JPG, PNG accepted'))
 
     telephone = models.CharField(_('Contact Number'), max_length=50, blank=True)
     #remove 'mobile'
     mobile = models.CharField(_('Mobile'), max_length=50, blank=True)
     twitter = models.CharField(_('Twitter'), max_length=15, blank=True)
 
-    biography = models.TextField(_('Biography'), blank=True)
-    skills = models.TextField(_('Your Skills'), blank=True)
+    biography = models.TextField(_('Biography'), max_length=350, blank=True, help_text=_('limited to 350 characters'))
+    skills = models.TextField(_('Your Skills'), blank=True, help_text=_('comma seperated'))
 
     is_staff = models.BooleanField(_('staff status'), default=False,
         help_text=_('Designates whether the user can log into this admin '
