@@ -107,7 +107,7 @@ class BaseSignupProfileForm(CompositeModelForm):
         parent_model=User,
         model=Task,
         form=TaskForm,
-        fk_name='assigned_to',
+        fk_name='user',
         can_delete=False)
 
     class Meta:
@@ -141,6 +141,11 @@ class BaseSignupProfileForm(CompositeModelForm):
         self.instance.set_password(self.cleaned_data["password1"])
         self.instance.privileges = self.user_privileges
         return super(BaseSignupProfileForm, self).save(*args, **kwargs)
+
+    def save_formsets(self, *args, **kwargs):
+        for form in self.formsets['tasks'].forms:
+            form.instance.assigned_to = self.instance
+        return super(BaseSignupProfileForm, self).save_formsets(*args, **kwargs)
 
 
 class SignupProfileForm(BaseSignupProfileForm):
