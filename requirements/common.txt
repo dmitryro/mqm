@@ -34,4 +34,4 @@ http://pypi-81b384.ma-work.co.uk/media/dists/django-mediastore-0.6.3.tar.gz
 http://pypi-81b384.ma-work.co.uk/media/dists/BeautifulSoup-3.2.0.tar.gz
 http://pypi-81b384.ma-work.co.uk/media/dists/sorl-thumbnail-3.2.5-ma1.tar.gz
 dependencies/django-contact-form-0.3.tar.gz
-git+https://github.com/gregmuellegger/django-compositeform@559bf5fa5a5b8af21fe6d051d3007c5e93d75b91#egg=django-compositeform
+git+https://github.com/gregmuellegger/django-compositeform@48fbdfd21880f27dd91dbc5802f718c0b38508dc#egg=django-compositeform

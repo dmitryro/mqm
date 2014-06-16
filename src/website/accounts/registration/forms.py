@@ -216,9 +216,9 @@ class PersonForm(ModelForm):
 class SignupLocalMindMembersForm(CompositeModelForm):
     formfield_callback = formfield_callback
 
-    ceo_one = ForeignKeyFormField(PersonForm, kwargs={'empty_permitted': True})
-    ceo_two = ForeignKeyFormField(PersonForm, kwargs={'empty_permitted': True})
-    chair = ForeignKeyFormField(PersonForm, kwargs={'empty_permitted': True})
+    ceo_one = ForeignKeyFormField(PersonForm)
+    ceo_two = ForeignKeyFormField(PersonForm)
+    chair = ForeignKeyFormField(PersonForm)
 
 #    services = InlineFormSetField(
 #        parent_model=LocalMind,

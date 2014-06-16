@@ -173,9 +173,8 @@ class SignupTests(WebTest):
         self.assertNotEqual(local_mind.ceo_one, None)
         self.assertEqual(local_mind.ceo_one.name, 'A big man')
 
-        # TODO: Fix related prefilled data.
-#        self.assertNotEqual(local_mind.ceo_two, None)
-#        self.assertEqual(local_mind.ceo_two.name, 'CEO Name')
+        self.assertNotEqual(local_mind.ceo_two, None)
+        self.assertEqual(local_mind.ceo_two.name, 'CEO Name')
 
         self.assertEqual(local_mind.chair, None)
 
