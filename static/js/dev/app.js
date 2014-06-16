@@ -46,7 +46,10 @@ $(document).ready(function() {
 */
 
 	var serialization = [
-	{"col":1,"row":1,"size_x":1,"size_y":1, "name":"callout"}
+	{"col":1,"row":1,"size_x":1,"size_y":1, "name":"callout"},
+	{"col":2,"row":1,"size_x":1,"size_y":1, "name":"meettheteam"},
+	{"col":3,"row":1,"size_x":1,"size_y":1, "name":"todo"},
+	{"col":4,"row":1,"size_x":1,"size_y":1, "name":"myLocalArea"}
 	];
 	
 

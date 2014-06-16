@@ -53,9 +53,34 @@
 
         <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
             <div class="widget-bar">
-                <div class="widget-title">MEET THE TEAM</div>
+                <div class="widget-title"><a href="/meet-the-team">MEET THE TEAM</a></div>
             </div>
+
+            <ul class="media-list">
+                {% for user in local_mind_users %}
+                <a href="{{ user.get_absolute_url }}">
+                    <li class="media">
+                        {% if user.user_avatar %}
+                        <div class="pull-left">
+                            <img class="media-object" class="img-circle" src="{% thumbnail user.user_avatar 40x40 crop %}">
+                        </div>
+                        {% endif %}
+                        <div class="media-body">
+                            <b>{{ user.get_full_name }}</b>
+                            {% if user.job_title %}
+                            <br>
+                            <small>{{ user.job_title }}</small>
+                            {% endif %}
+                            <i class="glyphicon glyphicon-play-circle"></i>
+
+                        </div>
+                    </li>
+                </a>
+                {% endfor %}
+            </ul>
+
             <!-- for loop of [user_avatar, full-name, job_title ] + link to /meet-the-team/[local_mind_name]/{id or name}-->
+            {% comment %}
             {% for user in local_mind_users %}
 
                 {% if user.user_avatar %}
@@ -74,6 +99,7 @@
                 <a href="{{ user.get_absolute_url }}">Link to {{ user }}</a>
 
             {% endfor %}
+            {% endcomment %}
         </li>
 
     </div>
@@ -89,7 +115,14 @@
                             <span class='badge'><!-- number of total questions for you --> {{ my_questions.count }}</span>Your Questions
                         </a>
                     </ul>
-                    <div class='list-group'>
+                    <ul class='list-group'>
+                    {% for question in questions %}
+                    <li class="list-group-item">
+                        <span class="glyphicon glyphicon-question-sign"></span><span class="glyphicon glyphicon-ok-sign text-success"></span>
+                        {{ question.question }}
+                    </li>
+                    {% endfor %}
+                     {% comment %}
                         <!-- for loop of all [question] in your local mind + link to questions detail page (/d/call-out/) -->
                         {% for question in questions %}
                             {{ question.question }}
@@ -97,17 +130,19 @@
                             <br>
                         {% endfor %}
                         <!-- add a class if the questions is one that you have posted -->
-                    </div>
+                         {% endcomment %}
+                    </ul>
                 </li>
     </div>
 
     <div class="hidden todo">
     <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
                     <div class="widget-bar">
-                        <div class="widget-title"> <span class="badge"><!-- total to-do assigned to you -->14</span> TO-DO LIST</div>
+                        <div class="widget-title"> <span class="badge"><!-- total to-do assigned to you -->14</span> <a href="/todos">TO-DO LIST</a></div>
                         {% include "includes/widget-settings.html" with type="Todo" %}
                     </div>
                     <ul class="list-group">
+                    {% comment %}
                       <li class="list-group-item">
                           {% comment %}
                           <div class="dropdown pull-right">
@@ -118,15 +153,21 @@
                             <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><span class="glyphicon glyphicon-trash"></span> Delete</a></li>
                           </ul>
                         </div>
-                        {% endcomment %}
+    
                       Confirm all contact details for key staff are correct<small class="text-muted"><br>Due 12th April 2014</small>
 
                       </li>
+                      {% endcomment %}
                       <!-- for loop of [totos]  --> <!-- ordering: your to-do's first with Hight Priority, then by Due date, then all other to-dos added to your Local mind -->
 
                       {% for task in my_tasks %}
                         <li class="list-group-item">
-                            {{ task.text }}
+                            {% if task.done %}
+                            <span class="glyphicon glyphicon-ok-sign text-success pull-right"></span>
+                            {% else %} 
+                            <span class="glyphicon glyphicon-record pull-right"></span>
+                            {% endif %}
+                            <span class="glyphicon glyphicon-asterisk"></span> {{ task.text }}
                             {% if task.due_date %}
                             <small class="text-muted"><br>Due {{ task.due_date|date }}</small>
                             {% endif %}
@@ -414,7 +455,7 @@
 
                     <!-- for loop of on line #486 (search for '//map markers' in this template) [ long, lat, title ] -->
                     <div id="map-canvas-local-area"></div>
-
+                    {% comment %}
                     {% for map in map_list %}
                         Latitude: {{ map.latitude }} <br>
                         Longitude: {{ map.longitude }} <br>
@@ -424,7 +465,7 @@
                         Marker: {{ map.marker.icon.url }}
                         {% endif %}
                     {% endfor %}
-
+                    {% endcomment %}
                 </li>
     </div>
 
@@ -523,13 +564,19 @@
       mc = new MarkerClusterer(map, markers);
 
 //loop markers for local map
-      markers.push(new google.maps.Marker({
-        position: new google.maps.LatLng(51.5072, 0.1275),
-        icon: '/static/assets/img/ui/icons/map-markers/local-mind.png',
-        title:"Local Mind - N/A",
-        filterName: "Local Mind",
-        partnerTypes: "N/A"
+
+
+/* You will need to bind the data for the resources section here */
+
+    {% for map in map_list %}
+    markers.push(new google.maps.Marker({
+        position: new google.maps.LatLng({{ map.latitude }}, {{ map.longitude }}),
+        icon: '{{ map.marker.icon.url }}',
+        title:"{{ map.name }}"
     }));
+    {% endfor %}
+
+/*  *  */
 
       for(i = 0; i < markers.length; i++) {
      mc.addMarker(markers[i]);
