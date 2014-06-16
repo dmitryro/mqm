@@ -11,7 +11,7 @@
 		<h3 class="withIcon icon_document"><span></span>TASK QUEUE/ TODO’S</h3>
 		<a href="/" class="page-close"></a>
 
-        <button class="btn btn-default action_addNew" data-target="#modal-form"{% if form.is_bound %} data-open{% endif %}>ADD NEW TASK</button>
+        <button class="btn btn-default action_addNew" data-target="#modal-form"{% if show_form %} data-open{% endif %}>ADD NEW TASK</button>
 
         {% include "tasks/_task_form.html" with id="modal-form" form=form %}
 

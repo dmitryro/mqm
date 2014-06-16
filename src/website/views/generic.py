@@ -55,6 +55,12 @@ class CreateMixin(ModelFormMixin):
 
 
 class ListCreateView(CreateMixin, ListView):
+    show_form = False
+
+    def dispatch(self, request, *args, **kwargs):
+        self.show_form = kwargs.pop('show_form', self.show_form)
+        return super(ListCreateView, self).dispatch(request, *args, **kwargs)
+
     def get(self, request, *args, **kwargs):
         self.object_list = self.get_queryset()
         return super(ListCreateView, self).get(request, *args, **kwargs)
@@ -72,4 +78,6 @@ class ListCreateView(CreateMixin, ListView):
         return ListView.get_context_object_name(self, object_list)
 
     def get_context_data(self, **kwargs):
-        return ListView.get_context_data(self, object_list=self.object_list, **kwargs)
+        context = ListView.get_context_data(self, object_list=self.object_list, **kwargs)
+        context['show_form'] = self.show_form or context['form'].is_bound
+        return context

@@ -12,7 +12,7 @@
     <h3 class="withIcon icon_newspaper"><span></span>POSITIVE NEWS</h3>
     <a href="/" class="page-close"></a>
 
-    <button class="btn btn-default action_addNew" data-target="#news-form"{% if form.is_bound %} data-open{% endif %}>ADD NEW POST</button>
+    <button class="btn btn-default action_addNew" data-target="#news-form"{% if show_form %} data-open{% endif %}>ADD NEW POST</button>
 
     {% include "news/_positivenews_form.html" with id="news-form" form=form %}
 
