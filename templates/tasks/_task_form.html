@@ -1,0 +1,18 @@
+{% extends "forms/_base_modal.html" %}
+{% load floppyforms %}
+
+
+{% block headline %}
+<div class="modal-icon" id="icon_document"></div><h2>ADD TODO</h2>
+{% endblock %}
+
+
+{% block fields %}
+    {% form form using %}
+        {% formconfig row using "forms/signup_row.html" %}
+
+        {% formrow form.text %}
+        {% formrow form.due_date %}
+        {% formrow form.assigned_to %}
+    {% endform %}
+{% endblock %}

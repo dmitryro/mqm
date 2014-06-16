@@ -34,6 +34,10 @@ class Task(models.Model):
     def __unicode__(self):
         return self.text
 
+    @models.permalink
+    def get_absolute_url(self):
+        return 'tasks', (), {}
+
     def comment_count(self):
         return self.comments.count()
 
