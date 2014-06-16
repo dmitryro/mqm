@@ -87,8 +87,8 @@ class Map(models.Model):
     postcode = models.CharField(_('Postcode'), max_length=120, blank=True,
         help_text=_('This is how we generate a map.'))
 
-    _latitude_postcode = models.CharField(max_length=32, blank=True)
-    _longitude_postcode = models.CharField(max_length=32, blank=True)
+    _latitude_postcode = models.CharField(max_length=32, null=True, blank=True)
+    _longitude_postcode = models.CharField(max_length=32, null=True, blank=True)
 
     relationship = models.CharField(max_length=120, choices=RELATIONSHIP_CHOICES, blank=True)
     website = models.URLField(_('Website'), blank=True)
