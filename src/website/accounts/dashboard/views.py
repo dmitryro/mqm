@@ -1,6 +1,7 @@
 from django.core.urlresolvers import reverse
 from django.views.generic import TemplateView, UpdateView
 from website.views.generic import CommonViewMixin
+from website.news.models import PositiveNews
 from .forms import LocalMindForm, ProfileForm
 
 
@@ -13,6 +14,7 @@ class DashboardView(CommonViewMixin, TemplateView):
         kwargs['questions'] = questions
         kwargs['my_questions'] = questions.filter(user=user)
         kwargs['my_tasks'] = user.tasks.order_by('-is_priority')
+        kwargs['positivenews_list'] = PositiveNews.objects.privacy(user)
         partners = user.local_mind.partners.all()
         partners = partners.exclude(_latitude_postcode=None, _longitude_postcode=None)
         partners = partners.privacy(user)
