@@ -9,45 +9,90 @@
 
 	<div class="container-fluid">
 
-		<h3 class="withIcon icon_people"><span></span>MEET THE TEAM</h3>
+        <h3 class="withIcon icon_people"><span></span>{{ local_mind }} Local Mind</h3>
 		<a href="/" class="page-close"></a>
-		{% comment %}
-		<a href="/invitee/" class="btn btn-default">ADD NEW TEAM MEMBER</a>
-		{% endcomment %}
-		<br><br>
-	</div>
 
-	<div id="team-content">
 
-		<div class="row">
-			<div class="col-md-3">
+		<div id="team-content">
+			<div class="col-md-3 team-side">
                 {% if local_mind.group_avatar %}
-                <div class="large-avatar"><img src="{% thumbnail local_mind.group_avatar 186x186 crop %}" alt="profile" width="186" height="186"></div>
+                <div class="large-avatar"><img class="img-circle" src="{% thumbnail local_mind.group_avatar 186x186 crop %}" alt="profile" width="186" height="186"></div>
                 {% endif %}
-                <div class="lmas"><a href="{{ local_mind.get_absolute_url }}">LM: {{ local_mind }}</a></div>
+                <div class="lmas">LM: {{ local_mind }}</div>
+				{% comment %}
+				<a href="/invitee/"><div class="add-team-button">ADD NEW TEAM MEMBER</div></a>
+				<div class="add-team-button">EDIT LM's DETAILS</div>
+				{% endcomment %}
 			</div>
-			<div class="col-md-8">
-				<div class="row">
+			<div class="col-md-9">
+				<div class="col-md-4 bio-col">
+                    <p><span><em>Local mind:</em></span> {{ local_mind }}</p>
+                    {% if local_mind.address %}
+                        <p><span><em>Address</em></span> {{ local_mind.address|linebreaksbr }}<br/>Purley Surrey CR8 2NE</p>
+                    {% endif %}
+				</div>
+				<div class="col-md-4 bio-col">
+					<p><span><em>Email:</em></span> <a href="mailto:{{ local_mind.email }}">{{ local_mind.email }}</a></p>
+                    {% if user.twitter %}
+                    <p><span><em>Twitter:</em></span> @{{ user.twitter }}</p>
+                    {% endif %}
+                    {% if user.telephone %}
+					<p><span><em>Office number:</em></span> 0171 965 6754</p>
+                    {% endif %}
+                    {% if local_mind.website %}
+                        <p><span><em>Website:</em></span> <a href="{{ local_mind.website }}">{{ local_mind.website }}</a></p>
+                    {% endif %}
+				</div>
+				<div class="col-md-4 bio-col">
+                    {% if local_mind.statement %}
+                        <p><span><em>Mission Statement</em></span></p>
+                        {{ local_mind.statement|linebreaks|urlize }}
+                    {% endif %}
+				</div>
+				<div class="bio-divider"></div>
+				<div class="col-md-9 bio">
+					{% comment %}
+				<h5>SERVICES</h5><p class="skill">Ecotherapy Services<br/>Couple Counciling<br/>Phone Based Support<br/>Psychological Therapies<br/>Cognitive Therapies<br/>Peer Support Services</p>
+				{% endcomment %}
 
-                    {% for member in members %}
-					<div class="col-md-3">
-                        {% if member.user_avatar %}
-                        <a href="{{ member.get_absolute_url }}"><div class="large-avatar"><img src="{% thumbnail member.user_avatar 186x186 crop %}" alt="profile" width="186" height="186"></div></a>
-                        {% endif %}
-                        <p>Name: <a href="{{ member.get_absolute_url }}">{{ member }}</a></p>
-                        {% if member.job_title %}
-                        <p>Job title: {{ member.job_title }}</p>
-                        {% endif %}
-					</div>
-                    {% endfor %}
+                    {% if local_mind.resources.all %}
+                        <h5>BACKEND RESOURCES</h5>
+                        <p class="skills">
+                        {% for resource in local_mind.resources.all %}
+                            Colour Printer
+                            {% if not forloop.last %}<br/>{% endif %}
+                        {% endfor %}
+                        </p>
+                    {% endif %}
 
+                    {% if local_mind.partners.all %}
+                        <h5>KEY PARTNERS</h5>
+
+                        <table>
+                            <thead>
+                                <th>Name</th>
+                                <th>Website</th>
+                                <th>Service</th>
+                            </thead>
+                            <tbody>
+                                {% for partner in local_mind.partners.all %}
+                                    <tr>
+                                        <td><strong>{{ partner.name }}</strong></td>
+                                        <td>
+                                            {% if partner.website %}
+                                            <a href="{{ partner.website }}">{{ partner.website }}</a>
+                                            {% endif %}
+                                        </td>
+                                        <td>{{ partner.get_relationship_display }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    {% endif %}
 				</div>
 			</div>
-
 		</div>
 	</div>
-</div>
-
 </div> <!-- CONTENT -->
 
 {% endblock %}

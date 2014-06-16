@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% load djangular_tags thumbnail %}
+
+{% block content %}
+
+<div id="content" class="clearfix">
+
+	{% include "includes/topbar.html" %}
+
+	<div class="container-fluid">
+
+		<h3 class="withIcon icon_people"><span></span>MEET THE TEAM</h3>
+		<a href="/" class="page-close"></a>
+		{% comment %}
+		<a href="/invitee/" class="btn btn-default">ADD NEW TEAM MEMBER</a>
+		{% endcomment %}
+		<br><br>
+	</div>
+
+	<div id="team-content">
+
+		<div class="row">
+			<div class="col-md-3">
+                {% if local_mind.group_avatar %}
+                <div class="large-avatar"><img class="img-circle" src="{% thumbnail local_mind.group_avatar 186x186 crop %}" alt="profile" width="186" height="186"></div>
+                {% endif %}
+                <div class="lmas"><a href="{{ local_mind.get_absolute_url }}">LM: {{ local_mind }}</a></div>
+			</div>
+			<div class="col-md-8">
+				<div class="row">
+
+                    {% for member in members %}
+					<div class="col-md-3">
+                        {% if member.user_avatar %}
+                        <a href="{{ member.get_absolute_url }}"><div class="large-avatar"><img class="img-circle" src="{% thumbnail member.user_avatar 186x186 crop %}" alt="profile" width="186" height="186"></div></a>
+                        {% endif %}
+                        <p>Name: <a href="{{ member.get_absolute_url }}">{{ member }}</a></p>
+                        {% if member.job_title %}
+                        <p>Job title: {{ member.job_title }}</p>
+                        {% endif %}
+					</div>
+                    {% endfor %}
+
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+</div> <!-- CONTENT -->
+
+{% endblock %}

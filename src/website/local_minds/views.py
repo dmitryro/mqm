@@ -20,6 +20,7 @@ class LocalMindDetailView(CommonViewMixin, DetailView):
 
 
 local_mind_detail = LocalMindDetailView.as_view()
+team_detail = LocalMindDetailView.as_view(template_name='local_minds/team.html')
 
 
 class UserDetailView(CommonViewMixin, DetailView):
