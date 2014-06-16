@@ -15,6 +15,7 @@ class MapForm(ModelForm):
             'postcode',
             'telephone',
             'category',
+            'relationship',
             'privacy',
         )
 
