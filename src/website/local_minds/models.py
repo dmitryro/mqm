@@ -63,9 +63,9 @@ class LocalMind(models.Model):
     staff_count = models.PositiveIntegerField(_('No Of Staff'), null=True, blank=True)
     trustees_count = models.PositiveIntegerField(_('No Of Trustees'), null=True, blank=True)
     volunteers_count = models.PositiveIntegerField(_('No Of Volunteers'), null=True, blank=True)
-    trustees_active = models.CharField(_('No Of Trustees Who Use MH Services'), max_length=20, choices=TRUSTEES_ACTIVE_CHOICES, null=True, blank=True)
+    trustees_active = models.CharField(_('% trustees who use MH Services'), max_length=20, choices=TRUSTEES_ACTIVE_CHOICES, null=True, blank=True)
     area_of_benefit = models.CharField(_('Area of benefit'), max_length=50, blank=True)
-    average_volunteer_hours = models.CharField(_('Average volunteer hours'), max_length=50, blank=True)
+    average_volunteer_hours = models.CharField(_('Avg hours volunteer provide per week'), max_length=50, blank=True)
 
     created = CreationDateTimeField()
     modified = ModificationDateTimeField()
