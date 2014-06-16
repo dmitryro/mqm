@@ -138,7 +138,7 @@
     <div class="hidden todo">
     <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
                     <div class="widget-bar">
-                        <div class="widget-title"> <span class="badge"><!-- total to-do assigned to you -->14</span> <a href="/todos">TO-DO LIST</a></div>
+                        <div class="widget-title"> <span class="badge"><!-- total to-do assigned to you -->{{ my_tasks.count }}</span> <a href="{% url "tasks" %}">TO-DO LIST</a></div>
                         {% include "includes/widget-settings.html" with type="Todo" %}
                     </div>
                     <ul class="list-group">
