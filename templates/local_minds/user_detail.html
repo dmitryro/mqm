@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% load djangular_tags thumbnail %}
+
+{% block content %}
+
+<div id="content" class="clearfix">
+
+	{% include "includes/topbar.html" %}
+
+	<div class="container-fluid">
+
+        <h3 class="withIcon icon_people"><span></span>MEET THE TEAM - {{ user }}</h3>
+		<a href="/" class="page-close"></a>
+
+		<div id="team-content">
+			<div class="col-md-3 team-side">
+				<div class="large-avatar"><img src="{{ STATIC_URL }}/assets/placeholder.gif" class="img-circle" alt="profile" width="186" height="186"></div>
+                <div class="lmas"><a href="{{ user.local_mind.get_absolute_url }}">LM: {{ user.local_mind }}</a></div>
+
+				{% comment %}
+				<div class="add-team-button">ADD NEW TEAM MEMBER</div>
+				<div class="add-team-button">EDIT YOUR PROFILE</div>
+				{% endcomment %}
+			</div>
+			<div class="col-md-9">
+				<div class="col-md-4 bio-col">
+                    <p><span><em>Name:</em></span> {{ user.get_full_name }}</p>
+                    <p><span><em>Local mind:</em></span> {{ user.local_mind }}</p>
+                    {% if user.job_title %}
+                    <p><span><em>Job title:</em></span> {{ user.job_title }}</p>
+                    {% endif %}
+                    {% if user.website %}
+                    <p><span><em>Website:</em></span> <a href="{{ user.website }}">{{ user.website }}</a></p>
+                    {% endif %}
+				</div>
+				<div class="col-md-4 bio-col">
+					<p><span><em>Email:</em></span> <a href="mailto:{{ user.email }}">{{ user.email }}</a></p>
+                    {% if user.twitter %}
+                    <p><span><em>Twitter:</em></span> @{{ user.twitter }}</p>
+                    {% endif %}
+                    {% if user.telephone %}
+					<p><span><em>Office number:</em></span> 0171 965 6754</p>
+                    {% endif %}
+				</div>
+				<div class="col-md-4 bio-col">
+                    {% if user.biography %}
+					<p><span><em>Bio</em></span></p>
+                    {{ user.biography|linebreaks|urlize }}
+                    {% endif %}
+				</div>
+				<div class="bio-divider"></div>
+				<div class="col-md-9 bio">
+
+                    {% if user.skills %}
+                        <h5><stong>SKILLS</stong></h5>
+                        <p class="skill">{{ user.skills|linebreaks|urlize }}</p>
+                    {% endif %}
+
+                    {% if user.experiences.all %}
+                        <h5><stong>EXPERIENCE</stong></h5>
+                        {% for experience in user.experiences.all %}
+                            <p class="skills">{{ experience }}</p>
+                        {% endfor %}
+                    {% endif %}
+					
+                    {% comment %}
+					<h5><stong>LATEST ACTIVITY</stong></h5>
+					<ul style="padding:0px">
+						<li style="display:block; padding-bottom:5px;"> <span>New Video Added - on 01/09/14 - <a href="video.html">Mind Cymru Open Day</a></span></li>
+						<li style="display:block; padding-bottom:5px;"><span>New Document Uploaded - on 01/09/14 - <a href="#">10 Top Tips for Tendering</a></span></li>
+						<li style="display:block; padding-bottom:5px;"><span>Quailty Mark Updated - on 28/08/14 - <a href="#">Quality Mark</a></span></li>
+					</ul>
+                    {% endcomment %}
+					
+				</div>
+			</div>
+
+			<div style="clear:both"></div>
+
+		</div>
+	</div>
+</div> <!-- CONTENT -->
+
+{% endblock %}
+
