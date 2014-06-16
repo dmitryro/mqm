@@ -29,6 +29,7 @@ class QuestionAdmin(admin.ModelAdmin):
             'fields': (
                 'notifications',
                 'privacy',
+                'local_mind',
             ),
         }),
     )
