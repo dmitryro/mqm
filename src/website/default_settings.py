@@ -58,6 +58,8 @@ TIME_ZONE = 'Europe/London'
 LANGUAGE_CODE = 'en'
 USE_I18N = True
 
+DATE_FORMAT = 'F jS Y'
+
 # more django core settings
 # -------------------------
 

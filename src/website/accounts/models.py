@@ -65,6 +65,14 @@ class User(AbstractBaseUser, PermissionsMixin):
     def __unicode__(self):
         return unicode(self.get_full_name())
 
+    @models.permalink
+    def get_absolute_url(self):
+        if self.local_mind:
+            return 'team', (), {
+                'local_mind_slug': self.local_mind.slug,
+                'slug': self.slug,
+            }
+
     def get_full_name(self):
         """
         Returns the first_name plus the last_name, with a space in between.

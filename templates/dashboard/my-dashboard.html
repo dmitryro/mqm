@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load djangular_tags webdesign %}
+{% load djangular_tags thumbnail %}
 {% load url from future %}
 
 {% block extra_js %}
@@ -56,6 +56,24 @@
                 <div class="widget-title">MEET THE TEAM</div>
             </div>
             <!-- for loop of [user_avatar, full-name, job_title ] + link to /meet-the-team/[local_mind_name]/{id or name}-->
+            {% for user in local_mind_users %}
+
+                {% if user.user_avatar %}
+                    <img src="{% thumbnail user.user_avatar 40x40 crop %}" alt="" class="img-circle">
+                    <br>
+                {% endif %}
+
+                {{ user.get_full_name }}
+                <br>
+
+                {% if user.job_title %}
+                    {{ user.job_title }}
+                    <br>
+                {% endif %}
+
+                <a href="{{ user.get_absolute_url }}">Link to {{ user }}</a>
+
+            {% endfor %}
         </li>
 
     </div>
@@ -68,11 +86,16 @@
                     </div>
                     <ul class='list-group'>
                         <a class='li list-group-item' href='#'>
-                            <span class='badge'><!-- number of total questions for you --> 14</span>Your Questions
+                            <span class='badge'><!-- number of total questions for you --> {{ my_questions.count }}</span>Your Questions
                         </a>
                     </ul>
                     <div class='list-group'>
                         <!-- for loop of all [question] in your local mind + link to questions detail page (/d/call-out/) -->
+                        {% for question in questions %}
+                            {{ question.question }}
+                            <a href="{{ question.get_absolute_url }}">Link</a>
+                            <br>
+                        {% endfor %}
                         <!-- add a class if the questions is one that you have posted -->
                     </div>
                 </li>
@@ -100,10 +123,15 @@
 
                       </li>
                       <!-- for loop of [totos]  --> <!-- ordering: your to-do's first with Hight Priority, then by Due date, then all other to-dos added to your Local mind -->
-                      <li class="list-group-item">Confirm all contact details for key staff are correctConfirm all contact details for key staff are correctConfirm all contact details for key staff are correctConfirm all contact details for key staff are correct</li>
-                      <li class="list-group-item">Morbi leo risus</li>
-                      <li class="list-group-item">Porta ac consectetur ac</li>
-                      <li class="list-group-item">Vestibulum at eros</li>
+
+                      {% for task in my_tasks %}
+                        <li class="list-group-item">
+                            {{ task.text }}
+                            {% if task.due_date %}
+                            <small class="text-muted"><br>Due {{ task.due_date|date }}</small>
+                            {% endif %}
+                        </li>
+                      {% endfor %}
                     </ul>
                 </li>
 
@@ -386,6 +414,17 @@
 
                     <!-- for loop of on line #486 (search for '//map markers' in this template) [ long, lat, title ] -->
                     <div id="map-canvas-local-area"></div>
+
+                    {% for map in map_list %}
+                        Latitude: {{ map.latitude }} <br>
+                        Longitude: {{ map.longitude }} <br>
+                        Name: {{ map.name }} <br>
+
+                        {% if map.marker %}
+                        Marker: {{ map.marker.icon.url }}
+                        {% endif %}
+                    {% endfor %}
+
                 </li>
     </div>
 
