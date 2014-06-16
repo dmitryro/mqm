@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load djangular_tags webdesign %}
+{% load djangular_tags %}
 
 {% block extra_css %}
 {{ block.super }}
@@ -8,6 +8,11 @@
     body { height: 100%; margin: 0; padding: 0 }
     #map-canvas { height: 100%; width: 100%;}
     #mediaObject {padding-top: 0px;}
+
+    #mapKey {}
+    #mapKey ul {list-style: none; margin:0; padding: 0;}
+    #mapKey ul li {float: left; margin-right: 40px; margin-top: 10px;}
+    #mapKey ul li img {display: block; margin: 0 auto; margin-bottom: 10px;}
 
 </style>
 {% endblock %}
@@ -35,7 +40,7 @@
     {% include "includes/topbar.html" %}
     <div class="container-fluid">
 
-        <h3 class="withIcon icon_map"><span></span>LOCAL MAP</h3>
+        <h3 class="withIcon icon_map"><span></span>MY LOCAL AREA</h3>
         <a href="/" class="page-close"></a>
 
         <div class="row">
@@ -50,30 +55,9 @@
                 <div class="row">
                     <div class="col-sm-6">
                         <label class="checkbox-inline"><input type="checkbox" id="allCheckbox" value="option1" onClick="toggle(this)" checked="true">All</label><br>
-                        <label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="National Charity">National Charity</label><br>
-                        <label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="Local Charity">Local Charity</label><br>
-                        <label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="Housing Association">Housing Association</label><br>
-                        <label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="Local Authority">Local Authority</label><br>
-                        <label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="Private Company">Private Company</label><br>
-                        <label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="NHS Body">NHS Body</label><br>
-                        <label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="Another Local Mind">Another Local Mind</label><br>
-                        <label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="Rethink">Rethink</label><br>
-                        <label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="Relate">Relate</label><br>
-                        <label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="Age UK">Age UK</label><br>
-                        <label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="Reach">Reach</label>
-                    </div>
-                    <div class="col-sm-6">
-                        <label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="Macmillan">Macmillan</label><br>
-                        <label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="CAB">CAB</label><br>
-                        <label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="Turning Point">Turning Point</label><br>
-                        <label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="Mencap">Mencap</label><br>
-                        <label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="Cruse">Cruse</label><br>
-                        <label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="Samaritans">Samaritans</label><br>
-                        <label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="Family Action">Family Action</label><br>
-                        <label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="National Trust">National Trust</label><br>
-                        <label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="YMCA">YMCA</label><br>
-                        <label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="Child Povery Action Group">Child Povery Action Group</label><br>
-                        <label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="Alternatives to Violence Project">Alternatives to Violence Project</label><br>
+                        {% for category_choice, category_label in model.CATEGORY_CHOICES %}
+                            <label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="{{ category_label }}">{{ category_label }}</label><br>
+                        {% endfor %}
                     </div>
                     <hr>
                 </div>
@@ -83,6 +67,26 @@
                 <div class="mediaObject" id="mediaObject">
                     <div id="map-canvas"></div>
                 </div>
+                <div>
+                    <h4>Key:</h4>
+                    <div id="mapKey" class="clearfix">
+                        <ul>
+                            <li>
+                                <img class="media-object" src="{{ STATIC_URL }}assets/img/ui/icons/map-markers/local-mind.png" alt="Local Mind Icon">
+                                <p>Local<br>Mind</p>
+                            </li>
+                            <li>
+                                <img class="media-object" src="{{ STATIC_URL }}assets/img/ui/icons/map-markers/current.png" alt="Current Partners Icon">
+                                <p>Current<br>Partners</p>
+                            </li>
+                            <li>
+                                <img class="media-object" src="{{ STATIC_URL }}assets/img/ui/icons/map-markers/potential.png" alt="Potential Partners Icon">
+                                <p>Potential<br>Partners</p>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
             </div>
 
         </div>
@@ -90,7 +94,7 @@
     </div>
 </div> <!-- CONTENT -->
 
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcyMGZWQcL-rxiSVvknJuk0AkSSkxEy-o"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_MAPS_API_KEY }}"></script>
 <script type="text/javascript" src="{{ STATIC_URL }}/js/markerclusterer.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script type="text/javascript">
@@ -106,16 +110,20 @@ function initialize() {
 
     document.getElementById("map-canvas").style.height = document.getElementById('mediaObject').clientHeight + "px";
 
-
     var styles = [
-    {
-        featureType: "all",
-        stylers: [
-        { saturation: -75 },
-        { hue: "#174787" },
-        ]
-    }
-    ];
+  {
+    "stylers": [
+      { "hue": "#174787" },
+      { "saturation": -75 }
+    ]
+  },{
+    "featureType": "road.highway",
+    "elementType": "labels.icon",
+    "stylers": [
+      { "visibility": "off" }
+    ]
+  }
+]
 
     var mapOptions = {
         center: new google.maps.LatLng(51.5072, 0.1275),
@@ -135,36 +143,29 @@ function initialize() {
 //},100);
 
 //information boxes content, the indexes are the same as the marker
+{% for map in map_list %}
 infoBoxes.push(new google.maps.InfoWindow({
-    content: "Some HTML"
+    content: (
+        '<p>{{ map.name }}</p><br>' + 
+        {% if map.category %}
+        '<p><span class="text-muted">Type:</span> {{ map.get_category_display|escapejs }}</p>' +
+        {% endif %}
+        {% if map.email %}
+        '<p><span class="text-muted">Email:</span> {{ map.email|escapejs }}</p>    ' + 
+        {% endif %}
+        {% if map.telephone %}
+        '<p><span class="text-muted">Telephone:</span> {{ map.telephone|escapejs }}</p>' +
+        {% endif %}
+        {% if map.website %}
+        '<p><span class="text-muted">website:</span> <a href="{{ map.website|escapejs }}">{{ map.website|escapejs }}</a></p>' +
+        {% endif %}
+        {% if map.address %}
+        '<p><span class="text-muted">Address:</span> {{ map.address|escapejs }}</p>' +
+        {% endif %}
+        ''
+    )
 }));
-infoBoxes.push(new google.maps.InfoWindow({
-    content: "Some HTML 2"
-}));
-infoBoxes.push(new google.maps.InfoWindow({
-    content: "Some HTML 2"
-}));
-infoBoxes.push(new google.maps.InfoWindow({
-    content: "Some HTML 2"
-}));
-infoBoxes.push(new google.maps.InfoWindow({
-    content: "Some HTML 2"
-}));
-infoBoxes.push(new google.maps.InfoWindow({
-    content: "Some HTML 2"
-}));
-infoBoxes.push(new google.maps.InfoWindow({
-    content: "Some HTML 2"
-}));
-infoBoxes.push(new google.maps.InfoWindow({
-    content: "Some HTML 2"
-}));
-infoBoxes.push(new google.maps.InfoWindow({
-    content: "Some HTML 2"
-}));
-infoBoxes.push(new google.maps.InfoWindow({
-    content: "Some HTML 2"
-}));
+{% endfor %}
 
 
 function markerEventListenerDelegate(marker,infobox) {
@@ -178,83 +179,19 @@ function markerEventListenerDelegate(marker,infobox) {
 
 
 //map markers
+
+
+{% for map in map_list %}
 markers.push(new google.maps.Marker({
-    position: new google.maps.LatLng(51.5072, 0.1275),
-    title:"Local Mind - N/A",
-    filterName: "Local Mind",
-    partnerTypes: "N/A"
-    /*icon: 'images/beachflag.png'*/
+    position: new google.maps.LatLng({{ map.latitude }}, {{ map.longitude }}),
+    {% if map.marker %}
+    icon: '{{ map.marker.icon.url|escapejs }}',
+    {% endif %}
+    title: '{{ map.get_relationship_display|escapejs }} - {{ map.get_category_display|escapejs }}',
+    filterName: '{{ map.get_relationship_display|escapejs }}',
+    partnerTypes: '{{ map.get_category_display|escapejs }}'
 }));
-
-markers.push(new google.maps.Marker({
-    position: new google.maps.LatLng(51.5072, -0.1275),
-    title:"Local Mind - N/A",
-    filterName: "Local Mind",
-    partnerTypes: "N/A"
-}));
-
-
-markers.push(new google.maps.Marker({
-    position: new google.maps.LatLng(51.645294, -0.549316),
-    title:"Local Mind - N/A",
-    filterName: "Local Mind",
-    partnerTypes: "N/A"
-}));
-
-
-markers.push(new google.maps.Marker({
-    position: new google.maps.LatLng(51.296276, -1.84021),
-    title:"Current Partners - CAB",
-    filterName: "Current Partners",
-    partnerTypes: "CAB"
-}));
-
-
-markers.push(new google.maps.Marker({
-    position: new google.maps.LatLng(51.910391, -0.620728),
-    title:"Current Partners - YMCA",
-    filterName: "Current Partners",
-    partnerTypes: "YMCA"
-}));
-
-
-markers.push(new google.maps.Marker({
-    position: new google.maps.LatLng(53.660916, -0.966797),
-    title:"Current Partners - Age UK",
-    filterName: "Current Partners",
-    partnerTypes: "Age UK"
-}));
-
-
-markers.push(new google.maps.Marker({
-    position: new google.maps.LatLng(51.388923, -0.357056),
-    title:"Potential Partners - Reach",
-    filterName: "Potential Partners",
-    partnerTypes: "Reach"
-}));
-
-markers.push(new google.maps.Marker({
-    position: new google.maps.LatLng(51.18623, -0.052185),
-    title:"Potential Partners - NHS Body",
-    filterName: "Potential Partners",
-    partnerTypes: "NHS Body"
-}));
-
-
-markers.push(new google.maps.Marker({
-    position: new google.maps.LatLng(51.623132,0.318604),
-    title:"Potential Partners - CAB",
-    filterName: "Potential Partners",
-    partnerTypes: "CAB"
-}));
-
-
-markers.push(new google.maps.Marker({
-    position: new google.maps.LatLng(51.716819, -0.296631),
-    title:"Potential Partners - CAB",
-    filterName: "Potential Partners",
-    partnerTypes: "CAB"
-}));
+{% endfor %}
 
 
 ////

@@ -4,15 +4,15 @@
 {% block extra_css %}
 {{ block.super }}
 <style type="text/css">
-	html { height: 100% }
-	body { height: 100%; margin: 0; padding: 0 }
-	#map-canvas { height: 100%; width: 100%;}
-	#mediaObject {padding-top: 0px;}
+    html { height: 100% }
+    body { height: 100%; margin: 0; padding: 0 }
+    #map-canvas { height: 100%; width: 100%;}
+    #mediaObject {padding-top: 0px;}
 
-	#mapKey {}
-	#mapKey ul {list-style: none; margin:0; padding: 0;}
-	#mapKey ul li {float: left; margin-right: 40px; margin-top: 10px;}
-	#mapKey ul li img {display: block; margin: 0 auto; margin-bottom: 10px;}
+    #mapKey {}
+    #mapKey ul {list-style: none; margin:0; padding: 0;}
+    #mapKey ul li {float: left; margin-right: 40px; margin-top: 10px;}
+    #mapKey ul li img {display: block; margin: 0 auto; margin-bottom: 10px;}
 
 </style>
 {% endblock %}
@@ -20,102 +20,102 @@
 {% block content %}
 
 <div class="modal fade" id="sharedModal" tabindex="-1" role="dialog" aria-labelledby="sharedModal" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-				<h4 class="modal-title">Modal title</h4>
-			</div>
-			<div class="modal-body">
-				<p>One fine body&hellip;</p>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-primary">Save changes</button>
-			</div>
-		</div><!-- /.modal-content -->
-	</div><!-- /.modal-dialog -->
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Modal title</h4>
+            </div>
+            <div class="modal-body">
+                <p>One fine body&hellip;</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
 </div>
 <div id="content" class="clearfix">
-	{% include "includes/topbar.html" %}
-	<div class="container-fluid">
+    {% include "includes/topbar.html" %}
+    <div class="container-fluid">
 
-		<h3 class="withIcon icon_map"><span></span>MY LOCAL AREA</h3>
-		<a href="/" class="page-close"></a>
-		
-		<div class="row">
-			<div class="col-md-3">
-				<button class="btn btn-default action_addNew" data-type="KeyPartner">ADD A KEY PARTNER</button>
-				<br><br>
-				<p>Filter By</p>
-				<label class="checkbox-inline"><input type="checkbox" id="filter_lm" checked="true" value="1">Local Minds</label><br>
-				<label class="checkbox-inline"><input type="checkbox" id="filter_cp" checked="true" value="1">Current Partners</label><br>
-				<label class="checkbox-inline"><input type="checkbox" id="filter_pp" checked="true">Potential Partners</label>
-				<br><br>
-				<div class="row">
-					<div class="col-sm-6">
-						<label class="checkbox-inline"><input type="checkbox" id="allCheckbox" value="option1" onClick="toggle(this)" checked="true">All</label><br>
-						<label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="National Charity">National Charity</label><br>
-						<label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="Local Charity">Local Charity</label><br>
-						<label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="Housing Association">Housing Association</label><br>
-						<label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="Local Authority">Local Authority</label><br>
-						<label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="Private Company">Private Company</label><br>
-						<label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="NHS Body">NHS Body</label><br>
-						<label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="Another Local Mind">Another Local Mind</label><br>
-						<label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="Rethink">Rethink</label><br>
-						<label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="Relate">Relate</label><br>
-						<label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="Age UK">Age UK</label><br>
-						<label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="Reach">Reach</label>
-					</div>
-					<div class="col-sm-6">
-						<label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="Macmillan">Macmillan</label><br>
-						<label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="CAB">CAB</label><br>
-						<label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="Turning Point">Turning Point</label><br>
-						<label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="Mencap">Mencap</label><br>
-						<label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="Cruse">Cruse</label><br>
-						<label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="Samaritans">Samaritans</label><br>
-						<label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="Family Action">Family Action</label><br>
-						<label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="National Trust">National Trust</label><br>
-						<label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="YMCA">YMCA</label><br>
-						<label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="Child Povery Action Group">Child Povery Action Group</label><br>
-						<label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="Alternatives to Violence Project">Alternatives to Violence Project</label><br>
-					</div>
-					<hr>
-				</div>
+        <h3 class="withIcon icon_map"><span></span>MY LOCAL AREA</h3>
+        <a href="/" class="page-close"></a>
 
-			</div>
-			<div class="col-md-9">
-				<div class="mediaObject" id="mediaObject">
-					<div id="map-canvas"></div>
-				</div>
-				<div>
-					<h4>Key:</h4>
-					<div id="mapKey" class="clearfix">
-						<ul>
-							<li>
-								<img class="media-object" src="{{ STATIC_URL }}assets/img/ui/icons/map-markers/local-mind.png" alt="Local Mind Icon">
-								<p>Local<br>Mind</p>
-							</li>
-							<li>
-								<img class="media-object" src="{{ STATIC_URL }}assets/img/ui/icons/map-markers/current.png" alt="Current Partners Icon">
-								<p>Current<br>Partners</p>
-							</li>
-							<li>
-								<img class="media-object" src="{{ STATIC_URL }}assets/img/ui/icons/map-markers/potential.png" alt="Potential Partners Icon">
-								<p>Potential<br>Partners</p>
-							</li>
-						</ul>
-					</div>
+        <div class="row">
+            <div class="col-md-3">
+                <button class="btn btn-default action_addNew" data-type="KeyPartner">ADD A KEY PARTNER</button>
+                <br><br>
+                <p>Filter By</p>
+                <label class="checkbox-inline"><input type="checkbox" id="filter_lm" checked="true" value="1">Local Minds</label><br>
+                <label class="checkbox-inline"><input type="checkbox" id="filter_cp" checked="true" value="1">Current Partners</label><br>
+                <label class="checkbox-inline"><input type="checkbox" id="filter_pp" checked="true">Potential Partners</label>
+                <br><br>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label class="checkbox-inline"><input type="checkbox" id="allCheckbox" value="option1" onClick="toggle(this)" checked="true">All</label><br>
+                        <label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="National Charity">National Charity</label><br>
+                        <label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="Local Charity">Local Charity</label><br>
+                        <label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="Housing Association">Housing Association</label><br>
+                        <label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="Local Authority">Local Authority</label><br>
+                        <label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="Private Company">Private Company</label><br>
+                        <label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="NHS Body">NHS Body</label><br>
+                        <label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="Another Local Mind">Another Local Mind</label><br>
+                        <label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="Rethink">Rethink</label><br>
+                        <label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="Relate">Relate</label><br>
+                        <label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="Age UK">Age UK</label><br>
+                        <label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="Reach">Reach</label>
+                    </div>
+                    <div class="col-sm-6">
+                        <label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="Macmillan">Macmillan</label><br>
+                        <label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="CAB">CAB</label><br>
+                        <label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="Turning Point">Turning Point</label><br>
+                        <label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="Mencap">Mencap</label><br>
+                        <label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="Cruse">Cruse</label><br>
+                        <label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="Samaritans">Samaritans</label><br>
+                        <label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="Family Action">Family Action</label><br>
+                        <label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="National Trust">National Trust</label><br>
+                        <label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="YMCA">YMCA</label><br>
+                        <label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="Child Povery Action Group">Child Povery Action Group</label><br>
+                        <label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="Alternatives to Violence Project">Alternatives to Violence Project</label><br>
+                    </div>
+                    <hr>
+                </div>
 
-				</div>
-			</div>
-			
-		</div>
+            </div>
+            <div class="col-md-9">
+                <div class="mediaObject" id="mediaObject">
+                    <div id="map-canvas"></div>
+                </div>
+                <div>
+                    <h4>Key:</h4>
+                    <div id="mapKey" class="clearfix">
+                        <ul>
+                            <li>
+                                <img class="media-object" src="{{ STATIC_URL }}assets/img/ui/icons/map-markers/local-mind.png" alt="Local Mind Icon">
+                                <p>Local<br>Mind</p>
+                            </li>
+                            <li>
+                                <img class="media-object" src="{{ STATIC_URL }}assets/img/ui/icons/map-markers/current.png" alt="Current Partners Icon">
+                                <p>Current<br>Partners</p>
+                            </li>
+                            <li>
+                                <img class="media-object" src="{{ STATIC_URL }}assets/img/ui/icons/map-markers/potential.png" alt="Potential Partners Icon">
+                                <p>Potential<br>Partners</p>
+                            </li>
+                        </ul>
+                    </div>
 
-	</div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
 </div> <!-- CONTENT -->
 
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcyMGZWQcL-rxiSVvknJuk0AkSSkxEy-o"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_MAPS_API_KEY }}"></script>
 <script type="text/javascript" src="{{ STATIC_URL }}/js/markerclusterer.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script type="text/javascript">
@@ -129,9 +129,9 @@ var mc; //marker cluster var
 function initialize() {
 
 
-	document.getElementById("map-canvas").style.height = document.getElementById('mediaObject').clientHeight + "px";
+    document.getElementById("map-canvas").style.height = document.getElementById('mediaObject').clientHeight + "px";
 
-	var styles = [
+    var styles = [
   {
     "stylers": [
       { "hue": "#174787" },
@@ -146,216 +146,216 @@ function initialize() {
   }
 ]
 
-	var mapOptions = {
-		center: new google.maps.LatLng(51.5072, 0.1275),
-		zoom: 8,
-		styles: styles
-	};
-	map = new google.maps.Map(document.getElementById("map-canvas"),mapOptions);
+    var mapOptions = {
+        center: new google.maps.LatLng(51.5072, 0.1275),
+        zoom: 8,
+        styles: styles
+    };
+    map = new google.maps.Map(document.getElementById("map-canvas"),mapOptions);
 
-	mc = new MarkerClusterer(map, markers);
-	
+    mc = new MarkerClusterer(map, markers);
+
 
 //put the markers on the map
 //window.setTimeout(function(){
-	//for(i = 0; i < markers.length; i++) {
-		//markers[i].setMap(map);
-	//}
+    //for(i = 0; i < markers.length; i++) {
+        //markers[i].setMap(map);
+    //}
 //},100);
 
 //information boxes content, the indexes are the same as the marker
 infoBoxes.push(new google.maps.InfoWindow({
-	content: '<p>NAME OF PARTNER</p><br><p><span class="text-muted">Type:</span> Local Authority</p><p><span class="text-muted">Email:</span> email address</p>	<p><span class="text-muted">Telephone:</span> 014 4454 5000</p><p><span class="text-muted">website:</span> www</p><p><span class="text-muted">Address:</span> address</p>'
+    content: '<p>NAME OF PARTNER</p><br><p><span class="text-muted">Type:</span> Local Authority</p><p><span class="text-muted">Email:</span> email address</p>    <p><span class="text-muted">Telephone:</span> 014 4454 5000</p><p><span class="text-muted">website:</span> www</p><p><span class="text-muted">Address:</span> address</p>'
 }));
 infoBoxes.push(new google.maps.InfoWindow({
-	content: "Some HTML 2"
+    content: "Some HTML 2"
 }));
 infoBoxes.push(new google.maps.InfoWindow({
-	content: "Some HTML 2"
+    content: "Some HTML 2"
 }));
 infoBoxes.push(new google.maps.InfoWindow({
-	content: "Some HTML 2"
+    content: "Some HTML 2"
 }));
 infoBoxes.push(new google.maps.InfoWindow({
-	content: "Some HTML 2"
+    content: "Some HTML 2"
 }));
 infoBoxes.push(new google.maps.InfoWindow({
-	content: "Some HTML 2"
+    content: "Some HTML 2"
 }));
 infoBoxes.push(new google.maps.InfoWindow({
-	content: "Some HTML 2"
+    content: "Some HTML 2"
 }));
 infoBoxes.push(new google.maps.InfoWindow({
-	content: "Some HTML 2"
+    content: "Some HTML 2"
 }));
 infoBoxes.push(new google.maps.InfoWindow({
-	content: "Some HTML 2"
+    content: "Some HTML 2"
 }));
 infoBoxes.push(new google.maps.InfoWindow({
-	content: "Some HTML 2"
+    content: "Some HTML 2"
 }));
 
 
 function markerEventListenerDelegate(marker,infobox) {
-	return google.maps.event.addListener(marker, 'click', function() {
-		for(i = 0; i < infoBoxes.length; i++) {
-			infoBoxes[i].close();
-		}
-		infobox.open(map,marker);
-	});
+    return google.maps.event.addListener(marker, 'click', function() {
+        for(i = 0; i < infoBoxes.length; i++) {
+            infoBoxes[i].close();
+        }
+        infobox.open(map,marker);
+    });
 }
 
 
 //map markers
 markers.push(new google.maps.Marker({
-	position: new google.maps.LatLng(51.5072, 0.1275),
-	icon: '/static/assets/img/ui/icons/map-markers/local-mind.png',
-	title:"Local Mind - N/A",
-	filterName: "Local Mind",
-	partnerTypes: "N/A"
+    position: new google.maps.LatLng(51.5072, 0.1275),
+    icon: '/static/assets/img/ui/icons/map-markers/local-mind.png',
+    title:"Local Mind - N/A",
+    filterName: "Local Mind",
+    partnerTypes: "N/A"
 }));
 
 markers.push(new google.maps.Marker({
-	position: new google.maps.LatLng(51.5072, -0.1275),
-	icon: '/static/assets/img/ui/icons/map-markers/local-mind.png',
-	title:"Local Mind - N/A",
-	filterName: "Local Mind",
-	partnerTypes: "N/A"
-}));
-
-
-markers.push(new google.maps.Marker({
-	position: new google.maps.LatLng(51.645294, -0.549316),
-	icon: '/static/assets/img/ui/icons/map-markers/local-mind.png',
-	title:"Local Mind - N/A",
-	filterName: "Local Mind",
-	partnerTypes: "N/A"
+    position: new google.maps.LatLng(51.5072, -0.1275),
+    icon: '/static/assets/img/ui/icons/map-markers/local-mind.png',
+    title:"Local Mind - N/A",
+    filterName: "Local Mind",
+    partnerTypes: "N/A"
 }));
 
 
 markers.push(new google.maps.Marker({
-	position: new google.maps.LatLng(51.296276, -1.84021),
-	icon: '/static/assets/img/ui/icons/map-markers/current/cab.png',
-	title:"Current Partners - CAB",
-	filterName: "Current Partners",
-	partnerTypes: "CAB"
+    position: new google.maps.LatLng(51.645294, -0.549316),
+    icon: '/static/assets/img/ui/icons/map-markers/local-mind.png',
+    title:"Local Mind - N/A",
+    filterName: "Local Mind",
+    partnerTypes: "N/A"
 }));
 
 
 markers.push(new google.maps.Marker({
-	position: new google.maps.LatLng(51.910391, -0.620728),
-	icon: '/static/assets/img/ui/icons/map-markers/current/ymca.png',
-	title:"Current Partners - YMCA",
-	filterName: "Current Partners",
-	partnerTypes: "YMCA"
+    position: new google.maps.LatLng(51.296276, -1.84021),
+    icon: '/static/assets/img/ui/icons/map-markers/current/cab.png',
+    title:"Current Partners - CAB",
+    filterName: "Current Partners",
+    partnerTypes: "CAB"
 }));
 
 
 markers.push(new google.maps.Marker({
-	position: new google.maps.LatLng(53.660916, -0.966797),
-	icon: '/static/assets/img/ui/icons/map-markers/current/age-uk.png',
-	title:"Current Partners - Age UK",
-	filterName: "Current Partners",
-	partnerTypes: "Age UK"
+    position: new google.maps.LatLng(51.910391, -0.620728),
+    icon: '/static/assets/img/ui/icons/map-markers/current/ymca.png',
+    title:"Current Partners - YMCA",
+    filterName: "Current Partners",
+    partnerTypes: "YMCA"
 }));
 
 
 markers.push(new google.maps.Marker({
-	position: new google.maps.LatLng(51.388923, -0.357056),
-	icon: '/static/assets/img/ui/icons/map-markers/potential/reach.png',
-	title:"Potential Partners - Reach",
-	filterName: "Potential Partners",
-	partnerTypes: "Reach"
-}));
-
-markers.push(new google.maps.Marker({
-	position: new google.maps.LatLng(51.18623, -0.052185),
-	icon: '/static/assets/img/ui/icons/map-markers/potential/nhs-body.png',
-	title:"Potential Partners - NHS Body",
-	filterName: "Potential Partners",
-	partnerTypes: "NHS Body"
+    position: new google.maps.LatLng(53.660916, -0.966797),
+    icon: '/static/assets/img/ui/icons/map-markers/current/age-uk.png',
+    title:"Current Partners - Age UK",
+    filterName: "Current Partners",
+    partnerTypes: "Age UK"
 }));
 
 
 markers.push(new google.maps.Marker({
-	position: new google.maps.LatLng(51.623132,0.318604),
-	icon: '/static/assets/img/ui/icons/map-markers/potential/cab.png',
-	title:"Potential Partners - CAB",
-	filterName: "Potential Partners",
-	partnerTypes: "CAB"
+    position: new google.maps.LatLng(51.388923, -0.357056),
+    icon: '/static/assets/img/ui/icons/map-markers/potential/reach.png',
+    title:"Potential Partners - Reach",
+    filterName: "Potential Partners",
+    partnerTypes: "Reach"
+}));
+
+markers.push(new google.maps.Marker({
+    position: new google.maps.LatLng(51.18623, -0.052185),
+    icon: '/static/assets/img/ui/icons/map-markers/potential/nhs-body.png',
+    title:"Potential Partners - NHS Body",
+    filterName: "Potential Partners",
+    partnerTypes: "NHS Body"
 }));
 
 
 markers.push(new google.maps.Marker({
-	position: new google.maps.LatLng(51.716819, -0.296631),
-	icon: '/static/assets/img/ui/icons/map-markers/potential/cab.png',
-	title:"Potential Partners - CAB",
-	filterName: "Potential Partners",
-	partnerTypes: "CAB"
+    position: new google.maps.LatLng(51.623132,0.318604),
+    icon: '/static/assets/img/ui/icons/map-markers/potential/cab.png',
+    title:"Potential Partners - CAB",
+    filterName: "Potential Partners",
+    partnerTypes: "CAB"
+}));
+
+
+markers.push(new google.maps.Marker({
+    position: new google.maps.LatLng(51.716819, -0.296631),
+    icon: '/static/assets/img/ui/icons/map-markers/potential/cab.png',
+    title:"Potential Partners - CAB",
+    filterName: "Potential Partners",
+    partnerTypes: "CAB"
 }));
 
 
 ////
 
 for(i = 0; i < markers.length; i++) {
-	//markers[i].setMap(map);
-	mc.addMarker(markers[i]);
-	markerEventListenerDelegate(markers[i], infoBoxes[i]);
+    //markers[i].setMap(map);
+    mc.addMarker(markers[i]);
+    markerEventListenerDelegate(markers[i], infoBoxes[i]);
 }
 
 
 } //end of init function
 
 function toggle(source) {
-	checkboxes = document.getElementsByClassName('partnersCheckbox');
-	for(var i=0, n=checkboxes.length;i<n;i++) {
-		checkboxes[i].checked = source.checked;
-	}
+    checkboxes = document.getElementsByClassName('partnersCheckbox');
+    for(var i=0, n=checkboxes.length;i<n;i++) {
+        checkboxes[i].checked = source.checked;
+    }
 }
 
 function showHideMarkers() {
-	mc.clearMarkers();//clear all of them and only add if they match the filters
-	for(i = 0; i < markers.length; i++) {
-		//for all markers go past this
-		if(markers[i].filterName == "Local Mind") {
-			//are you a local mind?
-			if($("#filter_lm").is(':checked')) {
-				//is your filter clecked
-				mc.addMarker(markers[i]);
-			}
-		} else {
-			//you are a partner
-			if(markers[i].filterName == "Current Partners") {
-				
-				if($("#filter_cp").is(':checked')) {
-					//how see if the subfilters are checked
-					$(".partnersCheckbox").each(function( index, value ) {
-						if($(value).is(':checked') && markers[i].partnerTypes == $(value).attr("value")) {
-							mc.addMarker(markers[i]);
-						}
-					});
-				}
-				
+    mc.clearMarkers();//clear all of them and only add if they match the filters
+    for(i = 0; i < markers.length; i++) {
+        //for all markers go past this
+        if(markers[i].filterName == "Local Mind") {
+            //are you a local mind?
+            if($("#filter_lm").is(':checked')) {
+                //is your filter clecked
+                mc.addMarker(markers[i]);
+            }
+        } else {
+            //you are a partner
+            if(markers[i].filterName == "Current Partners") {
 
-			} else {
-				
-				if($("#filter_pp").is(':checked')) {
-					//how see if the subfilters are checked
-					$(".partnersCheckbox").each(function( index, value ) {
-						if($(value).is(':checked') && markers[i].partnerTypes == $(value).attr("value")) {
-							mc.addMarker(markers[i]);
-						}
-					});
-				}
-				
-			}
+                if($("#filter_cp").is(':checked')) {
+                    //how see if the subfilters are checked
+                    $(".partnersCheckbox").each(function( index, value ) {
+                        if($(value).is(':checked') && markers[i].partnerTypes == $(value).attr("value")) {
+                            mc.addMarker(markers[i]);
+                        }
+                    });
+                }
 
-		}
-	}
+
+            } else {
+
+                if($("#filter_pp").is(':checked')) {
+                    //how see if the subfilters are checked
+                    $(".partnersCheckbox").each(function( index, value ) {
+                        if($(value).is(':checked') && markers[i].partnerTypes == $(value).attr("value")) {
+                            mc.addMarker(markers[i]);
+                        }
+                    });
+                }
+
+            }
+
+        }
+    }
 }
 
 $("#filter_lm, #filter_cp, #filter_pp, .partnersCheckbox, #allCheckbox").click(function(){
-	showHideMarkers();
+    showHideMarkers();
 });
 
 
