@@ -10,7 +10,7 @@
   <div class="container-fluid">
 
     <h3 class="withIcon icon_newspaper"><span></span>POSITIVE NEWS</h3>
-    <a href="/" class="page-close"></a>
+    <a href="{% url "dashboard" %}" class="page-close"></a>
 
     <button class="btn btn-default action_addNew" data-target="#news-form"{% if show_form %} data-open{% endif %}>ADD NEW POST</button>
 
