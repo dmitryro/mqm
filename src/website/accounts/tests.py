@@ -154,6 +154,13 @@ class SignupTests(WebTest):
         response.form['partners-formset-positive_news-0-tags'] = 'positive, news'
 
         response = response.form.submit()
+
+        # Key partner postcode is required.
+        self.assertTrue(response.context['form'].errors['key_partners'][0]['postcode'])
+
+        response.form['partners-formset-key_partners-0-postcode'] = 'NW1 7HJ'
+
+        response = response.form.submit()
         response = response.follow()
 
         # Fifth step.
@@ -304,7 +311,7 @@ class SignupTests(WebTest):
         self.assertTrue(email.subject)
 
     def test_profile_signup(self):
-        local_mind = autofixture.create_one(LocalMind)
+        local_mind = LocalMind.objects.all()[0]
         user = User.objects.create(
             local_mind=local_mind,
             email='foo@example.com',
