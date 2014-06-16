@@ -32,10 +32,7 @@ class SignupForm(forms.Form):
             reserved = ReservedEmail.objects.filter(email=email)
             if not reserved:
                 raise forms.ValidationError(_("""
-                    Sorry, but we don't recognize this email address. We need to have
-                    your email in our database in order to allow signup. Please make
-                    sure that you used the same email address here as you use for
-                    communications with minds.
+                    This email has not be recognised - please recheck your email address and enter again
                     """))
             return reserved.get()
         return email
