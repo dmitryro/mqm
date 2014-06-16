@@ -1,5 +1,6 @@
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
+from website.privacy import PrivacyViewMixin
 
 
 class LoginRequiredMixin(object):
@@ -18,4 +19,8 @@ class LoginRequiredMixin(object):
 
 
 class CommonViewMixin(LoginRequiredMixin):
+    pass
+
+
+class CommonPrivacyViewMixin(LoginRequiredMixin, PrivacyViewMixin):
     pass

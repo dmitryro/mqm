@@ -335,7 +335,7 @@ class SignupPartnersForm(CompositeModelForm):
             form.instance.user = user
 
         for form in self.formsets['positive_news'].forms:
-            form.instance.author = user
+            form.instance.user = user
 
         for form in self.formsets['key_partners'].forms:
             form.instance.user = user

@@ -126,6 +126,7 @@ INSTALLED_APPS = (
     'django.contrib.webdesign',
 
     # third-party apps
+    'autofixture',
     'django_extensions',
     'django_markup',
     'django_mobile',

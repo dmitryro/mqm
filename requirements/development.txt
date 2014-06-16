@@ -1,5 +1,4 @@
 -r common.txt
-django-autofixture
 django-debug-toolbar
 django-debug-toolbar-autoreload
 django-webtest == 1.7.7

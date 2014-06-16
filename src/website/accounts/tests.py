@@ -277,7 +277,7 @@ class SignupTests(WebTest):
 
         news = news[0]
         self.assertEqual(news.local_mind, local_mind)
-        self.assertEqual(news.author, user)
+        self.assertEqual(news.user, user)
         self.assertEqual(news.title, 'Good News: We had success')
         self.assertEqual(news.date, None)
         self.assertEqual(len(news.tags.all()), 2)

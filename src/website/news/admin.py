@@ -8,7 +8,7 @@ class BaseNewsAdmin(admin.ModelAdmin):
     list_display = (
         'title',
         'date',
-        'author',
+        'user',
         'privacy')
     list_editable = ('privacy',)
     list_filter = ('privacy',)
@@ -28,7 +28,8 @@ class BaseNewsAdmin(admin.ModelAdmin):
             'classes': ('wide',),
             'fields': (
                 'privacy',
-                'author',
+                'local_mind',
+                'user',
             ),
         }),
     )
