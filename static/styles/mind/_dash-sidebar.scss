@@ -41,6 +41,16 @@
 }
 
 #sidebar #people .person .avatar {
+  float:left;
+  padding-top:8px;
+  img {
+    height:40px;
+    width:40px;
+  }
+}
+
+/*
+#sidebar #people .person .avatar {
   height:58px;
   width:46px;
   float:left;
@@ -48,6 +58,7 @@
   background-repeat:no-repeat;
   background-position:center;
 }
+*/
 
 #sidebar #people .person .avatarLM {
   height:58px;
