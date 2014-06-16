@@ -1,0 +1,23 @@
+{% extends "forms/_base_modal.html" %}
+{% load floppyforms %}
+
+
+{% block headline %}
+<div class="modal-icon" id="icon_map"></div><h2>ADD A KEY PARTNER</h2>
+{% endblock %}
+
+
+{% block fields %}
+    {% form form using %}
+        {% formconfig row using "forms/signup_row.html" %}
+
+        {% formrow form.name %}
+        {% formrow form.email %}
+        {% formrow form.website %}
+        {% formrow form.address %}
+        {% formrow form.postcode %}
+        {% formrow form.telephone %}
+        {% formrow form.category %}
+        {% formrow form.privacy %}
+    {% endform %}
+{% endblock %}

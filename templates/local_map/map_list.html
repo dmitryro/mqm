@@ -45,7 +45,10 @@
 
         <div class="row">
             <div class="col-md-3">
-                <button class="btn btn-default action_addNew" data-type="KeyPartner">ADD A KEY PARTNER</button>
+                <button class="btn btn-default action_addNew" data-target="#modal-form"{% if form.is_bound %} data-open{% endif %}>ADD A KEY PARTNER</button>
+
+                {% include "local_map/_map_form.html" with id="modal-form" form=form %}
+
                 <br><br>
                 <p>Filter By</p>
                 <label class="checkbox-inline"><input type="checkbox" id="filter_lm" checked="true" value="1">Local Minds</label><br>
