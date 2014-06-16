@@ -55,6 +55,7 @@
             <div class="widget-bar">
                 <div class="widget-title">MEET THE TEAM</div>
             </div>
+            <!-- for loop of [user_avatar, full-name, job_title ] + link to /meet-the-team/[local_mind_name]/{id or name}-->
         </li>
 
     </div>
@@ -67,10 +68,12 @@
                     </div>
                     <ul class='list-group'>
                         <a class='li list-group-item' href='#'>
-                            <span class='badge'>14</span>Questions for you
+                            <span class='badge'><!-- number of total questions for you --> 14</span>Questions for you
                         </a>
                     </ul>
                     <div class='list-group'>
+                        <!-- for loop of [question] + link to  questiosn detail page (that doesnt exist yet) -->
+                        <!-- add a class if the questions is one that you have posted -->
                     </div>
                 </li>
     </div>
@@ -78,11 +81,12 @@
     <div class="hidden todo">
     <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
                     <div class="widget-bar">
-                        <div class="widget-title"> <span class="badge">14</span> TO-DO LIST</div>
+                        <div class="widget-title"> <span class="badge"><!-- total to-do assigned to you -->14</span> TO-DO LIST</div>
                         {% include "includes/widget-settings.html" with type="Todo" %}
                     </div>
                     <ul class="list-group">
                       <li class="list-group-item">
+                          {% comment %}
                           <div class="dropdown pull-right">
                           <a data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-chevron-down small showOnHover"></span></a>
                           <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
@@ -91,9 +95,11 @@
                             <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><span class="glyphicon glyphicon-trash"></span> Delete</a></li>
                           </ul>
                         </div>
+                        {% endcomment %}
                       Confirm all contact details for key staff are correct<small class="text-muted"><br>Due 12th April 2014</small>
 
                       </li>
+                      <!-- for loop of [totos]  - list your to-do's first, with the most priority -->
                       <li class="list-group-item">Confirm all contact details for key staff are correctConfirm all contact details for key staff are correctConfirm all contact details for key staff are correctConfirm all contact details for key staff are correct</li>
                       <li class="list-group-item">Morbi leo risus</li>
                       <li class="list-group-item">Porta ac consectetur ac</li>
@@ -103,6 +109,8 @@
 
         </div>
 
+
+    {% comment %}
     <div class="areasofgrowth hidden">
         <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
             <div class="widget-bar">
@@ -225,6 +233,8 @@
             </div>
         </li>
     </div>
+    {% endcomment %}
+
 
     <div class="theLabNews hidden">
         <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
@@ -232,10 +242,12 @@
                         <div class="widget-title">THE LAB NEWS</div>
                     </div>
                     <ul class="list-group" id="feedResults">
+                        <!-- feed, if times are good we'll do this -->
                     </ul>
                 </li>
     </div>
 
+    {% comment %}
     <div class="eventsdiary hidden">
         <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
             <div class="widget-bar">
@@ -352,6 +364,7 @@
                 </li>
 
     </div>
+    {% endcomment %}
 
     <div class="myLocalArea hidden">
     <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
@@ -359,11 +372,12 @@
                         <div class="widget-title">MY LOCAL AREA</div>
                         {% include "includes/widget-settings.html" %}
                     </div>
-                    <img src="" alt="graph_finance" width="293" height="224">
+                    <!-- for loop of on line #486 [ long, lat, title ] -->
                 </li>
     </div>
 
 
+    {% comment %}
     <div class="hidden videoStream">
         <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
                     <div class="widget-bar">
@@ -385,7 +399,9 @@
                 </li>
 
     </div>
+    {% endcomment %}
 
+    {% comment %}
     <div class="positiveNews hidden">
         <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
                     <div class="widget-bar">
@@ -404,6 +420,7 @@
             </div>
         </li>
     </div>
+    {% endcomment %}
 
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_MAPS_API_KEY }}"></script>
 <script type="text/javascript" src="{{ STATIC_URL }}/js/markerclusterer.min.js"></script>
