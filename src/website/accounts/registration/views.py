@@ -161,6 +161,7 @@ class SignupUserProfileView(SignupLogicMixin, FormView):
 
     def get_context_data(self, **kwargs):
         kwargs['user'] = self.user
+        kwargs['email'] = self.user.email
         return super(SignupUserProfileView, self).get_context_data(**kwargs)
 
     def get_form_kwargs(self):
