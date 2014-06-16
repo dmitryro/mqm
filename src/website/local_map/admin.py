@@ -1,23 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
-from .models import Marker, Map
-
-
-class MarkerAdmin(admin.ModelAdmin):
-    list_display = (
-        'title',)
-    fieldsets = (
-        (_('General'), {
-            'classes': ('wide',),
-            'fields': (
-                'title',
-                'icon',
-            ),
-        }),
-    )
-    save_on_top = True
-
+from .models import Map
 
 
 class MapAdmin(admin.ModelAdmin):
@@ -61,5 +45,5 @@ class MapAdmin(admin.ModelAdmin):
     )
     save_on_top = True
 
-admin.site.register(Marker, MarkerAdmin)
+
 admin.site.register(Map, MapAdmin)
