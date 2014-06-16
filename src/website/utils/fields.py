@@ -1,4 +1,5 @@
 from django.db import models
+import floppyforms as forms
 
 
 class EmailField(models.EmailField):
@@ -7,6 +8,10 @@ class EmailField(models.EmailField):
         if value is not None:
             value = value.lower()
         return value
+
+    def formfield(self, **kwargs):
+        kwargs.setdefault('form_class', forms.EmailField)
+        return super(EmailField, self).formfield(**kwargs)
 
 
 from south.modelsinspector import add_introspection_rules

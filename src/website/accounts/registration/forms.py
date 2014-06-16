@@ -295,6 +295,8 @@ class PositiveNewsForm(ModelForm):
 
 
 class SignupPartnersForm(CompositeModelForm):
+    formfield_callback = formfield_callback
+
     resources = InlineFormSetField(
         parent_model=LocalMind,
         model=Resource,
