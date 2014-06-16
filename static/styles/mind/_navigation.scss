@@ -130,12 +130,12 @@
 }
 
 #top-bar #profile #person .avatar {
-  height:58px;
-  width:46px;
   float:left;
-  background-image:url(../../assets/img/ui/nav/profile-main.svg);
-  background-repeat:no-repeat;
-  background-position:center;
+  padding-top:8px;
+  img {
+    height:40px;
+    width:40px;
+  }
 }
 
 #top-bar #profile #person .avatarLM {

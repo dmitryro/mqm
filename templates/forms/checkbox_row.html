@@ -2,7 +2,14 @@
 {% load floppyforms %}
 
 
+{% block help_text %}{% endblock %}
+
+
 {% block pre_widget %}<div class="checkbox">{% endblock %}
 {% block post_widget %}</div>{% endblock %}
 
-{% block help_text %}{% if field.help_text %}<label for="{{ field|id }}">{{ field.help_text }}</label>{% endif %}{% endblock %}
+
+{% block widget %}
+    {% formfield field %}
+    {% if field.help_text %}<label for="{{ field|id }}">{{ field.help_text }}</label>{% endif %}
+{% endblock %}

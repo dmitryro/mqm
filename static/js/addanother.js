@@ -6,6 +6,12 @@
         });
     };
 
+    var replacePrefixInText = function (element, newValue) {
+        $(element).text(function (index, value) {
+            return value.replace(/__prefix__/, newValue);
+        });
+    };
+
     $.fn.addanother = function () {
         return $(this).each(function () {
             var self = $(this);
@@ -14,6 +20,7 @@
                 var destination = self.attr('data-destination');
                 var formset = self.parents('[data-formset-prefix]');
                 var templateSelector = formset.attr('data-template') || '.template';
+                var formListSelector = formset.attr('data-formset-form-list') || null;
                 var prefix = formset.attr('data-formset-prefix');
 
                 var template = formset.find(templateSelector).clone(),
@@ -26,6 +33,7 @@
                 });
                 template.find('label').each(function () {
                     replacePrefix(this, 'for', totalForms.val());
+                    replacePrefixInText(this, parseInt(totalForms.val()) + 1);
                 });
 
                 totalForms.val(function (index, val) {
@@ -34,7 +42,11 @@
 
                 template.find('.form-counter').text(totalForms.val());
 
-                self.before(template);
+                if (formListSelector === null) {
+                    self.before(template);
+                } else {
+                    formset.find(formListSelector).append(template);
+                }
             });
 
             return this;

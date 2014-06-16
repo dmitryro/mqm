@@ -7,21 +7,20 @@ from django_publicmanager.managers import GenericPublicManager, \
     PublicOnlyManager
 from mediastore.fields import MediaField, MultipleMediaField
 from taggit.managers import TaggableManager
-from ..privacy import PrivacyField
+from ..privacy import PrivacyMixin
 
 
-class BaseNews(models.Model):
+class BaseNews(PrivacyMixin, models.Model):
     title = models.CharField(_('Title'), max_length=120)
+    slug = AutoSlugField(populate_from=('title',), unique=True)
     date = models.DateField(_('Entry Date'), null=True, blank=True)
-    author = models.ForeignKey('accounts.User', verbose_name=_('Author'))
+    user = models.ForeignKey('accounts.User', verbose_name=_('Author'))
     description = models.TextField(blank=True)
-    tags = TaggableManager()
+    tags = TaggableManager(blank=True)
     source = models.CharField(max_length=120, blank=True,
         help_text=_(
             'Enter a URL to a online source or simply write the publication '
             'name and author.'))
-
-    privacy = PrivacyField()
 
     created = CreationDateTimeField()
     modified = ModificationDateTimeField()
@@ -50,3 +49,7 @@ class PositiveNews(BaseNews):
         verbose_name = _('Positive News')
         verbose_name_plural = _('Positive News')
         ordering = ('-date',)
+
+    @models.permalink
+    def get_absolute_url(self):
+        return 'positive-news', (), {'slug': self.slug}

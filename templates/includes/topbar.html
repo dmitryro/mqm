@@ -1,19 +1,20 @@
+{% load thumbnail %}
 <div id="top-bar">
-            
+
             {% if dashboard == "true" %}
             <div id="sidebar-button" class="closed"></div>
             {% else %}
-            <a href="/my-dashboard"><div id="sidebar-home"></div></a>
+            <a href="{% url "dashboard" %}"><div id="sidebar-home"></div></a>
             {% endif %}
 
             <div id="search-bar">
-                
+
                 <input type="text" placeholder="search..." id="search">
 
             </div>
 
             <div id="tools">
-                    
+
                 <div id="write"></div>
                 {% comment %}
                 <div id="add">
@@ -28,9 +29,9 @@
                         <li class="settings-opt" style="background-image:url({{ STATIC_URL }}assets/img/ui/icons/qm-10.svg)">
                             Update Quality Mark
                         </li>
-                        
+
                         <li class="settings-opt" style="background-image:url({{ STATIC_URL }}assets/img/ui/icons/notes-02.svg)">
-                            Monthly Finances 
+                            Monthly Finances
                         </li>
                     </ul>
                 </div>
@@ -38,12 +39,14 @@
             </div>
 
             <div id="profile">
-                
+
                 <div id="person">
-                    <a href="team.html"><div class="avatar"></div></a>
-                    <div class="username">Jane Smith - Openhub</div>
+                    <div class="avatar">
+                        <img src="{% thumbnail user.user_avatar 40x40 crop %}" class="img-circle">
+                    </div>
+                    <div class="username">{{ user.get_full_name|default:user.email }}'s - Openhub</div>
                 </div>
-                <a href="home.html"><div id="logout"></div></a>
+                <a href="{% url "logout" %}"><div id="logout"></div></a>
                 <div id="settings">
                     <div id="settings-icon" class="drop"></div>
                     <ul>
@@ -64,22 +67,23 @@
                         </li>
                         {% endcomment %}
                         <li class="settings-opt red">Settings</li>
-                        
-                        <a href="/meet-the-team-member/{firstname - lastname}"><li class="settings-opt" style="background-image:url({{ STATIC_URL }}assets/img/ui/icons/profile-04.svg)">
-                            Update Profile
+
+                        <a href="{% url "profile-form" %}"><li class="settings-opt" style="background-image:url({{ STATIC_URL }}assets/img/ui/icons/profile-04.svg)">
+                            Update Profile <!-- this should go to pre-puplated page 8 (invitee) in the sign up process -->
                         </li></a>
-                        <li class="settings-opt" style="background-image:url({{ STATIC_URL }}assets/img/ui/icons/anchor-05.svg)">
-                            Update { name }
-                        </li>
+                        <a href="{% url "local-mind-form" %}"><li class="settings-opt" style="background-image:url({{ STATIC_URL }}assets/img/ui/icons/anchor-05.svg)" data-access="super">
+                            Update {{ user.local_mind.name }} <!-- this should go to pre-puplated page 1 in the sign up process (only accessible to super-users) -->
+                        </li></a>
                         {% comment %}
                         <li class="settings-opt" style="background-image:url({{ STATIC_URL }}assets/img/ui/icons/users-06.svg)">
                             Update Hub Users
                         </li>
                         {% endcomment %}
+                        {% comment %}
                         <li class="settings-opt action_addNew" data-type="Password" style="background-image:url({{ STATIC_URL }}assets/img/ui/icons/password-07.svg)">
-                           Change password
+                           <a href="#">Change password</a>
                         </li>
-                        
+                        {% endcomment %}
                     </ul>
                 </div>
 

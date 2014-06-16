@@ -1,0 +1,11 @@
+{% extends "forms/signup_row.html" %}
+{% load floppyforms %}
+
+
+{% block help_text %}{% endblock %}
+
+
+{% block widget %}
+    {% formfield field %}
+    {% if field.help_text %}<p class="help-block">{{ field.help_text }}</p>{% endif %}
+{% endblock %}

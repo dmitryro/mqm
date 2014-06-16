@@ -5,15 +5,14 @@ from django_extensions.db.fields import (AutoSlugField, CreationDateTimeField,
     ModificationDateTimeField)
 from django_publicmanager.managers import GenericPublicManager, \
     PublicOnlyManager
-from mediastore.fields import MediaField, MultipleMediaField
-from ..privacy import PrivacyField
+
+from ..privacy import PrivacyMixin
+from ..utils.models import PostcodeLocationMixin
 
 
 class Marker(models.Model):
     title = models.CharField(max_length=120)
-    icon = MediaField(
-        related_name='marker_image',
-        limit_choices_to={'content_type__model': 'image'},)
+    icon = models.ImageField(upload_to='local_map/markers/')
 
     class Meta:
         verbose_name = _('Map Marker')
@@ -23,7 +22,7 @@ class Marker(models.Model):
         return self.title
 
 
-class Map(models.Model):
+class Map(PrivacyMixin, PostcodeLocationMixin, models.Model):
     CURRENT_PARTNER = 'current-partner'
     PARTNER_OPPORTUNITY = 'partner-opportunity'
     RELATIONSHIP_CHOICES = (
@@ -78,6 +77,7 @@ class Map(models.Model):
         (ALTERNATIVES_TO_VIOLENCE_PROJECT, _('Alternatives to Voilence Project')),
     )
 
+    user = models.ForeignKey('accounts.User', verbose_name=_('Creator'))
     local_mind = models.ForeignKey('local_minds.LocalMind', related_name='partners')
 
     name = models.CharField(_('Name'), max_length=120)
@@ -86,11 +86,11 @@ class Map(models.Model):
     telephone = models.CharField(_('Contact number'), max_length=16, blank=True)
     postcode = models.CharField(_('Postcode'), max_length=120, blank=True,
         help_text=_('This is how we generate a map.'))
+
     relationship = models.CharField(max_length=120, choices=RELATIONSHIP_CHOICES, blank=True)
     website = models.URLField(_('Website'), blank=True)
     category = models.CharField(_('Type'), max_length=50, choices=CATEGORY_CHOICES, blank=True)
 
-    privacy = PrivacyField()
     marker = models.ForeignKey(Marker, null=True, blank=True)
 
     created = CreationDateTimeField()

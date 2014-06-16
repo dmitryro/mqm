@@ -5,35 +5,86 @@
 {% block section %}
 
     {% form form using %}
-        <h3>Invite colleagues</h3>
+        {% formconfig row using "forms/signup_row.html" %}
+
+        <div class="row">
+            <div class="col-md-6">
+              <div class="col-sm-3"></div>
+              <div class="col-sm-9">
+                <h4>INVITE COLLEAGUES</h4>
+              </div>
+            </div>
+        </div>
 
         {% with formset=form.formsets.invites %}
-        <div data-formset-prefix="{{ formset.prefix }}">
+        <div data-formset-prefix="{{ formset.prefix }}" data-formset-form-list=".formset-form-list">
             {{ formset.management_form }}
-            {% for form in formset %}
-                {% formrow form.first_name %}
-                {% formrow form.last_name %}
-                {% formrow form.email %}
-                {% formrow form.privileges %}
-                {% formrow form.job_title %}
-            {% endfor %}
 
-            <a class="add-another">Add another</a>
+            <div class="formset-form-list">
+            {% for form in formset %}
+                <div class="row">
+                    <div class="col-md-6">
+                        {% formrow form.first_name %}
+                    </div>
+                    <div class="col-md-6">
+                        {% formrow form.last_name %}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        {% formrow form.email %}
+                    </div>
+                    <div class="col-md-6">
+                        {% formrow form.privileges with label="Access Level <span class='glyphicon glyphicon-info-sign'></span>" tooltip="Remember this is where you decide what level of access you want each person to have. -- Super user: This level allows users to have full access to all aspects of the hub nodes and dashboards -- Admin: This level allows access to all aspects of the hub nodes but will not be able to alter the local mind dash board -- General: This level of access allow for access to all the hub nodes apart from financial and ability to alter the local mind hub -- Intern: Will not be able to access the following nodes; Design Your Support, Buddy Search, The Net Work, Financial and will also not be able to alter the Local Mind Hub" %}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        {% formrow form.job_title %}
+                    </div>
+                    <div class="col-md-6">
+                    </div>
+                </div>
+
+                {% if not forloop.last %}
+                <hr />
+                {% endif %}
+            {% endfor %}
+            </div>
+
+            {% include "forms/add_another_button.html" %}
 
             <div class="template">
             {% with form=formset.empty_form %}
-                {% formrow form.first_name %}
-                {% formrow form.last_name %}
-                {% formrow form.email %}
-                {% formrow form.privileges %}
-                {% formrow form.job_title %}
+                <hr />
+                <div class="row">
+                    <div class="col-md-6">
+                        {% formrow form.first_name %}
+                    </div>
+                    <div class="col-md-6">
+                        {% formrow form.last_name %}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        {% formrow form.email %}
+                    </div>
+                    <div class="col-md-6">
+                        {% formrow form.privileges %}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        {% formrow form.job_title %}
+                    </div>
+                    <div class="col-md-6">
+                    </div>
+                </div>
             {% endwith %}
             </div>
         </div>
         {% endwith %}
 
     {% endform %}
-
-    <input type="submit" name="submit" value="submit" />
 
 {% endblock %}

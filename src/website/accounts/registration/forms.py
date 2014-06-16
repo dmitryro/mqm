@@ -5,12 +5,13 @@ from django.utils.translation import ugettext_lazy as _
 from django_compositeform import CompositeModelForm, ForeignKeyFormField, FormSetField, InlineFormSetField
 
 import website.floppyforms_patch
-from floppyforms.__future__.models import ModelForm
+from floppyforms.__future__.models import ModelForm, formfield_callback
 import floppyforms.__future__ as forms
 
 from website.accounts.models import User, Experience
 from website.faq.models import Question
 from website.local_map.models import Map
+from website.local_minds.forms import PersonForm
 from website.local_minds.models import LocalMind, Ethnicity, Person
 from website.news.models import PositiveNews
 from website.resources.models import Resource
@@ -84,6 +85,8 @@ class InlineTaskFormSetField(InlineFormSetField):
 
 
 class BaseSignupProfileForm(CompositeModelForm):
+    formfield_callback = formfield_callback
+
     user_privileges = None
 
     error_messages = {
@@ -97,12 +100,14 @@ class BaseSignupProfileForm(CompositeModelForm):
         parent_model=User,
         model=Experience,
         form=ExperienceForm,
-        can_delete=False)
+        can_delete=False,
+        extra=4,
+        max_num=4)
     tasks = InlineTaskFormSetField(
         parent_model=User,
         model=Task,
         form=TaskForm,
-        fk_name='assigned_to',
+        fk_name='user',
         can_delete=False)
 
     class Meta:
@@ -115,7 +120,6 @@ class BaseSignupProfileForm(CompositeModelForm):
             'user_avatar',
             'biography',
             'telephone',
-            'mobile',
             'twitter',
         )
 
@@ -127,13 +131,26 @@ class BaseSignupProfileForm(CompositeModelForm):
                 self.error_messages['password_mismatch'])
         return password2
 
+    def clean_twitter(self):
+        value = self.cleaned_data['twitter']
+        if value:
+            value = value.lstrip('@')
+        return value
+
     def save(self, *args, **kwargs):
         self.instance.set_password(self.cleaned_data["password1"])
         self.instance.privileges = self.user_privileges
         return super(BaseSignupProfileForm, self).save(*args, **kwargs)
 
+    def save_formsets(self, *args, **kwargs):
+        for form in self.formsets['tasks'].forms:
+            form.instance.assigned_to = self.instance
+        return super(BaseSignupProfileForm, self).save_formsets(*args, **kwargs)
+
 
 class SignupProfileForm(BaseSignupProfileForm):
+    formfield_callback = formfield_callback
+
     user_privileges = User.SUPERUSER
 
     def save(self, email, local_mind, *args, **kwargs):
@@ -147,6 +164,8 @@ class SignupUserProfileForm(BaseSignupProfileForm):
     This profile form is used for single persons that only get to see this
     form, not the whole signup process.
     '''
+
+    formfield_callback = formfield_callback
 
     user_privileges = User.TRUSTEE
 
@@ -186,23 +205,12 @@ class QuestionForm(ModelForm):
         )
 
 
-class PersonForm(ModelForm):
-    class Meta:
-        model = Person
-        significant_fields = ('name',)
-        fields = (
-            'name',
-            'ethnicity',
-            'gender',
-            'email',
-            'telephone',
-        )
-
-
 class SignupLocalMindMembersForm(CompositeModelForm):
-    ceo_one = ForeignKeyFormField(PersonForm, kwargs={'empty_permitted': True})
-    ceo_two = ForeignKeyFormField(PersonForm, kwargs={'empty_permitted': True})
-    chair = ForeignKeyFormField(PersonForm, kwargs={'empty_permitted': True})
+    formfield_callback = formfield_callback
+
+    ceo_one = ForeignKeyFormField(PersonForm)
+    ceo_two = ForeignKeyFormField(PersonForm)
+    chair = ForeignKeyFormField(PersonForm)
 
 #    services = InlineFormSetField(
 #        parent_model=LocalMind,
@@ -227,13 +235,6 @@ class SignupLocalMindMembersForm(CompositeModelForm):
             'area_of_benefit',
             'average_volunteer_hours',
         )
-
-    def get_objects_from_formset(self, name):
-        formset = self.formsets[name]
-        return [
-            form.cleaned_data['ethnicity']
-            for form in formset.forms
-            if form.is_valid() and 'ethnicity' in form.cleaned_data]
 
     def save(self, local_mind, *args, **kwargs):
         # Hijack instance with new version.
@@ -279,9 +280,14 @@ class PositiveNewsForm(ModelForm):
             'date',
             'tags',
         )
+        widgets = {
+            'tags': forms.TextInput,
+        }
 
 
 class SignupPartnersForm(CompositeModelForm):
+    formfield_callback = formfield_callback
+
     resources = InlineFormSetField(
         parent_model=LocalMind,
         model=Resource,
@@ -311,8 +317,14 @@ class SignupPartnersForm(CompositeModelForm):
         for formset in self.formsets.values():
             formset.instance = local_mind
 
+        for form in self.formsets['resources'].forms:
+            form.instance.user = user
+
         for form in self.formsets['positive_news'].forms:
-            form.instance.author = user
+            form.instance.user = user
+
+        for form in self.formsets['key_partners'].forms:
+            form.instance.user = user
 
         return super(SignupPartnersForm, self).save(*args, **kwargs)
 

@@ -16,6 +16,7 @@ $icon-font-path: "../../libs/sass-bootstrap/fonts/";
 // MIND THEME
 @import "mind/fonts";                 // Avenir font declarations using fonts.com
 @import "mind/forms";                 // Boostrap 3.0 form override styles
+@import "mind/gridster";              // used for the dahsboard node management
 
 @import "mind/base";                  // general and base styles
 @import "mind/navigation";            // main top-bar navigation

@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 from django.conf import settings
 from django.conf.urls import include, patterns, url
+from django.views.generic import RedirectView
 from django.contrib import admin
+from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 
 admin.autodiscover()
@@ -10,7 +12,8 @@ urlpatterns = patterns('',
     url(r'^robots.txt$', 'django.shortcuts.render', {'template': 'robots.txt'},),
     url(r'^humans.txt$', 'django.shortcuts.render', {'template': 'humans.txt'},),
 
-    url(r'^$', 'website.views.index', name='index'),
+    #url(r'^$', 'website.views.index', name='index'),
+    url(r'^$', RedirectView.as_view(url='/login/')),
     url(r'^signup/profile/(?P<uidb36>[^-/]+)-(?P<token>[^/]+)/$', 'website.accounts.registration.views.signup_profile', name='signup-profile'),
     url(r'^signup/(?P<uidb36>[^-/]+)-(?P<token>[^/]+)/$', 'website.accounts.registration.views.signup_wizard', name='signup'),
     url(r'^signup/(?P<uidb36>[^-/]+)-(?P<token>[^/]+)/(?P<step>[^/]+)/$', 'website.accounts.registration.views.signup_wizard', name='signup'),
@@ -18,12 +21,18 @@ urlpatterns = patterns('',
 
     # PRODUCTION ready for Workshop 1 -- GREGOR TO COMPLETE THESE
     url(r'^my-dashboard/$', 'website.accounts.dashboard.views.dashboard', name='dashboard'),
+    url(r'^my-dashboard/local-mind/$', 'website.accounts.dashboard.views.local_mind_form', name='local-mind-form'),
+    url(r'^my-dashboard/profile/$', 'website.accounts.dashboard.views.profile_form', name='profile-form'),
     url(r'^my-local-area/$', 'website.local_map.views.map_list', name='local-area'),
-    #url(r'^positive-news/$', 'website.news.views.positive_news_list', name='positive-news'),
-    #url(r'^positive-news/(?P<slug>[^/]+)/$', 'website.news.views.positive_news_detail', name='positive-news'),
-    #url(r'^call-out/$', 'website.faq.views.questions_list', name='questions-answers'),
-    #url(r'^meet-the-team/$', 'django.shortcuts.render', {'template_name': 'dev/meet-the-team.html'}),
-    #url(r'^meet-the-team/(?P<slug>[^/]+)/$', 'django.shortcuts.render', {'template_name': 'dev/team.html'}),
+    url(r'^positive-news/$', 'website.news.views.positive_news_list', name='positive-news'),
+    url(r'^positive-news/(?P<slug>[^/]+)/$', 'website.news.views.positive_news_detail', name='positive-news'),
+    url(r'^call-out/$', 'website.faq.views.question_list', name='questions'),
+    url(r'^call-out/(?P<pk>\d+)/$', 'website.faq.views.question_detail', name='questions'),
+    url(r'^meet-the-team/$', 'django.shortcuts.render', {'template_name': 'dev/meet-the-team.html'}, name='team'),
+    url(r'^meet-the-team/(?P<slug>[^/]+)/$', 'django.shortcuts.render', {'template_name': 'dev/team.html'}, name='team'),
+    url(r'^meet-the-team/(?P<local_mind_slug>[^/]+)/(?P<slug>[^/]+)/$', 'django.shortcuts.render', {'template_name': 'dev/team.html'}, name='team'),
+    url(r'^todos/$', 'website.tasks.views.task_list', name='tasks'),
+    url(r'^the-net-works/$', 'django.shortcuts.render', {'template_name': 'dev/the-net-works.html'}, name='net-works'),
 
     url(r'^login/$', 'website.accounts.views.login_signup', name='login'),
     url(r'^login/signup/$', lambda r: HttpResponseRedirect(reverse('login') + '#signup'), name='signup'),

@@ -1,15 +1,25 @@
+import re
+
 import autofixture
 from django.core.urlresolvers import reverse
 from django.core import mail
 from django_webtest import WebTest
+
 from website.accounts.models import User, Experience, ReservedEmail
 from website.faq.models import Question
 from website.local_map.models import Map
-from website.local_minds.models import ReservedLocalMind, LocalMind, Ethnicity
+from website.local_minds.models import LocalMind, Ethnicity, Person
 from website.news.models import PositiveNews
 from website.resources.models import Resource
 from website.services.models import Service
 from website.tasks.models import Task
+
+
+class AuthViewTests(WebTest):
+    def test_login_signup_url(self):
+        response = self.app.get(reverse('signup'))
+        response = response.follow()
+        self.assertEqual(response.request.path, reverse('login'))
 
 
 class SignupTests(WebTest):
@@ -24,24 +34,31 @@ class SignupTests(WebTest):
         self.assertTrue(response.context['signup_form'].is_bound)
         self.assertTrue('email' in response.context['signup_form'].errors)
 
-        reserved_local_mind = ReservedLocalMind.objects.all()[0]
+        local_mind = LocalMind.objects.all()[0]
         reserved_email = ReservedEmail.objects.create(
             email='myemail@example.com',
-            local_mind=reserved_local_mind)
+            local_mind=local_mind)
 
         response.forms[1]['email'] = 'myemail@example.com'
         response = response.forms[1].submit('signup')
         self.assertEqual(response.status_code, 302)
 
         self.assertEqual(len(mail.outbox), 1)
+        email = mail.outbox[0]
+        self.assertTrue(email.subject)
 
     def test_signup_steps(self):
         white = Ethnicity.objects.get(name='White')
 
-        reserved_local_mind = ReservedLocalMind.objects.all()[0]
+        local_mind = LocalMind.objects.all()[0]
+        local_mind.ceo_two = Person.objects.create(name='CEO Name')
+        local_mind.save()
+
+        original_local_mind = local_mind
+
         reserved_email = ReservedEmail.objects.create(
             email='myemail@example.com',
-            local_mind=reserved_local_mind)
+            local_mind=local_mind)
 
         url = reserved_email.get_signup_url()
 
@@ -49,10 +66,12 @@ class SignupTests(WebTest):
         response = response.follow()
         self.assertEqual(response.status_code, 200)
 
+        self.assertTrue(re.match('^/signup/[^/]+/local-mind/$', response.request.path))
+
         # First step. Local Mind.
 
         # Check prefilled local mind name
-        self.assertEqual(response.form['local-mind-name'].value, reserved_local_mind.name)
+        self.assertEqual(response.form['local-mind-name'].value, local_mind.name)
 
         response.form['local-mind-name'] = 'My Local Mind'
         response.form['local-mind-hours'] = '11 am to 5pm'
@@ -87,8 +106,16 @@ class SignupTests(WebTest):
         self.assertFalse('password1' in response.context['form'].errors)
         self.assertTrue('password2' in response.context['form'].errors)
 
+        # First/Last name are required.
+        self.assertTrue('first_name' in response.context['form'].errors)
+        self.assertTrue('last_name' in response.context['form'].errors)
+
+        response.form['profile-first_name'] = 'Maxwell'
+        response.form['profile-last_name'] = 'McCog'
+
         response.form['profile-password1'] = 'TestPassword'
         response.form['profile-password2'] = 'TestPassword'
+
 
         response = response.form.submit()
         response = response.follow()
@@ -96,6 +123,7 @@ class SignupTests(WebTest):
         # Third step. Members.
 
         response.form['members-form-ceo_one-name'] = 'A big man'
+        self.assertEqual(response.form['members-form-ceo_two-name'].value, 'CEO Name')
 
         # Services are temporarily disabled.
 
@@ -148,20 +176,27 @@ class SignupTests(WebTest):
 
         local_mind = LocalMind.objects.get(name='My Local Mind')
 
-        self.assertEqual(local_mind.reserved_local_mind, reserved_local_mind)
-        self.assertEqual(local_mind.hours, '11 am to 5pm')
+        self.assertEqual(local_mind.pk, original_local_mind.pk)
 
-        self.assertEqual(local_mind.ceo_two, None)
-        self.assertEqual(local_mind.chair, None)
+        self.assertEqual(local_mind.hours, '11 am to 5pm')
 
         self.assertNotEqual(local_mind.ceo_one, None)
         self.assertEqual(local_mind.ceo_one.name, 'A big man')
+
+        self.assertNotEqual(local_mind.ceo_two, None)
+        self.assertEqual(local_mind.ceo_two.name, 'CEO Name')
+
+        self.assertEqual(local_mind.chair, None)
 
         # TODO: Test more local mind fields.
 
         user = User.objects.get(email=reserved_email.email)
         self.assertEqual(user.privileges, 'superuser')
         self.assertEqual(user.local_mind, local_mind)
+        self.assertEqual(user.first_name, 'Maxwell')
+        self.assertEqual(user.last_name, 'McCog')
+        self.assertTrue(user.check_password('TestPassword'))
+
         # TODO: Test more user fields.
 
         experiences = Experience.objects.all()
@@ -179,8 +214,8 @@ class SignupTests(WebTest):
         self.assertEqual(task1.text, 'Fst')
         self.assertEqual(task1.slug, 'fst')
         self.assertEqual(task1.local_mind, local_mind)
+        self.assertEqual(task1.user, user)
         self.assertEqual(task1.assigned_to, user)
-        self.assertEqual(task1.created_by, user)
         self.assertEqual(task1.due_date, None)
         self.assertEqual(task1.done, False)
         self.assertEqual(task1.done_date, None)
@@ -189,8 +224,8 @@ class SignupTests(WebTest):
         self.assertEqual(task2.text, 'Snd')
         self.assertEqual(task2.slug, 'snd')
         self.assertEqual(task2.local_mind, local_mind)
+        self.assertEqual(task2.user, user)
         self.assertEqual(task2.assigned_to, user)
-        self.assertEqual(task2.created_by, user)
         self.assertEqual(task2.due_date, None)
         self.assertEqual(task2.done, False)
         self.assertEqual(task2.done_date, None)
@@ -242,7 +277,7 @@ class SignupTests(WebTest):
 
         news = news[0]
         self.assertEqual(news.local_mind, local_mind)
-        self.assertEqual(news.author, user)
+        self.assertEqual(news.user, user)
         self.assertEqual(news.title, 'Good News: We had success')
         self.assertEqual(news.date, None)
         self.assertEqual(len(news.tags.all()), 2)
@@ -266,6 +301,7 @@ class SignupTests(WebTest):
         self.assertEqual(len(mail.outbox), 1)
         email = mail.outbox[0]
         self.assertEqual(email.to, [john.email])
+        self.assertTrue(email.subject)
 
     def test_profile_signup(self):
         local_mind = autofixture.create_one(LocalMind)
@@ -287,6 +323,11 @@ class SignupTests(WebTest):
 
         self.assertFalse('password1' in response.context['form'].errors)
         self.assertTrue('password2' in response.context['form'].errors)
+        self.assertTrue('first_name' in response.context['form'].errors)
+        self.assertTrue('last_name' in response.context['form'].errors)
+
+        response.form['first_name'] = 'Foo'
+        response.form['last_name'] = 'Bar'
 
         response.form['password1'] = 'TestPassword'
         response.form['password2'] = 'TestPassword'
@@ -300,5 +341,28 @@ class SignupTests(WebTest):
 
         user = User.objects.get(pk=user.pk)
 
+        self.assertEqual(user.first_name, 'Foo')
+        self.assertEqual(user.last_name, 'Bar')
         self.assertTrue(user.check_password('TestPassword'))
         self.assertTrue(user.date_joined is not None)
+
+    def test_local_mind_with_existing_user(self):
+        local_mind = LocalMind.objects.all()[0]
+        reserved_email = ReservedEmail.objects.create(
+            email='myemail@example.com',
+            local_mind=local_mind)
+
+        user = User.objects.create(
+            email='myemail@example.com',
+            local_mind=local_mind)
+
+        url = reserved_email.get_signup_url()
+
+        response = self.app.get(url, status=400)
+
+        # We won't get redirected. We get the message that we hit an invalid
+        # link.
+        self.assertEqual(response.status_code, 400)
+
+        # We should not be redirected to the signup process.
+        self.assertFalse(re.match('^/signup/[^/]+/.+/$', response.request.path))

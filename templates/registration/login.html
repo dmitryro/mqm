@@ -6,8 +6,7 @@
 
 
 {% block pagecontent %}
-<div id="logo-form"></div>
-<br>
+<div id="large-logos"></div>
 <p>Welcome to the Open Hub, a place for connecting, collaborating, learning and celebrating. Every year the Mind network delivers XXXX services to XXXXX people a year. That is an amazing amount of work with a huge amount of impact. The Open Hub is here to support and extend that.</p>
 
 <div class="center-block" style="width:100px; margin-bottom:20px">
@@ -16,7 +15,7 @@
 
 <!-- Tab panes -->
 <div class="tab-content">
-    <div class="tab-pane active" id="log-in">
+    <div class="tab-pane fade in active" id="log-in">
 
     <div class="login">
         {% form login_form using %}
@@ -25,16 +24,16 @@
         {% formconfig field with inline_label="Password" for form.password %}
 
         {% form login_form using "forms/form.html" with inline_label=1 %}
-
-        <p><a href="{% url "password-reset" %}">Password forgotten?</a></p>
-
+        <div class="text-center">
         {% include "forms/submit.html" with label="Login" name="login" only %}
+        </div>
+        <p class="text-center"><a href="{% url "password-reset" %}">Password forgotten?</a></p>
         </form>
         {% endform %}
     </div>
 
     </div>
-    <div class="tab-pane" id="sign-up">
+    <div class="tab-pane fade" id="sign-up">
     <div class="signup">
         {% form signup_form using %}
         {% formconfig row using "forms/row.html" %}

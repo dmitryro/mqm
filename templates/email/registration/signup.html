@@ -2,12 +2,13 @@
 {% load email %}
 
 
-{% subject %}Thank you for signing up!{% endsubject %}
+{% block subject %}Open Hub signup confirmation{% endblock %}
 
 
 {% block body %}
-Hi, thank you for signing up. Please visit the following link to signup with us:
+Hello,
 
+Thank you for signing up as a user on the Open Hub. Please visit the following link to signup with us:
 {{ signup_link }}
 {% endblock %}
 

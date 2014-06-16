@@ -1,10 +1,6 @@
 {% extends "base.html" %}
-{% load djangular_tags webdesign %}
-
-{% block extra_css %}
-{{ block.super }}
-<link rel="stylesheet" href="{{ STATIC_URL }}dist/styles/gridster.css" />
-{% endblock %}
+{% load djangular_tags thumbnail %}
+{% load url from future %}
 
 {% block extra_js %}
 {{ block.super }}
@@ -57,8 +53,53 @@
 
         <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
             <div class="widget-bar">
-                <div class="widget-title">MEET THE TEAM</div>
+                <div class="widget-title"><a href="/meet-the-team">MEET THE TEAM</a></div>
             </div>
+
+            <ul class="media-list">
+                {% for user in local_mind_users %}
+                <a href="{{ user.get_absolute_url }}">
+                    <li class="media">
+                        {% if user.user_avatar %}
+                        <div class="pull-left">
+                            <img class="media-object" class="img-circle" src="{% thumbnail user.user_avatar 40x40 crop %}">
+                        </div>
+                        {% endif %}
+                        <div class="media-body">
+                            <b>{{ user.get_full_name }}</b>
+                            {% if user.job_title %}
+                            <br>
+                            <small>{{ user.job_title }}</small>
+                            {% endif %}
+                            <i class="glyphicon glyphicon-play-circle"></i>
+
+                        </div>
+                    </li>
+                </a>
+                {% endfor %}
+            </ul>
+
+            <!-- for loop of [user_avatar, full-name, job_title ] + link to /meet-the-team/[local_mind_name]/{id or name}-->
+            {% comment %}
+            {% for user in local_mind_users %}
+
+                {% if user.user_avatar %}
+                    <img src="{% thumbnail user.user_avatar 40x40 crop %}" alt="" class="img-circle">
+                    <br>
+                {% endif %}
+
+                {{ user.get_full_name }}
+                <br>
+
+                {% if user.job_title %}
+                    {{ user.job_title }}
+                    <br>
+                {% endif %}
+
+                <a href="{{ user.get_absolute_url }}">Link to {{ user }}</a>
+
+            {% endfor %}
+            {% endcomment %}
         </li>
 
     </div>
@@ -71,22 +112,39 @@
                     </div>
                     <ul class='list-group'>
                         <a class='li list-group-item' href='#'>
-                            <span class='badge'>14</span>Questions for you
+                            <span class='badge'><!-- number of total questions for you --> {{ my_questions.count }}</span>Your Questions
                         </a>
                     </ul>
-                    <div class='list-group'>
-                    </div>
+                    <ul class='list-group'>
+                    {% for question in questions %}
+                    <li class="list-group-item">
+                        <span class="glyphicon glyphicon-question-sign"></span>
+                        {{ question.question }}
+                    </li>
+                    {% endfor %}
+                     {% comment %}
+                        <!-- for loop of all [question] in your local mind + link to questions detail page (/d/call-out/) -->
+                        {% for question in questions %}
+                            {{ question.question }}
+                            <a href="{{ question.get_absolute_url }}">Link</a>
+                            <br>
+                        {% endfor %}
+                        <!-- add a class if the questions is one that you have posted -->
+                         {% endcomment %}
+                    </ul>
                 </li>
     </div>
 
     <div class="hidden todo">
     <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
                     <div class="widget-bar">
-                        <div class="widget-title"> <span class="badge">14</span> TO-DO LIST</div>
+                        <div class="widget-title"> <span class="badge"><!-- total to-do assigned to you -->{{ my_tasks.count }}</span> <a href="{% url "tasks" %}">TO-DO LIST</a></div>
                         {% include "includes/widget-settings.html" with type="Todo" %}
                     </div>
                     <ul class="list-group">
+                    {% comment %}
                       <li class="list-group-item">
+                          {% comment %}
                           <div class="dropdown pull-right">
                           <a data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-chevron-down small showOnHover"></span></a>
                           <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
@@ -95,18 +153,33 @@
                             <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><span class="glyphicon glyphicon-trash"></span> Delete</a></li>
                           </ul>
                         </div>
+    
                       Confirm all contact details for key staff are correct<small class="text-muted"><br>Due 12th April 2014</small>
 
                       </li>
-                      <li class="list-group-item">Confirm all contact details for key staff are correctConfirm all contact details for key staff are correctConfirm all contact details for key staff are correctConfirm all contact details for key staff are correct</li>
-                      <li class="list-group-item">Morbi leo risus</li>
-                      <li class="list-group-item">Porta ac consectetur ac</li>
-                      <li class="list-group-item">Vestibulum at eros</li>
+                      {% endcomment %}
+                      <!-- for loop of [totos]  --> <!-- ordering: your to-do's first with Hight Priority, then by Due date, then all other to-dos added to your Local mind -->
+
+                      {% for task in my_tasks %}
+                        <li class="list-group-item">
+                            {% if task.done %}
+                            <span class="glyphicon glyphicon-ok-sign text-success pull-right"></span>
+                            {% else %} 
+                            <span class="glyphicon glyphicon-record pull-right"></span>
+                            {% endif %}
+                            <span class="glyphicon glyphicon-asterisk"></span> {{ task.text }}
+                            {% if task.due_date %}
+                            <small class="text-muted"><br>Due {{ task.due_date|date }}</small>
+                            {% endif %}
+                        </li>
+                      {% endfor %}
                     </ul>
                 </li>
 
         </div>
 
+
+    {% comment %}
     <div class="areasofgrowth hidden">
         <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
             <div class="widget-bar">
@@ -133,7 +206,7 @@
                         </div>
                         {% include "includes/widget-settings.html" %}
                     </div>
-                    <img style="margin:25px 0 0 27px;" src="../Assets/images/nodes/graph_services.png" alt="graph_services" width="233" height="192">
+                    <img style="margin:25px 0 0 27px;" src="" alt="graph_services" width="233" height="192">
                 </li>
     </div>
 
@@ -229,6 +302,19 @@
             </div>
         </li>
     </div>
+    {% endcomment %}
+
+        <div class="theNetWorks hidden">
+      <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
+        <div class="widget-bar">
+            <div class="widget-title"><a href="{% url "net-works" %}">THE NET WORKS</a></div>
+          {% include "includes/widget-settings.html" %}
+        </div>
+         <!-- this will be a map -->
+         <div id="map-canvas-network-map"></div>
+      </li>
+    </div>
+
 
     <div class="theLabNews hidden">
         <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
@@ -236,10 +322,12 @@
                         <div class="widget-title">THE LAB NEWS</div>
                     </div>
                     <ul class="list-group" id="feedResults">
+                        <!-- feed, if times are good we'll do this -->
                     </ul>
                 </li>
     </div>
 
+    {% comment %}
     <div class="eventsdiary hidden">
         <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
             <div class="widget-bar">
@@ -352,22 +440,37 @@
                         </div>
                         {% include "includes/widget-settings.html" %}
                     </div>
-                    <img style="margin:25px 0 0 27px;" src="../Assets/images/nodes/graph_finance.png" alt="graph_finance" width="233" height="192">
+                    <img style="margin:25px 0 0 27px;" src="" alt="graph_finance" width="233" height="192">
                 </li>
 
     </div>
+    {% endcomment %}
 
     <div class="myLocalArea hidden">
     <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
                     <div class="widget-bar">
-                        <div class="widget-title">MY LOCAL AREA</div>
+                        <div class="widget-title"><a href="/my-local-area">MY LOCAL AREA</a></div>
                         {% include "includes/widget-settings.html" %}
                     </div>
-                    <img src="../Assets/images/nodes/map.jpg" alt="graph_finance" width="293" height="224">
+
+                    <!-- for loop of on line #486 (search for '//map markers' in this template) [ long, lat, title ] -->
+                    <div id="map-canvas-local-area"></div>
+                    {% comment %}
+                    {% for map in map_list %}
+                        Latitude: {{ map.latitude }} <br>
+                        Longitude: {{ map.longitude }} <br>
+                        Name: {{ map.name }} <br>
+
+                        {% if map.marker %}
+                        Marker: {{ map.marker.icon.url }}
+                        {% endif %}
+                    {% endfor %}
+                    {% endcomment %}
                 </li>
     </div>
 
 
+    {% comment %}
     <div class="hidden videoStream">
         <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
                     <div class="widget-bar">
@@ -389,18 +492,28 @@
                 </li>
 
     </div>
+    {% endcomment %}
 
+    
     <div class="positiveNews hidden">
         <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
                     <div class="widget-bar">
-                        <div class="widget-title">THE LAB NEWS</div>
+                        <div class="widget-title">POSITIVE NEWS</div>
                         {% include "includes/widget-settings.html" with type="News" %}
                     </div>
+                    {% for news in positivenews_list %}
                     <div class='list-group'>
+                        <a href="{{ news.get_absolute_url }}">{{ news.title }}</a>
+                        <p class="small">
+                            {% if news.date %}{{ news.date|date }} - {% endif %}
+                            posted by {{ news.user }} - {{ news.local_mind }}</p>
+                        {{ news.description|truncatechars:20 }}
+                        <!-- feed for positive news -->
                     </div>
+                    {% endfor %}
                 </li>
     </div>
-
+    {% comment %}
     <div class="collectiveimpact hidden">
         <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
             <div class="widget-bar">
@@ -408,100 +521,149 @@
             </div>
         </li>
     </div>
+    {% endcomment %}
 
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcyMGZWQcL-rxiSVvknJuk0AkSSkxEy-o"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_MAPS_API_KEY }}"></script>
 <script type="text/javascript" src="{{ STATIC_URL }}/js/markerclusterer.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
 <script type="text/javascript">
+  function initializeLocalMap() {
 
-//global variables
-var markers = Array();
-var infoBoxes = Array();
-var map;
-var mc; //marker cluster var
-
-function initializeFundingMap() {
+    var markers = Array();
+    var infoBoxes = Array();
+    var map;
+    var mc; //marker cluster var
 
         var styles = [
-  {
-    featureType: "all",
-    stylers: [
-      { saturation: -75 },
-       { hue: "#174787" },
-    ]
-  }
-];
+        {
+            "stylers": [
+            { "hue": "#174787" },
+            { "saturation": -75 }
+            ]
+        },{
+            "featureType": "road.highway",
+            "elementType": "labels.icon",
+            "stylers": [
+            { "visibility": "off" }
+            ]
+        }
+        ]
 
-        var mapOptions = {
+
+        mapOptions = {
           center: new google.maps.LatLng(51.5072, 0.1275),
           zoom: 8,
           styles: styles,
           disableDoubleClickZoom: true,
-          draggable: false,
-          scrollwheel: false,
-          panControl: false,
-          controls:false,
-          mapTypeControl:false,
-          scaleControl:false,
-          streetViewControl:false,
-          overviewMapControl:false,
-          rotateControl:false
+            draggable: false,
+            scrollwheel: false,
+            panControl: false,
+            controls:false,
+            mapTypeControl:false,
+            scaleControl:false,
+            streetViewControl:false,
+            overviewMapControl:false,
+            rotateControl:false
+      };
+      map = new google.maps.Map(document.getElementById("map-canvas-local-area"),
+        mapOptions);
 
-        };
-        map = new google.maps.Map(document.getElementById("map-canvas1"),mapOptions);
+      mc = new MarkerClusterer(map, markers);
 
-    mc = new MarkerClusterer(map, markers);
+//loop markers for local map
 
 
-//put the markers on the map
-//window.setTimeout(function(){
-  //for(i = 0; i < markers.length; i++) {
-    //markers[i].setMap(map);
-  //}
-//},100);
+    {% for map in map_list %}
+    markers.push(new google.maps.Marker({
+        position: new google.maps.LatLng({{ map.latitude }}, {{ map.longitude }}),
+        icon: '{{ map.marker.icon.url }}',
+        title:"{{ map.name }}"
+    }));
+    {% endfor %}
 
-//information boxes content, the indexes are the same as the marker
-infoBoxes.push(new google.maps.InfoWindow({
-      content: "Some HTML"
-}));
 
-function markerEventListenerDelegate(marker,infobox) {
-  return google.maps.event.addListener(marker, 'click', function() {
-    for(i = 0; i < infoBoxes.length; i++) {
-      infoBoxes[i].close();
+      for(i = 0; i < markers.length; i++) {
+     mc.addMarker(markers[i]);
     }
-      infobox.open(map,marker);
-    });
+
 }
 
-
-//map markers
-markers.push(new google.maps.Marker({
-    position: new google.maps.LatLng(51.5072, 0.1275),
-    title:"Local Mind - N/A",
-}));
-
-
-
-////
-
-for(i = 0; i < markers.length; i++) {
-  //markers[i].setMap(map);
-  mc.addMarker(markers[i]);
-  markerEventListenerDelegate(markers[i], infoBoxes[i]);
-}
-
-
-} //end of init function
-
-google.maps.event.addDomListener(window, 'load', initializeFundingMap);
-
-
-
+google.maps.event.addDomListener(window, 'load', initializeLocalMap);
 </script>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script type="text/javascript">
 
+<script type="text/javascript">
+  function initializeNetworkMap() {
+
+    var markers = Array();
+    var infoBoxes = Array();
+    var map;
+    var mc; //marker cluster var
+
+        var styles = [
+        {
+            "stylers": [
+            { "hue": "#174787" },
+            { "saturation": -75 }
+            ]
+        },{
+            "featureType": "road.highway",
+            "elementType": "labels.icon",
+            "stylers": [
+            { "visibility": "off" }
+            ]
+        }
+        ]
+
+
+        mapOptions = {
+          center: new google.maps.LatLng(51.5072, 0.1275),
+          zoom: 8,
+          styles: styles,
+          disableDoubleClickZoom: true,
+            draggable: false,
+            scrollwheel: false,
+            panControl: false,
+            controls:false,
+            mapTypeControl:false,
+            scaleControl:false,
+            streetViewControl:false,
+            overviewMapControl:false,
+            rotateControl:false
+      };
+      map = new google.maps.Map(document.getElementById("map-canvas-network-map"),
+        mapOptions);
+
+      mc = new MarkerClusterer(map, markers);
+
+     /* You will need to bind the data for the resources section here */
+
+    {% for map in net_works %}
+    markers.push(new google.maps.Marker({
+        position: new google.maps.LatLng({{ map.latitude }}, {{ map.longitude }}),
+        icon: '',
+        title: "{{ map.name }}"
+    }));
+    {% endfor %}
+
+    /*  *  */
+
+
+
+      for(i = 0; i < markers.length; i++) {
+     mc.addMarker(markers[i]);
+    }
+
+}
+
+google.maps.event.addDomListener(window, 'load', initializeNetworkMap);
+</script>
+
+
+
+<script type="text/javascript">
 $(document).ready(function(){
+    /* FEED WILL EVENTUALLY GO HERE, SILENCING ERR
   $.ajax({
             type: 'GET',
             url: 'http://www.thementalelf.net/feed/',
@@ -515,7 +677,7 @@ $(document).ready(function(){
                     $('#feedResults').append('<a href="'+linkUrl+'" class="list-group-item">'+title+'</li></a>');
                 });
             }
-        });
+        });*/
 });
 
 </script>

@@ -1,7 +1,10 @@
 /.env/
 /.dump.json
 /logs
-/media/
+/media/_autofixture/
+/media/mediastore/
+/media/users/
+/media/signup/
 /node_modules/
 /static/dist/
 /static/libs/
@@ -10,8 +13,4 @@
 .DS_Store
 *.pyc
 db.sqlite
-<<<<<<< HEAD
 /src/website/local_settings.py
-=======
-/src/website/local_settings.py
->>>>>>> 0ae64ce2ad68dc4ea8017b3b45d49afd25eb6649

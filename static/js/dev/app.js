@@ -46,7 +46,10 @@ $(document).ready(function() {
 */
 
 	var serialization = [
-	{"col":1,"row":1,"size_x":1,"size_y":1, "name":"callout"}
+	{"col":1,"row":1,"size_x":1,"size_y":1, "name":"callout"},
+	{"col":2,"row":1,"size_x":1,"size_y":1, "name":"meettheteam"},
+	{"col":3,"row":1,"size_x":1,"size_y":1, "name":"todo"},
+	{"col":4,"row":1,"size_x":1,"size_y":1, "name":"myLocalArea"}
 	];
 	
 
@@ -206,7 +209,7 @@ $(document).ready(function() {
 	}
 
 	// DROP DOWNS 
-
+	/*
 	$('.drop').bind('click',function() {
 		if ($(this).hasClass('dropped')) {
 			$(this).parent().find('ul').css('display','none');
@@ -216,6 +219,7 @@ $(document).ready(function() {
 			$(this).addClass('dropped');
 		}
 	});
+	*/
 
 	//COLAPSE SIDEBAR DESCRIPTION
 
@@ -280,7 +284,10 @@ $(document).ready(function() {
 	    	var widgetName = $(this).parent().attr('data-widg');
 	    	gridster.add_widget( $('.'+widgetName).html(), 1, 1, 1, 1 );
 	    	if(widgetName == "fundingmap") {initializeFundingMap();}
+	    	if(widgetName == "myLocalArea") {initializeLocalMap();}
+	    	if(widgetName == "theNetWorks") {initializeNetworkMap();}
 	    	
+	    	/*
 	    	$('.drop').unbind('click');
 	    	$('.drop').bind('click',function() {
 				if ($(this).hasClass('dropped')) {
@@ -291,6 +298,7 @@ $(document).ready(function() {
 					$(this).addClass('dropped');
 				}
 			});
+			*/
 			$('.delete-node').bind('click');
 			$('.delete-node').bind('click', function() {
 		    	var widgetName = $(this).parent().parent().parent();

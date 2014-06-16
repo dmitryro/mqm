@@ -31,19 +31,17 @@ class User(AbstractBaseUser, PermissionsMixin):
     slug = AutoSlugField(unique=True, populate_from=('first_name', 'last_name'))
     local_mind = models.ForeignKey('local_minds.LocalMind', null=True, blank=True, related_name='users')
 
-    first_name = models.CharField(_('first name'), max_length=30, blank=True)
-    last_name = models.CharField(_('last name'), max_length=30, blank=True)
+    first_name = models.CharField(_('first name'), max_length=30)
+    last_name = models.CharField(_('last name'), max_length=30)
     email = EmailField(_('Email'), unique=True)
     job_title = models.CharField(_('Job Title'), max_length=50, blank=True)
-    user_avatar = models.ImageField(upload_to='users/avatars/', null=True, blank=True)
+    user_avatar = models.ImageField(_('Profile Image'), upload_to='users/avatars/', null=True, blank=True, help_text=_('Maximum size of 500kb. Only JPG, PNG accepted'))
 
     telephone = models.CharField(_('Contact Number'), max_length=50, blank=True)
-    #remove 'mobile'
-    mobile = models.CharField(_('Mobile'), max_length=50, blank=True)
     twitter = models.CharField(_('Twitter'), max_length=15, blank=True)
 
-    biography = models.TextField(_('Biography'), blank=True)
-    skills = models.TextField(_('Your Skills'), blank=True)
+    biography = models.TextField(_('Biography'), max_length=350, blank=True, help_text=_('limited to 350 characters'))
+    skills = models.TextField(_('Your Skills'), blank=True, help_text=_('comma seperated'))
 
     is_staff = models.BooleanField(_('staff status'), default=False,
         help_text=_('Designates whether the user can log into this admin '
@@ -63,6 +61,17 @@ class User(AbstractBaseUser, PermissionsMixin):
     class Meta:
         verbose_name = _('user')
         verbose_name_plural = _('users')
+
+    def __unicode__(self):
+        return unicode(self.get_full_name())
+
+    @models.permalink
+    def get_absolute_url(self):
+        if self.local_mind:
+            return 'team', (), {
+                'local_mind_slug': self.local_mind.slug,
+                'slug': self.slug,
+            }
 
     def get_full_name(self):
         """
@@ -131,7 +140,7 @@ class ReservedEmail(models.Model):
     '''
 
     email = EmailField(unique=True)
-    local_mind = models.OneToOneField('local_minds.ReservedLocalMind', null=True, blank=True)
+    local_mind = models.OneToOneField('local_minds.LocalMind')
 
     class Meta:
         verbose_name = _('Reserved Email')

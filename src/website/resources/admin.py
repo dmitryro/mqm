@@ -4,7 +4,7 @@ from .models import Resource
 
 
 class ResourceAdmin(admin.ModelAdmin):
-    list_display = ('name', 'slug', 'local_mind', 'privacy',)
+    list_display = ('name', 'slug', 'local_mind', 'user', 'privacy',)
     list_filter = ('privacy',)
 
 

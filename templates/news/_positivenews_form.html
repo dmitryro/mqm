@@ -1,0 +1,20 @@
+{% extends "forms/_base_modal.html" %}
+{% load floppyforms %}
+
+
+{% block headline %}
+<div class="modal-icon" id="icon_newspaper"></div><h2>ADD POSITIVE NEWS</h2>
+{% endblock %}
+
+
+{% block fields %}
+    {% form form using %}
+        {% formconfig row using "forms/signup_row.html" %}
+
+        {% formrow form.title %}
+        {% formrow form.date %}
+        {% formrow form.description %}
+        {% formrow form.source %}
+        {% formrow form.privacy %}
+    {% endform %}
+{% endblock %}

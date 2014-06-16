@@ -5,46 +5,158 @@
 {% block section %}
 
     {% form form using %}
+        {% formconfig row using "forms/signup_row.html" %}
 
-        {% formrow form.staff_count %}
-        {% formrow form.trustees_count %}
-        {% formrow form.volunteers_count %}
-        {% formrow form.trustees_active %}
-        {% formrow form.area_of_benefit %}
-        {% formrow form.average_volunteer_hours %}
+        <div class="row">
+            <div class="col-md-6">
+              <div class="col-sm-3"></div>
+              <div class="col-sm-9">
+                <h4>LM FURTHER DETAILS</h4>
+              </div>
+            </div>
+        </div>
 
-        <h3>Chairman</h3>
-        {% formrow form.forms.chair.name %}
-        {% formrow form.forms.chair.ethnicity %}
-        {% formrow form.forms.chair.gender %}
-        {% formrow form.forms.chair.email %}
-        {% formrow form.forms.chair.telephone %}
+        {# CEO 1 #}
+        <div class="row">
+            <div class="col-md-6">
+                {% formrow form.forms.ceo_one.name with label="CEO One Name" %}
+            </div>
+            <div class="col-md-6">
+                {% formrow form.forms.ceo_one.ethnicity with label="CEO One Ethnicity" %}
+            </div>
+        </div>
 
-        <h3>Ceo One</h3>
-        {% formrow form.forms.ceo_one.name %}
-        {% formrow form.forms.ceo_one.ethnicity %}
-        {% formrow form.forms.ceo_one.gender %}
-        {% formrow form.forms.ceo_one.email %}
-        {% formrow form.forms.ceo_one.telephone %}
+        <div class="row">
+            <div class="col-md-6">
+                {% formrow form.forms.ceo_one.gender with label="CEO One Gender" %}
+            </div>
+            <div class="col-md-6">
+                {% formrow form.forms.ceo_one.email with label="CEO One Email" %}
+            </div>
+        </div>
 
-        <h3>Ceo Two</h3>
-        {% formrow form.forms.ceo_two.name %}
-        {% formrow form.forms.ceo_two.ethnicity %}
-        {% formrow form.forms.ceo_two.gender %}
-        {% formrow form.forms.ceo_two.email %}
-        {% formrow form.forms.ceo_two.telephone %}
+        <div class="row">
+            <div class="col-md-6">
+                {% formrow form.forms.ceo_one.telephone with label="CEO One Contact Number" %}
+            </div>
+            <div class="col-md-6">
+            </div>
+        </div>
+
+        {# CEO 2 #}
+        <div class="row">
+            <div class="col-md-6">
+                {% formrow form.forms.ceo_two.name with label="CEO Two Name" %}
+            </div>
+            <div class="col-md-6">
+                {% formrow form.forms.ceo_two.ethnicity with label="CEO Two Ethnicity" %}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                {% formrow form.forms.ceo_two.gender with label="CEO Two Gender" %}
+            </div>
+            <div class="col-md-6">
+                {% formrow form.forms.ceo_two.email with label="CEO Two Email" %}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                {% formrow form.forms.ceo_two.telephone with label="CEO Two Contact Number" %}
+            </div>
+            <div class="col-md-6">
+            </div>
+        </div>
+
+        {# Other #}
+        <div class="row">
+            <div class="col-md-6">
+                {% formrow form.staff_count %}
+            </div>
+            <div class="col-md-6">
+                {% formrow form.trustees_count %}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                {% formrow form.volunteers_count %}
+            </div>
+            <div class="col-md-6">
+                {% formrow form.trustees_active %}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                {% formrow form.area_of_benefit %}
+            </div>
+            <div class="col-md-6">
+                {% formrow form.average_volunteer_hours %}
+            </div>
+        </div>
+
+        {# Chair #}
+        <div class="row">
+            <div class="col-md-6">
+                {% formrow form.forms.chair.name with label="Chair Name" %}
+            </div>
+            <div class="col-md-6">
+                {% formrow form.forms.chair.ethnicity with label="Chair Ethnicity" %}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                {% formrow form.forms.chair.gender with label="Chair Gender" %}
+            </div>
+            <div class="col-md-6">
+                {% formrow form.forms.chair.email with label="Chair Email" %}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                {% formrow form.forms.chair.telephone with label="Chair Contact Number" %}
+            </div>
+            <div class="col-md-6">
+            </div>
+        </div>
+
 
         {% comment %}
-        <h3>Service informations</h3>
-        <p class="help">Please submit any task below - they will automatically be assigned to you</p>
+        <div class="row">
+            <div class="col-md-6">
+              <div class="col-sm-3"></div>
+              <div class="col-sm-9">
+                <h4>SERVICE INFORMATIONS</h4>
+                <small>Please submit any task below, they will automatically assigned to you</small>
+              </div>
+            </div>
+        </div>
 
         {% with formset=form.formsets.services %}
         <div data-formset-prefix="{{ formset.prefix }}">
             {{ formset.management_form }}
             {% for form in formset %}
-                {% formrow form.name %}
-                {% formrow form.type %}
-                {% formrow form.users_count %}
+                <div class="row">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-3">
+                        {% formrow form.type %}
+                    </div>
+
+                    <div class="col-md-1"></div>
+                    <div class="col-md-3">
+                        {% formrow form.name %}
+                    </div>
+
+                    <div class="col-md-1"></div>
+                    <div class="col-md-3">
+                        {% formrow form.users_count %}
+                    </div>
+                </div>
             {% endfor %}
 
             <a class="add-another">Add another</a>
@@ -60,32 +172,61 @@
         {% endwith %}
         {% endcomment %}
 
-        <h3>Questions &amp; Answers</h3>
-        <p class="help">Post any questions the network can help answer</p>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="col-sm-3"></div>
+                <div class="col-sm-9">
+                    <h4>QUESTIONS &amp; ANSWERS <span class="glyphicon glyphicon-info-sign titlePopOver" data-container="body" data-toggle="popover" data-placement="top" data-content="Do you have a question that you'd like to ask the whole Local Mind network?. Write a question here and the whole network will see it through the Call Out node on the Open Hub. Just think, that's about 3,000 different brains that you have access to!"></span></h4>
+                    <small>Post any questions the network can help answer</small>
+                </div>
+            </div>
+        </div>
 
         {% with formset=form.formsets.faqs %}
         <div data-formset-prefix="{{ formset.prefix }}">
             {{ formset.management_form }}
             {% for form in formset %}
-                {% formrow form.question %}
-                {% formrow form.notifications %}
-                {% formrow form.privacy %}
+                <div class="row">
+                    <div class="col-md-6">
+                        {% formrow form.question %}
+                    </div>
+                    <div class="col-md-6">
+                        {% formrow form.privacy %}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        {% formrow form.notifications using "forms/checkbox_row.html" %}
+                    </div>
+                    <div class="col-md-6">
+                    </div>
+                </div>
             {% endfor %}
 
-            <a class="add-another">Add another</a>
+            <button type="button" class="btn btn-default add-another">Add another</a>
 
             <div class="template">
             {% with form=formset.empty_form %}
-                {% formrow form.question %}
-                {% formrow form.notifications %}
-                {% formrow form.privacy %}
+                <div class="row">
+                    <div class="col-md-6">
+                        {% formrow form.question %}
+                    </div>
+                    <div class="col-md-6">
+                        {% formrow form.privacy %}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        {% formrow form.notifications using "forms/checkbox_row.html" %}
+                    </div>
+                    <div class="col-md-6">
+                    </div>
+                </div>
             {% endwith %}
             </div>
         </div>
         {% endwith %}
 
     {% endform %}
-
-    <input type="submit" name="submit" value="submit" />
 
 {% endblock %}

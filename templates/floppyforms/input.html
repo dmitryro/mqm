@@ -1,4 +1,4 @@
-<input class="{% if type != "checkbox" %}form-control{% endif %}" {% if inline_label %} placeholder="{{ inline_label }}"{% endif %} type="{{ type }}" name="{{ name }}"{% if value %} value="{{ value }}"{% endif %}{% if required %} required{% endif %}{% include "floppyforms/attrs.html" %}{% if datalist %} list="{{ attrs.id }}_list"{% endif %}>{% if datalist %}
+<input class="{% if type != "checkbox" %}form-control{% endif %}" {% if inline_label %} placeholder="{{ inline_label }}"{% endif %} type="{{ type }}" name="{{ name }}"{% if value %} value="{{ value }}"{% endif %}{% if required %} required{% endif %}{% include "floppyforms/attrs.html" %}{% if placeholder %} placeholder="{{ placeholder }}"{% endif %}{% if datalist %} list="{{ attrs.id }}_list"{% endif %}>{% if datalist %}
 <datalist id="{{ attrs.id }}_list">{% for item in datalist %}
 <option value="{{ item }}">{% endfor %}
 </datalist>{% endif %}

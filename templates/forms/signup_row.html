@@ -2,16 +2,25 @@
     {% for field in fields %}
         <div class="form-group{% if field.errors %} has-error has-feedback{% endif %}">
             {% with classes=field.css_classes label=label|default:field.label help_text=help_text|default:field.help_text %}
-            {% block label %}{% if field|id %}<label class="col-sm-3 control-label{% if inline_label %} sr-only{% endif %}" for="{{ field|id }}">{% endif %}{{ label }}{% if field.field.required %} <span class="required">*</span>{% endif %}{% if field|id %}</label>{% endif %}{% endblock %}
+            {% block label %}
+                <label class="col-sm-3 control-label{% if inline_label %} sr-only{% endif %}"{% if field|id %} for="{{ field|id }}"{% endif %}{% if tooltip %} data-container="body" data-toggle="popover" data-placement="top" data-content="{{ tooltip }}"{% endif %}>
+                    {{ label }}
+                    {% comment %}
+                    {% if field.field.required %} <span class="required">*</span>{% endif %}
+                    {% endcomment %}
+                    {% block help_text %}
+                        {% if field.help_text and not hide_help_text %}
+                            <p class="help-block">{{ field.help_text }}</p>
+                        {% endif %}
+                    {% endblock %}
+                </label>
+            {% endblock %}
 
             {% block field %}
             <div class="col-sm-9">
                 {% block pre_widget %}{% endblock %}
 
                 {% block widget %}{% formfield field %}{% endblock %}
-                {% block help_text %}{% if field.help_text %}
-                    <p class="help-block">{{ field.help_text }}</p>
-                {% endif %}{% endblock %}
                 {% block errors %}{% include "floppyforms/errors.html" with errors=field.errors %}{% endblock %}
                 {% block hidden_fields %}{% for field in hidden_fields %}{{ field.as_hidden }}{% endfor %}{% endblock %}
 

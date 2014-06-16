@@ -3,9 +3,10 @@ from django.utils.translation import ugettext_lazy as _
 
 
 PRIVACY_CHOICES = (
-    ('local', _('Local')),
     ('national', _('National')),
     ('private', _('Private')),
+    ('local', _('Local')),
+    ('regional', _('Regional')),
 )
 
 

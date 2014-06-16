@@ -2,19 +2,10 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django_extensions.db.fields import AutoSlugField, CreationDateTimeField, ModificationDateTimeField
 
-
-class ReservedLocalMind(models.Model):
-    name = models.CharField(_('Local Mind'), max_length=120)
-
-    class Meta:
-        verbose_name = _('Reserved Local Mind')
-        verbose_name_plural = _('Reserved Local Minds')
-
-    def __unicode__(self):
-        return self.name
+from website.utils.models import PostcodeLocationMixin
 
 
-class LocalMind(models.Model):
+class LocalMind(PostcodeLocationMixin, models.Model):
     CHARITY_TYPE_CHOICES = (
         ('unincorporated', _('Unincorporated'),),
         ('company-limited-by-guarantee', _('Company Limited by Guarantee'),),
@@ -34,7 +25,19 @@ class LocalMind(models.Model):
         ('yorkshire-and-the-humber', _('Yorkshire and The Humber')),
     )
 
-    reserved_local_mind = models.OneToOneField('ReservedLocalMind', null=True, blank=True)
+    TRUSTEES_ACTIVE_CHOICES = (
+        ('0-10', _('0 - 10%')),
+        ('11-20', _('11 - 20%')),
+        ('21-30', _('21 - 30%')),
+        ('31-40', _('31 - 40%')),
+        ('41-50', _('41 - 50%')),
+        ('51-60', _('51 - 60%')),
+        ('61-70', _('61 - 70%')),
+        ('71-80', _('71 - 80%')),
+        ('81-90', _('81 - 90%')),
+        ('91-100', _('91 - 100%')),
+    )
+
     name = models.CharField(_('Local Mind'), max_length=120)
     slug = AutoSlugField(populate_from=('name',))
 
@@ -62,9 +65,9 @@ class LocalMind(models.Model):
     staff_count = models.PositiveIntegerField(_('No Of Staff'), null=True, blank=True)
     trustees_count = models.PositiveIntegerField(_('No Of Trustees'), null=True, blank=True)
     volunteers_count = models.PositiveIntegerField(_('No Of Volunteers'), null=True, blank=True)
-    trustees_active = models.PositiveIntegerField(_('No Of Trustees Who Use MH Services'), null=True, blank=True)
-    area_of_benefit = models.CharField(_('Area of benefit'), max_length=50, blank=True)
-    average_volunteer_hours = models.CharField(_('Average volunteer hours'), max_length=50, blank=True)
+    trustees_active = models.CharField(_('% trustees who use MH Services'), max_length=20, choices=TRUSTEES_ACTIVE_CHOICES, null=True, blank=True)
+    area_of_benefit = models.CharField(_('Area of benefit'), max_length=350, blank=True)
+    average_volunteer_hours = models.CharField(_('Avg hours volunteer provide per week'), max_length=50, blank=True)
 
     created = CreationDateTimeField()
     modified = ModificationDateTimeField()
@@ -104,3 +107,6 @@ class Person(models.Model):
     gender = models.CharField(max_length=30, choices=GENDER_CHOICES, blank=True)
     email = models.EmailField(blank=True)
     telephone = models.CharField(max_length=30, blank=True)
+
+    def __unicode__(self):
+        return self.name

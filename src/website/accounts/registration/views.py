@@ -10,6 +10,7 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
+from django.template.response import TemplateResponse
 from django.utils.http import base36_to_int
 from django.views.generic import FormView
 
@@ -66,11 +67,29 @@ class SignupWizardView(SignupLogicMixin, NamedUrlSessionWizardView):
 
     def get_token_object(self, uid_int):
         try:
-            obj = ReservedEmail.objects.get(pk=uid_int)
+            reserved_email = ReservedEmail.objects.get(pk=uid_int)
         except ReservedEmail.DoesNotExist:
-            obj = None
-        self.reserved_email = obj
-        return obj
+            reserved_email = None
+
+        self.reserved_email = reserved_email
+        return reserved_email
+
+    def check_token(self):
+        response = super(SignupWizardView, self).check_token()
+        if response:
+            return response
+
+        if self.reserved_email:
+            if self.reserved_email.local_mind.users.exists():
+                return TemplateResponse(
+                    self.request,
+                    'registration/local_mind_already_signed_up.html',
+                    context={
+                        'email': self.reserved_email.email,
+                        'reserved_email': self.reserved_email,
+                        'local_mind': self.reserved_email.local_mind,
+                    },
+                    status=400)
 
     def get_template_names(self):
         return [self.template_names[self.steps.current]]
@@ -80,12 +99,11 @@ class SignupWizardView(SignupLogicMixin, NamedUrlSessionWizardView):
         url_kwargs['step'] = step
         return reverse(self.url_name, kwargs=url_kwargs)
 
-    def get_form_initial(self, step):
-        initial = super(SignupWizardView, self).get_form_initial(step)
-        if step == 'local-mind':
-            if self.reserved_email.local_mind:
-                initial['name'] = self.reserved_email.local_mind.name
-        return initial
+    def get_form_kwargs(self, step):
+        kwargs = super(SignupWizardView, self).get_form_kwargs(step)
+        if step in ('local-mind', 'members'):
+            kwargs['instance'] = self.reserved_email.local_mind
+        return kwargs
 
     def get_context_data(self, **kwargs):
         kwargs['email'] = self.reserved_email.email
@@ -143,6 +161,7 @@ class SignupUserProfileView(SignupLogicMixin, FormView):
 
     def get_context_data(self, **kwargs):
         kwargs['user'] = self.user
+        kwargs['email'] = self.user.email
         return super(SignupUserProfileView, self).get_context_data(**kwargs)
 
     def get_form_kwargs(self):
@@ -162,5 +181,7 @@ signup_profile = SignupUserProfileView.as_view()
 
 
 def invalid_url(request):
-    return render_to_response('registration/invalid_url.html', {
-    }, context_instance=RequestContext(request))
+    return TemplateResponse(
+        request,
+        'registration/invalid_url.html',
+        status=400)
