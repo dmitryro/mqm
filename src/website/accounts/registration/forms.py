@@ -289,6 +289,9 @@ class PositiveNewsForm(ModelForm):
             'date',
             'tags',
         )
+        widgets = {
+            'tags': forms.TextInput,
+        }
 
 
 class SignupPartnersForm(CompositeModelForm):

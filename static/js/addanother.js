@@ -6,6 +6,12 @@
         });
     };
 
+    var replacePrefixInText = function (element, newValue) {
+        $(element).text(function (index, value) {
+            return value.replace(/__prefix__/, newValue);
+        });
+    };
+
     $.fn.addanother = function () {
         return $(this).each(function () {
             var self = $(this);
@@ -27,6 +33,7 @@
                 });
                 template.find('label').each(function () {
                     replacePrefix(this, 'for', totalForms.val());
+                    replacePrefixInText(this, parseInt(totalForms.val()) + 1);
                 });
 
                 totalForms.val(function (index, val) {

@@ -1,64 +1,146 @@
 {% extends "registration/signup_base.html" %}
-{% load floppyforms %}
+{% load floppyforms util_tags %}
 
 
 {% block section %}
 
     {% form form using %}
+        {% formconfig row using "forms/signup_row.html" %}
 
-        <h3>Resources to share</h3>
-        <p class="help">Please enter any resource you have to share with local community</p>
+        <div class="row">
+            <div class="col-md-6">
+              <div class="col-sm-3"></div>
+              <div class="col-sm-9">
+                <h4>RESOURCES TO SHARE</h4>
+                <small>Please enter any resources you have to share with local community</small>
+              </div>
+            </div>
+        </div>
+
 
         {% with formset=form.formsets.resources %}
-        <div data-formset-prefix="{{ formset.prefix }}">
+        <div data-formset-prefix="{{ formset.prefix }}" data-formset-form-list=".formset-form-list">
             {{ formset.management_form }}
-            {% for form in formset %}
-                {% formrow form.name %}
-                {% formrow form.privacy %}
-            {% endfor %}
 
-            <a class="add-another">Add another</a>
+            <div class="formset-form-list">
+                {% for form in formset %}
+                    <div class="row">
+                        <div class="col-md-6">
+                            {% formrow form.name with label="Resource "|concat:forloop.counter %}
+                                        </div>
+                        <div class="col-md-6">
+                            {% formrow form.privacy %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+            {% include "forms/add_another_button.html" %}
 
             <div class="template">
             {% with form=formset.empty_form %}
-                {% formrow form.name %}
-                {% formrow form.privacy %}
+                <div class="row">
+                    <div class="col-md-6">
+                        {% formrow form.name with label="Resource __prefix__" %}
+                    </div>
+                    <div class="col-md-6">
+                        {% formrow form.privacy %}
+                    </div>
+                </div>
             {% endwith %}
             </div>
         </div>
         {% endwith %}
 
-        <h3>Key partners</h3>
-        <p class="help">Please submit any partner you have</p>
+        <div class="row">
+            <div class="col-md-6">
+              <div class="col-sm-3"></div>
+              <div class="col-sm-9">
+                <h4>KEY PARTNERS</h4>
+                <small>Please select any partners you have</small>
+              </div>
+            </div>
+        </div>
 
         {% with formset=form.formsets.key_partners %}
-        <div data-formset-prefix="{{ formset.prefix }}">
+        <div data-formset-prefix="{{ formset.prefix }}" data-formset-form-list=".formset-form-list">
             {{ formset.management_form }}
-            {% for form in formset %}
-                {% formrow form.name %}
-                {% formrow form.email %}
-                {% formrow form.address %}
-                {% formrow form.telephone %}
-                {% formrow form.relationship %}
-                {% formrow form.postcode %}
-                {% formrow form.category %}
-                {% formrow form.website %}
-                {% formrow form.privacy %}
-            {% endfor %}
 
-            <a class="add-another">Add another</a>
+            <div class="formset-form-list">
+                {% for form in formset %}
+                    <div class="row">
+                        <div class="col-md-6">
+                            {% formrow form.name %}
+                        </div>
+                        <div class="col-md-6">
+                            {% formrow form.email %}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            {% formrow form.address %}
+                        </div>
+                        <div class="col-md-6">
+                            {% formrow form.telephone %}
+                            {% formrow form.relationship %}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            {% formrow form.postcode with hide_help_text=True %}
+                        </div>
+                        <div class="col-md-6">
+                            {% formrow form.category %}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            {% formrow form.website %}
+                        </div>
+                        <div class="col-md-6">
+                            {% formrow form.privacy %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+            {% include "forms/add_another_button.html" %}
 
             <div class="template">
             {% with form=formset.empty_form %}
-                {% formrow form.name %}
-                {% formrow form.email %}
-                {% formrow form.address %}
-                {% formrow form.telephone %}
-                {% formrow form.relationship %}
-                {% formrow form.postcode %}
-                {% formrow form.category %}
-                {% formrow form.website %}
-                {% formrow form.privacy %}
+                    <div class="row">
+                        <div class="col-md-6">
+                            {% formrow form.name %}
+                        </div>
+                        <div class="col-md-6">
+                            {% formrow form.email %}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            {% formrow form.address %}
+                        </div>
+                        <div class="col-md-6">
+                            {% formrow form.telephone %}
+                            {% formrow form.relationship %}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            {% formrow form.postcode with hide_help_text=True %}
+                        </div>
+                        <div class="col-md-6">
+                            {% formrow form.category %}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            {% formrow form.website %}
+                        </div>
+                        <div class="col-md-6">
+                            {% formrow form.privacy %}
+                        </div>
+                    </div>
             {% endwith %}
             </div>
         </div>
@@ -68,23 +150,50 @@
         <p class="help">Tell us about the best thing to happen in the last month</p>
 
         {% with formset=form.formsets.positive_news %}
-        <div data-formset-prefix="{{ formset.prefix }}">
+        <div data-formset-prefix="{{ formset.prefix }}" data-formset-form-list=".formset-form-list">
             {{ formset.management_form }}
-            {% for form in formset %}
-                {% formrow form.title %}
-                {% formrow form.description %}
-                {% formrow form.date %}
-                {% formrow form.tags %}
-            {% endfor %}
 
-            <a class="add-another">Add another</a>
+            <div class="formset-form-list">
+                {% for form in formset %}
+                    <div class="row">
+                        <div class="col-md-6">
+                            {% formrow form.title %}
+                            {% formrow form.date %}
+                        </div>
+                        <div class="col-md-6">
+                            {% formrow form.description %}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            {% formrow form.tags with hide_help_text=True %}
+                        </div>
+                        <div class="col-md-6">
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+            {% include "forms/add_another_button.html" %}
 
             <div class="template">
             {% with form=formset.empty_form %}
-                {% formrow form.title %}
-                {% formrow form.description %}
-                {% formrow form.date %}
-                {% formrow form.tags %}
+                <div class="row">
+                    <div class="col-md-6">
+                        {% formrow form.title %}
+                        {% formrow form.date %}
+                    </div>
+                    <div class="col-md-6">
+                        {% formrow form.description %}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        {% formrow form.tags with hide_help_text=True %}
+                    </div>
+                    <div class="col-md-6">
+                    </div>
+                </div>
             {% endwith %}
             </div>
         </div>
