@@ -21,6 +21,17 @@
             trigger: "hover"
         });
 
+        // Tasks do/undo
+
+        $('.tasks-active, .tasks-completed').find('input[type=checkbox]').change(function () {
+            var  url = '/todos/' + $(this).val() + '/';
+            url += $(this).is(':checked') ? 'done/' : 'undone/';
+
+            $.post(url, function (data) {
+                window.location.href = window.location.href;
+            });
+        });
+
         /* Ismail */
 
         $("#action_addNewVideo").click(function (e) {

@@ -41,6 +41,11 @@ class Task(models.Model):
     def comment_count(self):
         return self.comments.count()
 
+    def mark_as_done(self, done=True):
+        self.done = done
+        self.save()
+
+
 
 class Comment(models.Model):
     task = models.ForeignKey('Task', related_name='comments')
