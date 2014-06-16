@@ -118,7 +118,7 @@
                     <ul class='list-group'>
                     {% for question in questions %}
                     <li class="list-group-item">
-                        <span class="glyphicon glyphicon-question-sign"></span><span class="glyphicon glyphicon-ok-sign text-success"></span>
+                        <span class="glyphicon glyphicon-question-sign"></span>
                         {{ question.question }}
                     </li>
                     {% endfor %}
@@ -449,7 +449,7 @@
     <div class="myLocalArea hidden">
     <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
                     <div class="widget-bar">
-                        <div class="widget-title">MY LOCAL AREA</div>
+                        <div class="widget-title"><a href="/my-local-area">MY LOCAL AREA</a></div>
                         {% include "includes/widget-settings.html" %}
                     </div>
 
@@ -494,18 +494,19 @@
     </div>
     {% endcomment %}
 
-    {% comment %}
+    
     <div class="positiveNews hidden">
         <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
                     <div class="widget-bar">
-                        <div class="widget-title">THE LAB NEWS</div>
+                        <div class="widget-title">POSITIVE NEWS</div>
                         {% include "includes/widget-settings.html" with type="News" %}
                     </div>
                     <div class='list-group'>
+                        <!-- feed for positive news -->
                     </div>
                 </li>
     </div>
-
+    {% comment %}
     <div class="collectiveimpact hidden">
         <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
             <div class="widget-bar">
