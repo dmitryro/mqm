@@ -26,7 +26,7 @@
                 {% for form in formset %}
                     <div class="row">
                         <div class="col-md-6">
-                            {% formrow form.name with label="Resource "|concat:forloop.counter %}
+                            {% formrow form.name with placeholder="example + associated cost" label="Resource "|concat:forloop.counter %}
                                         </div>
                         <div class="col-md-6">
                             {% formrow form.privacy %}

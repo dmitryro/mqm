@@ -51,7 +51,7 @@
 
         <div class="row">
             <div class="col-md-6">
-                {% formrow form.skills %}
+                {% formrow form.skills with tooltip="The data you add here will be used on the Buddy Search and also the Local Mind network map" label="Your Skills <span class='glyphicon glyphicon-info-sign'></span>" %}
             </div>
             <div class="col-md-6">
                 {% formrow form.user_avatar using "forms/signup_row_file_field.html" %}
@@ -60,7 +60,7 @@
 
         <div class="row">
             <div class="col-md-6">
-                {% formrow form.biography using "forms/signup_row_inline_help.html" with tooltip="The more you share about yourself here, the more we can make sure that the Open Hub reflects your skills and experience, so that people learn more about you and also know what they can come to you for. The data you add here will be on your profile page and in the Meet The Team node on the Open Hub." %}
+                {% formrow form.biography using "forms/signup_row_inline_help.html" with tooltip="The more you share about yourself here, the more we can make sure that the Open Hub reflects your skills and experience, so that people learn more about you and also know what they can come to you for. The data you add here will be on your profile page and in the Meet The Team node on the Open Hub." label="Biography <span class='glyphicon glyphicon-info-sign'></span>" %}
             </div>
             <div class="col-md-6">
                 {% formrow form.telephone %}
@@ -73,7 +73,7 @@
             {{ formset.management_form }}
             <div class="row">
                 <div class="col-md-6">
-                    {% formrow formset.forms.0.experience using "forms/signup_row_inline_help.html" with tooltip="The more you share about yourself here, the more we can make sure that the Open Hub reflects your skills and experience, so that people learn more about you and also know what they can come to you for. By experiences we mean, what is something that you have worked through or responded to recently e.g developed a new volunteer recruitment strategy, dealt with a difficult stakeholder. The data you add here will be used on the Buddy Search and The Net Works node on the Open Hub." label="Experiance <span class='glyphicon glyphicon-info-sign'></span>"  %}
+                    {% formrow formset.forms.0.experience using "forms/signup_row_inline_help.html" with tooltip="The more you share about yourself here, the more we can make sure that the Open Hub reflects your skills and experience, so that people learn more about you and also know what they can come to you for. By experiences we mean, what is something that you have worked through or responded to recently e.g developed a new volunteer recruitment strategy, dealt with a difficult stakeholder. The data you add here will be used on the Buddy Search and The Net Works node on the Open Hub." label="Experience <span class='glyphicon glyphicon-info-sign'></span>"  %}
                 </div>
                 <div class="col-md-6">
                     {% formrow formset.forms.1.experience using "forms/signup_row_inline_help.html" %}
