@@ -15,8 +15,9 @@ class LoginRequiredMixin(object):
                 next=request.path))
 
     def dispatch(self, request, *args, **kwargs):
-        if self.login_required and not request.user.is_authenticated():
-            return self.access_denied(request)
+        if self.login_required:
+            if not request.user.is_authenticated() or request.user.local_mind is None:
+                return self.access_denied(request)
         return super(LoginRequiredMixin, self).dispatch(request, *args, **kwargs)
 
 
