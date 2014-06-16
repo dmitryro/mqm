@@ -52,10 +52,16 @@
 */
 
 
-#sidebar #people .person .avatar {
-  height:58px;
-  width:46px;
+#sidebar #people .person .avatar,
+#sidebar #people .person .avatar.avatar_default {
+  height:45px;
+  width:45px;
   float:left;
+}
+
+#sidebar #people .person .avatar.avatar_default img {
+  width:40px;
+  height:40px;
 }
 
 #sidebar #people .person .avatarLM {
@@ -71,7 +77,7 @@
   color: #fff;
   margin-left: 10px;
   float: left;
-  margin-top: 20px;
+  margin-top: 10px;
   font-size: 19px;
 }
 

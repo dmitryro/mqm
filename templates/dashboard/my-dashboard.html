@@ -64,6 +64,10 @@
                         <div class="pull-left">
                             <img class="media-object img-circle" src="{% thumbnail user.user_avatar 40x40 crop %}">
                         </div>
+                        {% else %}
+                        <div class="pull-left">
+                            <img class="media-object img-circle" src="{{ STATIC_URL }}assets/img/placeholder/base-avatar.png">
+                        </div>
                         {% endif %}
                         <div class="media-body">
                             <b>{{ user.get_full_name }}</b>
