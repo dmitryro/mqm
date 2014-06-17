@@ -149,7 +149,7 @@ function initialize() {
 {% for map in map_list %}
 infoBoxes.push(new google.maps.InfoWindow({
     content: (
-        '<p>{{ map.name }}</p><br>' +
+        '<p>{{ map.name|escapejs }}</p><br>' +
         {% if map.category %}
         '<p><span class="text-muted">Type:</span> {{ map.get_category_display|escapejs }}</p>' +
         {% endif %}
@@ -164,6 +164,28 @@ infoBoxes.push(new google.maps.InfoWindow({
         {% endif %}
         {% if map.address %}
         '<p><span class="text-muted">Address:</span> {{ map.address|escapejs }}</p>' +
+        {% endif %}
+        ''
+    )
+}));
+{% endfor %}
+
+{% for local_mind in local_minds %}
+infoBoxes.push(new google.maps.InfoWindow({
+    content: (
+        '<p><a href="{{ local_mind.get_absolute_url|escapejs }}">{{ local_mind.name|escapejs }}</a></p><br>' +
+        '<p><span class="text-muted">Type:</span> Local Mind</p>' +
+        {% if map.email %}
+        '<p><span class="text-muted">Email:</span> {{ local_mind.email|escapejs }}</p>    ' +
+        {% endif %}
+        {% if local_mind.telephone %}
+        '<p><span class="text-muted">Telephone:</span> {{ local_mind.telephone|escapejs }}</p>' +
+        {% endif %}
+        {% if local_mind.website %}
+        '<p><span class="text-muted">website:</span> <a href="{{ local_mind.website|escapejs }}">{{ local_mind.website|escapejs }}</a></p>' +
+        {% endif %}
+        {% if local_mind.address %}
+        '<p><span class="text-muted">Address:</span> {{ local_mind.address|escapejs }}</p>' +
         {% endif %}
         ''
     )
@@ -191,6 +213,15 @@ markers.push(new google.maps.Marker({
     title: '{{ map.get_relationship_display|escapejs }} - {{ map.get_category_display|escapejs }}',
     filterName: '{{ map.get_relationship_display|escapejs }}',
     partnerTypes: '{{ map.get_category_display|escapejs }}'
+}));
+{% endfor %}
+
+{% for local_mind in local_minds %}
+markers.push(new google.maps.Marker({
+    position: new google.maps.LatLng({{ local_mind.latitude }}, {{ local_mind.longitude }}),
+    icon: '{{ local_mind.marker_icon }}',
+    title: '{{ local_mind|escapejs }} - Local Mind',
+    filterName: 'Local Mind'
 }));
 {% endfor %}
 

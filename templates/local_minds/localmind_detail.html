@@ -28,7 +28,7 @@
 				<div class="col-md-4 bio-col">
                     <p><span><em>Local mind:</em></span> {{ local_mind }}</p>
                     {% if local_mind.address %}
-                        <p><span><em>Address</em></span> {{ local_mind.address|linebreaksbr }}<br/>Purley Surrey CR8 2NE</p>
+                        <p><span><em>Address</em></span> {{ local_mind.address|linebreaksbr }}</p>
                     {% endif %}
 				</div>
 				<div class="col-md-4 bio-col">
@@ -37,7 +37,7 @@
                     <p><span><em>Twitter:</em></span> @{{ user.twitter }}</p>
                     {% endif %}
                     {% if user.telephone %}
-					<p><span><em>Office number:</em></span> 0171 965 6754</p>
+                    <p><span><em>Office number:</em></span> {{ user.telephone }}</p>
                     {% endif %}
                     {% if local_mind.website %}
                         <p><span><em>Website:</em></span> <a href="{{ local_mind.website }}">{{ local_mind.website }}</a></p>
