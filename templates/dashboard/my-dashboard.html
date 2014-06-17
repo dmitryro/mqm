@@ -590,7 +590,7 @@
     {% for map in map_list %}
     markers.push(new google.maps.Marker({
         position: new google.maps.LatLng({{ map.latitude }}, {{ map.longitude }}),
-        icon: '{{ map.marker.icon.url }}',
+        icon: '{{ map.marker_icon }}',
         title:"{{ map.name }}"
     }));
     {% endfor %}
@@ -654,7 +654,7 @@ google.maps.event.addDomListener(window, 'load', initializeLocalMap);
     {% for map in net_works %}
     markers.push(new google.maps.Marker({
         position: new google.maps.LatLng({{ map.latitude }}, {{ map.longitude }}),
-        icon: '',
+        icon: '{{ map.marker_icon }}',
         title: "{{ map.name }}"
     }));
     {% endfor %}
