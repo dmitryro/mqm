@@ -503,7 +503,13 @@
         <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
                     <div class="widget-bar">
                         <div class="widget-title"><a href="{% url "positive-news" %}">POSITIVE NEWS</a></div>
+                        {% comment %}
                         {% include "includes/widget-settings.html" with type="News" %}
+                        {% endcomment %}
+                        <div class="widget-settings-button drop"></div>
+                        <ul>
+                            <li class="action_addNew"><a href="{% url "positive-news-add" %}">Add New</a></li>
+                        </ul>
                     </div>
                     {% for news in positivenews_list %}
                     <div class='list-group'>

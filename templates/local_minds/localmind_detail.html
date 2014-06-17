@@ -17,8 +17,10 @@
 			<div class="col-md-3 team-side">
                 {% if local_mind.group_avatar %}
                 <div class="large-avatar"><img class="img-circle" src="{% thumbnail local_mind.group_avatar 186x186 crop %}" alt="profile" width="186" height="186"></div>
-                {% endif %}
-                <div class="lmas">LM: {{ local_mind }}</div>
+                {% else %}
+								<div class="large-avatar"><a href="{{ local_mind.get_absolute_url }}"><img class="img-circle" src="{{ STATIC_URL }}assets/img/placeholder/base-avatar.png" alt="profile" width="186" height="186"></a></div>
+								{% endif %}
+                <div class="lmas"><a href="{% url "team" %}">LM: {{ local_mind }} Team</a></div>
 				{% comment %}
 				<a href="/invitee/"><div class="add-team-button">ADD NEW TEAM MEMBER</div></a>
 				<div class="add-team-button">EDIT LM's DETAILS</div>

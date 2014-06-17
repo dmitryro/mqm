@@ -1,10 +1,12 @@
 <div class="widget-settings-button drop"></div>
 <ul>
     <li class="action_addNew" data-type="{{ type }}">Add New</li>
+    {% comment %}
     <li>Visible to my LMA</li>
     <li>Visible to Regional LMA's</li>
     <li>Visible to National LMA's</li>
     {% if delatable != "false" %}
     <li class="delete-node">Delete Node</li>
     {% endif %}
+    {% endcomment %}
 </ul>
