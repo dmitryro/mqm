@@ -10,11 +10,11 @@
                 <div class="person">
                     {% if user.user_avatar %}
                     <div class="avatar">
-                        <img src="{% thumbnail user.user_avatar 40x40 crop %}" class="img-circle">
+                        <a href="{{ user.get_absolute_url }}"><img src="{% thumbnail user.user_avatar 40x40 crop %}" class="img-circle"></a>
                     </div>
                     {% else %}
                     <div class="avatar avatar_default">
-                        <img src="{{ STATIC_URL }}assets/img/placeholder/base-avatar-white.png" class="img-circle">
+                        <a href="{{ user.get_absolute_url }}"><img src="{{ STATIC_URL }}assets/img/placeholder/base-avatar-white.png" class="img-circle"></a>
                     </div>
                     {% endif %}
                     <div class="username">{{ user.get_full_name|default:user.email }}'s - Openhub</div>
