@@ -24,6 +24,7 @@ team_detail = LocalMindDetailView.as_view(template_name='local_minds/team.html')
 
 
 class UserDetailView(CommonViewMixin, DetailView):
+    context_object_name = 'member'
     template_name = 'local_minds/user_detail.html'
     queryset = User.objects.all()
 

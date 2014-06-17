@@ -9,17 +9,17 @@
 
 	<div class="container-fluid">
 
-        <h3 class="withIcon icon_people"><span></span>MEET THE TEAM - {{ user }}</h3>
+        <h3 class="withIcon icon_people"><span></span>MEET THE TEAM - {{ member }}</h3>
 		<a href="/" class="page-close"></a>
 
 		<div id="team-content">
 			<div class="col-md-3 team-side">
-				{% if user.user_avatar %}
-				<div class="large-avatar"><img class="img-circle" src="{% thumbnail user.user_avatar 186x186 crop %}" alt="profile" width="186" height="186"></div>
+				{% if member.user_avatar %}
+				<div class="large-avatar"><img class="img-circle" src="{% thumbnail member.user_avatar 186x186 crop %}" alt="profile" width="186" height="186"></div>
 				{% else %}
 				<div class="large-avatar"><img class="img-circle" src="{{ STATIC_URL }}assets/img/placeholder/base-avatar.png" alt="profile" width="186" height="186"></div>
 				{% endif %}
-        <div class="lmas"><a href="{{ user.local_mind.get_absolute_url }}">LM: {{ user.local_mind }}</a></div>
+        <div class="lmas"><a href="{{ member.local_mind.get_absolute_url }}">LM: {{ member.local_mind }}</a></div>
 
 				{% comment %}
 				<div class="add-team-button">ADD NEW TEAM MEMBER</div>
@@ -28,41 +28,41 @@
 			</div>
 			<div class="col-md-9">
 				<div class="col-md-4 bio-col">
-                    <p><span><em>Name:</em></span> {{ user.get_full_name }}</p>
-                    <p><span><em>Local mind:</em></span> {{ user.local_mind }}</p>
-                    {% if user.job_title %}
-                    <p><span><em>Job title:</em></span> {{ user.job_title }}</p>
+                    <p><span><em>Name:</em></span> {{ member.get_full_name }}</p>
+                    <p><span><em>Local mind:</em></span> {{ member.local_mind }}</p>
+                    {% if member.job_title %}
+                    <p><span><em>Job title:</em></span> {{ member.job_title }}</p>
                     {% endif %}
-                    {% if user.website %}
-                    <p><span><em>Website:</em></span> <a href="{{ user.website }}">{{ user.website }}</a></p>
-                    {% endif %}
-				</div>
-				<div class="col-md-4 bio-col">
-					<p><span><em>Email:</em></span> <a href="mailto:{{ user.email }}">{{ user.email }}</a></p>
-                    {% if user.twitter %}
-                    <p><span><em>Twitter:</em></span> @{{ user.twitter }}</p>
-                    {% endif %}
-                    {% if user.telephone %}
-					<p><span><em>Office number:</em></span> 0171 965 6754</p>
+                    {% if member.website %}
+                    <p><span><em>Website:</em></span> <a href="{{ member.website }}">{{ member.website }}</a></p>
                     {% endif %}
 				</div>
 				<div class="col-md-4 bio-col">
-                    {% if user.biography %}
+					<p><span><em>Email:</em></span> <a href="mailto:{{ member.email }}">{{ member.email }}</a></p>
+                    {% if member.twitter %}
+                    <p><span><em>Twitter:</em></span> @{{ member.twitter }}</p>
+                    {% endif %}
+                    {% if member.telephone %}
+                    <p><span><em>Office number:</em></span> {{ member.telephone }}</p>
+                    {% endif %}
+				</div>
+				<div class="col-md-4 bio-col">
+                    {% if member.biography %}
 					<p><span><em>Bio</em></span></p>
-                    {{ user.biography|linebreaks|urlize }}
+                    {{ member.biography|linebreaks|urlize }}
                     {% endif %}
 				</div>
 				<div class="bio-divider"></div>
 				<div class="col-md-9 bio">
 
-                    {% if user.skills %}
+                    {% if member.skills %}
                         <h5><stong>SKILLS</stong></h5>
-                        <p class="skill">{{ user.skills|linebreaks|urlize }}</p>
+                        <p class="skill">{{ member.skills|linebreaks|urlize }}</p>
                     {% endif %}
 
-                    {% if user.experiences.all %}
+                    {% if member.experiences.all %}
                         <h5><stong>EXPERIENCE</stong></h5>
-                        {% for experience in user.experiences.all %}
+                        {% for experience in member.experiences.all %}
                             <p class="skills">{{ experience }}</p>
                         {% endfor %}
                     {% endif %}
