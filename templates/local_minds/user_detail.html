@@ -14,8 +14,8 @@
 
 		<div id="team-content">
 			<div class="col-md-3 team-side">
-				{% if member.user_avatar %}
-				<div class="large-avatar"><img class="img-circle" src="{% thumbnail member.user_avatar 186x186 crop %}" alt="profile" width="186" height="186"></div>
+				{% if user.user_avatar %}
+				<div class="large-avatar"><img class="img-circle" src="{% thumbnail user.user_avatar 186x186 crop %}" alt="profile" width="186" height="186"></div>
 				{% else %}
 				<div class="large-avatar"><img class="img-circle" src="{{ STATIC_URL }}assets/img/placeholder/base-avatar.png" alt="profile" width="186" height="186"></div>
 				{% endif %}

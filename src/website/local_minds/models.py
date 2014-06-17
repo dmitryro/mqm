@@ -86,6 +86,12 @@ class LocalMind(PostcodeLocationMixin, models.Model):
         return 'local-mind', (), {'slug': self.slug}
 
     @property
+    def avatar_url(self):
+        if self.group_avatar:
+            return self.group_avatar.name
+        return ''
+
+    @property
     def marker_icon(self):
         return os.path.join(
             settings.STATIC_URL,

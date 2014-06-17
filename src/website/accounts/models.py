@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+from django.conf import settings
 from django.contrib.auth.models import AbstractBaseUser, UserManager, PermissionsMixin
 from django.contrib.auth.models import Group as _Group
 from django.contrib.sites.models import Site
@@ -72,6 +72,12 @@ class User(AbstractBaseUser, PermissionsMixin):
                 'local_mind_slug': self.local_mind.slug,
                 'slug': self.slug,
             }
+
+    @property
+    def avatar_url(self):
+        if self.user_avatar:
+            return self.user_avatar.name
+        return 'placeholder/base-avatar.png'
 
     def get_full_name(self):
         """
