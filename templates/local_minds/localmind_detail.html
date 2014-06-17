@@ -34,12 +34,11 @@
                     {% endif %}
 				</div>
 				<div class="col-md-4 bio-col">
+                    {% if local_mind.email %}
 					<p><span><em>Email:</em></span> <a href="mailto:{{ local_mind.email }}">{{ local_mind.email }}</a></p>
-                    {% if user.twitter %}
-                    <p><span><em>Twitter:</em></span> @{{ user.twitter }}</p>
                     {% endif %}
-                    {% if user.telephone %}
-                    <p><span><em>Office number:</em></span> {{ user.telephone }}</p>
+                    {% if local_mind.telephone %}
+                    <p><span><em>Office number:</em></span> {{ local_mind.telephone }}</p>
                     {% endif %}
                     {% if local_mind.website %}
                         <p><span><em>Website:</em></span> <a href="{{ local_mind.website }}">{{ local_mind.website }}</a></p>
