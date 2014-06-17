@@ -50,7 +50,7 @@
                         <a href="{{ user.get_absolute_url }}"><img src="{{ STATIC_URL }}assets/img/placeholder/base-avatar.png" class="img-circle"></a>
                     </div>
                     {% endif %}
-                    <div class="username">{{ user.get_full_name|default:user.email }}'s - Openhub</div>
+                    <div class="username">{{ user.first_name|default:user.email }}'s - Openhub</div>
                 </div>
                 <a href="{% url "logout" %}"><div id="logout"></div></a>
                 <div id="settings">

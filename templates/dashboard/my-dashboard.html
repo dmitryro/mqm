@@ -112,7 +112,7 @@
         <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
                     <div class="widget-bar">
                         <div class="widget-title"><a href="/call-out">CALL OUT</a></div>
-                        {% include "includes/widget-settings.html" with type="Question" delatable="false" %}
+                        {% include "includes/widget-settings.html" with type="question" delatable="false" url="/call-out/add" %}
                     </div>
                     <ul class='list-group'>
                         <a class='li list-group-item' href='#'>
@@ -142,8 +142,8 @@
     <div class="hidden todo">
     <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
                     <div class="widget-bar">
-                        <div class="widget-title"> <span class="badge"><!-- total to-do assigned to you -->{{ my_tasks.count }}</span> <a href="{% url "tasks" %}">TO-DO LIST</a></div>
-                        {% include "includes/widget-settings.html" with type="Todo" %}
+                        <div class="widget-title"> <span class="badge"><!-- total to-do assigned to you -->{{ my_tasks.count }}</span> &nbsp;<a href="{% url "tasks" %}">TO-DO LIST</a></div>
+                        {% include "includes/widget-settings.html" with type="todo" url="/todos/add" %}
                     </div>
                     <ul class="list-group">
                     {% comment %}
@@ -171,7 +171,7 @@
                             {% else %}
                             <span class="glyphicon glyphicon-record pull-right"></span>
                             {% endif %}
-                            <span class="glyphicon glyphicon-asterisk"></span> {{ task.text }}
+                            {% comment %}<span class="glyphicon glyphicon-asterisk"></span>{% endcomment %}<i class="fa fa-pencil-square-o"></i> {{ task.text }}
                             {% if task.due_date %}
                             <small class="text-muted"><br>Due {{ task.due_date|date }}</small>
                             {% endif %}
@@ -454,7 +454,7 @@
     <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
                     <div class="widget-bar">
                         <div class="widget-title"><a href="/my-local-area">MY LOCAL AREA</a></div>
-                        {% include "includes/widget-settings.html" %}
+                        {% include "includes/widget-settings.html" with type="local-area" url="/my-local-area/add" %}
                     </div>
 
                     <!-- for loop of on line #486 (search for '//map markers' in this template) [ long, lat, title ] -->

@@ -12,18 +12,18 @@
   <div class="container-fluid">
 
     <h3 class="withIcon icon_document"><span></span>CALL OUT</h3>
-    <a href="/" class="page-close"></a>
+    <a href="{% url "dashboard" %}" class="page-close"></a>
 
     <div id="team-content">
 
      <div class="row">
 
        <div class="col-md-6">
-        
+
         {% include "faq/_question_object.html" with question=question css_class="" show_answers=True show_answer_form=show_form %}
 
       </div>
-      
+
     </div>
 
   </div>
