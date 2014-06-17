@@ -676,10 +676,10 @@ google.maps.event.addDomListener(window, 'load', initializeNetworkMap);
 
 <script type="text/javascript">
 $(document).ready(function(){
-    /* FEED WILL EVENTUALLY GO HERE, SILENCING ERR
+
   $.ajax({
             type: 'GET',
-            url: 'http://www.thementalelf.net/feed/',
+            url: 'http://maworaa2.miniserver.com/mindFeed/mindFeed.php',
             dataType: 'xml',
             success: function (xml) {
                 $(xml).find("item").each(function () {
@@ -687,10 +687,10 @@ $(document).ready(function(){
                     var description = $(this).find("description").text();
                     var linkUrl = $(this).find("link").text();
                     var link = "<a href='" + linkUrl + "' target='_blank'>Read More<a>";
-                    $('#feedResults').append('<a href="'+linkUrl+'" class="list-group-item">'+title+'</li></a>');
+                    $('#feedResults').append('<a target="_blank" href="'+linkUrl+'" class="list-group-item">'+title+'</li></a>');
                 });
             }
-        });*/
+        });
 });
 
 </script>

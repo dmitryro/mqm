@@ -80,13 +80,13 @@
                         <a href="{% url "local-mind-form" %}"><li class="settings-opt" style="background-image:url({{ STATIC_URL }}assets/img/ui/icons/anchor-05.svg)" data-access="super">
                             Update {{ user.local_mind.name }} <!-- this should go to pre-puplated page 1 in the sign up process (only accessible to super-users) -->
                         </li></a>
-                        <a href="{{ local_mind.get_absolute_url }}">
+                        <a href="{% url "team" %}">
                         <li class="settings-opt" style="background-image:url({{ STATIC_URL }}assets/img/ui/icons/users-06.svg)">
                             View Hub Users
                         </li></a>
-                        <a href="{{ local_mind.get_absolute_url }}">
+                        <a href="{{ user.local_mind.get_absolute_url }}">
                         <li class="settings-opt" style="background-image:url({{ STATIC_URL }}assets/img/ui/icons/users-06.svg)">
-                            View {{ local_mind.name }}
+                            View {{ user.local_mind.name }}
                         </li></a>
                         {% comment %}
                         <li class="settings-opt action_addNew" data-type="Password" style="background-image:url({{ STATIC_URL }}assets/img/ui/icons/password-07.svg)">
