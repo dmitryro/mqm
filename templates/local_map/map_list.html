@@ -62,7 +62,6 @@
                             <label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="{{ category_label }}">{{ category_label }}</label><br>
                         {% endfor %}
                     </div>
-                    <hr>
                 </div>
 
             </div>
@@ -149,7 +148,7 @@ function initialize() {
 {% for map in map_list %}
 infoBoxes.push(new google.maps.InfoWindow({
     content: (
-        '<p>{{ map.name|escapejs }}</p><br>' +
+        '<h4>{{ map.name|escapejs }}</h4>' +
         {% if map.category %}
         '<p><span class="text-muted">Type:</span> {{ map.get_category_display|escapejs }}</p>' +
         {% endif %}

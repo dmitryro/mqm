@@ -20,6 +20,7 @@
 				<div class="large-avatar"><img class="img-circle" src="{{ STATIC_URL }}assets/img/placeholder/base-avatar.png" alt="profile" width="186" height="186"></div>
 				{% endif %}
         <div class="lmas"><a href="{{ member.local_mind.get_absolute_url }}">LM: {{ member.local_mind }}</a></div>
+        <div class="lmas"><a href="{{ local_mind.get_absolute_url }}">{{ local_mind }} Team</a></div>
 
 				{% comment %}
 				<div class="add-team-button">ADD NEW TEAM MEMBER</div>

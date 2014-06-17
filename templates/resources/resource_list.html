@@ -83,7 +83,7 @@ function initialize() {
 {% if local_mind.latitude and local_mind.longitude %}
 infoBoxes.push(new google.maps.InfoWindow({
   content: (
-    '<p><a href="{{ local_mind.get_absolute_url|escapejs }}">{{ local_mind|escapejs }}</a></p>' +
+    '<h4><a href="{{ local_mind.get_absolute_url|escapejs }}">{{ local_mind|escapejs }}</a></h4>' +
     '<div class="twocol"><span class="text-muted">Resources:</span><p>' +
     '{% for resource in resources %}{{ resource|escapejs }}{% if not forloop.last %}<br>{% endif %}{% endfor %}' +
     '</p></div>'

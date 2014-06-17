@@ -25,7 +25,7 @@
   height: 39px;
   margin:0 auto;
   margin-top:12px;
-  background:url(../../assets/img/ui/sidebar/logo.svg) left no-repeat, url(../../assets/img/ui/sidebar/mind-logoW.png) right no-repeat;
+  background:url(../../assets/img/ui/sidebar/logo.svg) right no-repeat, url(../../assets/img/ui/sidebar/mind-logoW.png) left no-repeat;
 }
 
 #sidebar #people {
@@ -150,7 +150,7 @@
 }
 
 #sidebar #menu .menu-button-wrap .menu-button:hover {
-  background-color:#c74a83;
+  background-color:$blue;
   color: #FFF;
   -webkit-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
@@ -209,7 +209,7 @@
 }
 
 .goRed {
-  background-color:#e5007d !important;
+  background-color:$blue !important;
 }
 
 

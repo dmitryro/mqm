@@ -26,7 +26,7 @@
             <div class="media">
             {% if answer.user.user_avatar %}
             <a class="pull-left" href="{{ answer.user.get_absolute_url }}">
-                <img class="media-object" src="{% thumbnail answer.user.user_avatar 40x40 crop %}" alt="Profile picture of {{ answer.user }}">
+                <img class="media-object img-circle" src="{% thumbnail answer.user.user_avatar 40x40 crop %}" alt="Profile picture of {{ answer.user }}">
             </a>
 
             {% endif %}
