@@ -19,23 +19,6 @@
 
 {% block content %}
 
-<div class="modal fade" id="sharedModal" tabindex="-1" role="dialog" aria-labelledby="sharedModal" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Modal title</h4>
-            </div>
-            <div class="modal-body">
-                <p>One fine body&hellip;</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div>
 <div id="content" class="clearfix">
     {% include "includes/topbar.html" %}
     <div class="container-fluid">
@@ -247,39 +230,27 @@ function showHideMarkers() {
     mc.clearMarkers();//clear all of them and only add if they match the filters
     for(i = 0; i < markers.length; i++) {
         //for all markers go past this
-        if(markers[i].filterName == "Local Mind") {
-            //are you a local mind?
-            if($("#filter_lm").is(':checked')) {
+        //are you a local mind?
+        if (markers[i].filterName == "Local Mind" && $("#filter_lm").is(':checked')) {
                 //is your filter clecked
                 mc.addMarker(markers[i]);
-            }
-        } else {
-            //you are a partner
-            if(markers[i].filterName == "Current Partners") {
 
-                if($("#filter_cp").is(':checked')) {
-                    //how see if the subfilters are checked
-                    $(".partnersCheckbox").each(function( index, value ) {
-                        if($(value).is(':checked') && markers[i].partnerTypes == $(value).attr("value")) {
-                            mc.addMarker(markers[i]);
-                        }
-                    });
+        //you are a partner
+        } else if (markers[i].filterName == "Current Partner" && $("#filter_cp").is(':checked')) {
+            //how see if the subfilters are checked
+            $(".partnersCheckbox").each(function( index, value ) {
+                if($(value).is(':checked') && markers[i].partnerTypes == $(value).attr("value")) {
+                    mc.addMarker(markers[i]);
                 }
-
-
-            } else {
-
-                if($("#filter_pp").is(':checked')) {
-                    //how see if the subfilters are checked
-                    $(".partnersCheckbox").each(function( index, value ) {
-                        if($(value).is(':checked') && markers[i].partnerTypes == $(value).attr("value")) {
-                            mc.addMarker(markers[i]);
-                        }
-                    });
+            });
+        //you are a opportunity
+        } else if (markers[i].filterName == "Partner Opportunity" && $("#filter_pp").is(':checked')) {
+            //how see if the subfilters are checked
+            $(".partnersCheckbox").each(function( index, value ) {
+                if($(value).is(':checked') && markers[i].partnerTypes == $(value).attr("value")) {
+                    mc.addMarker(markers[i]);
                 }
-
-            }
-
+            });
         }
     }
 }
