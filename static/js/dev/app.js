@@ -314,6 +314,7 @@ $(document).ready(function() {
 
     $('.menu-button').click(function() {
     	if ($(this).parent().attr('data-widg')) {
+    		return; //DISABLED ADDING NODES
 	    	var widgetName = $(this).parent().attr('data-widg');
 	    	gridster.add_widget( $('.'+widgetName).html(), 1, 1, 1, 1 );
 	    	if(widgetName == "fundingmap") {initializeFundingMap();}
