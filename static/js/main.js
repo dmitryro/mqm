@@ -1,6 +1,17 @@
 (function ($) {
     $(document).ready(function () {
 
+        //Login tabs
+
+        $("#loginTabs a").click(function(){
+            $("#loginTabs a").each(function( index ) {
+                $(this).removeClass("active");
+            });
+               
+            $(this).addClass("active");
+        });
+
+
         // DROP DOWNS
         $('body').on('click', '.drop', function () {
             if ($(this).hasClass('dropped')) {

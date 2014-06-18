@@ -115,9 +115,9 @@
                         {% include "includes/widget-settings.html" with type="question" delatable="false" url="/call-out/add" %}
                     </div>
                     <ul class='list-group'>
-                        <a class='li list-group-item' href='#'>
+                        <li class='list-group-item'>
                             <span class='badge'><!-- number of total questions for you --> {{ my_questions.count }}</span>Your Questions
-                        </a>
+                        </li>
                     </ul>
                     <ul class='list-group'>
                     {% for question in questions %}
@@ -142,7 +142,7 @@
     <div class="hidden todo">
     <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
                     <div class="widget-bar">
-                        <div class="widget-title"> <span class="badge"><!-- total to-do assigned to you -->{{ my_tasks.count }}</span> &nbsp;<a href="{% url "tasks" %}">TO-DO LIST</a></div>
+                        <div class="widget-title"><a href="{% url "tasks" %}">TO-DO LIST</a></div>
                         {% include "includes/widget-settings.html" with type="todo" url="/todos/add" %}
                     </div>
                     <ul class="list-group">
@@ -163,7 +163,9 @@
                       </li>
                       {% endcomment %}
                       <!-- for loop of [totos]  --> <!-- ordering: your to-do's first with Hight Priority, then by Due date, then all other to-dos added to your Local mind -->
-
+                      <li class='li list-group-item'>
+                            <span class='badge'><!-- number of total questions for you --> {{ my_active_tasks.count }}</span>My To-Dos Left
+                      </li>
                       {% for task in my_tasks %}
                         <li class="list-group-item">
                             {% if task.done %}
@@ -312,7 +314,6 @@
       <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
         <div class="widget-bar">
             <div class="widget-title"><a href="{% url "net-works" %}">THE NET WORKS</a></div>
-          {% include "includes/widget-settings.html" %}
         </div>
          <!-- this will be a map -->
          <div id="map-canvas-network-map"></div>
@@ -503,13 +504,7 @@
         <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
                     <div class="widget-bar">
                         <div class="widget-title"><a href="{% url "positive-news" %}">POSITIVE NEWS</a></div>
-                        {% comment %}
-                        {% include "includes/widget-settings.html" with type="News" %}
-                        {% endcomment %}
-                        <div class="widget-settings-button drop"></div>
-                        <ul>
-                            <li class="action_addNew"><a href="{% url "positive-news-add" %}">Add New</a></li>
-                        </ul>
+                        {% include "includes/widget-settings.html" with type="News" url="/positive-news/add/" %}
                     </div>
                     {% for news in positivenews_list %}
                     <div class='list-group'>
@@ -577,7 +572,8 @@
             scaleControl:false,
             streetViewControl:false,
             overviewMapControl:false,
-            rotateControl:false
+            rotateControl:false,
+            zoomControl: false
       };
       map = new google.maps.Map(document.getElementById("map-canvas-local-area"),
         mapOptions);
@@ -642,7 +638,8 @@ google.maps.event.addDomListener(window, 'load', initializeLocalMap);
             scaleControl:false,
             streetViewControl:false,
             overviewMapControl:false,
-            rotateControl:false
+            rotateControl:false,
+            zoomControl: false
       };
       map = new google.maps.Map(document.getElementById("map-canvas-network-map"),
         mapOptions);

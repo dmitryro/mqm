@@ -9,8 +9,8 @@
 <div id="large-logos"></div>
 <p>Welcome to the Open Hub, a place for connecting, collaborating, learning and celebrating. Every year the Mind network delivers XXXX services to XXXXX people a year. That is an amazing amount of work with a huge amount of impact. The Open Hub is here to support and extend that.</p>
 
-<div class="center-block" style="width:100px; margin-bottom:20px">
-    <a href="#log-in" data-toggle="tab">Login</a> / <a href="#sign-up" data-toggle="tab">Signup</a>
+<div class="center-block" id="loginTabs">
+    <a href="#log-in" class="active" data-toggle="tab">Login</a> / <a href="#sign-up" data-toggle="tab">Signup</a>
 </div>
 
 <!-- Tab panes -->
@@ -38,10 +38,13 @@
         {% form signup_form using %}
         {% formconfig row using "forms/row.html" %}
         <form action="" method="post" role="form">{% csrf_token %}
-        <p>Don't have an account yet?</p>
+        <p>Enter your registered email below</p>
 
         {% formrow form.email with inline_label="Your email" %}
+         <div class="text-center">
         {% include "forms/submit.html" with label="Signup" name="signup" only %}
+        </div>
+
         </form>
         {% endform %}
     </div>
