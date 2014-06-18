@@ -73,17 +73,21 @@
             {{ formset.management_form }}
             <div class="row">
                 <div class="col-md-6">
+                    {% formrow formset.forms.0.id %}
                     {% formrow formset.forms.0.experience using "forms/signup_row_inline_help.html" with tooltip="The more you share about yourself here, the more we can make sure that the Open Hub reflects your skills and experience, so that people learn more about you and also know what they can come to you for. By experiences we mean, what is something that you have worked through or responded to recently e.g developed a new volunteer recruitment strategy, dealt with a difficult stakeholder. The data you add here will be used on the Buddy Search and The Net Works node on the Open Hub." label="Experience <span class='glyphicon glyphicon-info-sign'></span>"  %}
                 </div>
                 <div class="col-md-6">
+                    {% formrow formset.forms.1.id %}
                     {% formrow formset.forms.1.experience using "forms/signup_row_inline_help.html" %}
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6">
+                    {% formrow formset.forms.2.id %}
                     {% formrow formset.forms.2.experience using "forms/signup_row_inline_help.html" %}
                 </div>
                 <div class="col-md-6">
+                    {% formrow formset.forms.3.id %}
                     {% formrow formset.forms.3.experience using "forms/signup_row_inline_help.html" %}
                 </div>
             </div>
@@ -105,6 +109,7 @@
 
             <div class="row">
                 {% for form in formset %}
+                    {% formrow form.id %}
                     <div class="col-md-6 formset-form">
                     {% formrow form.text using "forms/signup_row_inline_help.html" %}
                     </div>

@@ -141,6 +141,7 @@
         <div data-formset-prefix="{{ formset.prefix }}">
             {{ formset.management_form }}
             {% for form in formset %}
+                {% formrow form.id %}
                 <div class="row">
                     <div class="col-md-1"></div>
                     <div class="col-md-3">
@@ -186,6 +187,7 @@
         <div data-formset-prefix="{{ formset.prefix }}">
             {{ formset.management_form }}
             {% for form in formset %}
+                {% formrow form.id %}
                 <div class="row">
                     <div class="col-md-6">
                         {% formrow form.question %}

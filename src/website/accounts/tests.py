@@ -10,6 +10,7 @@ from website.faq.models import Question
 from website.local_map.models import Map
 from website.local_minds.models import LocalMind, Ethnicity, Person
 from website.news.models import PositiveNews
+from website.faq.models import Question
 from website.resources.models import Resource
 from website.services.models import Service
 from website.tasks.models import Task
@@ -53,6 +54,10 @@ class SignupTests(WebTest):
         local_mind = LocalMind.objects.all()[0]
         local_mind.ceo_two = Person.objects.create(name='CEO Name')
         local_mind.save()
+
+        question = Question.objects.create(
+            question='What a question',
+            local_mind=local_mind)
 
         original_local_mind = local_mind
 
