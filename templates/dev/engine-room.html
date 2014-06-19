@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load djangular_tags webdesign %}
+
+{% block content %}
+
+<div id="content" class="clearfix">
+
+  {% include "includes/topbar.html" %}
+
+  <div class="container-fluid">
+
+    <h3 class="withIcon icon_document"><span></span>ENGINE ROOM</h3>
+    <a href="{% url "dashboard"%}" class="page-close"></a>
+
+    
+     
+     <div class="row">
+       
+       <div class="col-md-12">
+
+       <ul id="engineRoomList" class="clearfix">
+         <li><div class="detail"></div><div class="feature"></div></li>
+         <li><div class="feature"></div></li>
+         <li><div class="feature"></div></li>
+         <li><div class="feature"></div></li>
+         <li><div class="feature"></div></li>
+       </ul>
+
+       </div>        
+          
+        </div>
+
+    
+    </div>
+  </div> <!-- CONTENT -->
+
+  {% endblock %}

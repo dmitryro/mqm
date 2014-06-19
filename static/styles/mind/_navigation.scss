@@ -58,8 +58,10 @@
   padding:0px;
   margin:0px;
   border:solid 1px #000;
-  width:500px;
+  width:300px;
 }
+
+.ui-helper-hidden-accessible {display:none;}
 
 .ui-autocomplete li {
   height:40px;

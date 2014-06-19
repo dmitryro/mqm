@@ -83,6 +83,12 @@ urlpatterns = patterns('',
     url(r'^d/positive-news/$', 'django.shortcuts.render', {'template_name': 'dev/positive-news.html'}),
     url(r'^d/brand/$', 'django.shortcuts.render', {'template_name': 'dev/brand.html'}),
     url(r'^d/the-net-works/$', 'django.shortcuts.render', {'template_name': 'dev/the-net-works.html'}),
+    url(r'^d/openhub-updates/$', 'django.shortcuts.render', {'template_name': 'dev/openhub-updates.html'}),
+    url(r'^d/national-mind-updates/$', 'django.shortcuts.render', {'template_name': 'dev/national-mind-updates.html'}),
+    url(r'^d/buddy-search/$', 'django.shortcuts.render', {'template_name': 'dev/buddy-search.html'}),
+    url(r'^d/hot-topic-news/$', 'django.shortcuts.render', {'template_name': 'dev/hot-topic-news.html'}),
+    url(r'^d/engine-room-2/$', 'django.shortcuts.render', {'template_name': 'dev/engine-room.html'}),
+
 
     url(r'^sign-up/part1$', 'django.shortcuts.render', {'template_name': 'dev/signup/part1.html'}),
     url(r'^sign-up/part2$', 'django.shortcuts.render', {'template_name': 'dev/signup/part2.html'}),

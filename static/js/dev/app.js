@@ -1,4 +1,5 @@
 var gridster;
+var serialization;
 
 function setCookie(cname, cvalue, exdays) {
     var d = new Date();
@@ -15,6 +16,11 @@ function getCookie(cname) {
         if (c.indexOf(name) == 0) return c.substring(name.length,c.length);
     }
     return "";
+}
+
+var supportLocalStorage = false;
+if(typeof(Storage) !== "undefined") {
+    supportLocalStorage = true;
 }
 
 $(document).ready(function() {
@@ -71,15 +77,23 @@ $(document).ready(function() {
 	{"col":2,"row":1,"size_x":1,"size_y":1, "name":"areasofgrowth"},
 */
 
-	var serialization = [
+	serialization = [
 	{"col":1,"row":1,"size_x":1,"size_y":1, "name":"callout"},
 	{"col":2,"row":1,"size_x":1,"size_y":1, "name":"meettheteam"},
 	{"col":3,"row":1,"size_x":1,"size_y":1, "name":"todo"},
-	{"col":4,"row":1,"size_x":1,"size_y":1, "name":"myLocalArea"},
-	{"col":1,"row":2,"size_x":1,"size_y":1, "name":"theNetWorks"},
+	{"col":4,"row":1,"size_x":1,"size_y":1, "name":"myLocalArea"}
+
+	/*{"col":1,"row":2,"size_x":1,"size_y":1, "name":"theNetWorks"},
 	{"col":2,"row":2,"size_x":1,"size_y":1, "name":"positiveNews"},
-	{"col":3,"row":2,"size_x":1,"size_y":1, "name":"theLabNews"}
+	{"col":3,"row":2,"size_x":1,"size_y":1, "name":"buddySearch"},
+	{"col":4,"row":2,"size_x":1,"size_y":1, "name":"theLabNews"},
+
+	{"col":1,"row":3,"size_x":1,"size_y":1, "name":"externalNews"},
+	{"col":2,"row":3,"size_x":1,"size_y":1, "name":"openHubUpdates"},
+	{"col":3,"row":3,"size_x":1,"size_y":1, "name":"nationalMindNews"}*/
+
 	];
+	
 	
 
     gridster = $(".gridster > ul").gridster({
@@ -91,12 +105,51 @@ $(document).ready(function() {
         autogenerate_stylesheet: true,
         resize: {
         	enabled: true
+      	},
+      	draggable: {
+      		stop: function(event, ui){ 
+                             // your events here
+                             saveState();
+               }
       	}
     }).data('gridster');
 
-    $.each(serialization, function() {
+    
+
+    if(localStorage.getItem("positions") === null) {
+    	$.each(serialization, function() {
             gridster.add_widget($('.'+this.name).html(), this.size_x, this.size_y, this.col, this.row);
-    });
+   		});
+	
+    	//use default
+    	saveState();
+
+    	
+
+    } else {
+    	restoreState();
+    	//alert("restoring");
+    }
+
+
+
+    function restoreState() {
+
+    	$.each(JSON.parse(localStorage.positions), function() {
+            gridster.add_widget($('.'+this.wdgName).html(), this.size_x, this.size_y, this.col, this.row);
+
+    	});
+	}
+
+	function saveState() {
+		if(supportLocalStorage) {
+			localStorage.setItem("positions", JSON.stringify(gridster.serialize()));
+		}
+	}
+
+
+
+
 
     function makeGrid(state, gr) {
 

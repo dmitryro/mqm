@@ -824,7 +824,8 @@
                 col: wgd.col,
                 row: wgd.row,
                 size_x: wgd.size_x,
-                size_y: wgd.size_y
+                size_y: wgd.size_y,
+                wdgName: wgd.el[0].getAttribute("data-name")
             };
         },
         collision: {},

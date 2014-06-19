@@ -95,6 +95,18 @@ h1,h2,h3,h4,h5,h6 {
 .withIcon.icon_people span, #icon_people {width:92px; height:38px; background:url('/static/assets/img/ui/icons/icon_people.svg');}
 .withIcon.icon_people { line-height:38px;}
 
+.withIcon.icon_openhub span, #icon_openhub {width:49px; height:63px; background:url('/static/assets/img/ui/icons/icon_openhub.svg');}
+.withIcon.icon_openhub { line-height:63px;}
+
+.withIcon.icon_nationalMind span, #icon_nationalMind {width:57px; height:58px; background:url('/static/assets/img/ui/icons/icon_nationalMind.svg');}
+.withIcon.icon_nationalMind { line-height:58px;}
+
+.withIcon.icon_buddySearch span, #icon_buddySearch {width:61px; height:81px; background:url('/static/assets/img/ui/icons/icon_buddySearch.svg');}
+.withIcon.icon_buddySearch { line-height:81px;}
+
+.withIcon.icon_externalNews span, #icon_externalNews {width:45px; height:54px; background:url('/static/assets/img/ui/icons/icon_externalNews.svg');}
+.withIcon.icon_externalNews { line-height:54px;}
+
 .openHubLogo {width:181px; height:79px; background:url(/static/assets/img/brand/openhub-logo.svg);}
 .no-svg .openHubLogo {background:url(/static/assets/img/brand/openhub-logo.png);}
 
@@ -132,3 +144,10 @@ h1,h2,h3,h4,h5,h6 {
 #loginTabs {width:100px; margin-bottom:20px}
 #loginTabs a {color:#000}
 #loginTabs .active {color:#843995}
+
+
+#engineRoomList {list-style:none; margin:0; padding:0;}
+#engineRoomList li {margin:0 0 70px 0; padding:0; float: left; border-bottom:15px solid rgba(255,255,255,0.4); width:25%; background:#020;}
+#engineRoomList li .feature {width:140px; height:180px; background:#fff; margin:0 auto; }
+#engineRoomList li .detail {width:290px; height:180px; background:$blue; position:absolute; opacity:0.4; margin:0 auto;}
+

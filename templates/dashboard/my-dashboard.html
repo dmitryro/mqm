@@ -51,7 +51,7 @@
 
     <div class="meettheteam">
 
-        <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
+        <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1" data-name="meettheteam">
             <div class="widget-bar">
                 <div class="widget-title"><a href="/meet-the-team">MEET THE TEAM</a></div>
             </div>
@@ -109,7 +109,7 @@
     </div>
 
     <div class="callout hidden">
-        <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
+        <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1" data-name="callout">
                     <div class="widget-bar">
                         <div class="widget-title"><a href="/call-out">CALL OUT</a></div>
                         {% include "includes/widget-settings.html" with type="question" delatable="false" url="/call-out/add" %}
@@ -140,7 +140,7 @@
     </div>
 
     <div class="hidden todo">
-    <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
+    <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1" data-name="todo">
                     <div class="widget-bar">
                         <div class="widget-title"><a href="{% url "tasks" %}">TO-DO LIST</a></div>
                         {% include "includes/widget-settings.html" with type="todo" url="/todos/add" %}
@@ -187,7 +187,7 @@
 
     {% comment %}
     <div class="areasofgrowth hidden">
-        <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
+        <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1" data-name="areasofgrowth">
             <div class="widget-bar">
                 <div class="widget-title">DESIGN YOUR SUPPORT</div>
                    {% include "includes/widget-settings.html" with delatable="false" %}
@@ -195,17 +195,10 @@
         </li>
     </div>
 
-    <div class="openHubUpdates hidden">
-        <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
-            <div class="widget-bar">
-                <div class="widget-title">Open Hub Updates</div>
-                   {% include "includes/widget-settings.html" %}
-            </div>
-        </li>
-    </div>
+    
 
     <div class="hidden assetsExpenditure">
-        <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
+        <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1" data-name="assetsExpenditure">
                     <div class="widget-bar">
                         <div class="widget-title">
                             ASSETS vs EXPENDITURE (%)
@@ -216,29 +209,12 @@
                 </li>
     </div>
 
-    <div class="externalNews hidden">
-    <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
-                    <div class="widget-bar">
-                        <div class="widget-title">HOT TOPICS NEWS STREAM</div>
-                        {% include "includes/widget-settings.html" with type="ExternalNews" %}
-                    </div>
-                    <div class='list-group'>
-                    </div>
-                </li>
-    </div>
+    
 
-    <div class="nationalMindNews hidden">
-        <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
-            <div class="widget-bar">
-                <div class="widget-title">NATIONAL MIND NEWS</div>
-            </div>
-            <div class='list-group'>
-            </div>
-        </li>
-    </div>
+    
 
     <div class="branding hidden">
-    <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
+    <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1" data-name="branding">
                     <div class="widget-bar">
                         <div class="widget-title">BRANDING</div>
                         {% include "includes/widget-settings.html" with type="Branding" %}
@@ -249,7 +225,7 @@
     </div>
 
     <div class="diagnostic hidden">
-        <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
+        <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1" data-name="diagnostic">
                     <div class="widget-bar">
                         <div class="widget-title">DIAGNOSTIC</div>
                         {% include "includes/widget-settings.html" %}
@@ -271,7 +247,7 @@
     </div>
 
     <div class="services hidden">
-        <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
+        <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1" data-name="services">
                     <div class="widget-bar">
                         <div class="widget-title">OUR SERVICES</div>
                         {% include "includes/widget-settings.html" with type="Service" %}
@@ -289,7 +265,7 @@
     </div>
 
     <div class="fundingmap hidden">
-        <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
+        <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1" data-name="fundingmap">
             <div class="widget-bar">
                 <div class="widget-title">THE FUNDING MAP</div>
                 {% include "includes/widget-settings.html" with type="Funding" %}
@@ -299,7 +275,7 @@
     </div>
 
     <div class="hidden theEngineRoom">
-        <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
+        <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1" data-name="theEngineRoom">
             <div class="widget-bar">
                 <div class="widget-title">THE ENGINE ROOM</div>
                 {% include "includes/widget-settings.html" with type="Document" %}
@@ -310,8 +286,28 @@
     </div>
     {% endcomment %}
 
+
+    <div class="openHubUpdates hidden">
+        <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1" data-name="openHubUpdates">
+            <div class="widget-bar">
+                <div class="widget-title">OPEN HUB UPDATES</div>
+                   {% include "includes/widget-settings.html" %}
+            </div>
+        </li>
+    </div>
+
+    <div class="nationalMindNews hidden">
+        <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1" data-name="nationalMindNews">
+            <div class="widget-bar">
+                <div class="widget-title">NATIONAL MIND NEWS</div>
+            </div>
+            <div class='list-group'>
+            </div>
+        </li>
+    </div>
+
         <div class="theNetWorks hidden">
-      <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
+      <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1" data-name="theNetWorks">
         <div class="widget-bar">
             <div class="widget-title"><a href="{% url "net-works" %}">THE NET WORKS</a></div>
         </div>
@@ -322,7 +318,7 @@
 
 
     <div class="theLabNews hidden">
-        <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
+        <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1" data-name="theLabNews">
                     <div class="widget-bar">
                         <div class="widget-title">THE LAB NEWS</div>
                     </div>
@@ -334,7 +330,7 @@
 
     {% comment %}
     <div class="eventsdiary hidden">
-        <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
+        <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1" data-name="eventsdiary">
             <div class="widget-bar">
                 <div class="widget-title">EVENTS DIARY</div>
                 {% include "includes/widget-settings.html" with type="Event" %}
@@ -428,17 +424,10 @@
         </li>
     </div>
 
-    <div class="buddysearch hidden">
-        <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
-            <div class="widget-bar">
-                <div class="widget-title">BUDDY SEARCH</div>
-                {% include "includes/widget-settings.html" %}
-            </div>
-        </li>
-    </div>
+    
 
     <div class="netCurrentAssets hidden">
-        <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
+        <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1" data-name="netCurrentAssets">
                     <div class="widget-bar">
                         <div class="widget-title">
                             NET CURRENT ASSETS
@@ -451,8 +440,49 @@
     </div>
     {% endcomment %}
 
-    <div class="myLocalArea hidden">
-    <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
+    <div class="buddySearch hidden" >
+        <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1" data-name="buddySearch">
+            <div class="widget-bar">
+                <div class="widget-title"><a href="/buddy-search">BUDDY SEARCH</a></div>
+            </div>
+            <ul class="media-list">
+                <li>
+                    <form class="form-horizontal nodeForm" role="form">
+                      <div class="form-group">
+                        <input type="text" class="form-control" id="buddySearchInput" placeholder="Search">
+                      </div>
+                    </form>
+                </li>
+                {% for user in local_mind_users %}
+                <a href="{{ user.get_absolute_url }}">
+                    <li class="media">
+                        {% if user.user_avatar %}
+                        <div class="pull-left">
+                            <img class="media-object img-circle" src="{% thumbnail user.user_avatar 40x40 crop %}">
+                        </div>
+                        {% else %}
+                        <div class="pull-left">
+                            <img class="media-object img-circle avatar_default_small" src="{{ STATIC_URL }}assets/img/placeholder/base-avatar.png">
+                        </div>
+                        {% endif %}
+                        <div class="media-body">
+                            <b>{{ user.get_full_name }}</b>
+                            {% if user.job_title %}
+                            <br>
+                            <small>{{ user.job_title }}</small>
+                            {% endif %}
+                            <i class="glyphicon glyphicon-play-circle"></i>
+
+                        </div>
+                    </li>
+                </a>
+                {% endfor %}
+            </ul>
+        </li>
+    </div>
+
+    <div class="myLocalArea hidden" >
+    <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1" data-name="myLocalArea">
                     <div class="widget-bar">
                         <div class="widget-title"><a href="/my-local-area">MY LOCAL AREA</a></div>
                         {% include "includes/widget-settings.html" with type="local-area" url="/my-local-area/add" %}
@@ -474,10 +504,21 @@
                 </li>
     </div>
 
+    <div class="externalNews hidden" >
+    <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1" data-name="externalNews">
+                    <div class="widget-bar">
+                        <div class="widget-title">HOT TOPICS NEWS STREAM</div>
+                        {% include "includes/widget-settings.html" with type="ExternalNews" %}
+                    </div>
+                    <div class='list-group'>
+                    </div>
+                </li>
+    </div>
+
 
     {% comment %}
     <div class="hidden videoStream">
-        <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
+        <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1" data-name="videoStream">
                     <div class="widget-bar">
                         <div class="widget-title">VIDEO STREAM</div>
                         {% include "includes/widget-settings.html" with type="Video" %}
@@ -501,7 +542,7 @@
 
 
     <div class="positiveNews hidden">
-        <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
+        <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1" data-name="positiveNews">
                     <div class="widget-bar">
                         <div class="widget-title"><a href="{% url "positive-news" %}">POSITIVE NEWS</a></div>
                         {% include "includes/widget-settings.html" with type="News" url="/positive-news/add/" %}
@@ -523,7 +564,7 @@
     </div>
     {% comment %}
     <div class="collectiveimpact hidden">
-        <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1">
+        <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1" data-name="collectiveimpact">
             <div class="widget-bar">
                 <div class="widget-title">COLLECTIVE IMPACT</div>
             </div>
