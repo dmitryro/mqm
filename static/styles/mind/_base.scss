@@ -147,7 +147,24 @@ h1,h2,h3,h4,h5,h6 {
 
 
 #engineRoomList {list-style:none; margin:0; padding:0;}
-#engineRoomList li {margin:0 0 70px 0; padding:0; float: left; border-bottom:15px solid rgba(255,255,255,0.4); width:25%; background:#020;}
+#engineRoomList li {margin:0 0 70px 0; padding:0; float: left; border-bottom:15px solid rgba(255,255,255,0.4); width:25%;  position:relative}
 #engineRoomList li .feature {width:140px; height:180px; background:#fff; margin:0 auto; }
-#engineRoomList li .detail {width:290px; height:180px; background:$blue; position:absolute; opacity:0.4; margin:0 auto;}
+#engineRoomList li .detail {width:290px; height:180px; background:$blue; position:absolute; opacity:0; margin:0 auto; left:0; right:0; text-align:center; color:#fff; transition: opacity 0.2s linear}
+#engineRoomList li .detail:hover {opacity:1; transition: opacity 0.1s linear}
+#engineRoomList li .detail h2 {font-size:30px;}
+
+@media screen and (max-width: 1245px) {
+  #engineRoomList li {width:33%}
+}
+
+@media screen and (max-width: 960px) {
+  #engineRoomList li {width:50%}
+}
+
+@media screen and (max-width: 661px) {
+  #engineRoomList li {width:100%}
+}
+
+
+
 
