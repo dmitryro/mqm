@@ -162,6 +162,7 @@ INSTALLED_APPS = (
     'website.local_minds',
 #    'website.clinical_research',
     'website.diary',
+    'website.diversity',
     'website.documents',
     'website.faq',
     'website.financial_summary',

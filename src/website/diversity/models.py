@@ -1,0 +1,147 @@
+# -*- coding: utf-8 -*-
+from django.db import models
+from django.utils.translation import ugettext_lazy as _
+from django_extensions.db.fields import (AutoSlugField, CreationDateTimeField,
+    ModificationDateTimeField)
+
+class Diversity(models.Model):
+    trustees_white_british = models.IntegerField(default="0")
+    trustees_white_irish = models.IntegerField(default="0")
+    trustees_other_white_background = models.IntegerField(default="0")
+    trustees_white_black_african = models.IntegerField(default="0")
+    trustees_white_asian = models.IntegerField(default="0")
+    trustees_white_black_caribbean = models.IntegerField(default="0")
+    trustees_other_mixed_background = models.IntegerField(default="0")
+    trustees_indian = models.IntegerField(default="0")
+    trustees_pakistani = models.IntegerField(default="0")
+    trustees_bangladeshi = models.IntegerField(default="0")
+    trustees_other_asian_background = models.IntegerField(default="0")
+    trustees_caribbean = models.IntegerField(default="0")
+    trustees_african = models.IntegerField(default="0")
+    trustees_other_black_background = models.IntegerField(default="0")
+    trustees_chinese = models.IntegerField(default="0")
+    trustees_gypsy_or_traveller = models.IntegerField(default="0")
+    trustees_other_ethnic_group = models.IntegerField(default="0")
+
+    volunteers_white_british = models.IntegerField(default="0")
+    volunteers_white_irish = models.IntegerField(default="0")
+    volunteers_other_white_background = models.IntegerField(default="0")
+    volunteers_white_black_african = models.IntegerField(default="0")
+    volunteers_white_asian = models.IntegerField(default="0")
+    volunteers_white_black_caribbean = models.IntegerField(default="0")
+    volunteers_other_mixed_background = models.IntegerField(default="0")
+    volunteers_indian = models.IntegerField(default="0")
+    volunteers_pakistani = models.IntegerField(default="0")
+    volunteers_bangladeshi = models.IntegerField(default="0")
+    volunteers_other_asian_background = models.IntegerField(default="0")
+    volunteers_caribbean = models.IntegerField(default="0")
+    volunteers_african = models.IntegerField(default="0")
+    volunteers_other_black_background = models.IntegerField(default="0")
+    volunteers_chinese = models.IntegerField(default="0")
+    volunteers_gypsy_or_traveller = models.IntegerField(default="0")
+    volunteers_other_ethnic_group = models.IntegerField(default="0")
+
+    staff_white_british = models.IntegerField(default="0")
+    staff_white_irish = models.IntegerField(default="0")
+    staff_other_white_background = models.IntegerField(default="0")
+    staff_white_black_african = models.IntegerField(default="0")
+    staff_white_asian = models.IntegerField(default="0")
+    staff_white_black_caribbean = models.IntegerField(default="0")
+    staff_other_mixed_background = models.IntegerField(default="0")
+    staff_indian = models.IntegerField(default="0")
+    staff_pakistani = models.IntegerField(default="0")
+    staff_bangladeshi = models.IntegerField(default="0")
+    staff_other_asian_background = models.IntegerField(default="0")
+    staff_caribbean = models.IntegerField(default="0")
+    staff_african = models.IntegerField(default="0")
+    staff_other_black_background = models.IntegerField(default="0")
+    staff_chinese = models.IntegerField(default="0")
+    staff_gypsy_or_traveller = models.IntegerField(default="0")
+    staff_other_ethnic_group = models.IntegerField(default="0")
+
+
+
+    trustees_autism = models.IntegerField(default="0")
+    trustees_blindness = models.IntegerField(default="0")
+    trustees_deafness = models.IntegerField(default="0")
+    trustees_emotional_disturbance = models.IntegerField(default="0")
+    trustees_intellectual_disability = models.IntegerField(default="0")
+    trustees_multiple_disabilities = models.IntegerField(default="0")
+    trustees_orthopaedic_impairment = models.IntegerField(default="0")
+    trustees_other_health_impaired = models.IntegerField(default="0")
+    trustees_specific_learning_disability = models.IntegerField(default="0")
+    trustees_speech_or_language_impairment = models.IntegerField(default="0")
+    trustees_traumatic_brain_injury = models.IntegerField(default="0")
+    trustees_visual_impairment = models.IntegerField(default="0")
+
+    volunteers_autism = models.IntegerField(default="0")
+    volunteers_blindness = models.IntegerField(default="0")
+    volunteers_deafness = models.IntegerField(default="0")
+    volunteers_emotional_disturbance = models.IntegerField(default="0")
+    volunteers_intellectual_disability = models.IntegerField(default="0")
+    volunteers_multiple_disabilities = models.IntegerField(default="0")
+    volunteers_orthopaedic_impairment = models.IntegerField(default="0")
+    volunteers_other_health_impaired = models.IntegerField(default="0")
+    volunteers_specific_learning_disability = models.IntegerField(default="0")
+    volunteers_speech_or_language_impairment = models.IntegerField(default="0")
+    volunteers_traumatic_brain_injury = models.IntegerField(default="0")
+    volunteers_visual_impairment = models.IntegerField(default="0")
+
+    staff_autism = models.IntegerField(default="0")
+    staff_blindness = models.IntegerField(default="0")
+    staff_deafness = models.IntegerField(default="0")
+    staff_emotional_disturbance = models.IntegerField(default="0")
+    staff_intellectual_disability = models.IntegerField(default="0")
+    staff_multiple_disabilities = models.IntegerField(default="0")
+    staff_orthopaedic_impairment = models.IntegerField(default="0")
+    staff_other_health_impaired = models.IntegerField(default="0")
+    staff_specific_learning_disability = models.IntegerField(default="0")
+    staff_speech_or_language_impairment = models.IntegerField(default="0")
+    staff_traumatic_brain_injury = models.IntegerField(default="0")
+    staff_visual_impairment = models.IntegerField(default="0")
+
+
+
+    trustees_female = models.IntegerField(default="0")
+    trustees_male = models.IntegerField(default="0")
+    trustees_transgender = models.IntegerField(default="0")
+
+    volunteers_female = models.IntegerField(default="0")
+    volunteers_male = models.IntegerField(default="0")
+    volunteers_transgender = models.IntegerField(default="0")
+
+    staff_female = models.IntegerField(default="0")
+    staff_male = models.IntegerField(default="0")
+    staff_transgender = models.IntegerField(default="0")
+
+
+    trustees_18_24 = models.IntegerField(default="0")
+    trustees_25_34 = models.IntegerField(default="0")
+    trustees_35_34 = models.IntegerField(default="0")
+    trustees_45_54 = models.IntegerField(default="0")
+    trustees_55_64 = models.IntegerField(default="0")
+    trustees_65  = models.IntegerField(default="0")
+
+    volunteers_18_24 = models.IntegerField(default="0")
+    volunteers_25_34 = models.IntegerField(default="0")
+    volunteers_35_34 = models.IntegerField(default="0")
+    volunteers_45_54 = models.IntegerField(default="0")
+    volunteers_55_64 = models.IntegerField(default="0")
+    volunteers_65  = models.IntegerField(default="0")
+
+    staff_18_24 = models.IntegerField(default="0")
+    staff_25_34 = models.IntegerField(default="0")
+    staff_35_34 = models.IntegerField(default="0")
+    staff_45_54 = models.IntegerField(default="0")
+    staff_55_64 = models.IntegerField(default="0")
+    staff_65  = models.IntegerField(default="0")
+
+
+
+
+    created = CreationDateTimeField()
+    modified = ModificationDateTimeField()
+
+    class Meta:
+        verbose_name = _('Diversity Marker')
+        verbose_name_plural = _('Diversity Markers')

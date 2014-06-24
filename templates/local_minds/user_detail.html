@@ -57,19 +57,19 @@
 				<div class="col-md-9 bio">
 
                     {% if member.skills %}
-                        <h5><stong>SKILLS</stong></h5>
-                        <p class="skill">{{ member.skills|linebreaks|urlize }}</p>
+                        <h5><strong>Skills</strong></h5>
+                        <p class="skill">{{ member.skills|urlize }}</p>
                     {% endif %}
 
                     {% if member.experiences.all %}
-                        <h5><stong>EXPERIENCE</stong></h5>
+                        <h5><strong>Experience</strong></h5>
                         {% for experience in member.experiences.all %}
                             <p class="skills">{{ experience }}</p>
                         {% endfor %}
                     {% endif %}
 
                     {% comment %}
-					<h5><stong>LATEST ACTIVITY</stong></h5>
+					<h5><strong>LATEST ACTIVITY</strong></h5>
 					<ul style="padding:0px">
 						<li style="display:block; padding-bottom:5px;"> <span>New Video Added - on 01/09/14 - <a href="video.html">Mind Cymru Open Day</a></span></li>
 						<li style="display:block; padding-bottom:5px;"><span>New Document Uploaded - on 01/09/14 - <a href="#">10 Top Tips for Tendering</a></span></li>
