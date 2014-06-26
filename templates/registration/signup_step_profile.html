@@ -51,7 +51,7 @@
 
         <div class="row">
             <div class="col-md-6">
-                {% formrow form.skills with tooltip="The data you add here will be used on the Buddy Search and also the Local Mind network map" label="Your Skills <span class='glyphicon glyphicon-info-sign'></span>" %}
+                {% formrow form.skills with tooltip="The data you add here will be used on the Buddy Search and also the Local Mind network map" label="Your Skills <span class='glyphicon glyphicon-info-sign'></span>" hide_help_text=True %}
             </div>
             <div class="col-md-6">
                 {% formrow form.user_avatar using "forms/signup_row_file_field.html" %}
