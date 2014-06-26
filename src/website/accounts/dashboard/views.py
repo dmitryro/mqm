@@ -1,8 +1,9 @@
 from django.core.urlresolvers import reverse
-from django.views.generic import TemplateView, UpdateView
+from django.views.generic import FormView, TemplateView, UpdateView
 from website.views.generic import CommonViewMixin
 from website.news.models import PositiveNews
 from website.local_minds.models import LocalMind
+from ..forms import InvitationForm
 from .forms import LocalMindForm, ProfileForm
 
 
@@ -59,3 +60,18 @@ class ProfileUpdateView(CommonViewMixin, UpdateView):
 
 
 profile_form = ProfileUpdateView.as_view()
+
+
+class InviteFormView(CommonViewMixin, FormView):
+    form_class = InvitationForm
+    template_name = 'dashboard/invitation_form.html'
+
+    def form_valid(self, form):
+        form.save(local_mind=self.request.user.local_mind)
+        return super(FormView, self).form_valid(form)
+
+    def get_success_url(self):
+        return reverse('dashboard')
+
+
+invite_form = InviteFormView.as_view()

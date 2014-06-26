@@ -8,6 +8,7 @@ import website.floppyforms_patch
 from floppyforms.__future__.models import ModelForm, formfield_callback
 import floppyforms.__future__ as forms
 
+from website.accounts.forms import InvitationForm
 from website.accounts.models import User, Experience
 from website.faq.models import Question
 from website.local_map.models import Map
@@ -87,8 +88,6 @@ class InlineTaskFormSetField(InlineFormSetField):
 class BaseSignupProfileForm(CompositeModelForm):
     formfield_callback = formfield_callback
 
-    user_privileges = None
-
     error_messages = {
         'password_mismatch': _("The two password fields didn't match."),
     }
@@ -139,7 +138,6 @@ class BaseSignupProfileForm(CompositeModelForm):
 
     def save(self, *args, **kwargs):
         self.instance.set_password(self.cleaned_data["password1"])
-        self.instance.privileges = self.user_privileges
         return super(BaseSignupProfileForm, self).save(*args, **kwargs)
 
     def save_formsets(self, *args, **kwargs):
@@ -156,6 +154,7 @@ class SignupProfileForm(BaseSignupProfileForm):
     def save(self, email, local_mind, *args, **kwargs):
         self.instance.email = email
         self.instance.local_mind = local_mind
+        self.instance.privileges = self.user_privileges
         return super(SignupProfileForm, self).save(*args, **kwargs)
 
 
@@ -166,8 +165,6 @@ class SignupUserProfileForm(BaseSignupProfileForm):
     '''
 
     formfield_callback = formfield_callback
-
-    user_privileges = User.GENERAL
 
     def save(self, *args, **kwargs):
         self.instance.date_joined = datetime.utcnow()
@@ -327,27 +324,6 @@ class SignupPartnersForm(CompositeModelForm):
             form.instance.user = user
 
         return super(SignupPartnersForm, self).save(*args, **kwargs)
-
-
-class InvitationForm(ModelForm):
-    class Meta:
-        model = User
-        fields = (
-            'first_name',
-            'last_name',
-            'email',
-            'privileges',
-            'job_title',
-        )
-
-    def save(self, *args, **kwargs):
-        self.instance.local_mind = self.cleaned_data['local_mind']
-        self.instance.date_joined = None
-        saved_obj = super(InvitationForm, self).save(*args, **kwargs)
-        def send_invitation():
-            saved_obj.send_invitation()
-        self.save_m2m = send_invitation
-        return saved_obj
 
 
 class SignupInviteForm(CompositeModelForm):

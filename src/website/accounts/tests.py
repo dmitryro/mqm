@@ -322,6 +322,7 @@ class SignupTests(WebTest):
         user = User.objects.create(
             local_mind=local_mind,
             email='foo@example.com',
+            privileges=User.INTERN,
             date_joined=None)
 
         url = user.get_signup_url()
@@ -359,6 +360,7 @@ class SignupTests(WebTest):
         self.assertEqual(user.last_name, 'Bar')
         self.assertTrue(user.check_password('TestPassword'))
         self.assertTrue(user.date_joined is not None)
+        self.assertEqual(user.privileges, User.INTERN)
 
     def test_local_mind_with_existing_user(self):
         local_mind = LocalMind.objects.all()[0]

@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
-import floppyforms as forms
+import website.floppyforms_patch
+from floppyforms.__future__.models import ModelForm
+import floppyforms.__future__ as forms
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.forms import PasswordResetForm as _PasswordResetForm
 from django.contrib.auth.tokens import default_token_generator
@@ -68,3 +70,31 @@ class PasswordResetForm(_PasswordResetForm):
                 template='email/registration/password_forgotten.html',
                 context=context)
             email.send()
+
+
+class InvitationForm(ModelForm):
+    class Meta:
+        model = User
+        fields = (
+            'first_name',
+            'last_name',
+            'email',
+            'privileges',
+            'job_title',
+        )
+
+    def save(self, commit=True, *args, **kwargs):
+        if 'local_mind' in kwargs:
+            local_mind = kwargs.pop('local_mind')
+        else:
+            local_mind = self.cleaned_data['local_mind']
+        self.instance.local_mind = local_mind
+        self.instance.date_joined = None
+        saved_obj = super(InvitationForm, self).save(*args, **kwargs)
+        if not commit:
+            def send_invitation():
+                saved_obj.send_invitation()
+            self.save_m2m = send_invitation
+        else:
+            saved_obj.send_invitation()
+        return saved_obj

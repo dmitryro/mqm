@@ -88,9 +88,11 @@
                         <li class="settings-opt" style="background-image:url({{ STATIC_URL }}assets/img/ui/icons/users-06.svg)">
                             View {{ user.local_mind.name }}
                         </li></a>
-                        <li class="settings-opt action_addNew" data-type="invite" style="background-image:url({{ STATIC_URL }}assets/img/ui/icons/profile-04.svg)">
-                           <a href="#">Invite Users</a>
-                        </li>
+                        <a href="{% url "invite-form" %}">
+                            <li class="settings-opt" style="background-image:url({{ STATIC_URL }}assets/img/ui/icons/profile-04.svg)">
+                                Invite Users
+                            </li>
+                        </a>
                         <li class="settings-opt action_addNew" data-type="Password" style="background-image:url({{ STATIC_URL }}assets/img/ui/icons/password-07.svg)">
                            <a href="#">Change password</a>
                         </li>
