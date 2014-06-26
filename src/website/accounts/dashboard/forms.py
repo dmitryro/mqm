@@ -1,5 +1,6 @@
+from django.contrib.auth.forms import PasswordChangeForm as _PasswordChangeForm
 from django_compositeform import CompositeModelForm, ForeignKeyFormField
-import floppyforms as forms
+import floppyforms.__future__ as forms
 from floppyforms.__future__.models import ModelForm, formfield_callback
 
 from website.accounts.models import User
@@ -61,3 +62,10 @@ class LocalMindForm(CompositeModelForm):
             'area_of_benefit',
             'average_volunteer_hours',
         )
+
+
+class PasswordChangeForm(_PasswordChangeForm):
+    def __init__(self, *args, **kwargs):
+        super(PasswordChangeForm, self).__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget = forms.PasswordInput()

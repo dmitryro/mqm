@@ -93,10 +93,11 @@
                                 Invite Users
                             </li>
                         </a>
-                        <li class="settings-opt action_addNew" data-type="Password" style="background-image:url({{ STATIC_URL }}assets/img/ui/icons/password-07.svg)">
-                           <a href="#">Change password</a>
-                        </li>
-
+                        <a href="{% url "change-password" %}">
+                            <li class="settings-opt" style="background-image:url({{ STATIC_URL }}assets/img/ui/icons/password-07.svg)">
+                            Change password
+                            </li>
+                        </a>
                     </ul>
                 </div>
 

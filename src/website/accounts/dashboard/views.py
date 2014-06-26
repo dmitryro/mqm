@@ -4,7 +4,7 @@ from website.views.generic import CommonViewMixin
 from website.news.models import PositiveNews
 from website.local_minds.models import LocalMind
 from ..forms import InvitationForm
-from .forms import LocalMindForm, ProfileForm
+from .forms import LocalMindForm, ProfileForm, PasswordChangeForm
 
 
 class DashboardView(CommonViewMixin, TemplateView):
@@ -75,3 +75,23 @@ class InviteFormView(CommonViewMixin, FormView):
 
 
 invite_form = InviteFormView.as_view()
+
+
+class ChangePasswordView(CommonViewMixin, FormView):
+    form_class = PasswordChangeForm
+    template_name = 'dashboard/change_password.html'
+
+    def get_form_kwargs(self):
+        kwargs = super(ChangePasswordView, self).get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
+
+    def form_valid(self, form):
+        form.save()
+        return super(FormView, self).form_valid(form)
+
+    def get_success_url(self):
+        return reverse('dashboard')
+
+
+change_password = ChangePasswordView.as_view()
