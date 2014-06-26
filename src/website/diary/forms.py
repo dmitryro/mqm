@@ -15,6 +15,10 @@ class EventForm(ModelForm):
             'postcode',
             'privacy',
         )
+        widgets = {
+            'start': forms.SplitDateTimeWidget,
+            'end': forms.SplitDateTimeWidget,
+        }
 
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user')
