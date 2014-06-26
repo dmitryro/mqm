@@ -1,0 +1,25 @@
+{% extends "forms/_base_modal.html" %}
+{% load floppyforms %}
+
+
+{% block headline %}
+<div class="modal-icon" id="icon_map"></div><h2>ADD A FUND</h2>
+{% endblock %}
+
+
+{% block fields %}
+    {% form form using %}
+        {% formconfig row using "forms/signup_row.html" %}
+
+        {% formrow form.title %}
+        {% formrow form.start_date %}
+        {% formrow form.end_date %}
+        {% formrow form.description %}
+        {% formrow form.telephone %}
+        {% formrow form.email %}
+        {% formrow form.website %}
+        {% formrow form.postcode %}
+        {% formrow form.privacy %}
+    {% endform %}
+{% endblock %}
+

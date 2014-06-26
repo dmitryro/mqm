@@ -48,6 +48,7 @@ urlpatterns = patterns('',
     url(r'^the-net-works/$', 'website.resources.views.resource_list', name='net-works'),
     url(r'^diary-events/$', 'website.diary.views.event_calendar', name='events'),
     url(r'^diary-events/(?P<slug>[^/]+)/$', 'website.diary.views.event_detail', name='events'),
+    url(r'^funding-map/$', 'website.funding_map.views.funding_list', name='fundings'),
 
     url(r'^login/$', 'website.accounts.views.login_signup', name='login'),
     url(r'^login/signup/$', lambda r: HttpResponseRedirect(reverse('login') + '#signup'), name='signup'),

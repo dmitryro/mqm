@@ -78,9 +78,7 @@
                 $modalContent.find('form').attr('action', action);
             }
 
-            console.log('open modal');
             openModal($modalContent);
-            console.log('open modal', $modalContent);
 
             //$(".widget-bar ul").hide(); //you want to hide the dropdown menu here
         });
