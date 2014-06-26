@@ -7,17 +7,21 @@ from django.template import RequestContext
 from django.views.generic import DetailView, ListView, TemplateView
 from django.utils.encoding import force_str
 
-from website.views.generic import CommonPrivacyViewMixin
+from website.views.generic import CommonPrivacyViewMixin, ListCreateView
 from ..local_minds.models import LocalMind
+from .forms import EventForm
 from .models import Event
 
 
-class EventCalendar(CommonPrivacyViewMixin, TemplateView):
+class EventCalendar(CommonPrivacyViewMixin, ListCreateView):
+    queryset = Event.objects.all()
+    form_class = EventForm
     template_name = 'diary/event_calendar.html'
 
     def get_context_data(self, **kwargs):
-        kwargs['regions'] = LocalMind.REGION_CHOICES
-        return super(EventCalendar, self).get_context_data(**kwargs)
+        context = super(EventCalendar, self).get_context_data(**kwargs)
+        context['regions'] = LocalMind.REGION_CHOICES
+        return context
 
 
 event_calendar = EventCalendar.as_view()
@@ -57,6 +61,7 @@ class EventAPIList(CommonPrivacyViewMixin, ListView):
             'class': 'event-important',
             'start': self.serialize_datetime(obj.start),
             'end': self.serialize_datetime(obj.end),
+            'privacy': obj.privacy,
         }
 
     def serialize_object_list(self, object_list):

@@ -14,7 +14,7 @@
 $(document).ready(function(){
     var regions = {
         {% for region_slug, region_name in regions %}
-        {{ region_slug }}: "{{ region_name }}"{% if not forloop.last %}, {% endif %}
+        "{{ region_slug|escapejs }}": "{{ region_name|escapejs }}"{% if not forloop.last %}, {% endif %}
         {% endfor %}
     };
     var calendar = $('#calendar').calendar({
@@ -41,10 +41,11 @@ $(document).ready(function(){
     <div class="container-fluid">
 
     <h3 class="withIcon icon_calendar"><span></span>EVENTS DIARY</h3>
-        <a href="/" class="page-close"></a>
+    <a href="{% url "dashboard" %}" class="page-close"></a>
 
-    <button class="btn btn-default action_addNew" data-type="Event">ADD NEW EVENT</button>
-    <br><br>
+    <button class="btn btn-default action_addNew" data-target="#event-form"{% if show_form %} data-open{% endif %}>ADD NEW EVENT</button>
+
+    {% include "diary/_event_form.html" with id="event-form" form=form %}
 
     <div id="team-content">
 

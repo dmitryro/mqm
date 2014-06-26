@@ -30,6 +30,12 @@ class CommonPrivacyViewMixin(LoginRequiredMixin, PrivacyViewMixin):
 
 
 class CreateMixin(ModelFormMixin):
+    show_form = False
+
+    def dispatch(self, request, *args, **kwargs):
+        self.show_form = kwargs.pop('show_form', self.show_form)
+        return super(CreateMixin, self).dispatch(request, *args, **kwargs)
+
     def get(self, request, *args, **kwargs):
         """
         Handles GET requests and instantiates a blank version of the form.
@@ -55,14 +61,13 @@ class CreateMixin(ModelFormMixin):
         else:
             return self.form_invalid(form)
 
+    def get_form_kwargs(self):
+        kwargs = super(CreateMixin, self).get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
+
 
 class DetailCreateView(CreateMixin, DetailView):
-    show_form = False
-
-    def dispatch(self, request, *args, **kwargs):
-        self.show_form = kwargs.pop('show_form', self.show_form)
-        return super(DetailCreateView, self).dispatch(request, *args, **kwargs)
-
     def get(self, request, *args, **kwargs):
         self.object = self.get_object()
         return super(DetailCreateView, self).get(request, *args, **kwargs)
@@ -70,11 +75,6 @@ class DetailCreateView(CreateMixin, DetailView):
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
         return super(DetailCreateView, self).post(request, *args, **kwargs)
-
-    def get_form_kwargs(self):
-        kwargs = super(DetailCreateView, self).get_form_kwargs()
-        kwargs['user'] = self.request.user
-        return kwargs
 
     def get_context_object_name(self, obj):
         return DetailView.get_context_object_name(self, obj)
@@ -86,8 +86,6 @@ class DetailCreateView(CreateMixin, DetailView):
 
 
 class ListCreateView(CreateMixin, ListView):
-    show_form = False
-
     def dispatch(self, request, *args, **kwargs):
         self.show_form = kwargs.pop('show_form', self.show_form)
         return super(ListCreateView, self).dispatch(request, *args, **kwargs)
@@ -99,11 +97,6 @@ class ListCreateView(CreateMixin, ListView):
     def post(self, request, *args, **kwargs):
         self.object_list = self.get_queryset()
         return super(ListCreateView, self).post(request, *args, **kwargs)
-
-    def get_form_kwargs(self):
-        kwargs = super(ListCreateView, self).get_form_kwargs()
-        kwargs['user'] = self.request.user
-        return kwargs
 
     def get_context_object_name(self, object_list):
         return ListView.get_context_object_name(self, object_list)
