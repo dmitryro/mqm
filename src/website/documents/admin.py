@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
+from mediastore.admin import ModelAdmin
+
 from .models import Category, Tag, Document
 
 
-class CategoryAdmin(admin.ModelAdmin):
+class CategoryAdmin(ModelAdmin):
     list_display = ('name',)
     prepopulated_fields = {
         'slug': ('name',),
@@ -25,7 +27,7 @@ class CategoryAdmin(admin.ModelAdmin):
         }),
     )
 
-class TagAdmin(admin.ModelAdmin):
+class TagAdmin(ModelAdmin):
     list_display = ('name',)
     prepopulated_fields = {
         'slug': ('name',),
@@ -47,7 +49,7 @@ class TagAdmin(admin.ModelAdmin):
     )
 
 
-class DocumentAdmin(admin.ModelAdmin):
+class DocumentAdmin(ModelAdmin):
     list_display = ('title', 'date', 'privacy',)
     list_editable = ('privacy',)
     list_filter = ('privacy',)
