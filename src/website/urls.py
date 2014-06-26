@@ -50,7 +50,7 @@ urlpatterns = patterns('',
     url(r'^diary-events/(?P<slug>[^/]+)/$', 'website.diary.views.event_detail', name='events'),
     url(r'^funding-map/$', 'website.funding_map.views.funding_list', name='fundings'),
     url(r'^video-stream/$', 'website.videos.views.video_list', name='videos'),
-    url(r'^video-stream/(?P<slug>[^/]+)/$', 'website.videos.views.video_list', name='videos'),
+    url(r'^video-stream/(?P<slug>[^/]+)/$', 'website.videos.views.video_detail', name='videos'),
 
     url(r'^login/$', 'website.accounts.views.login_signup', name='login'),
     url(r'^login/signup/$', lambda r: HttpResponseRedirect(reverse('login') + '#signup'), name='signup'),

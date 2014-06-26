@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load render_embeded %}
+
+
+{% block content %}
+{% include "includes/sidebar.html" %}
+
+    <div id="content">
+
+        {% include "includes/topbar.html" %}
+
+        <div class="container-fluid">
+            <h3 class="withIcon"><span class="icon_video"></span>{{ video.title }}</h3>
+            <a href="{% url "dashboard" %}" class="page-close"></a>
+
+
+        <div id="video-content">
+        <div class="row">
+            <div class="col-md-6">
+                    <div class="mediaObject">
+                        {{ video.url|render_embeded }}
+                    </div>
+                    <p>{{ video.user }} - {{ video.date }}</p>
+                    {% if video.description %}
+                        {{ video.description|safe }}
+                    {% endif %}
+            </div>
+
+        </div>
+
+        <div style="clear:both"></div>
+
+        </div>
+        </div>
+    </div> <!-- CONTENT -->
+
+{% endblock %}
