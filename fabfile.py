@@ -18,6 +18,9 @@ from fabric.contrib import files
 from fabric.contrib.console import confirm
 
 
+DEFAULT_REV = 'origin/master'
+
+
 def _project_config():
     from ConfigParser import SafeConfigParser
     config_file = os.path.join(
@@ -71,13 +74,13 @@ def run(command):
     sudo('su %s -c "%s"' % (config['user'], command))
 
 
-def update():
+def update(rev=DEFAULT_REV):
     '''
     * Update the checkout.
     '''
     with cd(path):
         sudo('git fetch origin', user=repo_manager)
-        sudo('git reset --hard origin/master', user=repo_manager)
+        sudo('git reset --hard {rev}'.format(rev=rev), user=repo_manager)
         run('mkdir -p logs')
     setup_fs_permissions()
 
@@ -202,13 +205,13 @@ def build():
     with cd(path):
         run('gulp')
 
-def deploy():
+def deploy(rev=DEFAULT_REV):
     '''
     * upload source
     * build static files
     * restart services
     '''
-    update()
+    update(rev=rev)
     npm_install()
     bower_install()
     pip_install()
