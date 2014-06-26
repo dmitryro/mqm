@@ -1,23 +1,22 @@
-from django.shortcuts import get_object_or_404, render_to_response
-from django.template import RequestContext
-from django.views.generic import DetailView, ListView, TemplateView
+# -*- coding: utf-8 -*-
+import floppyforms.__future__ as forms
+from django.views.generic import DetailView
+from website.views.generic import CommonPrivacyViewMixin, ListCreateView
+from ..local_minds.models import LocalMind
+from .forms import VideoForm
 from .models import Video
 
 
-class VideoList(ListView):
-    queryset = Video.objects.all()
-
-    def get_queryset(self):
-        queryset = super(VideoList, self).get_queryset()
-        return queryset
-
-
-video_list = VideoList.as_view()
-
-
-class VideoDetail(DetailView):
-    template_name = 'videos/video_detail.html'
+class VideoListView(CommonPrivacyViewMixin, ListCreateView):
+    form_class = VideoForm
     queryset = Video.objects.all()
 
 
-video_detail = VideoDetail.as_view()
+video_list = VideoListView.as_view()
+
+
+class VideoDetailView(CommonPrivacyViewMixin, DetailView):
+    queryset = Video.objects.all()
+
+
+video_detail = VideoDetailView.as_view()
