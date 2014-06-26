@@ -13,7 +13,7 @@ server {
     }
 }
 server {
-    server_name www.%(DOMAIN)s;
+    server_name %(DOMAIN)s;
 
     access_log /var/log/nginx/%(PROJECT_NAME)s.access.log;
     client_max_body_size 100m;
@@ -39,6 +39,6 @@ server {
     }
 }
 server {
-    server_name %(DOMAIN)s www.mind.madebyma.com mind.madebyma.com;
-    rewrite ^(.*) http://www.%(DOMAIN)s$1 permanent;
+    server_name www.%(DOMAIN)s www.mind.madebyma.com mind.madebyma.com;
+    rewrite ^(.*) http://%(DOMAIN)s$1 permanent;
 }
