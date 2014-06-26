@@ -48,14 +48,11 @@ class VideoAdmin(admin.ModelAdmin):
             'fields': (
                 'tags',
                 'privacy',
+                'local_mind',
                 'user',
-                'slug',
             ),
         }),
     )
-    prepopulated_fields = {
-        'slug': ('title',),
-    }
     save_on_top = True
 
 admin.site.register(Tag, TagAdmin)

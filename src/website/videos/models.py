@@ -3,25 +3,13 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django_extensions.db.fields import (AutoSlugField, CreationDateTimeField,
     ModificationDateTimeField)
-from django_publicmanager.managers import GenericPublicManager, \
-    PublicOnlyManager
 
-LOCAL = 'local'
-NATIONAL = 'national'
-PRIVATE = 'private'
-PRIVACY_CHOICES = (
-    (LOCAL, _('Local')),
-    (NATIONAL, _('National')),
-    (PRIVATE, _('Private')),
-)
+from ..privacy import PrivacyMixin
 
 
 class Tag(models.Model):
-    name = models.CharField(max_length=200)
     slug = models.SlugField(unique=True)
-
-    objects = GenericPublicManager()
-    public = PublicOnlyManager()
+    name = models.CharField(max_length=200)
 
     class Meta:
         ordering = ('name',)
@@ -31,35 +19,24 @@ class Tag(models.Model):
     def __unicode__(self):
         return self.name
 
-    @models.permalink
-    def get_absolute_url(self):
-        return 'document', (), {'tag_slug': self.slug}
 
+class Video(PrivacyMixin, models.Model):
+    local_mind = models.ForeignKey('local_minds.LocalMind', verbose_name=_('Local Mind'), null=True, blank=True, related_name='videos')
+    user = models.ForeignKey('accounts.User', verbose_name=_('User'), null=True, blank=True, related_name='videos')
 
-
-class Video(models.Model):
-    # content
+    slug = AutoSlugField(populate_from=('title',), unique=True)
     title = models.CharField(max_length=250)
     date = models.DateField(_('Date'))
     description = models.TextField(null=True, blank=True)
-    user = models.ForeignKey('accounts.User', null=True, blank=True,
-        db_index=True,
-        related_name='videos')
 
     # media
     url = models.URLField(null=True, blank=True, help_text="Enter the full YouTube or Vimeo URL")
 
     # categorization
     tags = models.ManyToManyField(Tag, blank=True, symmetrical=False,)
-    privacy = models.CharField(max_length=120, choices=PRIVACY_CHOICES)
-    slug = models.SlugField(unique=True)
 
     created = CreationDateTimeField()
     modified = ModificationDateTimeField()
-
-    # managers
-    objects = GenericPublicManager()
-    public = PublicOnlyManager()
 
     class Meta:
         verbose_name = _(u'Video')
@@ -69,5 +46,6 @@ class Video(models.Model):
     def __unicode__(self):
         return self.title
 
+    @models.permalink
     def get_absolute_url(self):
-        return reverse('videos', args=(self.slug,))
+        return 'videos', (self.slug,), {}
