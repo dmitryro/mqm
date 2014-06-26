@@ -46,6 +46,7 @@ urlpatterns = patterns('',
     url(r'^todos/(?P<pk>\d+)/done/$', 'website.tasks.views.task_done', {'done': True}, name='tasks-done'),
     url(r'^todos/(?P<pk>\d+)/undone/$', 'website.tasks.views.task_done', {'done': False}, name='tasks-undone'),
     url(r'^the-net-works/$', 'website.resources.views.resource_list', name='net-works'),
+    url(r'^diary-events/$', 'website.diary.views.event_calendar', name='events'),
     url(r'^diary-events/(?P<slug>[^/]+)/$', 'website.diary.views.event_detail', name='events'),
 
     url(r'^login/$', 'website.accounts.views.login_signup', name='login'),

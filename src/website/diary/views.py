@@ -12,15 +12,15 @@ from ..local_minds.models import LocalMind
 from .models import Event
 
 
-class EventList(CommonPrivacyViewMixin, ListView):
-    queryset = Event.objects.all()
+class EventCalendar(CommonPrivacyViewMixin, TemplateView):
+    template_name = 'diary/event_calendar.html'
 
-    def get_queryset(self):
-        queryset = super(EventList, self).get_queryset()
-        return queryset
+    def get_context_data(self, **kwargs):
+        kwargs['regions'] = LocalMind.REGION_CHOICES
+        return super(EventCalendar, self).get_context_data(**kwargs)
 
 
-event_list = EventList.as_view()
+event_calendar = EventCalendar.as_view()
 
 
 class EventDetail(CommonPrivacyViewMixin, ListView):
@@ -60,15 +60,9 @@ class EventAPIList(CommonPrivacyViewMixin, ListView):
         }
 
     def serialize_object_list(self, object_list):
-        regions = dict(
-            (
-                force_str(slug),
-                force_str(name),
-            ) for slug, name in LocalMind.REGION_CHOICES)
         return {
             'success': 1,
             'result': [self.serialize_object(obj) for obj in object_list],
-            'regions': regions,
         }
 
     def filter_queryset(self, queryset):
