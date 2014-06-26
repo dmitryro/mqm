@@ -125,6 +125,18 @@ urlpatterns = patterns('',
     url(r'^_addAnswer/$', 'django.shortcuts.render', {'template_name': 'dev/modals/add-answer.html'}),
 
 
+    #calendar widget urls
+    url(r'^calendarTemplates/day.html$', 'django.shortcuts.render', {'template_name': 'calendarTemplates/day.html'}),
+    url(r'^calendarTemplates/events-list.html$', 'django.shortcuts.render', {'template_name': 'calendarTemplates/events-list.html'}),
+    url(r'^calendarTemplates/modal.html$', 'django.shortcuts.render', {'template_name': 'calendarTemplates/modal.html'}),
+    url(r'^calendarTemplates/month-day.html$', 'django.shortcuts.render', {'template_name': 'calendarTemplates/month-day.html'}),
+    url(r'^calendarTemplates/month.html$', 'django.shortcuts.render', {'template_name': 'calendarTemplates/month.html'}),
+    url(r'^calendarTemplates/week-days.html$', 'django.shortcuts.render', {'template_name': 'calendarTemplates/week-days.html'}),
+    url(r'^calendarTemplates/week.html$', 'django.shortcuts.render', {'template_name': 'calendarTemplates/week.html'}),
+    url(r'^calendarTemplates/year-month.html$', 'django.shortcuts.render', {'template_name': 'calendarTemplates/year-month.html'}),
+    url(r'^calendarTemplates/year.html$', 'django.shortcuts.render', {'template_name': 'calendarTemplates/year.html'}),
+    #
+
     #general
      url(r'^log-in/$', 'django.shortcuts.render', {'template_name': 'dev/login.html'}),
      url(r'^invitee/$', 'django.shortcuts.render', {'template_name': 'dev/invitee.html'})
