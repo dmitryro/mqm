@@ -10,11 +10,11 @@ class FundingAdmin(admin.ModelAdmin):
         'telephone',
         'email',
         'website',
+        'local_mind',
         'privacy')
     list_editable = ('privacy',)
     list_filter = ('privacy',)
-    search_fields = (
-        'name',)
+    search_fields = ('title',)
     fieldsets = (
         (_('General'), {
             'classes': ('wide',),
@@ -32,10 +32,13 @@ class FundingAdmin(admin.ModelAdmin):
         (_('Categorisation'), {
             'classes': ('wide',),
             'fields': (
+                'user',
+                'local_mind',
                 'privacy',
             ),
         }),
     )
     save_on_top = True
+
 
 admin.site.register(Funding, FundingAdmin)

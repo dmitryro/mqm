@@ -3,21 +3,17 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django_extensions.db.fields import (AutoSlugField, CreationDateTimeField,
     ModificationDateTimeField)
-from django_publicmanager.managers import GenericPublicManager, \
-    PublicOnlyManager
-from mediastore.fields import MediaField, MultipleMediaField
 
-LOCAL = 'local'
-NATIONAL = 'national'
-PRIVATE = 'private'
-PRIVACY_CHOICES = (
-    (LOCAL, _('Local')),
-    (NATIONAL, _('National')),
-    (PRIVATE, _('Private')),
-)
+from ..privacy import PrivacyMixin
+from ..utils.models import PostcodeLocationMixin
+
 
 # opportunity to get funding (updated predominately bt National Mind)
-class Funding(models.Model):
+class Funding(PrivacyMixin, PostcodeLocationMixin, models.Model):
+    local_mind = models.ForeignKey('local_minds.LocalMind', verbose_name=_('Local Mind'), null=True, blank=True, related_name='fundings')
+    user = models.ForeignKey('accounts.User', verbose_name=_('Organiser'), null=True, blank=True, related_name='fundings')
+
+    slug = AutoSlugField(populate_from=('title',))
     title = models.CharField(max_length=120)
     start_date = models.DateField(null=True, blank=True)
     end_date = models.DateField(null=True, blank=True)
@@ -28,7 +24,6 @@ class Funding(models.Model):
     website = models.URLField(null=True, blank=True)
     postcode = models.CharField(max_length=120, help_text="this is how we generate a map")
 
-    privacy = models.CharField(max_length=120, choices=PRIVACY_CHOICES)
     created = CreationDateTimeField()
     modified = ModificationDateTimeField()
 
@@ -38,3 +33,7 @@ class Funding(models.Model):
 
     def __unicode__(self):
         return self.title
+
+    @models.permalink
+    def get_absolute_url(self):
+        return 'fundings', (), {}
