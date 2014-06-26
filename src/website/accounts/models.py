@@ -19,13 +19,15 @@ from .registration.tokens import token_generator
 class User(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = 'email'
 
-    TRUSTEE = 'trustee'
+    INTERN = 'intern'
+    GENERAL = 'trustee'
     ADMIN = 'admin'
     SUPERUSER = 'superuser'
     PRIVILEGE_CHOICES = (
-        (TRUSTEE, _('Trustee'),),
+        (INTERN, _('Intern'),),
+        (GENERAL, _('General'),),
         (ADMIN, _('Admin'),),
-        (SUPERUSER, _('Superuser'),),
+        (SUPERUSER, _('Super User'),),
     )
 
     slug = AutoSlugField(unique=True, populate_from=('first_name', 'last_name'))

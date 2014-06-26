@@ -167,7 +167,7 @@ class SignupUserProfileForm(BaseSignupProfileForm):
 
     formfield_callback = formfield_callback
 
-    user_privileges = User.TRUSTEE
+    user_privileges = User.GENERAL
 
     def save(self, *args, **kwargs):
         self.instance.date_joined = datetime.utcnow()
