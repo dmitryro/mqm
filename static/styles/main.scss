@@ -12,6 +12,8 @@ $icon-font-path: "../../libs/sass-bootstrap/fonts/";
 @import "utils/mixins";               // useful mixins for reusable tasks
 @import "utils/clearfix";             // shorthand clearfix
 
+// LIBS
+@import "chosen/chosen";
 
 // MIND THEME
 @import "mind/fonts";                 // Avenir font declarations using fonts.com

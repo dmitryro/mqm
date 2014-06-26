@@ -26,6 +26,11 @@
 
         $('.add-another').addanother();
 
+        // Init skills widgets.
+        $('select[name=skills], select[name$=-skills]').chosen({
+            search_contains: true
+        });
+
 
         // Label tooltips
         $("label[data-content], .titlePopOver").popover({
