@@ -13,7 +13,7 @@ class Event(PrivacyMixin, PostcodeLocationMixin, models.Model):
     local_mind = models.ForeignKey('local_minds.LocalMind', verbose_name=_('Local Mind'), related_name='events')
 
     # content
-    slug = AutoSlugField(populate_from=('title',))
+    slug = AutoSlugField(populate_from=('title',), unique=True)
     title = models.CharField(_('Title'), max_length=250)
     start = models.DateTimeField(_('Event Start Date/Time'))
     end = models.DateTimeField(_('Event End Date/Time'))

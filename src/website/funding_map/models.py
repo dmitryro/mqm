@@ -11,9 +11,9 @@ from ..utils.models import PostcodeLocationMixin
 # opportunity to get funding (updated predominately bt National Mind)
 class Funding(PrivacyMixin, PostcodeLocationMixin, models.Model):
     local_mind = models.ForeignKey('local_minds.LocalMind', verbose_name=_('Local Mind'), null=True, blank=True, related_name='fundings')
-    user = models.ForeignKey('accounts.User', verbose_name=_('Organiser'), null=True, blank=True, related_name='fundings')
+    user = models.ForeignKey('accounts.User', verbose_name=_('User'), null=True, blank=True, related_name='fundings')
 
-    slug = AutoSlugField(populate_from=('title',))
+    slug = AutoSlugField(populate_from=('title',), unique=True)
     title = models.CharField(max_length=120)
     start_date = models.DateField(null=True, blank=True)
     end_date = models.DateField(null=True, blank=True)
