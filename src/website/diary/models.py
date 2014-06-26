@@ -3,48 +3,34 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django_extensions.db.fields import (AutoSlugField, CreationDateTimeField,
     ModificationDateTimeField)
-from django_publicmanager.managers import GenericPublicManager, \
-    PublicOnlyManager
 
-LOCAL = 'local'
-NATIONAL = 'national'
-PRIVATE = 'private'
-PRIVACY_CHOICES = (
-    (LOCAL, _('Local')),
-    (NATIONAL, _('National')),
-    (PRIVATE, _('Private')),
-)
+from ..privacy import PrivacyMixin
+from ..utils.models import PostcodeLocationMixin
 
-class Event(models.Model):
+
+class Event(PrivacyMixin, PostcodeLocationMixin, models.Model):
+    user = models.ForeignKey('accounts.User', related_name='events')
+    local_mind = models.ForeignKey('local_minds.LocalMind', related_name='events')
+
     # content
-    title = models.CharField(max_length=250)
+    slug = AutoSlugField(populate_from=('title',))
+    title = models.CharField(_('Title'), max_length=250)
     start = models.DateTimeField(_('Event Start Date/Time'))
     end = models.DateTimeField(_('Event End Date/Time'))
-    location = models.CharField(max_length=250,null=True, blank=True)
-    postcode = models.CharField(max_length=250,null=True, blank=True)
-
-    # categorization
-    #region = models.ForeignKey(User.Region)
-    organiser = models.ForeignKey('accounts.User', null=True, blank=True,
-        db_index=True,
-        related_name='event')
-    privacy = models.CharField(max_length=120, choices=PRIVACY_CHOICES)
-    slug = models.SlugField(unique=True)
+    location = models.CharField(_('Location'), max_length=250, null=True, blank=True)
+    postcode = models.CharField(_('Postcode'), max_length=120, null=True, blank=True)
 
     created = CreationDateTimeField()
     modified = ModificationDateTimeField()
 
-    # managers
-    objects = GenericPublicManager()
-    public = PublicOnlyManager()
-
     class Meta:
         verbose_name = _(u'Event')
-        verbose_name_plural = _(u'Event')
+        verbose_name_plural = _(u'Events')
         ordering = ('-start',)
 
     def __unicode__(self):
         return self.title
 
+    @models.permalink
     def get_absolute_url(self):
-        return reverse('event', args=(self.slug,))
+        return 'events', (self.slug,), {}
