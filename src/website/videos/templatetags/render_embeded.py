@@ -6,11 +6,11 @@ from django.utils.safestring import mark_safe
 register = template.Library()
 
 
-YOUTUBE_MATCH = re.compile(r'https?://(?:www\.)youtube\.com/watch.*v=.*$')
-YOUTUBE_TOKENIZER = re.compile(r'(?P<domain>https?://(?:www\.)youtube\.com)/watch.*?[&?]v=(?P<video_id>[^&]*).*$')
+YOUTUBE_MATCH = re.compile(r'https?://(?:www\.)?youtube\.com/watch.*v=.*$')
+YOUTUBE_TOKENIZER = re.compile(r'(?P<domain>https?://(?:www\.)?youtube\.com)/watch.*?[&?]v=(?P<video_id>[^&]*).*$')
 
-VIMEO_MATCH = re.compile(r'https?://(?:www\.)vimeo\.com/(?:.+/)\d+$')
-VIMEO_TOKENIZER = re.compile(r'https?://(?:www\.)vimeo\.com/(?:.+/)?(?P<video_id>d+)$')
+VIMEO_MATCH =     re.compile(r'https?://(?:www\.)?vimeo\.com/(?:.+/)?\d+$')
+VIMEO_TOKENIZER = re.compile(r'https?://(?:www\.)?vimeo\.com/(?:.+/)?(?P<video_id>\d+)$')
 
 VIMEO_IFRAME_URL = '//player.vimeo.com/video/{video_id}?title=0&amp;byline=0&amp;portrait=0'
 
