@@ -43,12 +43,16 @@ class EventAPIList(CommonPrivacyViewMixin, ListView):
     def serialize_object(self, obj):
         return {
             'id': obj.pk,
+            'local_mind': {
+                'id': obj.local_mind.pk,
+                'name': obj.local_mind.name,
+                'region': obj.local_mind.region,
+            },
             'title': obj.title,
             'url': obj.get_absolute_url(),
             'class': 'event-important',
             'start': self.serialize_datetime(obj.start),
             'end': self.serialize_datetime(obj.end),
-            'region': obj.local_mind.region,
         }
 
     def serialize_object_list(self, object_list):
