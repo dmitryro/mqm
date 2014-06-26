@@ -5,7 +5,7 @@ from django.contrib.auth.models import Group as _Group
 from django.utils.translation import ugettext_lazy as _
 
 from ..tasks.models import Task
-from .models import User, Experience, Group, ReservedEmail
+from .models import User, Experience, Group, ReservedEmail, Skill
 
 
 class ExperienceAdminInline(admin.TabularInline):
@@ -72,5 +72,6 @@ class ReservedEmailAdmin(admin.ModelAdmin):
 admin.site.register(User, UserAdmin)
 admin.site.register(Group, GroupAdmin)
 admin.site.register(ReservedEmail, ReservedEmailAdmin)
+admin.site.register(Skill)
 
 admin.site.unregister(_Group)

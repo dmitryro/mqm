@@ -43,7 +43,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     twitter = models.CharField(_('Twitter'), max_length=15, blank=True)
 
     biography = models.TextField(_('Biography'), max_length=350, blank=True, help_text=_('limited to 350 characters'))
-    skills = models.TextField(_('Your Skills'), blank=True, help_text=_('comma seperated'))
+    skills = models.ManyToManyField('Skill', verbose_name=_('Your Skills'), blank=True)
 
     is_staff = models.BooleanField(_('staff status'), default=False,
         help_text=_('Designates whether the user can log into this admin '
@@ -135,6 +135,19 @@ class Experience(models.Model):
 
     def __unicode__(self):
         return self.experience
+
+
+class Skill(models.Model):
+    slug = AutoSlugField(populate_from=('name',))
+    name = models.CharField(max_length=50)
+
+    class Meta:
+        verbose_name = _('Skill')
+        verbose_name_plural = _('Skills')
+        ordering = ('name',)
+
+    def __unicode__(self):
+        return self.name
 
 
 class Group(_Group):
