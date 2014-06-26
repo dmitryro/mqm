@@ -7,7 +7,7 @@ from .models import Event
 class EventAdmin(admin.ModelAdmin):
     list_display = (
         'title',
-        'organiser',
+        'user',
         'start',
         'end',
         'privacy')
@@ -24,20 +24,17 @@ class EventAdmin(admin.ModelAdmin):
                 'end',
                 'location',
                 'postcode',
-                'organiser',
+                'user',
+                'local_mind',
             ),
         }),
         (_('Categorisation'), {
             'classes': ('wide',),
             'fields': (
                 'privacy',
-                'slug',
             ),
         }),
     )
-    prepopulated_fields = {
-        'slug': ('title',),
-    }
     save_on_top = True
 
 admin.site.register(Event, EventAdmin)

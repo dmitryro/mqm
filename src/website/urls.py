@@ -12,6 +12,9 @@ urlpatterns = patterns('',
     url(r'^robots.txt$', 'django.shortcuts.render', {'template': 'robots.txt'},),
     url(r'^humans.txt$', 'django.shortcuts.render', {'template': 'humans.txt'},),
 
+    url(r'^api/events/(?P<limit>own|local|national)/$', 'website.diary.views.event_api_list', name='api-events'),
+    url(r'^api/events/$', 'website.diary.views.event_api_list', name='api-events'),
+
     #url(r'^$', 'website.views.index', name='index'),
     url(r'^$', RedirectView.as_view(url='/login/')),
     url(r'^signup/profile/(?P<uidb36>[^-/]+)-(?P<token>[^/]+)/$', 'website.accounts.registration.views.signup_profile', name='signup-profile'),
@@ -43,6 +46,7 @@ urlpatterns = patterns('',
     url(r'^todos/(?P<pk>\d+)/done/$', 'website.tasks.views.task_done', {'done': True}, name='tasks-done'),
     url(r'^todos/(?P<pk>\d+)/undone/$', 'website.tasks.views.task_done', {'done': False}, name='tasks-undone'),
     url(r'^the-net-works/$', 'website.resources.views.resource_list', name='net-works'),
+    url(r'^diary-events/(?P<slug>[^/]+)/$', 'website.diary.views.event_detail', name='events'),
 
     url(r'^login/$', 'website.accounts.views.login_signup', name='login'),
     url(r'^login/signup/$', lambda r: HttpResponseRedirect(reverse('login') + '#signup'), name='signup'),

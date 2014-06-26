@@ -9,8 +9,8 @@ from ..utils.models import PostcodeLocationMixin
 
 
 class Event(PrivacyMixin, PostcodeLocationMixin, models.Model):
-    user = models.ForeignKey('accounts.User', related_name='events')
-    local_mind = models.ForeignKey('local_minds.LocalMind', related_name='events')
+    user = models.ForeignKey('accounts.User', verbose_name=_('Organiser'), related_name='events')
+    local_mind = models.ForeignKey('local_minds.LocalMind', verbose_name=_('Local Mind'), related_name='events')
 
     # content
     slug = AutoSlugField(populate_from=('title',))
