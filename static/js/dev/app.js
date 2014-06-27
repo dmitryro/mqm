@@ -27,11 +27,11 @@ $(document).ready(function() {
 
 
 
-	//Draggable Grid 
+	//Draggable Grid
 
 
 	// var $window = $(window);
-    
+
  //    $window.resize(function() {
  //      var wwidth = $window.width();
  //      if (wwidth < 768) {
@@ -51,13 +51,13 @@ $(document).ready(function() {
 	if(getCookie("displaySiderbarBind") == "0") {
 		$("#description-wrap, #close-description").hide();
 	}
-		
 
 
-	
+
+
 	var widget = '<li class="widget"><div class="widget-bar"></div></li>'
- 	
-	
+
+
 	var widgets = [
 		[widget, 1, 1],
 		[widget, 1, 1],
@@ -85,8 +85,10 @@ $(document).ready(function() {
 
 	{"col":1,"row":2,"size_x":1,"size_y":1, "name":"theNetWorks"},
 	{"col":2,"row":2,"size_x":1,"size_y":1, "name":"positiveNews"},
-	
-	{"col":3,"row":2,"size_x":1,"size_y":1, "name":"theLabNews"}
+  {"col":3,"row":2,"size_x":1,"size_y":1, "name":"externalNews"},
+	{"col":4,"row":2,"size_x":1,"size_y":1, "name":"theLabNews"},
+
+  {"col":1,"row":3,"size_x":1,"size_y":1, "name":"videoStream"},
 	/*
 	{"col":3,"row":2,"size_x":1,"size_y":1, "name":"buddySearch"},
 	{"col":1,"row":3,"size_x":1,"size_y":1, "name":"externalNews"},
@@ -94,8 +96,8 @@ $(document).ready(function() {
 	{"col":3,"row":3,"size_x":1,"size_y":1, "name":"nationalMindNews"}*/
 
 	];
-	
-	
+
+
 
     gridster = $(".gridster > ul").gridster({
         widget_margins: [20, 20],
@@ -108,24 +110,24 @@ $(document).ready(function() {
         	enabled: true
       	},
       	draggable: {
-      		stop: function(event, ui){ 
+      		stop: function(event, ui){
                              // your events here
                              saveState();
                }
       	}
     }).data('gridster');
 
-    
+
 
     if(localStorage.getItem("positions") === null) {
     	$.each(serialization, function() {
             gridster.add_widget($('.'+this.name).html(), this.size_x, this.size_y, this.col, this.row);
    		});
-	
+
     	//use default
     	saveState();
 
-    	
+
 
     } else {
     	restoreState();
@@ -177,7 +179,7 @@ $(document).ready(function() {
 		//gridster.serialize();
 
 		// gridster.options.min_cols = cols;
-		
+
 
 		for (var i = 0; i < $('.widget').length; i++){
 			if (colCounter <= cols) {
@@ -246,12 +248,12 @@ $(document).ready(function() {
 
 			$("body").css("overflow", "initial");
 			//makeGrid('cls', gridster);
-			
-            
+
+
 		}
 	});
 
-	// TOOLTIP 
+	// TOOLTIP
 
 	var tooltip = '<div class="s-tooltip"><div class="tt-arrow"></div><div class="tt-name"></div><div class="tt-text"></div></div>'
 
@@ -283,7 +285,7 @@ $(document).ready(function() {
 		$(this).parent().find('.tt-icon').css({'background-image':'url(/static//assets/img/ui/icons/info.svg)', 'background-position':'center'});
 	});
 
-	
+
 	function menuROver(me) {
 		var iconName = $(me).attr('data-iconName');
 		$(me).addClass('goRed').css({'background-image':'url(/static//assets/img/ui/icons/'+iconName+'_hover.svg)', 'background-position':'center'})
@@ -294,7 +296,7 @@ $(document).ready(function() {
 		$(me).removeClass('goRed').css({'background-image':'url(/static//assets/img/ui/icons/'+iconName+'.svg)', 'background-position':'center'}).removeClass('goRed')
 	}
 
-	// DROP DOWNS 
+	// DROP DOWNS
 	/*
 	$('.drop').bind('click',function() {
 		if ($(this).hasClass('dropped')) {
@@ -318,7 +320,7 @@ $(document).ready(function() {
 		document.cookie="displaySiderbarBind=0";
 	});
 
-	
+
 
 	//AUTO COMPLETE
 
@@ -350,8 +352,8 @@ $(document).ready(function() {
       source: availableTags
     });
 
-    //HEIGHTS 
-    
+    //HEIGHTS
+
     if($('#video-content').length) {
     	if($('#video-content').height() < $('#sidebar').height()) {
     		$('#content').css('min-height',$('#sidebar').height() + 70)
@@ -374,7 +376,7 @@ $(document).ready(function() {
 	    	if(widgetName == "fundingmap") {initializeFundingMap();}
 	    	if(widgetName == "myLocalArea") {initializeLocalMap();}
 	    	if(widgetName == "theNetWorks") {initializeNetworkMap();}
-	    	
+
 	    	/*
 	    	$('.drop').unbind('click');
 	    	$('.drop').bind('click',function() {
@@ -403,21 +405,3 @@ $(document).ready(function() {
     });
 
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

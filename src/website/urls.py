@@ -33,6 +33,10 @@ urlpatterns = patterns('',
     url(r'^positive-news/$', 'website.news.views.positive_news_list', name='positive-news'),
     url(r'^positive-news/add/$', 'website.news.views.positive_news_list', {'show_form': True},  name='positive-news-add'),
     url(r'^positive-news/(?P<slug>[^/]+)/$', 'website.news.views.positive_news_detail', name='positive-news'),
+
+    url(r'^external-news/$', 'website.news.views.external_news_list', name='external-news'),
+    url(r'^external-news/(?P<slug>[^/]+)/$', 'website.news.views.external_news_detail', name='external-news'),
+
     url(r'^call-out/$', 'website.faq.views.question_list', name='questions'),
     url(r'^call-out/add/$', 'website.faq.views.question_list', {'show_form': True}, name='questions'),
     url(r'^call-out/(?P<pk>\d+)/$', 'website.faq.views.question_detail', name='questions'),

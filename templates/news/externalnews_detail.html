@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load djangular_tags webdesign %}
+
+{% block content %}
+
+<div id="content" class="clearfix">
+
+  {% include "includes/topbar.html" %}
+
+  <div class="container-fluid">
+
+    <h3 class="withIcon icon_newspaper"><span></span>{{ object.title }}</h3>
+    <a href="{% url "external-news" %}" class="page-close"></a>
+
+    <div id="team-content">
+
+     <div class="row">
+       <div class="col-md-8">
+
+        <h4>{{ object.title }}</h4>
+        <p class="small">
+            {% if object.date %}{{ object.date|date }} - {% endif %}
+            posted by {{ object.user }} - {{ object.local_mind }}</p>
+        {{ object.description|linebreaks|urlize }}
+
+      </div>
+      <div class="col-md-4">
+      </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div> <!-- CONTENT -->
+
+  {% endblock %}

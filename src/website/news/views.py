@@ -21,3 +21,18 @@ class PositiveNewsDetailView(CommonPrivacyViewMixin, DetailView):
 
 
 positive_news_detail = PositiveNewsDetailView.as_view()
+
+
+
+# EXTERNAL NEWS
+
+class ExternalNewsListView(ListView):
+    queryset = ExternalNews.objects.order_by('-created')
+
+external_news_list = ExternalNewsListView.as_view()
+
+
+class ExternalNewsDetailView(DetailView):
+    queryset = ExternalNews.objects.order_by('-created')
+
+external_news_detail = ExternalNewsDetailView.as_view()

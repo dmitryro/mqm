@@ -23,7 +23,6 @@ class Question(PrivacyMixin, models.Model):
     class Meta:
         verbose_name = _('Callout')
         verbose_name_plural = _('Callout')
-        ordering = ['-date']
 
     def __unicode__(self):
         return unicode(self.question)
@@ -53,7 +52,6 @@ class Answer(models.Model):
     class Meta:
         verbose_name = _('Callout Answer')
         verbose_name_plural = _('Callout Answers')
-        ordering = ['-date']
 
     def __unicode__(self):
         return unicode(self.answer)
