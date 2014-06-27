@@ -197,3 +197,11 @@ padding: 10px 10px;
 
 .list-group-item .showOnHover {opacity:0;}
 .list-group-item:hover .showOnHover {opacity:1}
+
+
+#videos {
+    iframe {
+      max-width:100%;
+      height:auto;
+    }
+  }

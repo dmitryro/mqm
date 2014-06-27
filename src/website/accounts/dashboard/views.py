@@ -1,7 +1,8 @@
 from django.core.urlresolvers import reverse
 from django.views.generic import FormView, TemplateView, UpdateView
 from website.views.generic import CommonViewMixin
-from website.news.models import PositiveNews
+from website.news.models import PositiveNews, ExternalNews
+from website.videos.models import Video
 from website.local_minds.models import LocalMind
 from ..forms import InvitationForm
 from .forms import LocalMindForm, ProfileForm, PasswordChangeForm
@@ -17,6 +18,8 @@ class DashboardView(CommonViewMixin, TemplateView):
         kwargs['my_questions'] = questions.filter(user=user)
         kwargs['my_tasks'] = user.tasks.order_by('-is_priority')
         kwargs['positivenews_list'] = PositiveNews.objects.privacy(user)
+        kwargs['externalnews_list'] = ExternalNews.objects.privacy(user)
+        kwargs['video_list'] = Video.objects.all()
         partners = user.local_mind.partners.all()
         partners = partners.exclude(_latitude_postcode=None, _longitude_postcode=None)
         partners = partners.privacy(user)

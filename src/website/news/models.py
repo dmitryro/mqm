@@ -41,6 +41,10 @@ class ExternalNews(BaseNews):
         verbose_name_plural = _('External News')
         ordering = ('-date',)
 
+    @models.permalink
+    def get_absolute_url(self):
+        return 'external-news', (), {'slug': self.slug}    
+
 
 class PositiveNews(BaseNews):
     local_mind = models.ForeignKey('local_minds.LocalMind', related_name='positivenews')
