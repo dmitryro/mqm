@@ -78,6 +78,7 @@ class Document(models.Model):
 
     # media
     file = MediaField(
+        null=True, blank=True,
         related_name='document_file',
         limit_choices_to={'content_type__model':'download'},)
     url = models.URLField(null=True, blank=True, help_text="to share if coming from google docs/dropbox - permission will need to be open")
