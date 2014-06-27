@@ -11,6 +11,124 @@
 <script type="text/javascript" src="http://underscorejs.org/underscore-min.js"></script>
 <script type="text/javascript" src="{{ STATIC_URL }}/js/calendar.js"></script>
 <script type="text/javascript">
+var calendar;
+var FINALFEED;
+var yourCalendarSrc = "http://127.0.0.1:8000/api/events/own/";
+var localCalendarSrc = "http://127.0.0.1:8000/api/events/local/";
+var nationalCalendarSrc = "http://localhost:8000/api/events/national/?";
+var eventsObject = new Array();
+var numberOfFeedsLoaded=0;
+var isCalendarLoadComplete = 0;
+var selectedRegions = "";
+var emptyFeed = {
+    "success": 1,
+    "result": []
+    }
+
+    function generateCalendar() {
+        if(numberOfFeedsLoaded >=2 && isCalendarLoadComplete == 0) {
+            isCalendarLoadComplete=1;
+            //make the calendar
+
+            calendar = $('#calendar').calendar({
+        tmpl_path: '/calendarTemplates/',
+        events_source: function(){
+            return emptyFeed.result;
+        },
+        onAfterViewLoad: function(view) {
+            $('#calendar-date').text(this.getTitle());
+        }
+
+    });   
+
+
+
+
+        }
+
+        if(isCalendarLoadComplete == 1) {
+            calendar._render();
+        }
+
+    }
+
+    function generateFeed(){
+        emptyFeed.result.length = 0; //reset
+
+        if($("#filter_own").is(':checked')) {
+        $.getJSON(yourCalendarSrc,function(data) {
+            $.each( data['result'], function( key, val ) {
+                //eventsObject.push(val);
+                emptyFeed.result.push(val);
+            });
+        }).done(function(data) {
+            numberOfFeedsLoaded++;
+            generateCalendar();
+        });
+    }
+
+    if($("#filter_localMind").is(':checked')) {
+        $.getJSON(localCalendarSrc,function(data) {
+            $.each( data['result'], function( key, val ) {
+                //eventsObject.push(val);
+                emptyFeed.result.push(val);
+            });
+        }).done(function(data) {
+            numberOfFeedsLoaded++;
+            generateCalendar();
+        });
+    }
+
+    $.getJSON(nationalCalendarSrc+selectedRegions,function(data) {
+            $.each( data['result'], function( key, val ) {
+                //eventsObject.push(val);
+                emptyFeed.result.push(val);
+            });
+        }).done(function(data) {
+            numberOfFeedsLoaded++;
+            generateCalendar();
+        });
+
+
+
+    /*
+
+        if($("#filter_own").is(':checked')) {
+            //add your own feed
+            $.getJSON(yourCalendarSrc, function( data ) {
+                $.each( data['result'], function( key, val ) {
+                //eventsObject.push(val);
+                emptyFeed.result.push(val);
+            });
+
+            });
+
+        }
+        
+
+        if($("#filter_localMind").is(':checked')) {
+            return;
+            //add your local feed
+
+            $.getJSON(localCalendarSrc, function( data ) {
+                $.each( data['result'], function( key, val ) {
+                //eventsObject.push(val);
+                emptyFeed.result.push(val);
+            });
+
+            });
+
+
+        }
+    */
+        //getthe rest add add
+
+
+
+
+
+    }
+
 $(document).ready(function(){
 
     {% comment %}
@@ -21,24 +139,59 @@ $(document).ready(function(){
     };
     {% endcomment %}
 
-    var yourCalendarSrc = "/api/events/own/";
-    var localCalendarSrc = "http://localhost:8000/api/events/local/";
 
-    var calendar = $('#calendar').calendar({
+    
+
+    $(".filterRegion").click(function(e){
+        selectedRegions = "";
+        $(".filterRegion").each(function( index, element ) {
+            if($(this).is(':checked')) {
+                selectedRegions = selectedRegions+"&region=" + $(this).attr("data-region");
+            }
+        });
+         generateFeed();
+    });
+
+    $("#filter_own").click(function(e){
+        generateFeed();
+    });
+
+    $("#filter_localMind").click(function(e){
+        generateFeed();
+    });
+
+
+   
+    
+
+
+    
+
+
+    generateFeed();
+
+    /*
+    calendar = $('#calendar').calendar({
         tmpl_path: '/calendarTemplates/',
-    events_source: '/api/events/own/'
+        events_source: function(){
+            return emptyFeed.result;
+        },
+        onAfterViewLoad: function(view) {
+            $('#calendar-date').text(this.getTitle());
+        }
 
     });   
+    */
 
 
-    $('.btn-group button[data-calendar-nav]').each(function() {
+    $("#calendarTopBar li:first-child, #calendarTopBar li:last-child").each(function() {
         var $this = $(this);
         $this.click(function() {
             calendar.navigate($this.data('calendar-nav'));
         });
     });
 
-    $('.btn-group button[data-calendar-view]').each(function() {
+    $('#calendarTopBarView li').each(function() {
         var $this = $(this);
         $this.click(function() {
             calendar.view($this.data('calendar-view'));
@@ -70,30 +223,36 @@ $(document).ready(function(){
         <div class="col-md-2">
             <h4>AVALIABLE CALENDARS</h4>
             <p class="small">Click on the regions below to see them in you calendar</p>
-
-            <ul>
-                {% for region_slug, region_name in regions %}
-                <li><small>{{ region_slug }}</small> {{ region_name }}</li>
-                {% endfor %}
-            </ul>
+            <label class="checkbox-inline"><input type="checkbox" id="filter_own" checked="true" value="1">My Calendar</label><br>
+            <label class="checkbox-inline"><input type="checkbox" id="filter_localMind" checked="true" value="1">{{ user.local_mind.name }} Mind</label><br>
+            {% for region_slug, region_name in regions %}
+            <label class="checkbox-inline"><input type="checkbox" class="filterRegion" data-region="{{ region_slug }}" id="filter_{{ region_slug }}" value="1">{{ region_name }}</label><br>
+            {% endfor %}
         </div>
         <div class="col-md-9">
 
-            <div class="page-header">
+            <div>
 
-        <div class="form-inline">
-            <div class="btn-group">
-                <button class="btn btn-primary" data-calendar-nav="prev"><</button>
-                <button class="btn btn-default" data-calendar-nav="today">Today</button>
-                <button class="btn btn-primary" data-calendar-nav="next">></button>
-            </div>
-            <div class="btn-group">
-                <button class="btn btn-warning" data-calendar-view="year">Year</button>
-                <button class="btn btn-warning active" data-calendar-view="month">Month</button>
-                <button class="btn btn-warning" data-calendar-view="week">Week</button>
-                <button class="btn btn-warning" data-calendar-view="day">Day</button>
-            </div>
-        </div>
+              
+
+           
+            <ul id="calendarTopBar" class="clearfix">
+                <li data-calendar-nav="prev"><h1><span class="glyphicon glyphicon-chevron-left"></span></h1></li>
+                <li><h1 id="calendar-date">June 2014</h1></li>
+                <li data-calendar-nav="next"><h1><span class="glyphicon glyphicon-chevron-right"></span></h1></li>
+            </ul>
+        
+
+              <ul id="calendarTopBarView" class="clearfix">
+            <li data-calendar-view="day">DAY</li>
+            <li data-calendar-view="week">WEEK</li>
+            <li data-calendar-view="month">MONTH</li>
+            
+
+        </ul>
+
+
+
     </div>
 
 
