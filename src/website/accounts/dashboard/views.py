@@ -3,6 +3,7 @@ from django.views.generic import FormView, TemplateView, UpdateView
 from website.views.generic import CommonViewMixin
 from website.news.models import PositiveNews, ExternalNews
 from website.videos.models import Video
+from website.funding_map.models import Funding
 from website.local_minds.models import LocalMind
 from ..forms import InvitationForm
 from .forms import LocalMindForm, ProfileForm, PasswordChangeForm
@@ -20,6 +21,7 @@ class DashboardView(CommonViewMixin, TemplateView):
         kwargs['positivenews_list'] = PositiveNews.objects.privacy(user)
         kwargs['externalnews_list'] = ExternalNews.objects.privacy(user)
         kwargs['video_list'] = Video.objects.all()
+        kwargs['funding_list'] = Funding.objects.all()
         partners = user.local_mind.partners.all()
         partners = partners.exclude(_latitude_postcode=None, _longitude_postcode=None)
         partners = partners.privacy(user)
