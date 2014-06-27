@@ -264,16 +264,6 @@
 
     </div>
 
-    <div class="fundingmap hidden">
-        <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1" data-name="fundingmap">
-            <div class="widget-bar">
-                <div class="widget-title">THE FUNDING MAP</div>
-                {% include "includes/widget-settings.html" with type="Funding" %}
-            </div>
-            <div id="map-canvas1"></div>
-        </li>
-    </div>
-
     <div class="hidden theEngineRoom">
         <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1" data-name="theEngineRoom">
             <div class="widget-bar">
@@ -545,6 +535,21 @@
                     </div>
                 </li>
 
+    </div>
+
+
+    <div class="fundingmap hidden">
+        <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1" data-name="fundingmap">
+            <div class="widget-bar">
+                <div class="widget-title">THE FUNDING MAP</div>
+                {% include "includes/widget-settings.html" with type="Funding" %}
+            </div>
+            {% for funding in funding_list %}
+                <p>{{ funding.title }}</p>
+                <p>{{ funding.user }}</p>
+            {% endfor %}
+            <div id="map-canvas1"></div>
+        </li>
     </div>
 
 

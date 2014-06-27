@@ -126,53 +126,6 @@
         </div>
 
 
-        {% comment %}
-        <div class="row">
-            <div class="col-md-6">
-              <div class="col-sm-3"></div>
-              <div class="col-sm-9">
-                <h4>SERVICE INFORMATIONS</h4>
-                <small>Please submit any task below, they will automatically assigned to you</small>
-              </div>
-            </div>
-        </div>
-
-        {% with formset=form.formsets.services %}
-        <div data-formset-prefix="{{ formset.prefix }}">
-            {{ formset.management_form }}
-            {% for form in formset %}
-                {% formrow form.id %}
-                <div class="row">
-                    <div class="col-md-1"></div>
-                    <div class="col-md-3">
-                        {% formrow form.type %}
-                    </div>
-
-                    <div class="col-md-1"></div>
-                    <div class="col-md-3">
-                        {% formrow form.name %}
-                    </div>
-
-                    <div class="col-md-1"></div>
-                    <div class="col-md-3">
-                        {% formrow form.users_count %}
-                    </div>
-                </div>
-            {% endfor %}
-
-            <a class="add-another">Add another</a>
-
-            <div class="template">
-            {% with form=formset.empty_form %}
-                {% formrow form.name %}
-                {% formrow form.type %}
-                {% formrow form.users_count %}
-            {% endwith %}
-            </div>
-        </div>
-        {% endwith %}
-        {% endcomment %}
-
         <div class="row">
             <div class="col-md-6">
                 <div class="col-sm-3"></div>
