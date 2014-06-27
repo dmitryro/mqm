@@ -95,6 +95,18 @@ h1,h2,h3,h4,h5,h6 {
 .withIcon.icon_people span, #icon_people {width:92px; height:38px; background:url('/static/assets/img/ui/icons/icon_people.svg');}
 .withIcon.icon_people { line-height:38px;}
 
+.withIcon.icon_person span, #icon_person {width:61px; height:61px; background:url('/static/assets/img/ui/icons/icon_person.svg');}
+.withIcon.icon_person { line-height:61px;}
+
+.withIcon.icon_anchor span, #icon_anchor {width:37px; height:48px; background:url('/static/assets/img/ui/icons/icon_anchor.svg');}
+.withIcon.icon_anchor { line-height:48px;}
+
+.withIcon.icon_padlock span, #icon_padlock {width:35px; height:46px; background:url('/static/assets/img/ui/icons/icon_padlock.svg');}
+.withIcon.icon_padlock { line-height:46px;}
+
+.withIcon.icon_todo span, #icon_todo {width:47px; height:61px; background:url('/static/assets/img/ui/icons/icon_todo.svg');}
+.withIcon.icon_todo { line-height:61px;}
+
 .withIcon.icon_openhub span, #icon_openhub {width:49px; height:63px; background:url('/static/assets/img/ui/icons/icon_openhub.svg');}
 .withIcon.icon_openhub { line-height:63px;}
 
@@ -167,5 +179,10 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 
+#calendarTopBar {margin:0;padding:0; list-style:none; margin:0 auto; display:block; width:620px; clear:both; }
+#calendarTopBar li {float:left;}
+#calendarTopBar li:first-child:hover, #calendarTopBar li:last-child:hover {color:$blue; cursor:pointer}
+#calendar-date {width:540px; text-align:center}
 
-
+#calendarTopBarView {margin:0; padding:0; list-style:none; float:right; margin-top:-33px;}
+#calendarTopBarView li {float: left; padding:0 10px; cursor: pointer}
