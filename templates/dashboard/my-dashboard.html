@@ -280,19 +280,42 @@
     <div class="openHubUpdates hidden">
         <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1" data-name="openHubUpdates">
             <div class="widget-bar">
-                <div class="widget-title">OPEN HUB UPDATES</div>
+                <div class="widget-title"><a href="{% url "hub-updates" %}">OPEN HUB UPDATES</a></div>
                    {% include "includes/widget-settings.html" %}
             </div>
+            {% for hub_update in openhub_update_list|slice:":1" %}
+                <div class='list-group'>
+                    <div class="list-group-item">
+                    <a href="{{ hub_update.get_absolute_url }}">
+                    <h2>{{ hub_update.title }}</h2>
+                    </a>
+                    <p class="small text-muted">{% if hub_update.date %}{{ hub_update.date|date }} - {% endif %}
+                        posted by {{ hub_update.user }} - {{ hub_update.local_mind }}</p>
+                    <p>{{ hub_update.description|truncatewords:25 }}</p>
+                    <!-- feed for positive news -->
+                    </div>
+                </div>
+            {% endfor %}
         </li>
     </div>
 
     <div class="nationalMindNews hidden">
         <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1" data-name="nationalMindNews">
             <div class="widget-bar">
-                <div class="widget-title">NATIONAL MIND NEWS</div>
+                <div class="widget-title"><a href="{% url "mind-updates" %}">NATIONAL MIND NEWS</a></div>
             </div>
-            <div class='list-group'>
-            </div>
+            {% for update in update_list|slice:":1" %}
+                <div class='list-group'>
+                    <div class="list-group-item">
+                    <h2>{{ update.title }}</h2>
+                    <p class="small text-muted">{% if update.date %}{{ update.date|date }} - {% endif %}
+                        posted by {{ update.user }} - {{ update.local_mind }}</p>
+                    <p>{{ update.description|truncatewords:25 }}</p>
+                    <!-- feed for positive news -->
+                    </div>
+                </div>
+            {% endfor %}
+        </li>
         </li>
     </div>
 

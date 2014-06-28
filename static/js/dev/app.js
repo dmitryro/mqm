@@ -89,13 +89,13 @@ $(document).ready(function() {
 	{"col":4,"row":2,"size_x":1,"size_y":1, "name":"theLabNews"},
 
   {"col":1,"row":3,"size_x":1,"size_y":1, "name":"videoStream"},
-  {"col":2,"row":3,"size_x":1,"size_y":1, "name":"fundingmap"}
+  {"col":2,"row":3,"size_x":1,"size_y":1, "name":"fundingmap"},
+  {"col":3,"row":3,"size_x":1,"size_y":1, "name":"openHubUpdates"},
+  {"col":4,"row":3,"size_x":1,"size_y":1, "name":"nationalMindNews"}
 
 	/*
 	{"col":3,"row":2,"size_x":1,"size_y":1, "name":"buddySearch"},
-
-	{"col":2,"row":3,"size_x":1,"size_y":1, "name":"openHubUpdates"},
-	{"col":3,"row":3,"size_x":1,"size_y":1, "name":"nationalMindNews"}*/
+  */
 
 	];
 

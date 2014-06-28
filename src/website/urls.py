@@ -34,8 +34,13 @@ urlpatterns = patterns('',
     url(r'^positive-news/add/$', 'website.news.views.positive_news_list', {'show_form': True},  name='positive-news-add'),
     url(r'^positive-news/(?P<slug>[^/]+)/$', 'website.news.views.positive_news_detail', name='positive-news'),
 
+    # ANGELO
     url(r'^external-news/$', 'website.news.views.external_news_list', name='external-news'),
     url(r'^external-news/(?P<slug>[^/]+)/$', 'website.news.views.external_news_detail', name='external-news'),
+    url(r'^mind-updates/$', 'website.updates.views.update_list', name='mind-updates'),
+    url(r'^mind-updates/(?P<slug>[^/]+)/$', 'website.updates.views.update_detail', name='mind-updates'),
+    url(r'^openhub-updates/$', 'website.updates.views.openhub_update_list', name='hub-updates'),
+    #url(r'^hub-updates/(?P<slug>[^/]+)/$', 'website.updates.views.openhub_update_detail', name='hub-updates'),
 
     url(r'^call-out/$', 'website.faq.views.question_list', name='questions'),
     url(r'^call-out/add/$', 'website.faq.views.question_list', {'show_form': True}, name='questions'),

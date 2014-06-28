@@ -18,6 +18,7 @@ class UpdateAdmin(admin.ModelAdmin):
                 'title',
                 'date',
                 'description',
+                #'slug',
             ),
         }),
         (_('Media'), {

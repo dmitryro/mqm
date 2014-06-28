@@ -25,6 +25,7 @@ class Update(models.Model):
     video = models.URLField(null=True, blank=True, help_text="paste the URL from Vimeo or YouTube here and we'll take care of the rest")
 
     #tags = ....
+    #slug = AutoSlugField(populate_from=('title',), unique=True)
 
     created = CreationDateTimeField()
     modified = ModificationDateTimeField()
@@ -36,6 +37,10 @@ class Update(models.Model):
 
     def __unicode__(self):
         return self.title
+
+    @models.permalink
+    def get_absolute_url(self):
+        return 'mind-updates', (), {'slug': self.slug}
 
 
 

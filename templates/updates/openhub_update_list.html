@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load djangular_tags webdesign %}
+
+{% block content %}
+
+<div id="content" class="clearfix">
+
+  {% include "includes/topbar.html" %}
+
+  <div class="container-fluid">
+
+    <h3 class="withIcon icon_openhub"><span></span>OPENHUB UPDATES</h3>
+    <a href="{% url "dashboard"%}" class="page-close"></a>
+
+
+
+     <div class="row">
+       <div class="col-md-6 col-md-offset-3">
+         {% for object in object_list|slice:":2" %}
+         <div class="update-item">
+            <h4>{{ object.title }}</h4>
+            <p class="small">{% if object.date %}{{ object.date|date }} - {% endif %}posted by {{ object.user }} - {{ object.local_mind }}</p>
+            {{ object.description|linebreaks|urlize }}
+            <a href="{{ object.source }}">{{ object.source }}</a>
+          <hr>
+        </div>
+        {% endfor %}
+
+          </div>
+
+
+        </div>
+
+
+    </div>
+  </div> <!-- CONTENT -->
+
+  {% endblock %}
