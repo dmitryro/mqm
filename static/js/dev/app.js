@@ -1,6 +1,6 @@
 var gridster;
 var serialization;
-
+var addedWidgets = Array();
 function setCookie(cname, cvalue, exdays) {
     var d = new Date();
     d.setTime(d.getTime() + (exdays*24*60*60*1000));
@@ -77,11 +77,11 @@ $(document).ready(function() {
 	{"col":2,"row":1,"size_x":1,"size_y":1, "name":"areasofgrowth"},
 */
 
+
 	serialization = [
 	{"col":1,"row":1,"size_x":1,"size_y":1, "name":"callout"},
-	{"col":2,"row":1,"size_x":1,"size_y":1, "name":"meettheteam"},
-	{"col":3,"row":1,"size_x":1,"size_y":1, "name":"todo"},
-	{"col":4,"row":1,"size_x":1,"size_y":1, "name":"myLocalArea"},
+	{"col":2,"row":1,"size_x":1,"size_y":1, "name":"todo"},
+	{"col":3,"row":1,"size_x":1,"size_y":1, "name":"myLocalArea"},
 
 	{"col":1,"row":2,"size_x":1,"size_y":1, "name":"theNetWorks"},
 	{"col":2,"row":2,"size_x":1,"size_y":1, "name":"positiveNews"},
@@ -214,6 +214,20 @@ $(document).ready(function() {
 		// }
 
 	}
+
+
+	$.each(gridster.$widgets, function( index, value ) {
+  		addedWidgets.push($(value).attr('data-name'));
+
+  		//makes the preadded hide in the sidebar
+  		$("#menu .menu-button-wrap[data-widg|=" + $(value).attr('data-name') + "]").hide();
+
+	});
+	//^ keeps track of all widgets that are added to the system
+
+
+
+
 
 	//makeGrid('opn', gridster);
 
@@ -371,14 +385,27 @@ $(document).ready(function() {
     // add widgets
 
     $('.menu-button').click(function() {
+    	var allowAdding = true;
     	if ($(this).parent().attr('data-widg')) {
-    		return; //DISABLED ADDING NODES
-	    	var widgetName = $(this).parent().attr('data-widg');
+    		var widgetName = $(this).parent().attr('data-widg');
+    		$.each(addedWidgets, function( index, value ) {
+  				if(value == widgetName) {
+  					allowAdding = false;
+  					return; //no need to continue if we already know its added
+  				}
+			});
+    		$("#menu .menu-button-wrap[data-widg|=" + widgetName + "]").hide();
+    		if(!allowAdding) {
+    			return;
+    		}
+	    	
 	    	gridster.add_widget( $('.'+widgetName).html(), 1, 1, 1, 1 );
 	    	if(widgetName == "fundingmap") {initializeFundingMap();}
 	    	if(widgetName == "myLocalArea") {initializeLocalMap();}
 	    	if(widgetName == "theNetWorks") {initializeNetworkMap();}
 
+	    	//at this point you want to save the state again
+	    	saveState();
 	    	/*
 	    	$('.drop').unbind('click');
 	    	$('.drop').bind('click',function() {
@@ -391,19 +418,26 @@ $(document).ready(function() {
 				}
 			});
 			*/
-			$('.delete-node').bind('click');
+			/*$('.delete-node').bind('click');
 			$('.delete-node').bind('click', function() {
 		    	var widgetName = $(this).parent().parent().parent();
-		    	gridster.remove_widget(widgetName);
-		    });
+		    	$("#menu .menu-button-wrap[data-widg|=" + $(widgetName).attr("data-name") + "]").show();
+		    	
+		    	//save at this point
+		    	saveState();
+		    });*/
     	}
     });
 
     // Delete Widgets
-
-    $('.delete-node').bind('click', function() {
+    $('body').on('click', '.delete-node', function () {
     	var widgetName = $(this).parent().parent().parent();
     	gridster.remove_widget(widgetName);
+
+    	$("#menu .menu-button-wrap[data-widg|=" + $(widgetName).attr("data-name") + "]").show();
+		    	
+		    	//save at this point
+		    	saveState();
     });
 
 });
