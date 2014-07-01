@@ -32,7 +32,7 @@
         <p class="small">
             {% if news.date %}{{ news.date|date }} - {% endif %}
             posted by {{ news.user }} - {{ news.local_mind }}</p>
-        {{ news.description|linebreaks|urlize }}
+        {{ news.description|urlize|linebreaks }}
 
       </div>
       <div class="col-md-4">

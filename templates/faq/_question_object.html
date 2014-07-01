@@ -34,7 +34,7 @@
             </a>
             <div class="media-body">
                 <p>{{ answer.user }} - {{ answer.user.local_mind }} - replied on {{ answer.created|date }}</p>
-                <h4 class="media-heading">{{ answer.answer|linebreaks|urlize }}</h4>
+                <h4 class="media-heading">{{ answer.answer|urlize|linebreaks }}</h4>
             </div>
             </div>
         {% endfor %}

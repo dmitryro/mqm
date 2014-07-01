@@ -50,7 +50,7 @@
 				<div class="col-md-4 bio-col">
                     {% if member.biography %}
 					<p><span><em>Bio</em></span></p>
-                    {{ member.biography|linebreaks|urlize }}
+                    {{ member.biography|urlize|linebreaks }}
                     {% endif %}
 				</div>
 				<div class="bio-divider"></div>

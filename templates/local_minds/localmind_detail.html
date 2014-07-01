@@ -47,7 +47,7 @@
 				<div class="col-md-4 bio-col">
                     {% if local_mind.statement %}
                         <p><span><em>Mission Statement</em></span></p>
-                        {{ local_mind.statement|linebreaks|urlize }}
+                        {{ local_mind.statement|urlize|linebreaks }}
                     {% endif %}
 				</div>
 				<div class="bio-divider"></div>

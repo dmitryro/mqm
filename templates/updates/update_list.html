@@ -20,7 +20,7 @@
          <div class="update-item">
             <h4><a href="{{ objectget_absolute_url }}">{{ object.title }}</a></h4>
             <p class="small">{% if object.date %}{{ object.date|date }} - {% endif %}posted by {{ object.user }} - {{ object.local_mind }}</p>
-            {{ object.description|linebreaks|urlize }}
+            {{ object.description|urlize|linebreaks }}
             {{ object.video }}
           <hr>
         </div>
