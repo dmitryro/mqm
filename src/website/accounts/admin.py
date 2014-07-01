@@ -24,7 +24,7 @@ class UserAdmin(admin.ModelAdmin):
     list_filter = ('is_active', 'is_staff', 'privileges',)
     date_hierarchy = 'date_joined'
     search_fields = ('email', 'first_name', 'last_name', 'local_mind__name')
-    filter_horizontal = ('user_permissions', 'groups')
+    filter_horizontal = ('user_permissions', 'groups', 'skills')
     ordering = ('date_joined',)
     fieldsets = (
         (_('Account data'), {
@@ -36,6 +36,7 @@ class UserAdmin(admin.ModelAdmin):
                 'job_title',
                 'user_avatar',
                 'telephone',
+                'skills',
             ),
         }),
         (_('Administration'), {

@@ -56,9 +56,9 @@
 				<div class="bio-divider"></div>
 				<div class="col-md-9 bio">
 
-                    {% if member.skills %}
+                    {% if member.skills.all %}
                         <h5><strong>Skills</strong></h5>
-                        <p class="skill">{{ member.skills|urlize }}</p>
+                        <p class="skill">{% for skill in member.skills.all %}{{ skill }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
                     {% endif %}
 
                     {% if member.experiences.all %}
