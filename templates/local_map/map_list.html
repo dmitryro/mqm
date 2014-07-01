@@ -25,26 +25,74 @@
 
         <h3 class="withIcon icon_map"><span></span>MY LOCAL AREA</h3>
         <a href="{% url "dashboard" %}" class="page-close"></a>
-
+        <button class="btn btn-default action_addNew" data-target="#modal-form"{% if show_form %} data-open{% endif %}>ADD A KEY PARTNER</button>
+         {% include "local_map/_map_form.html" with id="modal-form" form=form %}
         <div class="row">
-            <div class="col-md-3">
-                <button class="btn btn-default action_addNew" data-target="#modal-form"{% if show_form %} data-open{% endif %}>ADD A KEY PARTNER</button>
-
-                {% include "local_map/_map_form.html" with id="modal-form" form=form %}
-
-                <br><br>
+            <div class="col-md-3"> 
                 <p>Filter By</p>
                 <label class="checkbox-inline"><input type="checkbox" id="filter_lm" checked="true" value="1">Local Minds</label><br>
                 <label class="checkbox-inline"><input type="checkbox" id="filter_cp" checked="true" value="1">Current Partners</label><br>
                 <label class="checkbox-inline"><input type="checkbox" id="filter_pp" checked="true">Potential Partners</label>
-                <br><br>
-                <div class="row">
-                    <div class="col-sm-6">
+                <br>
+
+            <div class="row">
+                  <div class="col-md-6"> 
+                <br>
+
                         <label class="checkbox-inline"><input type="checkbox" id="allCheckbox" value="option1" onClick="toggle(this)" checked="true">All</label><br>
-                        {% for category_choice, category_label in model.CATEGORY_CHOICES %}
-                            <label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="{{ category_label }}">{{ category_label }}</label><br>
-                        {% endfor %}
+                        <label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="National Charity">National Charity</label><br>
+                        
+                            <label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="Local Charity">Local Charity</label><br>
+                        
+                            <label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="Housing Association">Housing Association</label><br>
+                        
+                            <label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="Local Authority">Local Authority</label><br>
+                        
+                            <label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="Local Company">Local Company</label><br>
+                        
+                            <label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="NHS Body">NHS Body</label><br>
+                        
+                            <label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="Another Local Mind">Another Local Mind</label><br>
+                        
+                            <label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="Rethink">Rethink</label><br>
+                        
+                            <label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="Relate">Relate</label><br>
+                        
+                            <label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="Age Uk">Age Uk</label><br>
+                        
+                            <label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="Reach">Reach</label><br>
+                        
                     </div>
+
+                <div class="col-md-6"> 
+                            <br>                            
+                        
+                            <label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="Macmillan">Macmillan</label><br>
+                        
+                            <label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="Cab">Cab</label><br>
+                        
+                            <label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="Turning Point">Turning Point</label><br>
+                        
+                            <label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="Mencap">Mencap</label><br>
+                        
+                            <label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="Cruse">Cruse</label><br>
+                        
+                            <label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="Samaritans">Samaritans</label><br>
+                        
+                            <label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="Family Action">Family Action</label><br>
+                        
+                            <label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="National Trust">National Trust</label><br>
+                        
+                            <label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="YMCA">YMCA</label><br>
+                        
+                            <label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="Child Poverty Action Group">Child Poverty Action Group</label><br>
+                        
+                            <label class="checkbox-inline"><input type="checkbox" class="partnersCheckbox" id="inlineCheckbox1" checked="true" value="Alternatives to Voilence Project">Alternatives to Voilence Project</label>
+                        
+                    </div>
+
+              
+
                 </div>
 
             </div>

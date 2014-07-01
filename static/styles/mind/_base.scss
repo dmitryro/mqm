@@ -195,3 +195,7 @@ h1,h2,h3,h4,h5,h6 {
 #events-node .ui-datepicker-calendar thead th {text-align:center;}
 #events-node .ui-datepicker-calendar .ui-state-highlight {color:#fff}
 #events-node .ui-datepicker-calendar .ui-datepicker-today {background:$blue}
+
+
+.form-inline.instant-submit select.form-control {width:75%}
+.btn.btn-default.action_addNew {position: absolute;right: 140px;top:98px;}

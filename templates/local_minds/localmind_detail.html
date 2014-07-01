@@ -28,25 +28,25 @@
 			</div>
 			<div class="col-md-9">
 				<div class="col-md-4 bio-col">
-                    <p><span><em>Local mind:</em></span> {{ local_mind }}</p>
+                    <p><span><em>Local mind: </em></span> {{ local_mind }}</p>
                     {% if local_mind.address %}
-                        <p><span><em>Address</em></span> {{ local_mind.address|linebreaksbr }}</p>
+                        <p><span><em>Address: </em></span> {{ local_mind.address|linebreaksbr }}</p>
                     {% endif %}
 				</div>
 				<div class="col-md-4 bio-col">
                     {% if local_mind.email %}
-					<p><span><em>Email:</em></span> <a href="mailto:{{ local_mind.email }}">{{ local_mind.email }}</a></p>
+					<p><span><em>Email: </em></span> <a href="mailto:{{ local_mind.email }}">{{ local_mind.email }}</a></p>
                     {% endif %}
                     {% if local_mind.telephone %}
-                    <p><span><em>Office number:</em></span> {{ local_mind.telephone }}</p>
+                    <p><span><em>Office number: </em></span> {{ local_mind.telephone }}</p>
                     {% endif %}
                     {% if local_mind.website %}
-                        <p><span><em>Website:</em></span> <a href="{{ local_mind.website }}">{{ local_mind.website }}</a></p>
+                        <p><span><em>Website: </em></span> <a href="{{ local_mind.website }}">{{ local_mind.website }}</a></p>
                     {% endif %}
 				</div>
 				<div class="col-md-4 bio-col">
                     {% if local_mind.statement %}
-                        <p><span><em>Mission Statement</em></span></p>
+                        <span><em>Mission Statement</em></span>
                         {{ local_mind.statement|urlize|linebreaks }}
                     {% endif %}
 				</div>
@@ -57,17 +57,17 @@
 				{% endcomment %}
 
                     {% if local_mind.resources.all %}
-                        <h5>BACKEND RESOURCES</h5>
-                        <p class="skills">
+                        <strong>Backend Resources</strong>
+                        <p>
                         {% for resource in local_mind.resources.all %}
                             {{ resource }}
                             {% if not forloop.last %}<br/>{% endif %}
                         {% endfor %}
                         </p>
                     {% endif %}
-
+                    <br> 
                     {% if local_mind.partners.all %}
-                        <h5>KEY PARTNERS</h5>
+                        <strong>Key Partners</strong>
 
                         <table>
                             <thead>
