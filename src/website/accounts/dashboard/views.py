@@ -1,6 +1,7 @@
 from django.core.urlresolvers import reverse
 from django.views.generic import FormView, TemplateView, UpdateView
 from website.views.generic import CommonViewMixin
+from website.documents.models import Document
 from website.news.models import PositiveNews, ExternalNews
 from website.videos.models import Video
 from website.updates.models import Update, Openhub_Update
@@ -25,6 +26,7 @@ class DashboardView(CommonViewMixin, TemplateView):
         kwargs['update_list'] = Update.objects.all()
         kwargs['openhub_update_list'] = Openhub_Update.objects.all()
         kwargs['funding_list'] = Funding.objects.all()
+        kwargs['documents'] = Document.objects.privacy(user)
         partners = user.local_mind.partners.all()
         partners = partners.exclude(_latitude_postcode=None, _longitude_postcode=None)
         partners = partners.privacy(user)

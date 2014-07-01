@@ -264,6 +264,7 @@
 
     </div>
 
+    {% endcomment %}
     <div class="hidden theEngineRoom">
         <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1" data-name="theEngineRoom">
             <div class="widget-bar">
@@ -271,11 +272,12 @@
                 {% include "includes/widget-settings.html" with type="Document" %}
             </div>
             <div class='list-group'>
-                <!-- Gregor enter the for lopp of Documents here |slice:5 -->
+                {% for document in documents %}
+                    <a href="{{ document.get_absolute_url }}">{{ document }}</a>
+                {% endfor %}
             </div>
         </li>
     </div>
-    {% endcomment %}
 
 
     <div class="openHubUpdates hidden">
