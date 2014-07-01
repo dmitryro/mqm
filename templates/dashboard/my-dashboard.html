@@ -341,104 +341,19 @@
                 </li>
     </div>
 
-    {% comment %}
+   
     <div class="eventsdiary hidden">
         <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1" data-name="eventsdiary">
             <div class="widget-bar">
                 <div class="widget-title">EVENTS DIARY</div>
                 {% include "includes/widget-settings.html" with type="Event" %}
             </div>
-            <div id="events">
-                <table class="table table-bordered">
-                    <tbody><tr>
-                        <td>
-                            <b>M</b>
-                        </td>
-                        <td>
-                            <b>T</b>
-                        </td>
-                        <td>
-                            <b>W</b>
-                        </td>
-                        <td>
-                            <b>T</b>
-                        </td>
-                        <td>
-                            <b>F</b>
-                        </td>
-                        <td>
-                            <b>S</b>
-                        </td>
-                        <td>
-                            <b>S</b>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="past">1</td>
-                        <td class="past">2</td>
-                        <td class="past">3</td>
-                        <td class="past">4</td>
-                        <td class="past">5</td>
-                        <td class="past">6</td>
-                        <td class="past">7</td>
-                    </tr>
-                    <tr>
-                        <td class="past">9</td>
-                        <td class="past">8</td>
-                        <td class="past">10</td>
-                        <td class="past">11</td>
-                        <td class="today">
-                            <b>12</b>
-                        </td>
-                        <td>13</td>
-                        <td class="event-day">
-                            <a href="#">14</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="event-day">
-                            <a href="#">15</a>
-                        </td>
-                        <td>16</td>
-                        <td>17</td>
-                        <td>18</td>
-                        <td>19</td>
-                        <td>20</td>
-                        <td>21</td>
-                    </tr>
-                    <tr>
-                        <td>22</td>
-                        <td class="event-day">
-                            <a href="#">23</a>
-                        </td>
-                        <td>24</td>
-                        <td>25</td>
-                        <td class="event-day">
-                            <a href="#">26</a>
-                        </td>
-                        <td>27</td>
-                        <td class="event-day">
-                            <a href="#">28</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>29</td>
-                        <td>30</td>
-                        <td class="event-day">
-                            <a href="#">31</a>
-                        </td>
-                        <td class="past"></td>
-                        <td class="past"></td>
-                        <td class="past"></td>
-                        <td class="past"></td>
-                    </tr>
-                </tbody></table>
-            </div>
+            <div id="events-node"></div>
         </li>
     </div>
 
 
-
+    {% comment %}
     <div class="netCurrentAssets hidden">
         <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1" data-name="netCurrentAssets">
                     <div class="widget-bar">
@@ -560,21 +475,15 @@
 
     </div>
 
-
     <div class="fundingmap hidden">
         <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1" data-name="fundingmap">
             <div class="widget-bar">
                 <div class="widget-title">THE FUNDING MAP</div>
                 {% include "includes/widget-settings.html" with type="Funding" %}
             </div>
-            {% for funding in funding_list %}
-                <p>{{ funding.title }}</p>
-                <p>{{ funding.user }}</p>
-            {% endfor %}
-            <div id="map-canvas1"></div>
+            <div id="map-canvas-funding"></div>
         </li>
     </div>
-
 
 
     <div class="positiveNews hidden">
@@ -746,10 +655,83 @@ google.maps.event.addDomListener(window, 'load', initializeLocalMap);
 google.maps.event.addDomListener(window, 'load', initializeNetworkMap);
 </script>
 
+<script type="text/javascript">
+  function initializeFundingMap() {
+
+    var markers = Array();
+    var infoBoxes = Array();
+    var map;
+    var mc; //marker cluster var
+
+        var styles = [
+        {
+            "stylers": [
+            { "hue": "#174787" },
+            { "saturation": -75 }
+            ]
+        },{
+            "featureType": "road.highway",
+            "elementType": "labels.icon",
+            "stylers": [
+            { "visibility": "off" }
+            ]
+        }
+        ]
+
+
+        mapOptions = {
+          center: new google.maps.LatLng(51.5072, 0.1275),
+          zoom: 8,
+          styles: styles,
+          disableDoubleClickZoom: true,
+            draggable: false,
+            scrollwheel: false,
+            panControl: false,
+            controls:false,
+            mapTypeControl:false,
+            scaleControl:false,
+            streetViewControl:false,
+            overviewMapControl:false,
+            rotateControl:false,
+            zoomControl: false
+      };
+      map = new google.maps.Map(document.getElementById("map-canvas-funding"),
+        mapOptions);
+
+      mc = new MarkerClusterer(map, markers);
+
+     /* You will need to bind the data for the resources section here */
+
+    {% for funding in funding_list %}
+    markers.push(new google.maps.Marker({
+        position: new google.maps.LatLng({{ funding.latitude }}, {{ funding.longitude }}),
+        icon: '/static/assets/img/ui/icons/map-markers/funding.png',
+        title: "{{ funding.title }}"
+    }));
+    {% endfor %}
+
+    /*  *  */
+
+
+
+      for(i = 0; i < markers.length; i++) {
+     mc.addMarker(markers[i]);
+    }
+
+}
+
+google.maps.event.addDomListener(window, 'load', initializeFundingMap);
+</script>
+
 
 
 <script type="text/javascript">
 $(document).ready(function(){
+
+    $("#events-node").datepicker({
+        nextText: "",
+        prevText: ""
+    });
 
   $.ajax({
             type: 'GET',

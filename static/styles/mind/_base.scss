@@ -152,7 +152,7 @@ h1,h2,h3,h4,h5,h6 {
   background:url(/static/assets/img/brand/logo-bundle.png);
 }
 
-#map-canvas-local-area, #map-canvas-network-map {height:257px;}
+#map-canvas-local-area, #map-canvas-network-map, #map-canvas-funding {height:257px;}
 
 #loginTabs {width:100px; margin-bottom:20px}
 #loginTabs a {color:#000}
@@ -186,3 +186,12 @@ h1,h2,h3,h4,h5,h6 {
 
 #calendarTopBarView {margin:0; padding:0; list-style:none; float:right; margin-top:-33px;}
 #calendarTopBarView li {float: left; padding:0 10px; cursor: pointer}
+
+
+#events-node .ui-datepicker-title {display:none;}
+#events-node .ui-datepicker-calendar {height:100%; width:100%;border-collapse:collapse;}
+#events-node .ui-datepicker-calendar tr {border:1px solid #D5D5D5; border-left:0px; border-right:0px;}
+#events-node .ui-datepicker-calendar td {border:1px solid #D5D5D5; border-left:0px;padding:14px 3px; text-align: center;}
+#events-node .ui-datepicker-calendar thead th {text-align:center;}
+#events-node .ui-datepicker-calendar .ui-state-highlight {color:#fff}
+#events-node .ui-datepicker-calendar .ui-datepicker-today {background:$blue}
