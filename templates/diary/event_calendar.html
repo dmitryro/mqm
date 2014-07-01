@@ -9,13 +9,13 @@
 {% block extra_js %}
 {{ block.super }}
 <script type="text/javascript" src="http://underscorejs.org/underscore-min.js"></script>
-<script type="text/javascript" src="{{ STATIC_URL }}/js/calendar.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/calendar.js"></script>
 <script type="text/javascript">
 var calendar;
 var FINALFEED;
-var yourCalendarSrc = "http://127.0.0.1:8000/api/events/own/";
-var localCalendarSrc = "http://127.0.0.1:8000/api/events/local/";
-var nationalCalendarSrc = "http://localhost:8000/api/events/national/?";
+var yourCalendarSrc = "/api/events/own/";
+var localCalendarSrc = "/api/events/local/";
+var nationalCalendarSrc = "/api/events/national/?";
 var eventsObject = new Array();
 var numberOfFeedsLoaded=0;
 var isCalendarLoadComplete = 0;
@@ -39,7 +39,7 @@ var emptyFeed = {
             $('#calendar-date').text(this.getTitle());
         }
 
-    });   
+    });
 
 
 
@@ -104,7 +104,7 @@ var emptyFeed = {
             });
 
         }
-        
+
 
         if($("#filter_localMind").is(':checked')) {
             return;
@@ -140,7 +140,7 @@ $(document).ready(function(){
     {% endcomment %}
 
 
-    
+
 
     $(".filterRegion").click(function(e){
         selectedRegions = "";
@@ -161,11 +161,11 @@ $(document).ready(function(){
     });
 
 
-   
-    
 
 
-    
+
+
+
 
 
     generateFeed();
@@ -180,7 +180,7 @@ $(document).ready(function(){
             $('#calendar-date').text(this.getTitle());
         }
 
-    });   
+    });
     */
 
 
@@ -233,21 +233,21 @@ $(document).ready(function(){
 
             <div>
 
-              
 
-           
+
+
             <ul id="calendarTopBar" class="clearfix">
                 <li data-calendar-nav="prev"><h1><span class="glyphicon glyphicon-chevron-left"></span></h1></li>
                 <li><h1 id="calendar-date">June 2014</h1></li>
                 <li data-calendar-nav="next"><h1><span class="glyphicon glyphicon-chevron-right"></span></h1></li>
             </ul>
-        
+
 
               <ul id="calendarTopBarView" class="clearfix">
             <li data-calendar-view="day">DAY</li>
             <li data-calendar-view="week">WEEK</li>
             <li data-calendar-view="month">MONTH</li>
-            
+
 
         </ul>
 
