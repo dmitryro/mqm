@@ -22,7 +22,7 @@ class Funding(PrivacyMixin, PostcodeLocationMixin, models.Model):
     telephone = models.CharField(max_length=16,null=True, blank=True)
     email = models.CharField(max_length=120,null=True, blank=True)
     website = models.URLField(null=True, blank=True)
-    postcode = models.CharField(max_length=120, help_text="this is how we generate a map")
+    postcode = models.CharField(max_length=120, help_text="This to create a marker on the map")
 
     created = CreationDateTimeField()
     modified = ModificationDateTimeField()
