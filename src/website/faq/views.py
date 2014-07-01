@@ -24,7 +24,7 @@ class QuestionSearchForm(forms.Form):
 
 class QuestionListView(CommonPrivacyViewMixin, ListCreateView):
     form_class = QuestionForm
-    queryset = Question.objects.all()
+    queryset = Question.objects.order_by('-created')
 
     def get_context_data(self, **kwargs):
         kwargs['my_questions'] = self.get_queryset().filter(user=self.request.user)
