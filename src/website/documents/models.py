@@ -6,15 +6,9 @@ from django_extensions.db.fields import (AutoSlugField, CreationDateTimeField,
 from django_publicmanager.managers import GenericPublicManager, \
     PublicOnlyManager
 from mediastore.fields import MediaField, MultipleMediaField
+from taggit.managers import TaggableManager
 
-LOCAL = 'local'
-NATIONAL = 'national'
-PRIVATE = 'private'
-PRIVACY_CHOICES = (
-    (LOCAL, _('Local')),
-    (NATIONAL, _('National')),
-    (PRIVATE, _('Private')),
-)
+from ..privacy.models import PrivacyMixin
 
 
 def category_count():
@@ -23,12 +17,7 @@ class Category(models.Model):
     name = models.CharField(max_length=200)
     slug = models.SlugField(unique=True)
 
-    # categorization
-    sort_value = models.IntegerField(default=category_count,
-        db_index=True)
-
-    objects = GenericPublicManager()
-    public = PublicOnlyManager()
+    sort_value = models.IntegerField(default=category_count, db_index=True)
 
     class Meta:
         ordering = ('sort_value',)
@@ -40,70 +29,48 @@ class Category(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        return 'document', (), {'category_slug': self.slug}
+        return 'documents', (), {'category_slug': self.slug}
 
 
-
-def tag_count():
-    return Tag.objects.count()
-class Tag(models.Model):
-    name = models.CharField(max_length=200)
-    slug = models.SlugField(unique=True)
-
-    # categorization
-    sort_value = models.IntegerField(default=tag_count,
-        db_index=True)
-
-    objects = GenericPublicManager()
-    public = PublicOnlyManager()
-
-    class Meta:
-        ordering = ('sort_value',)
-        verbose_name = _(u'Tags')
-        verbose_name_plural = _(u'Tags')
-
-    def __unicode__(self):
-        return self.name
-
-    @models.permalink
-    def get_absolute_url(self):
-        return 'document', (), {'tag_slug': self.slug}
+def upload_path(instance, filename):
+    now = datetime.utcnow()
+    name, file_extension = os.path.splitext(filename)
+    return os.path.join(
+        'documents',
+        now.strftime('%Y'),
+        now.strftime('%m'),
+        now.strftime('%d'),
+        '{}{}'.format(uuid.uuid4(), file_extension))
 
 
+class Document(PrivacyMixin, models.Model):
+    local_mind = models.ForeignKey('local_minds.LocalMind', related_name='documents')
+    user = models.ForeignKey('accounts.User', related_name='documents')
 
-class Document(models.Model):
-    # content
-    title = models.CharField(max_length=250)
-    date = models.DateField(_('Date'))
+    title = models.CharField(_('Title'), max_length=250)
+    slug = AutoSlugField(populate_from=('title',))
 
-    # media
-    file = MediaField(
-        null=True, blank=True,
-        related_name='document_file',
-        limit_choices_to={'content_type__model':'download'},)
-    url = models.URLField(null=True, blank=True, help_text="to share if coming from google docs/dropbox - permission will need to be open")
+    file = models.FileField(_('File'), null=True, blank=True, upload_to=upload_path)
+    url = models.URLField(_('URL'), null=True, blank=True, help_text=_(
+        'to share if coming from google docs/dropbox - permission will be needed to open'))
+
+    download_count = models.PositiveIntegerField(default=0)
 
     # categorization
-    categories = models.ManyToManyField(Category, blank=True, symmetrical=False,)
-    tags = models.ManyToManyField(Tag, blank=True, symmetrical=False,)
-    #rating = .......
-    privacy = models.CharField(max_length=120, choices=PRIVACY_CHOICES)
-    slug = models.SlugField(unique=True)
+    categories = models.ManyToManyField(Category, verbose_name=_('Categories'), blank=True, symmetrical=False,)
+    tags = TaggableManager()
 
     created = CreationDateTimeField()
     modified = ModificationDateTimeField()
 
-    # managers
-    objects = GenericPublicManager()
-    public = PublicOnlyManager()
-
     class Meta:
         verbose_name = _(u'Document')
         verbose_name_plural = _(u'Documents')
-        ordering = ('-date',)
+        ordering = ('-created',)
 
     def __unicode__(self):
         return self.title
 
+    @models.permalink
     def get_absolute_url(self):
-        return reverse('document', args=(self.slug,))
+        return 'documents', self.slug, {}
