@@ -57,13 +57,16 @@
 
         $("#action_addNewVideo").click(function (e) {
             $('#myModal').modal();
-
-
         });
 
         var openModal = function ($element) {
-            $element.modal({
+            $element.modal();
 
+            $element.on('shown.bs.modal', function () {
+                // Init document categories widget.
+                $element.find('select[id=id_categories]').chosen({
+                    search_contains: true
+                });
             });
         };
 
@@ -86,9 +89,7 @@
         // Open up modals on load if they have the ``data-open`` attribute.
         $('body').find('.action_addNew[data-open]').each(function () {
             var $that = $(this);
-            $($that.attr('data-target')).modal({
-
-            });
+            openModal($($that.attr('data-target')));
         });
 
         $('body').on('hidden.bs.modal', '.modal', function () {

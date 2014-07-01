@@ -2,6 +2,7 @@
 /.dump.json
 /logs
 /media/_autofixture/
+/media/documents/
 /media/mediastore/
 /media/users/
 /media/signup/

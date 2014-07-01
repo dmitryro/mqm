@@ -1,4 +1,9 @@
 # -*- coding: utf-8 -*-
+from datetime import datetime
+import os
+import uuid
+
+from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django_extensions.db.fields import (AutoSlugField, CreationDateTimeField,
@@ -27,9 +32,8 @@ class Category(models.Model):
     def __unicode__(self):
         return self.name
 
-    @models.permalink
     def get_absolute_url(self):
-        return 'documents', (), {'category_slug': self.slug}
+        return reverse('documents') + '?category=' + self.slug
 
 
 def upload_path(instance, filename):
@@ -48,17 +52,20 @@ class Document(PrivacyMixin, models.Model):
     user = models.ForeignKey('accounts.User', related_name='documents')
 
     title = models.CharField(_('Title'), max_length=250)
-    slug = AutoSlugField(populate_from=('title',))
+    slug = AutoSlugField(populate_from=('title',), unique=True)
 
     file = models.FileField(_('File'), null=True, blank=True, upload_to=upload_path)
+    file_type = models.CharField(max_length=20, null=True, blank=True)
+
     url = models.URLField(_('URL'), null=True, blank=True, help_text=_(
         'to share if coming from google docs/dropbox - permission will be needed to open'))
 
     download_count = models.PositiveIntegerField(default=0)
 
     # categorization
-    categories = models.ManyToManyField(Category, verbose_name=_('Categories'), blank=True, symmetrical=False,)
-    tags = TaggableManager()
+    categories = models.ManyToManyField(Category, verbose_name=_('Categories'),
+                                        blank=True, related_name='documents')
+    tags = TaggableManager(blank=True)
 
     created = CreationDateTimeField()
     modified = ModificationDateTimeField()
@@ -73,4 +80,17 @@ class Document(PrivacyMixin, models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        return 'documents', self.slug, {}
+        return 'documents', (self.slug,), {}
+
+    def get_download_url(self):
+        if self.file:
+            return self.file.url
+        return self.url
+
+    def save(self, *args, **kwargs):
+        if self.file:
+            __, extension = os.path.splitext(self.file.name)
+            self.file_type = extension.lower().lstrip('.')
+        else:
+            self.file_type = None
+        return super(Document, self).save(*args, **kwargs)

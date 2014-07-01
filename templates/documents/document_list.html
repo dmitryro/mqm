@@ -1,73 +1,68 @@
-{% extends "documents/base.html" %}
-{% load djangular_tags webdesign thumbnail mediastore_tags markup_tags %}
+{% extends "base.html" %}
+{% load floppyforms %}
 
+{% block content %}
 
-{% block pagecontent %}
-<div class="container">
+<div id="content" class="clearfix">
 
-    <div class="row page-header">
+	{% include "includes/topbar.html" %}
 
-        <div class="pull-left">
-            <h1>News
-            </h1>
-        </div>
-        <div class="pull-right">
-            <ul class="nav nav-pills">
-              <li class="active"><a href="{% url "news" %}">Reset</a></li>
-              {% for category in categories %}
-              <li><a href="{{ category.get_absolute_url }}">{{ category }}</a></li>
-              {% endfor %}
-            </ul>
-        </div>
+	<div class="container-fluid">
 
-    </div>
+		<h3 class="withIcon icon_document"><span></span>THE ENGINE ROOM</h3>
+        <a href="{% url "dashboard" %}" class="page-close"></a>
 
-    {% for object in object_list %}
-    <div class="row">
+        <button class="btn btn-default action_addNew" data-target="#modal-form"{% if show_form %} data-open{% endif %}>ADD NEW DOCUMENT</button>
 
-        <div class="col-md-2">
-            <p>May 24, 2013</p>
-        </div>
-        <div class="col-md-5">
-            <a href="{{ object.get_absolute_url }}">
-                {% with object.media.all.0.object as object %}
-                <img src="{% thumbnail object.file 600x300 crop,upscale %}" alt="{{ object }}" class="img-responsive" />
-                {% endwith %}
-            </a>
-        </div>
-        <div class="col-md-5">
-            <h3 class="news"><a href="{{ object.get_absolute_url }}">{{ object.title }}</a></h3>
-            <p>{{ object.pub_date|date:"j, F Y" }}</p>
-            {{ object.article|safe }}
-            <a class="btn btn-primary" href="{{ object.get_absolute_url }}">Read More <i class="fa fa-angle-right"></i></a>
-        </div>
+        {% include "documents/_document_form.html" with id="modal-form" form=form %}
+		
+		<div class="row">
+			<div class="col-md-12">
+				<br>
+				<form class="form-inline instant-submit" role="form">
+                {% form search_form using %}
+                    {% formconfig row using "forms/signup_row.html" %}
+					<div class="form-group">
+						<label for="id_region">Filter by area</label>
+                        {% formfield form.region %}
+					</div>
+					<div class="form-group">
+						<label for="id_category">Filter by type</label>
+                        {% formfield form.category %}
+					</div>
+                {% endform %}
+				</form>
 
-    </div>
+				<br>
+                {% if document_list %}
+                    <table class="table table-striped">
+                        <thead>
+                            <th>Title</th>
+                            <th>Added by</th>
+                            <th>Date added</th>
+                            <th>File type</th>
+                            <th>Size</th>
+                            <th>Downloads</th>
+                        </thead>
+                        <tbody>
+                        {% for document in document_list %}
+                            <tr>
+                                <td><a href="{{ document.get_absolute_url }}">{{ document.title }}</a></td>
+                                <td>{{ document.local_mind }}</td>
+                                <td>{{ document.created|date:"d/m/Y" }}</td>
+                                <td>{% if document.file_type %}{{ document.file_type|upper }}{% endif %}</td>
+                                <td>{% if document.file %}{{ document.file.size|filesizeformat }}{% endif %}</td>
+                                <td>{{ document.download_count }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                {% endif %}
+			</div>
+		</div>
 
-    <hr>
-    {% endfor %}
+	</div>
 
-
-        {% if is_paginated %}
-        <div class="row">
-
-        <ul class="pager">
-            {% if page_obj.has_previous %}
-            <li class="previous"><a href="?page={{ page_obj.previous_page_number }}">&larr; Older</a></li>
-            {% endif %}
-            {% if page_obj.has_next %}
-            <li class="next"><a href="?page={{ page_obj.next_page_number }}">Newer &rarr;</a></li>
-            {% endif %}
-        </ul>
-      </div>
-      {% endif %}
-
-
-    </div>
-
-</div>
-<!-- /.container -->
-
-
+</div> <!-- CONTENT -->
 
 {% endblock %}
