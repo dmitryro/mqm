@@ -103,6 +103,7 @@ urlpatterns = patterns('',
     url(r'^api/', include('website.api.urls')),
 
     # PRODUCTION ready for Workshop 1 -- GREGOR TO COMPLETE THESE
+    url(r'^dashboard/$', 'website.accounts.dashboard.views.local_dashboard', name='local-dashboard'),
     url(r'^my-dashboard/$', 'website.accounts.dashboard.views.dashboard', name='dashboard'),
     url(r'^my-dashboard/local-mind/$', 'website.accounts.dashboard.views.local_mind_form', name='local-mind-form'),
     url(r'^my-dashboard/profile/$', 'website.accounts.dashboard.views.profile_form', name='profile-form'),

@@ -1,0 +1,756 @@
+{% extends "base.html" %}
+{% load djangular_tags thumbnail render_embeded %}
+{% load url from future %}
+
+{% block extra_js %}
+{{ block.super }}
+<script src="{{ STATIC_URL }}js/dev/gridster.js"></script>
+<script src="{{ STATIC_URL }}js/dev/app-local.js"></script>
+{% endblock %}
+
+{% block content %}
+
+{% include "includes/sidebar.html" %}
+<div class="modal fade" id="sharedModal" tabindex="-1" role="dialog" aria-labelledby="sharedModal" aria-hidden="true">
+<div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        <p>One fine body&hellip;</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div>
+    <div id="content">
+
+        {% include "includes/topbar.html" with dashboard="true" %}
+
+        <div class="gridster">
+
+            <ul>
+
+
+
+
+
+
+            </ul>
+
+        </div><!-- End of gridster -->
+
+    </div>
+
+    {% include "includes/overlay.html" %}
+
+    <div class="meettheteam">
+
+        <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1" data-name="meettheteam">
+            <div class="widget-bar">
+                <div class="widget-title"><a href="/meet-the-team">MEET THE TEAM</a></div>
+                {% include "includes/widget-settings.html" with type="Team" url="/my-dashboard/invite/" %}
+            </div>
+
+            <ul class="media-list">
+                {% for user in local_mind_users %}
+                <a href="{{ user.get_absolute_url }}">
+                    <li class="media">
+                        {% if user.user_avatar %}
+                        <div class="pull-left">
+                            <img class="media-object img-circle" src="{% thumbnail user.user_avatar 40x40 crop %}">
+                        </div>
+                        {% else %}
+                        <div class="pull-left">
+                            <img class="media-object img-circle avatar_default_small" src="{{ STATIC_URL }}assets/img/placeholder/base-avatar.png">
+                        </div>
+                        {% endif %}
+                        <div class="media-body">
+                            <b>{{ user.get_full_name }}</b>
+                            {% if user.job_title %}
+                            <br>
+                            <small>{{ user.job_title }}</small>
+                            {% endif %}
+                            <i class="glyphicon glyphicon-play-circle"></i>
+
+                        </div>
+                    </li>
+                </a>
+                {% endfor %}
+            </ul>
+
+            <!-- for loop of [user_avatar, full-name, job_title ] + link to /meet-the-team/[local_mind_name]/{id or name}-->
+            {% comment %}
+            {% for user in local_mind_users %}
+
+                {% if user.user_avatar %}
+                    <img src="{% thumbnail user.user_avatar 40x40 crop %}" alt="" class="img-circle">
+                    <br>
+                {% endif %}
+
+                {{ user.get_full_name }}
+                <br>
+
+                {% if user.job_title %}
+                    {{ user.job_title }}
+                    <br>
+                {% endif %}
+
+                <a href="{{ user.get_absolute_url }}">Link to {{ user }}</a>
+
+            {% endfor %}
+            {% endcomment %}
+        </li>
+
+    </div>
+
+    <div class="callout hidden">
+        <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1" data-name="callout">
+                    <div class="widget-bar">
+                        <div class="widget-title"><a href="/call-out">CALL OUT</a></div>
+                        {% include "includes/widget-settings.html" with type="question" delatable="false" url="/call-out/add" %}
+                    </div>
+                    <ul class='list-group'>
+                        <li class='list-group-item'>
+                            <span class='badge'><!-- number of total questions for you --> {{ my_questions.count }}</span>Your Questions
+                        </li>
+                    </ul>
+                    <ul class='list-group'>
+                    {% for question in questions %}
+                    <li class="list-group-item">
+                        <span class="glyphicon glyphicon-question-sign"></span>
+                        {{ question.question }}
+                    </li>
+                    {% endfor %}
+                     {% comment %}
+                        <!-- for loop of all [question] in your local mind + link to questions detail page (/d/call-out/) -->
+                        {% for question in questions %}
+                            {{ question.question }}
+                            <a href="{{ question.get_absolute_url }}">Link</a>
+                            <br>
+                        {% endfor %}
+                        <!-- add a class if the questions is one that you have posted -->
+                         {% endcomment %}
+                    </ul>
+                </li>
+    </div>
+
+    <div class="hidden todo">
+    <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1" data-name="todo">
+                    <div class="widget-bar">
+                        <div class="widget-title"><a href="{% url "tasks" %}">TO-DO LIST</a></div>
+                        {% include "includes/widget-settings.html" with type="todo" url="/todos/add" %}
+                    </div>
+                    <ul class="list-group">
+                    {% comment %}
+                      <li class="list-group-item">
+                          {% comment %}
+                          <div class="dropdown pull-right">
+                          <a data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-chevron-down small showOnHover"></span></a>
+                          <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><span class="glyphicon glyphicon-ok"></span> Mark as complete</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><span class="glyphicon glyphicon-edit"></span> Edit</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><span class="glyphicon glyphicon-trash"></span> Delete</a></li>
+                          </ul>
+                        </div>
+
+                      Confirm all contact details for key staff are correct<small class="text-muted"><br>Due 12th April 2014</small>
+
+                      </li>
+                      {% endcomment %}
+                      <!-- for loop of [totos]  --> <!-- ordering: your to-do's first with Hight Priority, then by Due date, then all other to-dos added to your Local mind -->
+                      <li class='li list-group-item'>
+                            <span class='badge'><!-- number of total questions for you --> {{ my_active_tasks.count }}</span>My To-Dos Left
+                      </li>
+                      {% for task in my_tasks %}
+                        <li class="list-group-item">
+                            {% if task.done %}
+                            <span class="glyphicon glyphicon-ok-sign text-success pull-right"></span>
+                            {% else %}
+                            <span class="glyphicon glyphicon-record pull-right"></span>
+                            {% endif %}
+                            {% comment %}<span class="glyphicon glyphicon-asterisk"></span>{% endcomment %}<i class="fa fa-pencil-square-o"></i> {{ task.text }}
+                            {% if task.due_date %}
+                            <small class="text-muted"><br>Due {{ task.due_date|date }}</small>
+                            {% endif %}
+                        </li>
+                      {% endfor %}
+                    </ul>
+                </li>
+
+        </div>
+
+
+    {% comment %}
+    <div class="areasofgrowth hidden">
+        <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1" data-name="areasofgrowth">
+            <div class="widget-bar">
+                <div class="widget-title">DESIGN YOUR SUPPORT</div>
+                   {% include "includes/widget-settings.html" with delatable="false" %}
+            </div>
+        </li>
+    </div>
+
+
+
+    <div class="hidden assetsExpenditure">
+        <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1" data-name="assetsExpenditure">
+                    <div class="widget-bar">
+                        <div class="widget-title">
+                            ASSETS vs EXPENDITURE (%)
+                        </div>
+                        {% include "includes/widget-settings.html" %}
+                    </div>
+                    <img style="margin:25px 0 0 27px;" src="" alt="graph_services" width="233" height="192">
+                </li>
+    </div>
+
+
+
+
+
+    <div class="branding hidden">
+    <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1" data-name="branding">
+                    <div class="widget-bar">
+                        <div class="widget-title">BRANDING</div>
+                        {% include "includes/widget-settings.html" with type="Branding" %}
+                    </div>
+                    <div class='list-group'>
+                    </div>
+                </li>
+    </div>
+
+    <div class="diagnostic hidden">
+        <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1" data-name="diagnostic">
+                    <div class="widget-bar">
+                        <div class="widget-title">DIAGNOSTIC</div>
+                        {% include "includes/widget-settings.html" %}
+                    </div>
+                    <ul class='list-group'>
+
+                        <li class="list-group-item">
+                            <b>70% completed</b>
+                            <div class="progress">
+                              <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+                                <span class="sr-only">60% Complete</span>
+                              </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">Confirm all contact details for key staff are correctConfirm all contact details for key staff are correctConfirm all contact details for key staff are correctConfirm all contact details for key staff are correct</li>
+
+                    </ul>
+                </li>
+    </div>
+
+    <div class="services hidden">
+        <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1" data-name="services">
+                    <div class="widget-bar">
+                        <div class="widget-title">OUR SERVICES</div>
+                        {% include "includes/widget-settings.html" with type="Service" %}
+                        </div>
+
+                    <ul class='list-group'>
+                        <a class='li list-group-item' href='#'>
+                            <span class='badge'>users</span>Type of service
+                        </a>
+                    </ul>
+                    <div class='list-group'>
+                    </div>
+                </li>
+
+    </div>
+
+    {% endcomment %}
+
+    <div class="hidden theEngineRoom">
+        <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1" data-name="theEngineRoom">
+            <div class="widget-bar">
+                <div class="widget-title"><a href="{% url "documents" %}">THE ENGINE ROOM</a></div>
+                {% comment %}{% include "includes/widget-settings.html" with type="Document" url="/engine-room/" %}{% endcomment %}
+            </div>
+            <div class='list-group'>
+                {% for document in documents %}
+                    <a class="list-group-item" href="{{ document.get_absolute_url }}">{{ document }}</a>
+                {% endfor %}
+            </div>
+        </li>
+    </div>
+
+
+    <div class="openHubUpdates hidden">
+        <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1" data-name="openHubUpdates">
+            <div class="widget-bar">
+                <div class="widget-title"><a href="{% url "hub-updates" %}">OPEN HUB UPDATES</a></div>
+            </div>
+            {% for hub_update in openhub_update_list|slice:":1" %}
+                <div class='list-group'>
+                    <div class="list-group-item">
+                    <a href="{{ hub_update.get_absolute_url }}">
+                    <h2>{{ hub_update.title }}</h2>
+                    </a>
+                    <p class="small text-muted">{% if hub_update.date %}{{ hub_update.date|date }} - {% endif %}
+                        posted by {{ hub_update.user }} - {{ hub_update.local_mind }}</p>
+                    <p>{{ hub_update.description|truncatewords:25 }}</p>
+                    <!-- feed for positive news -->
+                    </div>
+                </div>
+            {% endfor %}
+        </li>
+    </div>
+
+    <div class="nationalMindNews hidden">
+        <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1" data-name="nationalMindNews">
+            <div class="widget-bar">
+                <div class="widget-title"><a href="{% url "mind-updates" %}">NATIONAL MIND NEWS</a></div>
+            </div>
+            {% for update in update_list|slice:":1" %}
+                <div class='list-group'>
+                    <div class="list-group-item">
+                    <h2>{{ update.title }}</h2>
+                    <p class="small text-muted">{% if update.date %}{{ update.date|date }} - {% endif %}
+                        posted by {{ update.user }} - {{ update.local_mind }}</p>
+                    <p>{{ update.description|truncatewords:25 }}</p>
+                    <!-- feed for positive news -->
+                    </div>
+                </div>
+            {% endfor %}
+        </li>
+        </li>
+    </div>
+
+        <div class="theNetWorks hidden">
+      <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1" data-name="theNetWorks">
+        <div class="widget-bar">
+            <div class="widget-title"><a href="{% url "net-works" %}">THE NET WORKS</a></div>
+        </div>
+         <!-- this will be a map -->
+         <div id="map-canvas-network-map"></div>
+      </li>
+    </div>
+
+
+    <div class="theLabNews hidden">
+        <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1" data-name="theLabNews">
+                    <div class="widget-bar">
+                        <div class="widget-title">THE LAB NEWS</div>
+                    </div>
+                    <ul class="list-group" id="feedResults">
+                        <!-- feed, if times are good we'll do this -->
+                    </ul>
+                </li>
+    </div>
+
+
+    <div class="eventsdiary hidden">
+        <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1" data-name="eventsdiary">
+            <div class="widget-bar">
+                <div class="widget-title"><a href="{% url "events" %}">EVENTS DIARY</a></div>
+                {% include "includes/widget-settings.html" with type="Event" url="/diary-events/add/" %}
+            </div>
+            <div id="events-node"></div>
+        </li>
+    </div>
+
+
+    {% comment %}
+    <div class="netCurrentAssets hidden">
+        <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1" data-name="netCurrentAssets">
+                    <div class="widget-bar">
+                        <div class="widget-title">
+                            NET CURRENT ASSETS
+                        </div>
+                        {% include "includes/widget-settings.html" %}
+                    </div>
+                    <img style="margin:25px 0 0 27px;" src="" alt="graph_finance" width="233" height="192">
+                </li>
+
+    </div>
+    {% endcomment %}
+
+    <div class="buddySearch hidden" >
+        <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1" data-name="buddySearch">
+            <div class="widget-bar">
+                <div class="widget-title"><a href="/buddy-search">BUDDY SEARCH</a></div>
+            </div>
+            <ul class="media-list">
+                <li>
+                    <form class="form-horizontal nodeForm" role="form">
+                      <div class="form-group">
+                        <input type="text" class="form-control" id="buddySearchInput" placeholder="Search">
+                      </div>
+                    </form>
+                </li>
+                {% for user in local_mind_users %}
+                <a href="{{ user.get_absolute_url }}">
+                    <li class="media">
+                        {% if user.user_avatar %}
+                        <div class="pull-left">
+                            <img class="media-object img-circle" src="{% thumbnail user.user_avatar 40x40 crop %}">
+                        </div>
+                        {% else %}
+                        <div class="pull-left">
+                            <img class="media-object img-circle avatar_default_small" src="{{ STATIC_URL }}assets/img/placeholder/base-avatar.png">
+                        </div>
+                        {% endif %}
+                        <div class="media-body">
+                            <b>{{ user.get_full_name }}</b>
+                            {% if user.job_title %}
+                            <br>
+                            <small>{{ user.job_title }}</small>
+                            {% endif %}
+                            <i class="glyphicon glyphicon-play-circle"></i>
+
+                        </div>
+                    </li>
+                </a>
+                {% endfor %}
+            </ul>
+        </li>
+    </div>
+
+    <div class="myLocalArea hidden" >
+    <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1" data-name="myLocalArea">
+                    <div class="widget-bar">
+                        <div class="widget-title"><a href="/my-local-area">MY LOCAL AREA</a></div>
+                        {% include "includes/widget-settings.html" with type="local-area" url="/my-local-area/add" %}
+                    </div>
+
+                    <!-- for loop of on line #486 (search for '//map markers' in this template) [ long, lat, title ] -->
+                    <div id="map-canvas-local-area"></div>
+                    {% comment %}
+                    {% for map in map_list %}
+                        Latitude: {{ map.latitude }} <br>
+                        Longitude: {{ map.longitude }} <br>
+                        Name: {{ map.name }} <br>
+
+                        {% if map.marker %}
+                        Marker: {{ map.marker.icon.url }}
+                        {% endif %}
+                    {% endfor %}
+                    {% endcomment %}
+                </li>
+    </div>
+
+    <div class="externalNews hidden">
+    <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1" data-name="externalNews">
+                    <div class="widget-bar">
+                        <div class="widget-title"><a href="{% url "external-news" %}">HOT TOPICS NEWS STREAM</a></div>
+                    </div>
+                    {% for news in externalnews_list %}
+                    <div class='list-group'>
+                        <div class="list-group-item">
+                        <a href="{{ news.get_absolute_url }}">
+                        <h2>{{ news.title }}</h2>
+                        </a>
+                        <p class="small text-muted">{% if news.date %}{{ news.date|date }} - {% endif %}
+                            posted by {{ news.user }} - {{ news.local_mind }}</p>
+                        <p>{{ news.description|truncatechars:250 }}</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </li>
+    </div>
+
+
+
+    <div class="hidden videoStream">
+        <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1" data-name="videoStream">
+                    <div class="widget-bar">
+                        <div class="widget-title"><a href="{% url "videos" %}">VIDEO STREAM</a></div>
+                        {% include "includes/widget-settings.html" with type="Video" url="/video-stream/add/" %}
+                    </div>
+                    <div id='videos'>
+                        {% for video in video_list|slice:":1" %}
+                            <div class='panel-content'>
+                                <h5>{{ video.title }}</h5>
+                                {{ video.url|render_embeded }}
+                                <p style="padding-left:15px;">Posted by {{ video.user }} on {{ video.date }}</p>
+                            </div>
+
+                        {% endfor %}
+                    </div>
+                </li>
+
+    </div>
+
+    <div class="fundingmap hidden">
+        <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1" data-name="fundingmap">
+            <div class="widget-bar">
+                <div class="widget-title"><a href="{% url "fundings" %}">THE FUNDING MAP</a></div>
+                {% include "includes/widget-settings.html" with type="Funding" url="/" %}
+            </div>
+            <div id="map-canvas-funding"></div>
+        </li>
+    </div>
+
+
+    <div class="positiveNews hidden">
+        <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1" data-name="positiveNews">
+                    <div class="widget-bar">
+                        <div class="widget-title"><a href="{% url "positive-news" %}">POSITIVE NEWS</a></div>
+                        {% include "includes/widget-settings.html" with type="News" url="/positive-news/add/" %}
+                    </div>
+                    {% for news in positivenews_list %}
+                    <div class='list-group'>
+                        <div class="list-group-item">
+                        <a href="{{ news.get_absolute_url }}">
+                        <h2>{{ news.title }}</h2>
+                        </a>
+                        <p class="small text-muted">{% if news.date %}{{ news.date|date }} - {% endif %}
+                            posted by {{ news.user }} - {{ news.local_mind }}</p>
+                        <p>{{ news.description|truncatechars:250 }}</p>
+                        <!-- feed for positive news -->
+                        </div>
+                    </div>
+                    {% endfor %}
+                </li>
+    </div>
+    {% comment %}
+    <div class="collectiveimpact hidden">
+        <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1" data-name="collectiveimpact">
+            <div class="widget-bar">
+                <div class="widget-title">COLLECTIVE IMPACT</div>
+            </div>
+        </li>
+    </div>
+    {% endcomment %}
+
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_MAPS_API_KEY }}"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}/js/markerclusterer.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+  function initializeLocalMap() {
+
+    var markers = Array();
+    var infoBoxes = Array();
+    var map;
+    var mc; //marker cluster var
+
+        var styles = [
+        {
+            "stylers": [
+            { "hue": "#174787" },
+            { "saturation": -75 }
+            ]
+        },{
+            "featureType": "road.highway",
+            "elementType": "labels.icon",
+            "stylers": [
+            { "visibility": "off" }
+            ]
+        }
+        ]
+
+
+        mapOptions = {
+          center: new google.maps.LatLng(51.5072, 0.1275),
+          zoom: 8,
+          styles: styles,
+          disableDoubleClickZoom: true,
+            draggable: false,
+            scrollwheel: false,
+            panControl: false,
+            controls:false,
+            mapTypeControl:false,
+            scaleControl:false,
+            streetViewControl:false,
+            overviewMapControl:false,
+            rotateControl:false,
+            zoomControl: false
+      };
+      map = new google.maps.Map(document.getElementById("map-canvas-local-area"),
+        mapOptions);
+
+      mc = new MarkerClusterer(map, markers);
+
+//loop markers for local map
+
+
+    {% for map in map_list %}
+    markers.push(new google.maps.Marker({
+        position: new google.maps.LatLng({{ map.latitude }}, {{ map.longitude }}),
+        icon: '{{ map.marker_icon }}',
+        title:"{{ map.name }}"
+    }));
+    {% endfor %}
+
+
+      for(i = 0; i < markers.length; i++) {
+     mc.addMarker(markers[i]);
+    }
+
+}
+
+google.maps.event.addDomListener(window, 'load', initializeLocalMap);
+</script>
+
+<script type="text/javascript">
+  function initializeNetworkMap() {
+
+    var markers = Array();
+    var infoBoxes = Array();
+    var map;
+    var mc; //marker cluster var
+
+        var styles = [
+        {
+            "stylers": [
+            { "hue": "#174787" },
+            { "saturation": -75 }
+            ]
+        },{
+            "featureType": "road.highway",
+            "elementType": "labels.icon",
+            "stylers": [
+            { "visibility": "off" }
+            ]
+        }
+        ]
+
+
+        mapOptions = {
+          center: new google.maps.LatLng(51.5072, 0.1275),
+          zoom: 8,
+          styles: styles,
+          disableDoubleClickZoom: true,
+            draggable: false,
+            scrollwheel: false,
+            panControl: false,
+            controls:false,
+            mapTypeControl:false,
+            scaleControl:false,
+            streetViewControl:false,
+            overviewMapControl:false,
+            rotateControl:false,
+            zoomControl: false
+      };
+      map = new google.maps.Map(document.getElementById("map-canvas-network-map"),
+        mapOptions);
+
+      mc = new MarkerClusterer(map, markers);
+
+     /* You will need to bind the data for the resources section here */
+
+    {% for map in net_works %}
+    markers.push(new google.maps.Marker({
+        position: new google.maps.LatLng({{ map.latitude }}, {{ map.longitude }}),
+        icon: '{{ map.marker_icon }}',
+        title: "{{ map.name }}"
+    }));
+    {% endfor %}
+
+    /*  *  */
+
+
+
+      for(i = 0; i < markers.length; i++) {
+     mc.addMarker(markers[i]);
+    }
+
+}
+
+google.maps.event.addDomListener(window, 'load', initializeNetworkMap);
+</script>
+
+<script type="text/javascript">
+  function initializeFundingMap() {
+
+    var markers = Array();
+    var infoBoxes = Array();
+    var map;
+    var mc; //marker cluster var
+
+        var styles = [
+        {
+            "stylers": [
+            { "hue": "#174787" },
+            { "saturation": -75 }
+            ]
+        },{
+            "featureType": "road.highway",
+            "elementType": "labels.icon",
+            "stylers": [
+            { "visibility": "off" }
+            ]
+        }
+        ]
+
+
+        mapOptions = {
+          center: new google.maps.LatLng(51.5072, 0.1275),
+          zoom: 8,
+          styles: styles,
+          disableDoubleClickZoom: true,
+            draggable: false,
+            scrollwheel: false,
+            panControl: false,
+            controls:false,
+            mapTypeControl:false,
+            scaleControl:false,
+            streetViewControl:false,
+            overviewMapControl:false,
+            rotateControl:false,
+            zoomControl: false
+      };
+      map = new google.maps.Map(document.getElementById("map-canvas-funding"),
+        mapOptions);
+
+      mc = new MarkerClusterer(map, markers);
+
+     /* You will need to bind the data for the resources section here */
+
+    {% for funding in funding_list %}
+    markers.push(new google.maps.Marker({
+        position: new google.maps.LatLng({{ funding.latitude }}, {{ funding.longitude }}),
+        icon: '/static/assets/img/ui/icons/map-markers/funding.png',
+        title: "{{ funding.title }}"
+    }));
+    {% endfor %}
+
+    /*  *  */
+
+
+
+      for(i = 0; i < markers.length; i++) {
+     mc.addMarker(markers[i]);
+    }
+
+}
+
+google.maps.event.addDomListener(window, 'load', initializeFundingMap);
+</script>
+
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+
+    $("#events-node").datepicker({
+        nextText: "",
+        prevText: ""
+    });
+
+  $.ajax({
+            type: 'GET',
+            url: 'http://maworaa2.miniserver.com/mindFeed/mindFeed.php',
+            dataType: 'xml',
+            success: function (xml) {
+                $(xml).find("item").each(function () {
+                    var title = $(this).find("title").text();
+                    var description = $(this).find("description").text();
+                    var linkUrl = $(this).find("link").text();
+                    var link = "<a href='" + linkUrl + "' target='_blank'>Read More<a>";
+                    $('#feedResults').append('<a target="_blank" href="'+linkUrl+'" class="list-group-item">'+title+'</li></a>');
+                });
+            }
+        });
+});
+
+</script>
+{% endblock %}
