@@ -54,6 +54,7 @@
         <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1" data-name="meettheteam">
             <div class="widget-bar">
                 <div class="widget-title"><a href="/meet-the-team">MEET THE TEAM</a></div>
+                {% include "includes/widget-settings.html" with type="Team" url="/my-dashboard/invite/" %}
             </div>
 
             <ul class="media-list">
@@ -265,11 +266,12 @@
     </div>
 
     {% endcomment %}
+
     <div class="hidden theEngineRoom">
         <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1" data-name="theEngineRoom">
             <div class="widget-bar">
                 <div class="widget-title"><a href="{% url "documents" %}">THE ENGINE ROOM</a></div>
-                {% include "includes/widget-settings.html" with type="Document" url="/engine-room/" %}
+                {% comment %}{% include "includes/widget-settings.html" with type="Document" url="/engine-room/" %}{% endcomment %}
             </div>
             <div class='list-group'>
                 {% for document in documents %}
@@ -284,7 +286,6 @@
         <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1" data-name="openHubUpdates">
             <div class="widget-bar">
                 <div class="widget-title"><a href="{% url "hub-updates" %}">OPEN HUB UPDATES</a></div>
-                   {% include "includes/widget-settings.html" %}
             </div>
             {% for hub_update in openhub_update_list|slice:":1" %}
                 <div class='list-group'>
@@ -349,7 +350,7 @@
         <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1" data-name="eventsdiary">
             <div class="widget-bar">
                 <div class="widget-title"><a href="{% url "events" %}">EVENTS DIARY</a></div>
-                {% include "includes/widget-settings.html" with type="Event" %}
+                {% include "includes/widget-settings.html" with type="Event" url="/diary-events/add/" %}
             </div>
             <div id="events-node"></div>
         </li>
@@ -449,7 +450,6 @@
                         <p class="small text-muted">{% if news.date %}{{ news.date|date }} - {% endif %}
                             posted by {{ news.user }} - {{ news.local_mind }}</p>
                         <p>{{ news.description|truncatechars:250 }}</p>
-                        <!-- feed for positive news -->
                         </div>
                     </div>
                     {% endfor %}
@@ -462,7 +462,7 @@
         <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1" data-name="videoStream">
                     <div class="widget-bar">
                         <div class="widget-title"><a href="{% url "videos" %}">VIDEO STREAM</a></div>
-                        {% include "includes/widget-settings.html" with type="Video" %}
+                        {% include "includes/widget-settings.html" with type="Video" url="/video-stream/add/" %}
                     </div>
                     <div id='videos'>
                         {% for video in video_list|slice:":1" %}
@@ -482,7 +482,7 @@
         <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1" data-name="fundingmap">
             <div class="widget-bar">
                 <div class="widget-title"><a href="{% url "fundings" %}">THE FUNDING MAP</a></div>
-                {% include "includes/widget-settings.html" with type="Funding" %}
+                {% include "includes/widget-settings.html" with type="Funding" url="/" %}
             </div>
             <div id="map-canvas-funding"></div>
         </li>

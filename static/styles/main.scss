@@ -25,9 +25,8 @@ $icon-font-path: "../../libs/sass-bootstrap/fonts/";
 @import "mind/dashboard";             // Dashboard base styles
 @import "mind/dash-sidebar";          // Dashboard 'fly-out' sidebar
 @import "mind/dash-nodes";            // Dashboard node components
-@import "mind/calendar";            // Calendar
+@import "mind/components";            // Site-wide general reusable omponents
+@import "mind/calendar";              // Calendar
+@import "mind/video";                 // Video related pages
+@import "mind/team";                  // Meet the Team styles
 @import "mind/devices";               // Device overrides
-
-@import "mind/video";
-
-@import "mind/team";

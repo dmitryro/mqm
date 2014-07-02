@@ -1,0 +1,20 @@
+/* COMPONTENTS
+-------------------------------------------------------- */
+
+/* posts ( Positive News, Hot Topics News Stream, Openhub Updates, National Mind Updates )
+---------- */
+
+.post {
+  margin-bottom:40px;
+  padding-bottom:30px;
+  border-bottom:1px solid #ccc;
+  &:first-child {
+    margin-top:30px;
+  }
+  .meta {
+    margin-bottom:20px;
+  }
+  .source {
+    margin-top:20px;
+  }
+}

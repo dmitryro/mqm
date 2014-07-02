@@ -9,30 +9,28 @@
 
   <div class="container-fluid">
 
-    <h3 class="withIcon icon_openhub"><span></span>NATIONAL MIND UPDATES</h3>
-    <a href="{% url "dashboard"%}" class="page-close"></a>
+    <div id="page-head">
+        <h3 class="withIcon icon_openhub"><span></span>NATIONAL MIND UPDATES</h3>
+        <a href="{% url "dashboard"%}" class="page-close"></a>
+    </div>
 
-
+    <div id="page-content">
 
      <div class="row">
        <div class="col-md-6 col-md-offset-3">
          {% for object in object_list|slice:":2" %}
-         <div class="update-item">
+         <div class="post">
             <h4><a href="{{ objectget_absolute_url }}">{{ object.title }}</a></h4>
-            <p class="small">{% if object.date %}{{ object.date|date }} - {% endif %}posted by {{ object.user }} - {{ object.local_mind }}</p>
-            {{ object.description|urlize|linebreaks }}
+            <p class="small meta">{% if object.date %}{{ object.date|date }} - {% endif %}posted by {{ object.user }} - {{ object.local_mind }}</p>
+            <div>{{ object.description|urlize|linebreaks }}</div>
             {{ object.video }}
-          <hr>
         </div>
         {% endfor %}
-
-          </div>
-
-
-        </div>
-
-
     </div>
-  </div> <!-- CONTENT -->
+    </div>
 
+    </div><!--page-content-->
+
+    </div><!--container-fluid-->
+</div> <!--content-->
   {% endblock %}

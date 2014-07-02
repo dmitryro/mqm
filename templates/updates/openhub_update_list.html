@@ -9,30 +9,29 @@
 
   <div class="container-fluid">
 
-    <h3 class="withIcon icon_openhub"><span></span>OPENHUB UPDATES</h3>
-    <a href="{% url "dashboard"%}" class="page-close"></a>
+    <div id="page-head">
+        <h3 class="withIcon icon_openhub"><span></span>OPENHUB UPDATES</h3>
+        <a href="{% url "dashboard"%}" class="page-close"></a>
+    </div>
 
 
+    <div id="page-content">
 
      <div class="row">
        <div class="col-md-6 col-md-offset-3">
-         {% for object in object_list|slice:":2" %}
-         <div class="update-item">
+         {% for object in object_list %}
+         <div class="post">
             <h4>{{ object.title }}</h4>
-            <p class="small">{% if object.date %}{{ object.date|date }} - {% endif %}posted by {{ object.user }} - {{ object.local_mind }}</p>
+            <p class="small meta">{% if object.date %}{{ object.date|date }} - {% endif %}posted by {{ object.user }} - {{ object.local_mind }}</p>
             {{ object.description|urlize|linebreaks }}
-            <a href="{{ object.source }}">{{ object.source }}</a>
-          <hr>
+            <p class="source"><i class="fa fa-rocket"></i> Source: <a href="{{ object.source }}" target="_blank">{{ object.source }}</a></p>
         </div>
         {% endfor %}
-
-          </div>
-
-
         </div>
-
-
     </div>
-  </div> <!-- CONTENT -->
 
-  {% endblock %}
+    </div><!--page-content-->
+
+  </div><!--container-fluid-->
+</div> <!--content-->
+{% endblock %}
