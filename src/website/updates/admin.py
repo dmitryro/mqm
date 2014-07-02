@@ -1,13 +1,25 @@
 # -*- coding: utf-8 -*-
+from django import forms
 from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
 from .models import Update, Openhub_Update
+from website.utils.admin import TextEditor
+
+
+class UpdateAdminForm(forms.ModelForm):
+    class Meta:
+        model = Update
+        widgets = {
+            'description': TextEditor(),
+        }
 
 
 class UpdateAdmin(admin.ModelAdmin):
     list_display = (
         'title',
         'date')
+    save_on_top = True
+    form = UpdateAdminForm
     search_fields = (
         'title',
         'description',)
@@ -32,10 +44,20 @@ class UpdateAdmin(admin.ModelAdmin):
     )
     save_on_top = True
 
+
+class Openhub_UpdateAdminForm(forms.ModelForm):
+    class Meta:
+        model = Openhub_Update
+        widgets = {
+            'description': TextEditor(),
+        }
+
 class Openhub_UpdateAdmin(admin.ModelAdmin):
     list_display = (
         'title',
         'date')
+    save_on_top = True
+    form = Openhub_UpdateAdminForm    
     search_fields = (
         'title',
         'description',)
