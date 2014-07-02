@@ -1,13 +1,10 @@
-{% extends "base.html" %}
 {% load djangular_tags webdesign %}
 
 
 {% block content %}
-<div id="content">
 
-    {% include "includes/topbar.html" %}
 
-    <div class="container-fluid">
+   
         <h3>Event Diary</h3>
 
         {% for object in object_list %}
@@ -18,7 +15,7 @@
             <p>{{ object.organiser }}</p>
         {% endfor %}
 
-    </div> <!-- CONTENT -->
+
 
 
 {% endblock %}

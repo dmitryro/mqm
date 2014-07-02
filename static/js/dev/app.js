@@ -79,7 +79,8 @@ $(document).ready(function() {
 
 
 	serialization = [
-	{"col":1,"row":1,"size_x":1,"size_y":1, "name":"callout"},
+	{"col":1,"row":1,"size_x":1,"size_y":1, "name":"callout"}
+/*
 	{"col":2,"row":1,"size_x":1,"size_y":1, "name":"todo"},
 	{"col":3,"row":1,"size_x":1,"size_y":1, "name":"myLocalArea"},
 
@@ -153,7 +154,10 @@ $(document).ready(function() {
 	}
 
 
-
+	$("#reset-dashboard").click(function(e){
+		localStorage.removeItem("positions");
+		window.location.reload();
+	});
 
 
     function makeGrid(state, gr) {

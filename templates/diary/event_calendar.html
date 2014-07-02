@@ -1,28 +1,23 @@
 {% extends "base.html" %}
 {% load djangular_tags webdesign %}
 
-{% block extra_css %}
-{{ block.super }}
-<link rel="stylesheet" href="{{ STATIC_URL }}dist/styles/calendar.css">
-{% endblock %}
-
 {% block extra_js %}
 {{ block.super }}
 <script type="text/javascript" src="http://underscorejs.org/underscore-min.js"></script>
 <script type="text/javascript" src="{{ STATIC_URL }}js/calendar.js"></script>
 <script type="text/javascript">
-var calendar;
-var FINALFEED;
-var yourCalendarSrc = "/api/events/own/";
-var localCalendarSrc = "/api/events/local/";
-var nationalCalendarSrc = "/api/events/national/?";
-var eventsObject = new Array();
-var numberOfFeedsLoaded=0;
-var isCalendarLoadComplete = 0;
-var selectedRegions = "";
-var emptyFeed = {
-    "success": 1,
-    "result": []
+    var calendar;
+    var FINALFEED;
+    var yourCalendarSrc = "/api/events/own/";
+    var localCalendarSrc = "/api/events/local/";
+    var nationalCalendarSrc = "/api/events/national/?";
+    var eventsObject = new Array();
+    var numberOfFeedsLoaded=0;
+    var isCalendarLoadComplete = 0;
+    var selectedRegions = "";
+    var emptyFeed = {
+        "success": 1,
+        "result": []
     }
 
     function generateCalendar() {
@@ -30,16 +25,17 @@ var emptyFeed = {
             isCalendarLoadComplete=1;
             //make the calendar
 
-            calendar = $('#calendar').calendar({
-        tmpl_path: '/calendarTemplates/',
-        events_source: function(){
-            return emptyFeed.result;
-        },
-        onAfterViewLoad: function(view) {
-            $('#calendar-date').text(this.getTitle());
-        }
+            calendar = $('#theCalendar').calendar({
+                tmpl_path: '/calendarTemplates/',
+                modal: "#events-modal",
+                events_source: function(){
+                    return emptyFeed.result;
+                },
+                onAfterViewLoad: function(view) {
+                    $('#calendar-date').text(this.getTitle());
+                }
 
-    });
+            });
 
 
 
@@ -56,30 +52,30 @@ var emptyFeed = {
         emptyFeed.result.length = 0; //reset
 
         if($("#filter_own").is(':checked')) {
-        $.getJSON(yourCalendarSrc,function(data) {
-            $.each( data['result'], function( key, val ) {
+            $.getJSON(yourCalendarSrc,function(data) {
+                $.each( data['result'], function( key, val ) {
                 //eventsObject.push(val);
                 emptyFeed.result.push(val);
             });
-        }).done(function(data) {
-            numberOfFeedsLoaded++;
-            generateCalendar();
-        });
-    }
+            }).done(function(data) {
+                numberOfFeedsLoaded++;
+                generateCalendar();
+            });
+        }
 
-    if($("#filter_localMind").is(':checked')) {
-        $.getJSON(localCalendarSrc,function(data) {
-            $.each( data['result'], function( key, val ) {
+        if($("#filter_localMind").is(':checked')) {
+            $.getJSON(localCalendarSrc,function(data) {
+                $.each( data['result'], function( key, val ) {
                 //eventsObject.push(val);
                 emptyFeed.result.push(val);
             });
-        }).done(function(data) {
-            numberOfFeedsLoaded++;
-            generateCalendar();
-        });
-    }
+            }).done(function(data) {
+                numberOfFeedsLoaded++;
+                generateCalendar();
+            });
+        }
 
-    $.getJSON(nationalCalendarSrc+selectedRegions,function(data) {
+        $.getJSON(nationalCalendarSrc+selectedRegions,function(data) {
             $.each( data['result'], function( key, val ) {
                 //eventsObject.push(val);
                 emptyFeed.result.push(val);
@@ -120,7 +116,7 @@ var emptyFeed = {
 
 
         }
-    */
+        */
         //getthe rest add add
 
 
@@ -129,46 +125,46 @@ var emptyFeed = {
 
     }
 
-$(document).ready(function(){
+    $(document).ready(function(){
 
-    {% comment %}
-    var regions = {
-        {% for region_slug, region_name in regions %}
-        "{{ region_slug|escapejs }}": "{{ region_name|escapejs }}"{% if not forloop.last %}, {% endif %}
-        {% endfor %}
-    };
-    {% endcomment %}
-
-
+        {% comment %}
+        var regions = {
+            {% for region_slug, region_name in regions %}
+            "{{ region_slug|escapejs }}": "{{ region_name|escapejs }}"{% if not forloop.last %}, {% endif %}
+            {% endfor %}
+        };
+        {% endcomment %}
 
 
-    $(".filterRegion").click(function(e){
-        selectedRegions = "";
-        $(".filterRegion").each(function( index, element ) {
-            if($(this).is(':checked')) {
-                selectedRegions = selectedRegions+"&region=" + $(this).attr("data-region");
-            }
+
+
+        $(".filterRegion").click(function(e){
+            selectedRegions = "";
+            $(".filterRegion").each(function( index, element ) {
+                if($(this).is(':checked')) {
+                    selectedRegions = selectedRegions+"&region=" + $(this).attr("data-region");
+                }
+            });
+            generateFeed();
         });
-         generateFeed();
-    });
 
-    $("#filter_own").click(function(e){
+        $("#filter_own").click(function(e){
+            generateFeed();
+        });
+
+        $("#filter_localMind").click(function(e){
+            generateFeed();
+        });
+
+
+
+
+
+
+
+
+
         generateFeed();
-    });
-
-    $("#filter_localMind").click(function(e){
-        generateFeed();
-    });
-
-
-
-
-
-
-
-
-
-    generateFeed();
 
     /*
     calendar = $('#calendar').calendar({
@@ -181,91 +177,99 @@ $(document).ready(function(){
         }
 
     });
-    */
+*/
 
 
-    $("#calendarTopBar li:first-child, #calendarTopBar li:last-child").each(function() {
-        var $this = $(this);
-        $this.click(function() {
-            calendar.navigate($this.data('calendar-nav'));
-        });
+$("#calendarTopBar li:first-child, #calendarTopBar li:last-child").each(function() {
+    var $this = $(this);
+    $this.click(function() {
+        calendar.navigate($this.data('calendar-nav'));
     });
+});
 
-    $('#calendarTopBarView li').each(function() {
-        var $this = $(this);
-        $this.click(function() {
-            calendar.view($this.data('calendar-view'));
-        });
+$('#calendarTopBarView li').each(function() {
+    var $this = $(this);
+    $this.click(function() {
+        calendar.view($this.data('calendar-view'));
     });
+});
 
 });
 </script>
 {% endblock %}
 
 {% block content %}
+<!-- Calendar needs #content to have background set to none -->
+<div class="modal fade" id="events-modal" style="background:#fff">
+<div class="modal-close close" data-dismiss="modal" aria-hidden="true"></div>
+    <div class="modal-body" style="height: 400px">
+    
+    </div>
+</div>
 
-<div id="content" class="clearfix">
+
+<div id="content" class="clearfix" style="background:none">
 
     {% include "includes/topbar.html" %}
 
     <div class="container-fluid">
 
-    <h3 class="withIcon icon_calendar"><span></span>EVENTS DIARY</h3>
-    <a href="{% url "dashboard" %}" class="page-close"></a>
+        <h3 class="withIcon icon_calendar"><span></span>EVENTS DIARY</h3>
+        <a href="{% url "dashboard" %}" class="page-close"></a>
 
-    <button class="btn btn-default action_addNew" data-target="#event-form"{% if show_form %} data-open{% endif %}>ADD NEW EVENT</button>
+        <button class="btn btn-default action_addNew" data-target="#event-form"{% if show_form %} data-open{% endif %}>ADD NEW EVENT</button>
 
-    {% include "diary/_event_form.html" with id="event-form" form=form %}
+        {% include "diary/_event_form.html" with id="event-form" form=form %}
 
-    <div id="team-content">
+        <div id="cal-content">
 
-        <div class="row">
-        <div class="col-md-2">
-            <h4>AVALIABLE CALENDARS</h4>
-            <p class="small">Click on the regions below to see them in you calendar</p>
-            <label class="checkbox-inline"><input type="checkbox" id="filter_own" checked="true" value="1">My Calendar</label><br>
-            <label class="checkbox-inline"><input type="checkbox" id="filter_localMind" checked="true" value="1">{{ user.local_mind.name }} Mind</label><br>
-            {% for region_slug, region_name in regions %}
-            <label class="checkbox-inline"><input type="checkbox" class="filterRegion" data-region="{{ region_slug }}" id="filter_{{ region_slug }}" value="1">{{ region_name }}</label><br>
-            {% endfor %}
+            <div class="row">
+                <div class="col-md-2">
+                    <h4>AVALIABLE CALENDARS</h4>
+                    <p class="small">Click on the regions below to see them in you calendar</p>
+                    <label class="checkbox-inline"><input type="checkbox" id="filter_own" checked="true" value="1">My Calendar</label><br>
+                    <label class="checkbox-inline"><input type="checkbox" id="filter_localMind" checked="true" value="1">{{ user.local_mind.name }} Mind</label><br>
+                    {% for region_slug, region_name in regions %}
+                    <label class="checkbox-inline"><input type="checkbox" class="filterRegion" data-region="{{ region_slug }}" id="filter_{{ region_slug }}" value="1">{{ region_name }}</label><br>
+                    {% endfor %}
+                </div>
+                <div class="col-md-9">
+
+                    <div>
+
+
+
+
+                        <ul id="calendarTopBar" class="clearfix">
+                            <li data-calendar-nav="prev"><h1><span class="glyphicon glyphicon-chevron-left"></span></h1></li>
+                            <li><h1 id="calendar-date">June 2014</h1></li>
+                            <li data-calendar-nav="next"><h1><span class="glyphicon glyphicon-chevron-right"></span></h1></li>
+                        </ul>
+
+
+                        <ul id="calendarTopBarView" class="clearfix">
+                            <li data-calendar-view="day">DAY</li>
+                            <li data-calendar-view="week">WEEK</li>
+                            <li data-calendar-view="month">MONTH</li>
+
+
+                        </ul>
+
+
+
+                    </div>
+
+
+
+
+
+
+                    <div id="theCalendar"></div>
+                </div>
+
+            </div>
+
         </div>
-        <div class="col-md-9">
-
-            <div>
-
-
-
-
-            <ul id="calendarTopBar" class="clearfix">
-                <li data-calendar-nav="prev"><h1><span class="glyphicon glyphicon-chevron-left"></span></h1></li>
-                <li><h1 id="calendar-date">June 2014</h1></li>
-                <li data-calendar-nav="next"><h1><span class="glyphicon glyphicon-chevron-right"></span></h1></li>
-            </ul>
-
-
-              <ul id="calendarTopBarView" class="clearfix">
-            <li data-calendar-view="day">DAY</li>
-            <li data-calendar-view="week">WEEK</li>
-            <li data-calendar-view="month">MONTH</li>
-
-
-        </ul>
-
-
-
-    </div>
-
-
-
-
-
-
-                <div id="calendar"></div>
-        </div>
-
-        </div>
-
-    </div>
     </div>
 
 </div> <!-- CONTENT -->

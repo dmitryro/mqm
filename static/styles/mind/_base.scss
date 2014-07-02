@@ -74,8 +74,8 @@ h1,h2,h3,h4,h5,h6 {
 .withIcon {color:#4d4d4f; margin: 30px 20px 30px 0px; font-size:20px; font-weight:bold;}
 .withIcon span {position:relative;display:inline-block;float: left;margin-right:20px;}
 
-.withIcon.icon_video span, #icon_video {width:66px; height:43px; background:url('/static/assets/img/ui/icons/icon_video.svg');}
-.withIcon.icon_video span { line-height:43px;}
+.withIcon.icon_video span, #icon_video {width:67px; height:44px; background:url('/static/assets/img/ui/icons/icon_video.svg');}
+.withIcon.icon_video { line-height:44px;}
 
 .withIcon.icon_document span,  #icon_document {width:48px; height:48px; background:url('/static/assets/img/ui/icons/icon_document.svg');}
 .withIcon.icon_document { line-height:48px;}
@@ -199,3 +199,8 @@ h1,h2,h3,h4,h5,h6 {
 
 .form-inline.instant-submit select.form-control {width:75%}
 .btn.btn-default.action_addNew {position: absolute;right: 140px;top:98px;}
+
+#videosStreamImages img { cursor:pointer;}
+
+#reset-dashboard {margin-left:30px; color:#fff; cursor:pointer;}
+#reset-dashboard:hover {text-decoration:underline;}

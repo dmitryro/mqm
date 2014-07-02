@@ -268,12 +268,12 @@
     <div class="hidden theEngineRoom">
         <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1" data-name="theEngineRoom">
             <div class="widget-bar">
-                <div class="widget-title">THE ENGINE ROOM</div>
-                {% include "includes/widget-settings.html" with type="Document" %}
+                <div class="widget-title"><a href="{% url "documents" %}">THE ENGINE ROOM</a></div>
+                {% include "includes/widget-settings.html" with type="Document" url="/engine-room/" %}
             </div>
             <div class='list-group'>
                 {% for document in documents %}
-                    <a href="{{ document.get_absolute_url }}">{{ document }}</a>
+                    <a class="list-group-item" href="{{ document.get_absolute_url }}">{{ document }}</a>
                 {% endfor %}
             </div>
         </li>
@@ -348,7 +348,7 @@
     <div class="eventsdiary hidden">
         <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1" data-name="eventsdiary">
             <div class="widget-bar">
-                <div class="widget-title">EVENTS DIARY</div>
+                <div class="widget-title"><a href="{% url "events" %}">EVENTS DIARY</a></div>
                 {% include "includes/widget-settings.html" with type="Event" %}
             </div>
             <div id="events-node"></div>
@@ -438,7 +438,7 @@
     <div class="externalNews hidden">
     <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1" data-name="externalNews">
                     <div class="widget-bar">
-                        <div class="widget-title">HOT TOPICS NEWS STREAM</div>
+                        <div class="widget-title"><a href="{% url "external-news" %}">HOT TOPICS NEWS STREAM</a></div>
                     </div>
                     {% for news in externalnews_list %}
                     <div class='list-group'>
@@ -481,7 +481,7 @@
     <div class="fundingmap hidden">
         <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1" data-name="fundingmap">
             <div class="widget-bar">
-                <div class="widget-title">THE FUNDING MAP</div>
+                <div class="widget-title"><a href="{% url "fundings" %}">THE FUNDING MAP</a></div>
                 {% include "includes/widget-settings.html" with type="Funding" %}
             </div>
             <div id="map-canvas-funding"></div>

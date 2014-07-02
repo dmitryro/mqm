@@ -38,7 +38,7 @@
                     You can choose which of the nodes below you would like on your dashboard. Just click on the node(s) that you want and they will move to the dashboard. You can also delete nodes from your dashboard. Remember this has been designed so you can create the dashboard that is most useful and relevant to you.
                 </div>
             </div>
-            
+            <div id="reset-dashboard">Reset Dashboard</div>
             <div id="menu">
 
                 <div class="menu-button-wrap" data-tt="See all memebers of the team" data-widg="meettheteam">
@@ -85,20 +85,24 @@
                     </div>
                 </div>
 
-                {% comment %}
-                <div class="menu-button-wrap" data-tt="Lisiting for all available research guidelines best pratice etc" data-widg="theEngineRoom">
-                    <div class="tt-icon"></div>
-                    <div class="menu-button" data-iconName="documents" style="background-image:url({{ STATIC_URL }}assets/img/ui/icons/documents.svg)">
-                        <div class="menu-name">The Engine Room</div>
-                    </div>
-                </div>
-
                 <div class="menu-button-wrap" data-tt="content updated by LM's to show best practice" data-widg="videoStream">
                     <div class="tt-icon"></div>
                     <div class="menu-button" data-iconName="videos" style="background-image:url({{ STATIC_URL }}assets/img/ui/icons/videos.svg)">
                         <div class="menu-name">Video Stream</div>
                     </div>
                 </div>
+
+                 <div class="menu-button-wrap" data-tt="Lisiting for all available research guidelines best pratice etc" data-widg="theEngineRoom">
+                    <div class="tt-icon"></div>
+                    <div class="menu-button" data-iconName="documents" style="background-image:url({{ STATIC_URL }}assets/img/ui/icons/documents.svg)">
+                        <div class="menu-name">The Engine Room</div>
+                    </div>
+                </div>
+                
+                {% comment %}
+               
+
+                
 
                 
 
@@ -143,6 +147,21 @@
                         <div class="menu-name">The Lab News</div>
                     </div>
                 </div>
+
+                 <div class="menu-button-wrap" data-tt="serivces you offer to your users" data-widg="openHubUpdates">
+                    <div class="tt-icon"></div>
+                    <div class="menu-button" data-iconName="hubupdates" style="background-image:url({{ STATIC_URL }}assets/img/ui/icons/hubupdates.svg)">
+                        <div class="menu-name">Open Hub Updates</div>
+                    </div>
+                </div>
+                
+                <div class="menu-button-wrap" data-tt="serivces you offer to your users" data-widg="nationalMindNews">
+                    <div class="tt-icon"></div>
+                    <div class="menu-button" data-iconName="national" style="background-image:url({{ STATIC_URL }}assets/img/ui/icons/national.svg)">
+                        <div class="menu-name">National Mind News</div>
+                    </div>
+                </div>
+
                 {% comment %}
                 
 
@@ -153,19 +172,9 @@
                     </div>
                 </div>
 
-                <div class="menu-button-wrap" data-tt="serivces you offer to your users" data-widg="openHubUpdates">
-                    <div class="tt-icon"></div>
-                    <div class="menu-button" data-iconName="hubupdates" style="background-image:url({{ STATIC_URL }}assets/img/ui/icons/hubupdates.svg)">
-                        <div class="menu-name">Open Hub Updates</div>
-                    </div>
-                </div>
+               
 
-                <div class="menu-button-wrap" data-tt="serivces you offer to your users" data-widg="nationalMindNews">
-                    <div class="tt-icon"></div>
-                    <div class="menu-button" data-iconName="national" style="background-image:url({{ STATIC_URL }}assets/img/ui/icons/national.svg)">
-                        <div class="menu-name">National Mind News</div>
-                    </div>
-                </div>
+                
                 {% endcomment %}
 
 
