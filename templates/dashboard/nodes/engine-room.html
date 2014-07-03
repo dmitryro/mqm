@@ -1,9 +1,10 @@
 {% load djangular_tags thumbnail render_embeded %}
+
 <div class="hidden theEngineRoom">
     <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1" data-name="theEngineRoom">
         <div class="widget-bar">
-            <div class="widget-title"><a href="{% url "documents" %}">THE ENGINE ROOM</a></div>
-            {% comment %}{% include "includes/widget-settings.html" with type="Document" url="/engine-room/" %}{% endcomment %}
+            <div class="widget-title"><a href="{% url "documents" %}"><i class="fa fa-book" style="color:green;"></i> &nbsp;THE ENGINE ROOM</a></div>
+            {% include "includes/widget-settings.html" with type="Document" url="/engine-room/" %}
         </div>
         <ul class="list-group">
             {% for document in documents %}
@@ -14,3 +15,25 @@
         </ul>
     </li>
 </div>
+
+
+{% comment %}
+<div class="hidden theEngineRoom">
+    <li class="widget-ex" data-col="1" data-row="1" data-sizex="1" data-sizey="1" data-name="theEngineRoom">
+        <div class="widget-head">
+            <div class="widget-title">
+                <a href="{% url "documents" %}">
+                <span class="circle-small"><i class="fa fa-book" style="color:green;"></i></span> &nbsp;THE ENGINE ROOM</a></div>
+        </div>
+        <div class="widget-content">
+            <ul class="list-group">
+                {% for document in documents %}
+                <li class="list-group-item">
+                    <a href="{{ document.get_absolute_url }}" target="_blank">{{ document }}<br><small class="text-muted"><i class="fa fa-file"></i>&nbsp; {{ document.file_type }} -  {{ document.created }}</small></a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </li>
+</div>
+{% endcomment %}
