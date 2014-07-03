@@ -275,7 +275,7 @@
             </div>
             <div class='list-group'>
                 {% for document in documents %}
-                    <a class="list-group-item" href="{{ document.get_absolute_url }}">{{ document }}</a>
+                    <a class="list-group-item" href="{{ document.get_absolute_url }}">{{ document }}<br><span class="text-muted">{{ document.file_type }} -  {{ document.created }}</span></a>
                 {% endfor %}
             </div>
         </li>
