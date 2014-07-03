@@ -26,7 +26,7 @@
                 <p class="small meta">
                 {% if news.date %}{{ news.date|date }} - {% endif %}
                 posted by {{ news.user }} - {{ news.local_mind }}</p>
-                <div>{{ news.description|urlize|linebreaks }}</div>
+                <div>{{ news.description|safe }}</div>
                 {% if news.source %}
                 <p class="source"><i class="fa fa-rocket"></i> Article Source: <a href="{{ news.source }}" target="_blank">{{ news.source }}</a></p>
                 {% endif %}

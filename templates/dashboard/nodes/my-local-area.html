@@ -1,0 +1,16 @@
+<div class="myLocalArea hidden">
+  <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1" data-name="myLocalArea">
+    <div class="widget-bar">
+      <div class="widget-title"><a href="/my-local-area">MY LOCAL AREA</a>
+      </div>
+      {% include "includes/widget-settings.html" with type="local-area" url="/my-local-area/add" %}
+    </div>
+
+    <!-- for loop of on line #486 (search for '//map markers' in this template) [ long, lat, title ] -->
+    <div id="map-canvas-local-area"></div>
+    {% comment %} {% for map in map_list %} Latitude: {{ map.latitude }}
+    <br>Longitude: {{ map.longitude }}
+    <br>Name: {{ map.name }}
+    <br>{% if map.marker %} Marker: {{ map.marker.icon.url }} {% endif %} {% endfor %} {% endcomment %}
+  </li>
+</div>

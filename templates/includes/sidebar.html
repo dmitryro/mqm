@@ -17,16 +17,24 @@
                         <a href="{{ user.get_absolute_url }}"><img src="{{ STATIC_URL }}assets/img/placeholder/base-avatar-white.png" class="img-circle"></a>
                     </div>
                     {% endif %}
-                    <div class="username">{{ user.get_full_name|default:user.email }}'s - Openhub</div>
+                    <div class="username"><a href="{% url "dashboard" %}">{{ user.get_full_name|default:user.email }}'s - Openhub</a></div>
 
                 </div>
 
-                <div class="person">
                 {% comment %}
-                    <div class="avatarLM"></div>
-                    <div class="username"><a href="lm-hub.html"><strong>Plymouth</strong> - openhub</a></div>
-                {% endcomment %}
+                <div class="person">
+                    {% if local_mind.group_avatar %}
+                    <div class="avatar">
+                        <a href="{{ local_mind.get_absolute_url }}"><img src="{% thumbnail local_mind.group_avatar 40x40 crop %}" class="img-circle"></a>
+                    </div>
+                    {% else %}
+                    <div class="avatar avatar_default">
+                        <a href="{{ local_mind.get_absolute_url }}"><img src="{{ STATIC_URL }}assets/img/placeholder/base-avatar-white.png" class="img-circle"></a>
+                    </div>
+                    {% endif %}
+                    <div class="username"><a href="{% url "local-dashboard" %}"><strong>{{ user.local_mind.name }}</strong> - openhub</a></div>
                 </div>
+                {% endcomment %}
 
             </div>
 

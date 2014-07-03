@@ -79,7 +79,10 @@ $(document).ready(function() {
 
 
 	serialization = [
-	{"col":1,"row":1,"size_x":1,"size_y":1, "name":"callout"}
+	{"col":1,"row":1,"size_x":1,"size_y":1, "name":"callout"},
+  {"col":2,"row":1,"size_x":1,"size_y":1, "name":"meettheteam"},
+  {"col":3,"row":1,"size_x":1,"size_y":1, "name":"openHubUpdates"},
+  {"col":4,"row":1,"size_x":1,"size_y":1, "name":"nationalMindNews"}
 /*
 	{"col":2,"row":1,"size_x":1,"size_y":1, "name":"todo"},
 	{"col":3,"row":1,"size_x":1,"size_y":1, "name":"myLocalArea"},
@@ -402,7 +405,7 @@ $(document).ready(function() {
     		if(!allowAdding) {
     			return;
     		}
-	    	
+
 	    	gridster.add_widget( $('.'+widgetName).html(), 1, 1, 1, 1 );
 	    	if(widgetName == "fundingmap") {initializeFundingMap();}
 	    	if(widgetName == "myLocalArea") {initializeLocalMap();}
@@ -426,7 +429,7 @@ $(document).ready(function() {
 			$('.delete-node').bind('click', function() {
 		    	var widgetName = $(this).parent().parent().parent();
 		    	$("#menu .menu-button-wrap[data-widg|=" + $(widgetName).attr("data-name") + "]").show();
-		    	
+
 		    	//save at this point
 		    	saveState();
 		    });*/
@@ -439,7 +442,7 @@ $(document).ready(function() {
     	gridster.remove_widget(widgetName);
 
     	$("#menu .menu-button-wrap[data-widg|=" + $(widgetName).attr("data-name") + "]").show();
-		    	
+
 		    	//save at this point
 		    	saveState();
     });

@@ -1,0 +1,21 @@
+{% load djangular_tags render_embeded %}
+<div class="hidden videoStream">
+  <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1" data-name="videoStream">
+    <div class="widget-bar">
+      <div class="widget-title"><a href="{% url "videos" %}">VIDEO STREAM</a>
+      </div>
+      {% include "includes/widget-settings.html" with type="Video" url="/video-stream/add/" %}
+    </div>
+    <div id='videos'>
+      {% for video in video_list|slice:":1" %}
+      <div class='panel-content'>
+        <h5>{{ video.title }}</h5>
+        {{ video.url|render_embeded }}
+        <p style="padding-left:15px;">Posted by {{ video.user }} on {{ video.date }}</p>
+      </div>
+
+      {% endfor %}
+    </div>
+  </li>
+
+</div>

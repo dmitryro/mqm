@@ -21,7 +21,7 @@
         <p class="small">
             {% if object.date %}{{ object.date|date }} - {% endif %}
             posted by {{ object.user }} - {{ object.local_mind }}</p>
-        {{ object.description|urlize|linebreaks }}
+            {{ object.description|safe }}
 
       </div>
       <div class="col-md-4">

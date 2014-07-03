@@ -1,0 +1,19 @@
+<div class="nationalMindNews hidden">
+    <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1" data-name="nationalMindNews">
+        <div class="widget-bar">
+            <div class="widget-title"><a href="{% url "mind-updates" %}">NATIONAL MIND NEWS</a></div>
+        </div>
+        {% for update in update_list|slice:":1" %}
+            <div class='list-group'>
+                <div class="list-group-item">
+                <h2>{{ update.title }}</h2>
+                <p class="small text-muted">{% if update.date %}{{ update.date|date }} - {% endif %}
+                    posted by {{ update.user }} - {{ update.local_mind }}</p>
+                <p>{{ update.description|truncatewords:25 }}</p>
+                <!-- feed for positive news -->
+                </div>
+            </div>
+        {% endfor %}
+    </li>
+    </li>
+</div>

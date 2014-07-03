@@ -16,6 +16,7 @@ class CategoryAdmin(ModelAdmin):
         (_('category details'), {
             'fields': (
                 'name',
+                'list_image',
             ),
             'classes': ('wide',),
         }),

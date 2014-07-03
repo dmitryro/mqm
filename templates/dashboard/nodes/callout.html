@@ -1,0 +1,31 @@
+{% load djangular_tags thumbnail render_embeded %}
+<div class="callout hidden">
+    <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1" data-name="callout">
+                <div class="widget-bar">
+                    <div class="widget-title"><a href="/call-out">CALL OUT</a></div>
+                    {% include "includes/widget-settings.html" with type="question" delatable="false" url="/call-out/add" %}
+                </div>
+                <ul class='list-group'>
+                    <li class='list-group-item'>
+                        <span class='badge'><!-- number of total questions for you --> {{ my_questions.count }}</span>Your Questions
+                    </li>
+                </ul>
+                <ul class='list-group'>
+                {% for question in questions %}
+                <li class="list-group-item">
+                    <span class="glyphicon glyphicon-question-sign"></span>
+                    {{ question.question }}
+                </li>
+                {% endfor %}
+                 {% comment %}
+                    <!-- for loop of all [question] in your local mind + link to questions detail page (/d/call-out/) -->
+                    {% for question in questions %}
+                        {{ question.question }}
+                        <a href="{{ question.get_absolute_url }}">Link</a>
+                        <br>
+                    {% endfor %}
+                    <!-- add a class if the questions is one that you have posted -->
+                     {% endcomment %}
+                </ul>
+            </li>
+</div>

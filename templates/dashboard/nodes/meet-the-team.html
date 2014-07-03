@@ -1,0 +1,38 @@
+{% load djangular_tags thumbnail render_embeded %}
+<div class="meettheteam">
+
+    <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1" data-name="meettheteam">
+        <div class="widget-bar">
+            <div class="widget-title"><a href="/meet-the-team">MEET THE TEAM</a></div>
+            {% include "includes/widget-settings.html" with type="Team" url="/my-dashboard/invite/" %}
+        </div>
+
+        <ul class="media-list">
+            {% for user in local_mind_users %}
+            <a href="{{ user.get_absolute_url }}">
+                <li class="media">
+                    {% if user.user_avatar %}
+                    <div class="pull-left">
+                        <img class="media-object img-circle" src="{% thumbnail user.user_avatar 40x40 crop %}">
+                    </div>
+                    {% else %}
+                    <div class="pull-left">
+                        <img class="media-object img-circle avatar_default_small" src="{{ STATIC_URL }}assets/img/placeholder/base-avatar.png">
+                    </div>
+                    {% endif %}
+                    <div class="media-body">
+                        <b>{{ user.get_full_name }}</b>
+                        {% if user.job_title %}
+                        <br>
+                        <small>{{ user.job_title }}</small>
+                        {% endif %}
+                        <i class="glyphicon glyphicon-play-circle"></i>
+
+                    </div>
+                </li>
+            </a>
+            {% endfor %}
+        </ul>
+    </li>
+
+</div>

@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load djangular_tags thumbnail render_embeded %}
 
 {% block content %}
 
@@ -10,38 +10,43 @@
   <div class="container-fluid">
 
     <h3 class="withIcon icon_document"><span></span>ENGINE ROOM</h3>
-    <a href="{% url "dashboard"%}" class="page-close"></a>
+    <a href="{% url "dashboard" %}" class="page-close"></a>
 
-    
-     
-     <div class="row">
-       
-       <div class="col-md-12">
-       <div class="row">
-       <p class="margin-30-bottom">Choose a Category</p>
-       </div>
-       <ul id="engineRoomList" class="clearfix">
-        {% for category in category_list %}
-            <li>
-                <a href="{{ category.get_absolute_url }}" class="detail">
-                    <h2>{{ category }}</h2>
-                    <p>{{ category.document_count }} File{{ category.document_count|pluralize:"s" }}</p>
-                    {% if category.latest_upload_date %}
-                        <p>Last updated {{ category.latest_upload_date|date }}</p>
-                    {% endif %}
-                    <p>Total Downloads {{ category.download_count }}</p>
-                </a>
-                <div class="feature"></div>
-            </li>
-        {% endfor %}
-       </ul>
 
-       </div>        
-          
+
+    <div class="row">
+
+      <div class="col-md-12">
+        <div class="row">
+          <p class="margin-30-bottom">Choose a Category</p>
         </div>
+        <ul id="engineRoomList" class="clearfix">
+          {% for category in category_list %}
+          <li>
+            <a href="{{ category.get_absolute_url }}" class="detail">
+              <h2>{{ category }}</h2>
+              <p>{{ category.document_count }} File{{ category.document_count|pluralize:"s" }}</p>
+              {% if category.latest_upload_date %}
+              <p>Last updated {{ category.latest_upload_date|date }}</p>
+              {% endif %}
+              <p>Total Downloads {{ category.download_count }}</p>
+            </a>
+            <div class="feature">
+                {% with category.list_image.object as object %}
+                <img src="{{ object.file.url }}" alt="{{ object }}"/>
+                {% endwith %}
+            </div>
+          </li>
+          {% endfor %}
+        </ul>
 
-    
+      </div>
+
     </div>
-  </div> <!-- CONTENT -->
+
+
+  </div>
+</div>
+<!-- CONTENT -->
 
 {% endblock %}

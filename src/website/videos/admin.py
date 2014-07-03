@@ -1,8 +1,16 @@
 # -*- coding: utf-8 -*-
+from django import forms
 from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
 from .models import Tag, Video
+from website.utils.admin import TextEditor
 
+
+class VideoAdminForm(forms.ModelForm):
+    class Meta:
+        widgets = {
+            'description': TextEditor(),
+        }
 
 class TagAdmin(admin.ModelAdmin):
     list_display = (
@@ -26,6 +34,8 @@ class VideoAdmin(admin.ModelAdmin):
         'privacy')
     list_editable = ('privacy',)
     list_filter = ('privacy',)
+    save_on_top = True
+    form = VideoAdminForm
     search_fields = (
         'title', 'description',)
     fieldsets = (

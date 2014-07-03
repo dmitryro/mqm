@@ -9,39 +9,25 @@
 
   <div class="container-fluid">
 
-    <h3 class="withIcon icon_newspaper"><span></span>{{ news.title }}</h3>
-    <a href="{% url "positive-news" %}" class="page-close"></a>
+    <div id="page-head">
+        <h3 class="withIcon icon_newspaper"><span></span>{{ news.title }}</h3>
+        <a href="{% url "positive-news" %}" class="page-close"></a>
+    </div>
 
-    <div id="team-content">
+    <div id="page-content">
 
-     <div class="row">
-       <div class="col-md-8">
-       {% comment %}
-        <form class="form-inline" role="form">
-          <div class="form-group">
-            <label for="filterBy">Filter by</label>
-            <select class="form-control" id="filterBy">
-              <option value="South West">South West</option>
-            </select>
+        <div class="row">
+           <div class="col-md-8 col-md-offset-2">
+                <div class="post">
+                    <h4><a href="{{ news.get_absolute_url }}">{{ news.title }}</a></h4>
+                    <p class="small">{% if news.date %}{{ news.date|date }} - {% endif %}posted by {{ news.user }} - {{ news.local_mind }}</p>
+                    <div>{{ news.description|safe }}</div>
+                </div>
           </div>
-        </form>
-        {% endcomment %}
-        <br>
-
-        <h4><a href="{{ news.get_absolute_url }}">{{ news.title }}</a></h4>
-        <p class="small">
-            {% if news.date %}{{ news.date|date }} - {% endif %}
-            posted by {{ news.user }} - {{ news.local_mind }}</p>
-        {{ news.description|urlize|linebreaks }}
-
-      </div>
-      <div class="col-md-4">
-      </div>
-
         </div>
 
-      </div>
-    </div>
-  </div> <!-- CONTENT -->
+    </div><!--page-content-->
 
-  {% endblock %}
+  </div><!--container-fluid-->
+</div> <!--content-->
+{% endblock %}

@@ -22,6 +22,11 @@ class Category(models.Model):
     name = models.CharField(max_length=200)
     slug = models.SlugField(unique=True)
 
+    list_image = MediaField(
+        related_name='document_category_image',
+        limit_choices_to={'content_type__model': 'image'},null=True, blank=True)
+        
+
     sort_value = models.IntegerField(default=category_count, db_index=True)
 
     class Meta:

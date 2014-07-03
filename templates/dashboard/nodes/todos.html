@@ -1,0 +1,45 @@
+{% load djangular_tags thumbnail render_embeded %}
+<div class="hidden todo">
+<li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1" data-name="todo">
+                <div class="widget-bar">
+                    <div class="widget-title"><a href="{% url "tasks" %}">TO-DO LIST</a></div>
+                    {% include "includes/widget-settings.html" with type="todo" url="/todos/add" %}
+                </div>
+                <ul class="list-group">
+                {% comment %}
+                  <li class="list-group-item">
+                      {% comment %}
+                      <div class="dropdown pull-right">
+                      <a data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-chevron-down small showOnHover"></span></a>
+                      <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><span class="glyphicon glyphicon-ok"></span> Mark as complete</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><span class="glyphicon glyphicon-edit"></span> Edit</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><span class="glyphicon glyphicon-trash"></span> Delete</a></li>
+                      </ul>
+                    </div>
+
+                  Confirm all contact details for key staff are correct<small class="text-muted"><br>Due 12th April 2014</small>
+
+                  </li>
+                  {% endcomment %}
+                  <!-- for loop of [totos]  --> <!-- ordering: your to-do's first with Hight Priority, then by Due date, then all other to-dos added to your Local mind -->
+                  <li class='li list-group-item'>
+                        <span class='badge'><!-- number of total questions for you --> {{ my_active_tasks.count }}</span>My To-Dos
+                  </li>
+                  {% for task in my_tasks %}
+                    <li class="list-group-item">
+                        {% if task.done %}
+                        <span class="glyphicon glyphicon-ok-sign text-success pull-right"></span>
+                        {% else %}
+                        <span class="glyphicon glyphicon-record pull-right"></span>
+                        {% endif %}
+                        {% comment %}<span class="glyphicon glyphicon-asterisk"></span>{% endcomment %}<i class="fa fa-pencil-square-o"></i> {{ task.text }}
+                        {% if task.due_date %}
+                        <small class="text-muted"><br>Due {{ task.due_date|date }}</small>
+                        {% endif %}
+                    </li>
+                  {% endfor %}
+                </ul>
+            </li>
+
+    </div>
