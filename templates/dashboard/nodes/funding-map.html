@@ -1,7 +1,7 @@
 <div class="fundingmap hidden">
   <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1" data-name="fundingmap">
     <div class="widget-bar">
-      <div class="widget-title"><a href="{% url "fundings" %}">THE FUNDING MAP</a></div>
+      <div class="widget-title"><a href="{% url "fundings" %}"><div class="nodeIcon"></div>THE FUNDING MAP</a></div>
       {% include "includes/widget-settings.html" with type="Funding" url="/" %}
     </div>
     <div id="map-canvas-funding"></div>

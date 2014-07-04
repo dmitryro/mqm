@@ -16,6 +16,24 @@
 {% include "includes/sidebar.html" %}
 
 
+<div class="modal fade" id="alertModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        <p>content for alerts modal goes here</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+
 <div id="content">
     {% include "includes/topbar.html" with dashboard="true" %}
     <div class="gridster">
@@ -395,6 +413,12 @@ $(document).ready(function(){
         nextText: "",
         prevText: ""
     });
+
+    /* hide this if you dont want to show the alerts modal */
+    $('#alertModal').modal({
+      backdrop:"static",
+      show:false
+    })
 
   $.ajax({
             type: 'GET',

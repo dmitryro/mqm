@@ -125,7 +125,7 @@ $(document).ready(function() {
 
 
 
-    if(localStorage.getItem("positions") === null) {
+    if(localStorage.getItem("positions_local") === null) {
     	$.each(serialization, function() {
             gridster.add_widget($('.'+this.name).html(), this.size_x, this.size_y, this.col, this.row);
    		});
@@ -144,7 +144,7 @@ $(document).ready(function() {
 
     function restoreState() {
 
-    	$.each(JSON.parse(localStorage.positions), function() {
+    	$.each(JSON.parse(localStorage.positions_local), function() {
             gridster.add_widget($('.'+this.wdgName).html(), this.size_x, this.size_y, this.col, this.row);
 
     	});
@@ -152,13 +152,13 @@ $(document).ready(function() {
 
 	function saveState() {
 		if(supportLocalStorage) {
-			localStorage.setItem("positions", JSON.stringify(gridster.serialize()));
+			localStorage.setItem("positions_local", JSON.stringify(gridster.serialize()));
 		}
 	}
 
 
 	$("#reset-dashboard").click(function(e){
-		localStorage.removeItem("positions");
+		localStorage.removeItem("positions_local");
 		window.location.reload();
 	});
 

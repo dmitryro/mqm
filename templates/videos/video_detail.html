@@ -10,13 +10,13 @@
         {% include "includes/topbar.html" %}
 
         <div class="container-fluid">
-            <h3 class="withIcon"><span class="icon_video"></span>{{ video.title }}</h3>
+            <h3 class="withIcon icon_video"><span></span>{{ video.title }}</h3>
             <a href="{% url "videos" %}" class="page-close"></a>
 
 
         <div id="video-content">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-8 col-md-offset-2">
                     <div class="mediaObject">
                         {{ video.url|render_embeded }}
                     </div>

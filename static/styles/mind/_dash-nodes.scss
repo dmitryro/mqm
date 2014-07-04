@@ -24,7 +24,7 @@
 }
 
 .widget-bar {
-  background:#9d9c9c;
+  background:$purple;
   height:41px;
   position:relative;
 }
@@ -207,6 +207,7 @@ padding: 10px 10px;
   }
 
 
+.widget h2 {margin-top:5px;}
 
 
 /* EXPERIMENTAL OVERRIDES
