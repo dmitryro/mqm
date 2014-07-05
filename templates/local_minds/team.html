@@ -11,7 +11,7 @@
 
 		<h3 class="withIcon icon_people"><span></span>MEET THE TEAM</h3>
 		<a href="{% url "dashboard" %}" class="page-close"></a>
-		<a href="/invitee/" class="btn btn-default action_addNew">ADD NEW TEAM MEMBER</a>
+		<a href="/my-dashboard/invite/" class="btn btn-default action_addNew">ADD NEW TEAM MEMBER</a>
 		<br><br>
 	</div>
 
@@ -24,7 +24,7 @@
                 {% else %}
                     <div class="large-avatar"><a href="{{ local_mind.get_absolute_url }}"><img class="img-circle img-responsive" src="{{ STATIC_URL }}assets/img/placeholder/base-avatar.png" alt="profile"></a></div>
                 {% endif %}
-                <div class="lmas text-center"><a href="{{ local_mind.get_absolute_url }}">{{ local_mind }} Team</a></div>
+                <div class="lmas text-center"><a href="{{ local_mind.get_absolute_url }}">{{ local_mind }} Team Details</a></div>
 			</div>
 			<div class="col-md-8">
 				<div class="row">
