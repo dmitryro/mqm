@@ -3,7 +3,7 @@
 
 body {
   font-family: $base-font;
-  background-color: #d8dbdd;
+  background-color: $base;
   //background: url(#{$mind-logo}) repeat-x fixed 0 0;
 }
 
@@ -57,7 +57,7 @@ h1,h2,h3,h4,h5,h6 {
     padding-bottom: 56.25%;
     height: 0; overflow: hidden;
 }
- 
+
 .mediaObject iframe,
 .mediaObject object,
 .mediaObject embed {
@@ -224,6 +224,6 @@ a.btn.btn-default {transition: none; -webkit-transition: none;} //disables trans
  width: 600px;
  height: initial;
  padding-top: 30px;
-  padding-bottom: 30px; 
+  padding-bottom: 30px;
 
 }

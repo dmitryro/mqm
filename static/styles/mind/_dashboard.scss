@@ -3,7 +3,7 @@
 
 #content {
   -webkit-transition: all 0.3s ease-in-out;
-  background:#d8dbdd; /* For some reason, the calendar does not like this but its required for the sidebar to function.*/
+  background:$base; /* For some reason, the calendar does not like this but its required for the sidebar to function.*/
   min-height:100%;
   position:relative;
 }
