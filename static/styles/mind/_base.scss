@@ -217,6 +217,15 @@ a.btn.btn-default {transition: none; -webkit-transition: none;} //disables trans
 [data-name="todo"] .nodeIcon {background:url(/static/assets/img/ui/nodes/icons/task.svg);width:15px;}
 [data-name="theNetWorks"] .nodeIcon {background:url(/static/assets/img/ui/nodes/icons/national.svg);width:16px;}
 [data-name="positiveNews"] .nodeIcon {background:url(/static/assets/img/ui/nodes/icons/positive.svg);width:24px;}
+[data-name="videoStream"] .nodeIcon {background:url(/static/assets/img/ui/nodes/icons/videos.svg);width:29px;}
+[data-name="theEngineRoom"] .nodeIcon {background:url(/static/assets/img/ui/nodes/icons/documents.svg);width:19px;}
+[data-name="eventsdiary"] .nodeIcon {background:url(/static/assets/img/ui/nodes/icons/events.svg);width:19px;}
+[data-name="theLabNews"] .nodeIcon {background:url(/static/assets/img/ui/nodes/icons/clinical.svg);width:16px;}
+[data-name="openHubUpdates"] .nodeIcon {background:url(/static/assets/img/ui/nodes/icons/hubupdates.svg);width:16px;}
+[data-name="nationalMindNews"] .nodeIcon {background:url(/static/assets/img/ui/nodes/icons/national.svg);width:16px;}
+[data-name="callout"] .nodeIcon {background:url(/static/assets/img/ui/nodes/icons/documents.svg);width:19px;}
+[data-name="externalNews"] .nodeIcon {background:url(/static/assets/img/ui/nodes/icons/positive.svg);width:24px;}
+
 
 #alertModal {}
 

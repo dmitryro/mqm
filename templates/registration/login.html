@@ -8,7 +8,6 @@
 {% block pagecontent %}
 <div id="large-logos"></div>
 <p>Welcome to the Open Hub, a place for connecting, collaborating, learning and celebrating. Every year the Mind network delivers XXXX services to XXXXX people a year. That is an amazing amount of work with a huge amount of impact. The Open Hub is here to support and extend that.</p>
-
 <div class="center-block" id="loginTabs">
     <a href="#log-in" class="active" data-toggle="tab">Login</a> / <a href="#sign-up" data-toggle="tab">Signup</a>
 </div>
@@ -34,6 +33,7 @@
 
     </div>
     <div class="tab-pane fade" id="sign-up">
+    <div class="alert alert-warning" role="alert">We use cookies to help deliver our services, By using our services and signing up, you agree to our use of cookies.</div>
     <div class="signup">
         {% form signup_form using %}
         {% formconfig row using "forms/row.html" %}
