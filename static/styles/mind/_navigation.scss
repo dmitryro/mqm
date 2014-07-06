@@ -172,11 +172,12 @@
   text-decoration: none;
 }
 
-.username a:hover, a:visited {
+.username a:hover{
   text-decoration: none;
   opacity: 0.6;
   -webkit-transition: all 0.5s ease-in-out;
   transition: all 0.5s ease-in-out;
+  color:#ffcc00 !important;
 }
 
 #top-bar #profile #logout {

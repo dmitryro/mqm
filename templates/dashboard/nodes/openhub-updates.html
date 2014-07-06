@@ -1,7 +1,7 @@
 <div class="openHubUpdates hidden">
     <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1" data-name="openHubUpdates">
         <div class="widget-bar">
-            <div class="widget-title"><a href="{% url "hub-updates" %}">OPEN HUB UPDATES</a></div>
+            <div class="widget-title"><a href="{% url "hub-updates" %}"><div class="nodeIcon"></div>OPEN HUB UPDATES</a></div>
         </div>
         {% for hub_update in openhub_update_list|slice:":1" %}
             <div class='list-group'>

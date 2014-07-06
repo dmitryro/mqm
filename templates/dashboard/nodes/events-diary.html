@@ -1,7 +1,7 @@
 <div class="eventsdiary hidden">
     <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1" data-name="eventsdiary">
         <div class="widget-bar">
-            <div class="widget-title"><a href="{% url "events" %}">EVENTS DIARY</a></div>
+            <div class="widget-title"><a href="{% url "events" %}"><div class="nodeIcon"></div>EVENTS DIARY</a></div>
             {% include "includes/widget-settings.html" with type="Event" url="/diary-events/add/" %}
         </div>
         <div id="events-node"></div>
