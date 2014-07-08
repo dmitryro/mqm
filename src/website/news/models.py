@@ -57,6 +57,9 @@ class PositiveNews(BaseNews):
     list_image = MediaField(
         related_name='positivenews_image',
         limit_choices_to={'content_type__model': 'image'},null=True, blank=True)
+    download = MediaField(
+        related_name='positivenews_download',
+        limit_choices_to={'content_type__model': 'download'},null=True, blank=True)
 
     class Meta:
         verbose_name = _('Positive News')

@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load djangular_tags webdesign %}
+{% load djangular_tags webdesign thumbnail %}
 
 {% block content %}
 
@@ -21,7 +21,22 @@
                 <div class="post">
                     <h4><a href="{{ news.get_absolute_url }}">{{ news.title }}</a></h4>
                     <p class="small">{% if news.date %}{{ news.date|date }} - {% endif %}posted by {{ news.user }} - {{ news.local_mind }}</p>
-                    <div>{{ news.description|safe }}</div>
+
+                    {% if object.list_image %}
+                        {% with object.list_image.object as object %}
+                        <div class="media-content"><img src="{% thumbnail object.file 720x480 crop,upscale %}" alt="{{ object }}"/></div>
+                        {% endwith %}
+                    {% endif %}
+
+                    <div>{{ object.description|safe }}</div>
+
+                    {% if object.download %}
+                        {% with object.download.object as object %}
+                        <h4>Download:</h4>
+                        <a href="{{ object.download.object.file.url }}" target="_blank"><i class="fa fa-caret-right"></i> {{object}}</a>
+                        {% endwith %}
+                    {% endif %}
+
                 </div>
           </div>
         </div>

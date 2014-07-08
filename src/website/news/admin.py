@@ -80,6 +80,7 @@ class PositiveNewsAdmin(BaseNewsAdmin):
                 'description',
                 'source',
                 'list_image',
+                'download',
             ),
         }),
         (_('Categorisation'), {

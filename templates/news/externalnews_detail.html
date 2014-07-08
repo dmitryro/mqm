@@ -1,36 +1,49 @@
 {% extends "base.html" %}
-{% load djangular_tags webdesign %}
+{% load djangular_tags webdesign thumbnail %}
 
 {% block content %}
 
 <div id="content" class="clearfix">
-
-  {% include "includes/topbar.html" %}
+{% include "includes/topbar.html" %}
 
   <div class="container-fluid">
 
-    <h3 class="withIcon icon_newspaper"><span></span>{{ object.title }}</h3>
-    <a href="{% url "external-news" %}" class="page-close"></a>
+    <div id="page-head">
+        <h3 class="withIcon icon_newspaper"><span></span>HOT TOPICS NEWS STREAM</h3>
+        <a href="{% url "external-news" %}" class="page-close"></a>
+    </div>
 
-    <div id="team-content">
+
+    <div id="page-content">
 
      <div class="row">
-       <div class="col-md-8">
+       <div class="col-md-6 col-md-offset-3">
+         <div class="post">
+            <h4>{{ object.title }}</h4>
+            <p class="small meta">{% if object.date %}{{ object.date|date }} - {% endif %}posted by {{ object.user }} - {{ object.local_mind }}</p>
 
-        <h4>{{ object.title }}</h4>
-        <p class="small">
-            {% if object.date %}{{ object.date|date }} - {% endif %}
-            posted by {{ object.user }} - {{ object.local_mind }}</p>
-            {{ object.description|safe }}
+            {% if object.image %}
+                {% with object.image.object as object %}
+                <div class="media-content"><img src="{% thumbnail object.file 720x480 crop,upscale %}" alt="{{ object }}"/></div>
+                {% endwith %}
+            {% endif %}
 
-      </div>
-      <div class="col-md-4">
-      </div>
+            <div>{{ object.description|safe }}</div>
+
+            {% if object.download %}
+                {% with object.download.object as object %}
+                <h4>Download:</h4>
+                <a href="{{ object.download.object.file.url }}" target="_blank"><i class="fa fa-caret-right"></i> {{object}}</a>
+                {% endwith %}
+            {% endif %}
 
         </div>
-
-      </div>
     </div>
-  </div> <!-- CONTENT -->
+    </div>
 
-  {% endblock %}
+
+    </div><!--page-content-->
+
+  </div><!--container-fluid-->
+</div> <!--content-->
+{% endblock %}
