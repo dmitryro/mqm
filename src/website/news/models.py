@@ -43,8 +43,8 @@ class ExternalNews(BaseNews):
         limit_choices_to={'content_type__model': 'download'},null=True, blank=True)
 
     class Meta:
-        verbose_name = _('External News')
-        verbose_name_plural = _('External News')
+        verbose_name = _('Hot Topics News Stream')
+        verbose_name_plural = _('Hot Topics News Stream')
         ordering = ('-date',)
 
     @models.permalink

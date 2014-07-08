@@ -27,6 +27,7 @@ class Task(models.Model):
     modified = ModificationDateTimeField()
 
     class Meta:
+        app_label = 'Todo'
         ordering = ('local_mind', 'sort_value',)
         verbose_name = _('To Do')
         verbose_name_plural = _('To Dos')
@@ -57,6 +58,7 @@ class Comment(models.Model):
     modified = ModificationDateTimeField()
 
     class Meta:
+        app_label = 'Todo'
         verbose_name = _('Comment')
         verbose_name_plural = _('Comments')
 

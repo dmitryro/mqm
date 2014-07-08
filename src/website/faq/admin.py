@@ -1,7 +1,30 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
-from .models import Question, Answer
+from .models import Category, Question, Answer
+
+
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ('name',)
+    prepopulated_fields = {
+        'slug': ('name',),
+    }
+    fieldsets = (
+        (_('category details'), {
+            'fields': (
+                'name',
+                'list_image',
+            ),
+            'classes': ('wide',),
+        }),
+        (_('Categorisation'), {
+            'fields': (
+                'sort_value',
+                'slug',
+            ),
+            'classes': ('wide',),
+        }),
+    )
 
 
 class QuestionAdmin(admin.ModelAdmin):
@@ -57,5 +80,6 @@ class AnswerAdmin(admin.ModelAdmin):
     save_on_top = True
 
 
+admin.site.register(Category, CategoryAdmin)
 admin.site.register(Question, QuestionAdmin)
 admin.site.register(Answer, AnswerAdmin)

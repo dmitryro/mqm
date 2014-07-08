@@ -25,11 +25,12 @@ class Category(models.Model):
     list_image = MediaField(
         related_name='document_category_image',
         limit_choices_to={'content_type__model': 'image'},null=True, blank=True)
-        
+
 
     sort_value = models.IntegerField(default=category_count, db_index=True)
 
     class Meta:
+        app_label = 'Engine_Room'
         ordering = ('sort_value',)
         verbose_name = _(u'Category')
         verbose_name_plural = _(u'Categories')
@@ -76,6 +77,7 @@ class Document(PrivacyMixin, models.Model):
     modified = ModificationDateTimeField()
 
     class Meta:
+        app_label = 'Engine_Room'
         verbose_name = _(u'Document')
         verbose_name_plural = _(u'Documents')
         ordering = ('-created',)
