@@ -47,11 +47,50 @@ class BaseNewsAdmin(admin.ModelAdmin):
 
 
 class ExternalNewsAdmin(BaseNewsAdmin):
-    pass
+    fieldsets = (
+        (_('General'), {
+            'classes': ('wide',),
+            'fields': (
+                'title',
+                'date',
+                'description',
+                'source',
+                'image',
+                'download',
+            ),
+        }),
+        (_('Categorisation'), {
+            'classes': ('wide',),
+            'fields': (
+                'privacy',
+                'local_mind',
+                'user',
+            ),
+        }),
+    )
 
 
 class PositiveNewsAdmin(BaseNewsAdmin):
-    pass
+    fieldsets = (
+        (_('General'), {
+            'classes': ('wide',),
+            'fields': (
+                'title',
+                'date',
+                'description',
+                'source',
+                'list_image',
+            ),
+        }),
+        (_('Categorisation'), {
+            'classes': ('wide',),
+            'fields': (
+                'privacy',
+                'local_mind',
+                'user',
+            ),
+        }),
+    )
 
 
 admin.site.register(ExternalNews, ExternalNewsAdmin)

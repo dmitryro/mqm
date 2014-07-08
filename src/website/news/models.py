@@ -35,6 +35,12 @@ class BaseNews(PrivacyMixin, models.Model):
 
 class ExternalNews(BaseNews):
     local_mind = models.ForeignKey('local_minds.LocalMind', related_name='externalnews')
+    image = MediaField(
+        related_name='externalnews_image',
+        limit_choices_to={'content_type__model': 'image'},null=True, blank=True)
+    download = MediaField(
+        related_name='externalnews_download',
+        limit_choices_to={'content_type__model': 'download'},null=True, blank=True)
 
     class Meta:
         verbose_name = _('External News')
@@ -43,11 +49,14 @@ class ExternalNews(BaseNews):
 
     @models.permalink
     def get_absolute_url(self):
-        return 'external-news', (), {'slug': self.slug}    
+        return 'external-news', (), {'slug': self.slug}
 
 
 class PositiveNews(BaseNews):
     local_mind = models.ForeignKey('local_minds.LocalMind', related_name='positivenews')
+    list_image = MediaField(
+        related_name='positivenews_image',
+        limit_choices_to={'content_type__model': 'image'},null=True, blank=True)
 
     class Meta:
         verbose_name = _('Positive News')
