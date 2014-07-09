@@ -20,7 +20,7 @@
                 {% else %}
 								<div class="large-avatar"><a href="{{ local_mind.get_absolute_url }}"><img class="img-circle" src="{{ STATIC_URL }}assets/img/placeholder/base-avatar.png" alt="profile" width="186" height="186"></a></div>
 								{% endif %}
-                <div class="lmas"><a href="{% url "team" %}">LM: {{ local_mind }} Team</a></div>
+                <div class="lmas"><a href="{% url "team" local_mind.slug %}">LM: {{ local_mind }} Team</a></div>
 
 				<a class="btn btn-default margin-30-bottom" href="/my-dashboard/invite/">ADD NEW TEAM MEMBER</a>
                 <a class="btn btn-default margin-30-bottom" href="/my-dashboard/local-mind/">EDIT LM's DETAILS</a>
