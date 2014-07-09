@@ -17,7 +17,7 @@ class Category(models.Model):
     slug = models.SlugField(unique=True)
 
     list_image = MediaField(
-        related_name='document_category_image',
+        related_name='faq_category_image',
         limit_choices_to={'content_type__model': 'image'}, null=True, blank=True)
 
     sort_value = models.IntegerField(default=category_count, db_index=True)
@@ -31,7 +31,7 @@ class Category(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('documents') + '?category=' + self.slug
+        return reverse('questions') + '?category=' + self.slug
 
 
 class Question(PrivacyMixin, models.Model):

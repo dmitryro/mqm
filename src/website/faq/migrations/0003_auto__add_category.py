@@ -8,20 +8,41 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        db.alter_column(u'faq_answer', 'author_id', self.gf('django.db.models.fields.related.ForeignKey')(default=1, to=orm['accounts.User']))
+        # Adding model 'Category'
+        db.create_table(u'faq_category', (
+            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('name', self.gf('django.db.models.fields.CharField')(max_length=200)),
+            ('slug', self.gf('django.db.models.fields.SlugField')(unique=True, max_length=50)),
+            ('list_image', self.gf('mediastore.fields.related.MediaField')(blank=True, related_name='faq_category_image', null=True, to=orm['mediastore.Media'])),
+            ('sort_value', self.gf('django.db.models.fields.IntegerField')(default=0, db_index=True)),
+        ))
+        db.send_create_signal(u'faq', ['Category'])
 
-        db.rename_column(u'faq_question', 'author_id', 'user_id')
-        db.rename_column(u'faq_answer', 'author_id', 'user_id')
+        # Adding M2M table for field categories on 'Question'
+        m2m_table_name = db.shorten_name(u'faq_question_categories')
+        db.create_table(m2m_table_name, (
+            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
+            ('question', models.ForeignKey(orm[u'faq.question'], null=False)),
+            ('category', models.ForeignKey(orm[u'faq.category'], null=False))
+        ))
+        db.create_unique(m2m_table_name, ['question_id', 'category_id'])
 
 
     def backwards(self, orm):
-        db.rename_column(u'faq_question', 'user_id', 'author_id')
-        db.rename_column(u'faq_answer', 'user_id', 'author_id')
+        # Deleting model 'Category'
+        db.delete_table(u'faq_category')
 
-        db.alter_column(u'faq_answer', 'author_id', self.gf('django.db.models.fields.related.ForeignKey')(null=True, to=orm['accounts.User']))
+        # Removing M2M table for field categories on 'Question'
+        db.delete_table(db.shorten_name(u'faq_question_categories'))
 
 
     models = {
+        u'accounts.skill': {
+            'Meta': {'ordering': "('name',)", 'object_name': 'Skill'},
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
+            'slug': ('django_extensions.db.fields.AutoSlugField', [], {'allow_duplicates': 'False', 'max_length': '50', 'separator': "u'-'", 'blank': 'True', 'populate_from': "('name',)", 'overwrite': 'False'})
+        },
         u'accounts.user': {
             'Meta': {'object_name': 'User'},
             'biography': ('django.db.models.fields.TextField', [], {'max_length': '350', 'blank': 'True'}),
@@ -39,7 +60,7 @@ class Migration(SchemaMigration):
             'local_mind': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'users'", 'null': 'True', 'to': u"orm['local_minds.LocalMind']"}),
             'password': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
             'privileges': ('django.db.models.fields.CharField', [], {'max_length': '20'}),
-            'skills': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
+            'skills': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['accounts.Skill']", 'symmetrical': 'False', 'blank': 'True'}),
             'slug': ('django_extensions.db.fields.AutoSlugField', [], {'allow_duplicates': 'False', 'max_length': '50', 'separator': "u'-'", 'blank': 'True', 'unique': 'True', 'populate_from': "('first_name', 'last_name')", 'overwrite': 'False'}),
             'telephone': ('django.db.models.fields.CharField', [], {'max_length': '50', 'blank': 'True'}),
             'twitter': ('django.db.models.fields.CharField', [], {'max_length': '15', 'blank': 'True'}),
@@ -69,15 +90,24 @@ class Migration(SchemaMigration):
         u'faq.answer': {
             'Meta': {'object_name': 'Answer'},
             'answer': ('django.db.models.fields.TextField', [], {}),
-            'user': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'answer'", 'to': u"orm['accounts.User']"}),
             'created': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now', 'blank': 'True'}),
             'date': ('django.db.models.fields.DateField', [], {'null': 'True', 'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'modified': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now', 'blank': 'True'}),
-            'question': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'answers'", 'to': u"orm['faq.Question']"})
+            'question': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'answers'", 'to': u"orm['faq.Question']"}),
+            'user': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'answers'", 'to': u"orm['accounts.User']"})
+        },
+        u'faq.category': {
+            'Meta': {'ordering': "('sort_value',)", 'object_name': 'Category'},
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'list_image': ('mediastore.fields.related.MediaField', [], {'blank': 'True', 'related_name': "'faq_category_image'", 'null': 'True', 'to': "orm['mediastore.Media']"}),
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
+            'slug': ('django.db.models.fields.SlugField', [], {'unique': 'True', 'max_length': '50'}),
+            'sort_value': ('django.db.models.fields.IntegerField', [], {'default': '0', 'db_index': 'True'})
         },
         u'faq.question': {
             'Meta': {'object_name': 'Question'},
+            'categories': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'related_name': "'questions'", 'blank': 'True', 'to': u"orm['faq.Category']"}),
             'created': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now', 'blank': 'True'}),
             'date': ('django.db.models.fields.DateField', [], {'null': 'True', 'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
@@ -96,6 +126,8 @@ class Migration(SchemaMigration):
         },
         u'local_minds.localmind': {
             'Meta': {'object_name': 'LocalMind'},
+            '_latitude_postcode': ('django.db.models.fields.CharField', [], {'max_length': '32', 'null': 'True', 'blank': 'True'}),
+            '_longitude_postcode': ('django.db.models.fields.CharField', [], {'max_length': '32', 'null': 'True', 'blank': 'True'}),
             'address': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
             'area_of_benefit': ('django.db.models.fields.CharField', [], {'max_length': '350', 'blank': 'True'}),
             'average_volunteer_hours': ('django.db.models.fields.CharField', [], {'max_length': '50', 'blank': 'True'}),
@@ -134,6 +166,28 @@ class Migration(SchemaMigration):
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
             'telephone': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'})
+        },
+        'mediastore.media': {
+            'Meta': {'ordering': "('created',)", 'object_name': 'Media'},
+            'content_type': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['contenttypes.ContentType']"}),
+            'created': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
+            'description': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '120', 'null': 'True', 'blank': 'True'}),
+            'slug': ('django.db.models.fields.SlugField', [], {'unique': 'True', 'max_length': '50', 'blank': 'True'})
+        },
+        u'taggit.tag': {
+            'Meta': {'object_name': 'Tag'},
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'name': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '100'}),
+            'slug': ('django.db.models.fields.SlugField', [], {'unique': 'True', 'max_length': '100'})
+        },
+        u'taggit.taggeditem': {
+            'Meta': {'object_name': 'TaggedItem'},
+            'content_type': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "u'taggit_taggeditem_tagged_items'", 'to': u"orm['contenttypes.ContentType']"}),
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'object_id': ('django.db.models.fields.IntegerField', [], {'db_index': 'True'}),
+            'tag': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "u'taggit_taggeditem_items'", 'to': u"orm['taggit.Tag']"})
         }
     }
 
