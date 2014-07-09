@@ -7,6 +7,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.utils.http import is_safe_url
+from django.views.decorators.csrf import csrf_exempt
 
 from .forms import LoginForm, SignupForm, PasswordResetForm
 
@@ -14,6 +15,7 @@ from .forms import LoginForm, SignupForm, PasswordResetForm
 LOGIN_SUCCESS_URLNAME = 'dashboard'
 
 
+@csrf_exempt
 def login_signup(request):
     if 'signup' in request.POST:
         signup_form = SignupForm(request.POST)
