@@ -93,6 +93,7 @@ urlpatterns = patterns('',
     url(r'^humans.txt$', 'django.shortcuts.render', {'template': 'humans.txt'},),
 
     url(r'^api/events/(?P<limit>own|local|national)/$', 'website.diary.views.event_api_list', name='api-events'),
+    url(r'^api/events/dates/$', 'website.diary.views.event_api_current_dates', name='api-events-dates'),
     url(r'^api/events/$', 'website.diary.views.event_api_list', name='api-events'),
 
     url(r'^$', 'website.views.index', name='index'),

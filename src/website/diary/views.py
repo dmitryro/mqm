@@ -1,11 +1,9 @@
 import calendar
+from datetime import date, timedelta
 import json
 
 from django.http import HttpResponse
-from django.shortcuts import get_object_or_404, render_to_response
-from django.template import RequestContext
-from django.views.generic import DetailView, ListView, TemplateView
-from django.utils.encoding import force_str
+from django.views.generic import ListView
 
 from website.views.generic import CommonPrivacyViewMixin, ListCreateView
 from ..local_minds.models import LocalMind
@@ -36,10 +34,6 @@ event_detail = EventDetail.as_view()
 
 class EventAPIList(CommonPrivacyViewMixin, ListView):
     queryset = Event.objects.select_related('local_mind', 'user')
-
-    def get_queryset(self):
-        queryset = super(EventAPIList, self).get_queryset()
-        return queryset
 
     def serialize_datetime(self, datetime):
         return calendar.timegm(datetime.timetuple()) * 1000
@@ -98,3 +92,37 @@ class EventAPIList(CommonPrivacyViewMixin, ListView):
 
 
 event_api_list = EventAPIList.as_view()
+
+
+class EventAPICurrentDates(CommonPrivacyViewMixin, ListView):
+    queryset = Event.objects.all()
+
+    def filter_queryset(self, queryset):
+        today = date.today()
+        month_start = today.replace(day=1)
+        month_end = (month_start + timedelta(days=31)).replace(day=1) - timedelta(days=1)
+        queryset = queryset.filter(start__range=(month_start, month_end))
+        return queryset
+
+    def serialize_object(self, obj):
+        return '{day}-{month}-{year}'.format(
+            day=obj.day,
+            month=obj.month,
+            year=obj.year)
+
+    def serialize_object_list(self, object_list):
+        return [
+            self.serialize_object(obj) for obj in object_list
+        ]
+
+    def get(self, request, *args, **kwargs):
+        queryset = self.get_queryset()
+        queryset = self.filter_queryset(queryset)
+        queryset = queryset.dates('start', kind='day')
+        data = self.serialize_object_list(queryset)
+        return HttpResponse(
+            json.dumps(data),
+            content_type='application/json')
+
+
+event_api_current_dates = EventAPICurrentDates.as_view()
