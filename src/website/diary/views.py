@@ -71,19 +71,21 @@ class EventAPIList(CommonPrivacyViewMixin, ListView):
         }
 
     def filter_queryset(self, queryset):
+        regions = self.request.GET.getlist('region')
+        if regions:
+            queryset = queryset.filter(local_mind__region__in=regions)
+
         limit = self.kwargs['limit']
         if limit == 'own':
             queryset = queryset.filter(user=self.request.user)
         elif limit == 'local':
             queryset = queryset.filter(local_mind=self.request.user.local_mind)
         elif limit == 'national':
-            pass
+            # Return no events when no region is given.
+            if not regions:
+                queryset = queryset.none()
         else:
             raise AssertionError('Did not get expected value for "limit".')
-
-        regions = self.request.GET.getlist('region')
-        if regions:
-            queryset = queryset.filter(local_mind__region__in=regions)
         return queryset
 
     def get(self, request, *args, **kwargs):
