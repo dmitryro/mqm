@@ -151,9 +151,10 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        {% formrow form.notifications using "forms/checkbox_row.html" %}
+                        {% formrow form.categories with hide_help_text=True %}
                     </div>
                     <div class="col-md-6">
+                        {% formrow form.notifications using "forms/checkbox_row.html" %}
                     </div>
                 </div>
             {% endfor %}

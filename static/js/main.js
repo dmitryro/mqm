@@ -30,9 +30,11 @@
         $('select[name=skill], select[name=skills], select[name$=-skills], select[name=categories]').addClass('chosen-select');
 
         var initChosen = function ($element) {
-            console.log('init chosen');
-            $element.find('.chosen-select').chosen({
-                search_contains: true
+            $element.find('.chosen-select').each(function () {
+                $(this).chosen({
+                    search_contains: true
+                });
+                $(this).next().css('width', $(this).parent().width() + 'px');
             });
         };
 
@@ -71,9 +73,7 @@
 
             $element.on('shown.bs.modal', function () {
                 // Init document categories widget.
-                $element.find('.chosen-select').each(function () {
-                    $(this).next().css('width', $(this).parent().width() + 'px');
-                });
+                initChosen($element);
             });
         };
 

@@ -197,9 +197,13 @@ class QuestionForm(ModelForm):
         model = Question
         fields = (
             'question',
+            'categories',
             'notifications',
             'privacy',
         )
+        widgets = {
+            'categories': forms.SelectMultiple(attrs={'class': 'chosen-select'})
+        }
 
 
 class SignupLocalMindMembersForm(CompositeModelForm):
