@@ -5,7 +5,7 @@
     <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1" data-name="theEngineRoom">
         <div class="widget-bar">
             <div class="widget-title"><a href="{% url "documents" %}"><div class="nodeIcon"></div>THE ENGINE ROOM</a></div>
-            {% include "includes/widget-settings.html" with type="Document" url="/engine-room/" %}
+            {% include "includes/widget-settings.html" with type="Document" url="/engine-room/add/" %}
         </div>
         <ul class="list-group">
             {% for document in documents %}

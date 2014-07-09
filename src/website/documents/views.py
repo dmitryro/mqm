@@ -3,8 +3,7 @@ import floppyforms.__future__ as forms
 from django.core.urlresolvers import reverse
 from django.db.models import Count, Max, F
 from django.http import HttpResponseRedirect
-from django.shortcuts import get_object_or_404
-from django.views.generic import DetailView, ListView
+from django.views.generic import DetailView
 from website.views.generic import CommonViewMixin, CommonPrivacyViewMixin, ListCreateView
 from ..local_minds.models import LocalMind
 from .forms import DocumentForm
@@ -43,6 +42,9 @@ class CategoryListView(CommonViewMixin, ListCreateView):
     form_class = DocumentForm
     queryset = category_queryset
 
+    def get_success_url(self):
+        return self.request.path
+
 
 category_list = CategoryListView.as_view()
 
@@ -52,12 +54,12 @@ class DocumentListView(CommonPrivacyViewMixin, ListCreateView):
     category_queryset = category_queryset
     queryset = Document.objects.order_by('-created')
 
-    def get(self, request, *args, **kwargs):
+    def dispatch(self, request, *args, **kwargs):
         self.search_form = DocumentSearchForm(request.GET)
         if not self.search_form.is_valid():
             return HttpResponseRedirect(reverse('documents-categories'))
         self.category = self.search_form.cleaned_data['category']
-        return super(DocumentListView, self).get(request, *args, **kwargs)
+        return super(DocumentListView, self).dispatch(request, *args, **kwargs)
 
     def get_queryset(self):
         queryset = super(DocumentListView, self).get_queryset()

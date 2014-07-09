@@ -12,7 +12,7 @@
     <h3 class="withIcon icon_document"><span></span>ENGINE ROOM</h3>
     <a href="{% url "dashboard" %}" class="page-close"></a>
 
-
+    {% include "documents/_document_form.html" with id="modal-form" form=form is_open=show_form %}
 
     <div class="row">
 

@@ -92,6 +92,10 @@
             openModal($($that.attr('data-target')));
         });
 
+        $('body').find('.modal.auto-open').each(function () {
+            openModal($(this));
+        });
+
         $('body').on('hidden.bs.modal', '.modal', function () {
             $(this).removeData('bs.modal'); //very important so that new modals are loaded
         });
