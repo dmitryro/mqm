@@ -22,7 +22,7 @@ class SkillSearchForm(forms.Form):
 
 
 class SkillSearchView(CommonViewMixin, TemplateView):
-    queryset = User.objects.exclude(local_mind=None, date_joined=None).filter(is_active=True)
+    queryset = User.objects.exclude(local_mind=None).exclude(date_joined=None).filter(is_active=True)
     form_class = SkillSearchForm
     template_name = 'search/skill_search.html'
 
