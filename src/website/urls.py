@@ -149,6 +149,7 @@ urlpatterns = patterns('',
     url(r'^engine-room/documents/$', 'website.documents.views.document_list', name='documents'),
     url(r'^engine-room/documents/add/$', 'website.documents.views.document_list', {'show_form': True}, name='documents-add'),
     url(r'^engine-room/documents/(?P<slug>[^/]+)/$', 'website.documents.views.document_detail', name='documents'),
+    url(r'^buddy-search/$', 'website.search.views.skill_search', name='skill-search'),
 
     url(r'^login/$', 'website.accounts.views.login_signup', name='login'),
     url(r'^login/signup/$', lambda r: HttpResponseRedirect(reverse('login') + '#signup'), name='signup'),

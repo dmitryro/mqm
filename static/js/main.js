@@ -27,7 +27,7 @@
         $('.add-another').addanother();
 
         // Init skills widgets.
-        $('select[name=skills], select[name$=-skills]').chosen({
+        $('select[name=skill], select[name=skills], select[name$=-skills]').chosen({
             search_contains: true
         });
 

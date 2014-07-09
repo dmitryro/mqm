@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+
+
+{% block extra_js %}
+{{ block.super }}
+<!-- Display a for loop of all accounts.skills to make the autocomplete wisget in the search form work -->
+<script type="text/javascript">
+  var availableTerms = [
+      "ActionScript",
+      "AppleScript",
+      "Asp",
+      "BASIC",
+      "C",
+      "C++",
+      "Clojure",
+      "COBOL",
+      "ColdFusion",
+      "Erlang",
+      "Fortran",
+      "Groovy",
+      "Haskell",
+      "Java",
+      "JavaScript",
+      "Lisp",
+      "Perl",
+      "PHP",
+      "Python",
+      "Ruby",
+      "Scala",
+      "Scheme"
+    ];
+    $( "#id_q" ).autocomplete({
+      source: availableTerms
+    });
+</script>
+{% endblock %}
+
+{% block content %}
+
+<div id="content" class="clearfix">
+
+  {% include "includes/topbar.html" %}
+
+  <div class="container-fluid">
+
+    <h3 class="withIcon icon_buddySearch"><span></span>BUDDY SEARCH</h3>
+    <a href="{% url "dashboard"%}" class="page-close"></a>
+
+
+
+     <div class="row">
+
+       <div class="col-md-2">
+
+
+         <form class="form-horizontal instant-submit" role="form">
+          <div class="form-group">
+              {{ form.skill }}
+          </div>
+        </form>
+
+
+        {% comment %}
+        <div class="hidden-xs">
+       <h5>RECENT SEARCHES</h5>
+       <p>LMA: Plymouth</p>
+       <p>LMA: Plymouth</p>
+       <p>LMA: Plymouth</p>
+       <p>LMA: Plymouth</p>
+       </div>
+        {% endcomment %}
+
+       </div>
+
+       <div class="col-md-10">
+        {% if skill %}
+            <p>RESULTS FOR - {{ skill|upper }}</p>
+            <div class="row">
+
+            {% for member in members %}
+            <div class="col-md-3">
+                            {% if member.user_avatar %}
+                                <div class="large-avatar"><a href="{{ member.get_absolute_url }}"><img class="img-circle" src="{% thumbnail member.user_avatar 186x186 crop %}" alt="profile" width="186" height="186"></a></div>
+                            {% else %}
+                                <div class="large-avatar"><a href="{{ member.get_absolute_url }}"><img class="img-circle" src="{{ STATIC_URL }}assets/img/placeholder/base-avatar.png" alt="profile" width="186" height="186"></a></div>
+                            {% endif %}
+                            <p>Name: <a href="{{ member.get_absolute_url }}">{{ member }}</a></p>
+                            {% if member.job_title %}
+                            <p>Job title: {{ member.job_title }}</p>
+                            {% endif %}
+            </div>
+            {% empty %}
+                <p>No members found for this skill</p>
+            {% endfor %}
+
+            </div>
+        {% endif %}
+
+       </div>
+
+
+        </div>
+
+
+    </div>
+  </div> <!-- CONTENT -->
+  {% endblock %}
+
