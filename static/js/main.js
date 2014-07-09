@@ -27,9 +27,16 @@
         $('.add-another').addanother();
 
         // Init skills widgets.
-        $('select[name=skill], select[name=skills], select[name$=-skills]').chosen({
-            search_contains: true
-        });
+        $('select[name=skill], select[name=skills], select[name$=-skills], select[name=categories]').addClass('chosen-select');
+
+        var initChosen = function ($element) {
+            console.log('init chosen');
+            $element.find('.chosen-select').chosen({
+                search_contains: true
+            });
+        };
+
+        initChosen($('body'));
 
 
         // Label tooltips
@@ -64,8 +71,8 @@
 
             $element.on('shown.bs.modal', function () {
                 // Init document categories widget.
-                $element.find('select[id=id_categories]').chosen({
-                    search_contains: true
+                $element.find('.chosen-select').each(function () {
+                    $(this).next().css('width', $(this).parent().width() + 'px');
                 });
             });
         };

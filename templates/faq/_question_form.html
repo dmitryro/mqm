@@ -12,6 +12,7 @@
         {% formconfig row using "forms/signup_row.html" %}
 
         {% formrow form.question %}
+        {% formrow form.categories with hide_help_text=True %}
         {% formrow form.notifications using "forms/checkbox_row.html" %}
         {% formrow form.privacy %}
     {% endform %}

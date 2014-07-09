@@ -28,8 +28,15 @@ class QuestionForm(ModelForm):
         fields = (
             'question',
             'notifications',
+            'categories',
             'privacy',
         )
+        widget = {
+            'categories': forms.SelectMultiple(attrs={
+                'class': 'form-control',
+                'data-placeholder': 'Enter categories',
+            }),
+        }
 
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user')
