@@ -1,29 +1,28 @@
 # -*- coding: utf-8 -*-
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
-from django_extensions.db.fields import (AutoSlugField, CreationDateTimeField,
+from django_extensions.db.fields import (CreationDateTimeField,
     ModificationDateTimeField)
-from django_publicmanager.managers import GenericPublicManager, \
-    PublicOnlyManager
-from mediastore.fields import MediaField, MultipleMediaField
+from django.core.urlresolvers import reverse
+from mediastore.fields import MediaField
 from ..privacy import PrivacyMixin
 
 
 def category_count():
     return Category.objects.count()
+
+
 class Category(models.Model):
     name = models.CharField(max_length=200)
     slug = models.SlugField(unique=True)
 
     list_image = MediaField(
         related_name='document_category_image',
-        limit_choices_to={'content_type__model': 'image'},null=True, blank=True)
-
+        limit_choices_to={'content_type__model': 'image'}, null=True, blank=True)
 
     sort_value = models.IntegerField(default=category_count, db_index=True)
 
     class Meta:
-        app_label = 'Callout'
         ordering = ('sort_value',)
         verbose_name = _(u'Category')
         verbose_name_plural = _(u'Categories')
@@ -33,7 +32,6 @@ class Category(models.Model):
 
     def get_absolute_url(self):
         return reverse('documents') + '?category=' + self.slug
-
 
 
 class Question(PrivacyMixin, models.Model):
@@ -51,7 +49,6 @@ class Question(PrivacyMixin, models.Model):
     modified = ModificationDateTimeField()
 
     class Meta:
-        app_label = 'Callout'
         verbose_name = _('Callout Question')
         verbose_name_plural = _('Callout Questions')
 
@@ -81,7 +78,6 @@ class Answer(models.Model):
     modified = ModificationDateTimeField()
 
     class Meta:
-        app_label = 'Callout'
         verbose_name = _('Callout Answer')
         verbose_name_plural = _('Callout Answers')
 

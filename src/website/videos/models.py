@@ -12,7 +12,6 @@ class Tag(models.Model):
     name = models.CharField(max_length=200)
 
     class Meta:
-        app_label = 'Video_Stream'
         ordering = ('name',)
         verbose_name = _(u'Tags')
         verbose_name_plural = _(u'Tags')
@@ -40,7 +39,6 @@ class Video(PrivacyMixin, models.Model):
     modified = ModificationDateTimeField()
 
     class Meta:
-        app_label = 'Video_Stream'
         verbose_name = _(u'Video')
         verbose_name_plural = _(u'Video')
         ordering = ('-date',)
