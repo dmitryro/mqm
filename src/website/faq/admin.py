@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
+from mediastore.admin import ModelAdmin
 from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
 from .models import Category, Question, Answer
 
 
-class CategoryAdmin(admin.ModelAdmin):
+class CategoryAdmin(ModelAdmin):
     list_display = ('name',)
     prepopulated_fields = {
         'slug': ('name',),
