@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load djangular_tags webdesign %}
+{% load djangular_tags webdesign thumbnail %}
 
 {% block content %}
 
@@ -10,7 +10,7 @@
   <div class="container-fluid">
 
     <div id="page-head">
-        <h3 class="withIcon icon_openhub"><span></span>NATIONAL MIND UPDATES</h3>
+        <h3 class="withIcon icon_nationalMindUpdates "><span></span>NATIONAL MIND UPDATES</h3>
         <a href="{% url "dashboard"%}" class="page-close"></a>
     </div>
 
@@ -18,19 +18,33 @@
 
      <div class="row">
        <div class="col-md-6 col-md-offset-3">
-         {% for object in object_list|slice:":2" %}
+         {% for object in object_list %}
          <div class="post">
-            <h4><a href="{{ objectget_absolute_url }}">{{ object.title }}</a></h4>
+            <h4>{{ object.title }}</h4>
             <p class="small meta">{% if object.date %}{{ object.date|date }} - {% endif %}posted by {{ object.user }} - {{ object.local_mind }}</p>
-            <div>{{ object.description|urlize|linebreaks }}</div>
-            {{ object.video }}
+
+            {% if object.list_image %}
+                {% with object.list_image.object as object %}
+                <div class="media-content"><img src="{% thumbnail object.file 720x480 crop,upscale %}" alt="{{ object }}"/></div>
+                {% endwith %}
+            {% endif %}
+
+            <div>{{ object.description|safe }}</div>
+
+            {% if object.download %}
+                {% with object.download.object as object %}
+                <h4>Download:</h4>
+                <a href="{{ object.download.object.file.url }}" target="_blank"><i class="fa fa-caret-right"></i> {{object}}</a>
+                {% endwith %}
+            {% endif %}
+
         </div>
         {% endfor %}
     </div>
     </div>
 
-    </div><!--page-content-->
 
+    </div><!--page-content-->
     </div><!--container-fluid-->
 </div> <!--content-->
   {% endblock %}

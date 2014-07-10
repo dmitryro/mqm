@@ -11,7 +11,7 @@
                 </a>
                 <p class="small text-muted">{% if hub_update.date %}{{ hub_update.date|date }} - {% endif %}
                     posted by {{ hub_update.user }} - {{ hub_update.local_mind }}</p>
-                <p>{{ hub_update.description|truncatewords:25 }}</p>
+                <p>{{ hub_update.description|safe|truncatewords:25 }}</p>
                 <!-- feed for positive news -->
                 </div>
             </div>

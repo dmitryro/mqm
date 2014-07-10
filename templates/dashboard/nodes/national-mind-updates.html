@@ -9,7 +9,7 @@
                 <h2>{{ update.title }}</h2>
                 <p class="small text-muted">{% if update.date %}{{ update.date|date }} - {% endif %}
                     posted by {{ update.user }} - {{ update.local_mind }}</p>
-                <p>{{ update.description|truncatewords:25 }}</p>
+                <p>{{ update.description|safe|truncatewords:25 }}</p>
                 <!-- feed for positive news -->
                 </div>
             </div>
