@@ -15,6 +15,7 @@
     var numberOfFeedsLoaded=0;
     var isCalendarLoadComplete = 0;
     var selectedRegions = "";
+    var userid = {{ user.id }};
     var emptyFeed = {
         "success": 1,
         "result": []
@@ -67,7 +68,9 @@
             $.getJSON(localCalendarSrc,function(data) {
                 $.each( data['result'], function( key, val ) {
                 //eventsObject.push(val);
-                emptyFeed.result.push(val);
+                if(val.user.id != userid) {
+                    emptyFeed.result.push(val);
+                }
             });
             }).done(function(data) {
                 numberOfFeedsLoaded++;
@@ -78,7 +81,7 @@
         $.getJSON(nationalCalendarSrc+selectedRegions,function(data) {
             $.each( data['result'], function( key, val ) {
                 //eventsObject.push(val);
-                emptyFeed.result.push(val);
+                emptyFeed.result.push(val);  
             });
         }).done(function(data) {
             numberOfFeedsLoaded++;

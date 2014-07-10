@@ -40,8 +40,8 @@
 
 #top-bar #search-bar {
   width:330px;
-  border-right:solid 2px $blue;
-  float:left;
+  border-left:solid 2px $blue;
+  float:right;
   height:58px;
   background-image:url(../../assets/img/ui/nav/search.svg);
   background-repeat:no-repeat;
@@ -120,18 +120,18 @@
   float:right;
   height:58px;
   border-left:solid 2px $blue;
-  width:356px;
+  width:206px;
   padding-right:10px;
   box-sizing:border-box;
 }
 
-#top-bar #profile #person {
+#top-bar #person {
   height:58px;
   float:left;
   padding-left:10px;
 }
 
-#top-bar #profile #person .avatar {
+#top-bar #person .avatar {
   float:left;
   padding-top:8px;
   img {
@@ -140,19 +140,19 @@
   }
 }
 
-#top-bar #profile #person .avatar,
-#top-bar #profile #person .avatar.avatar_default {
+#top-bar #person .avatar,
+#top-bar #person .avatar.avatar_default {
   height:45px;
   width:45px;
   float:left;
 }
 
-#top-bar #profile #person .avatar.avatar_default img {
+#top-bar #person .avatar.avatar_default img {
   width:40px;
   height:40px;
 }
 
-#top-bar #profile #person .avatarLM {
+#top-bar #person .avatarLM {
   height:58px;
   width:46px;
   float:left;
@@ -161,7 +161,7 @@
   background-position:center;
 }
 
-#top-bar #profile #person .username {
+#top-bar #person .username {
   float: left;
   margin-left: 10px;
   margin-top: 19px;
@@ -205,7 +205,7 @@
 
 #top-bar #profile #settings ul {
   position:absolute;
-  right:49px;
+  right:0px;
   list-style:none;
   margin:0px;
   padding:0px;
@@ -219,12 +219,23 @@
   padding:0px;
   display:none;
   top: 58px;
-  left: 7px;
+  left: -203px;
+}
+
+#top-bar #person ul {
+  position:absolute;
+  list-style:none;
+  margin:0px;
+  padding:0px;
+  display:none;
+  top: 58px;
+  left: 56px;
 }
 
 #top-bar #profile #settings:hover #settings-icon{
   opacity:0.7;
 }
+
 
 
 #top-bar #profile #settings ul li, #top-bar #tools #add ul li  {
@@ -242,7 +253,25 @@
   cursor: pointer;
 }
 
-#top-bar #profile #settings ul li:hover, #top-bar #tools #add ul li:hover {
+#top-bar #person ul li .avatar {padding-top:0px;}
+#top-bar #person ul li p {margin: 0;padding: 0;line-height: 43px;}
+
+#top-bar #person ul li  {
+  height:66px;
+  background:#fff;
+  margin:0px;
+  width:450px;
+  border-right:solid 2px $blue;
+  border-left:solid 2px $blue;
+  border-bottom:solid 2px $blue;
+  position:relative;
+  background-repeat: no-repeat;
+  background-position: 10px center;
+  padding: 11px 10px 10px 10px;
+  cursor: pointer;
+}
+
+#top-bar #profile #settings ul li:hover, #top-bar #tools #add ul li:hover, #top-bar #person ul li:hover {
   background-color:#eee;
 }
 
@@ -261,6 +290,12 @@
 
 .red {
   background:$blue !important;
+  color:#fff;
+  padding:11px !important;
+}
+
+.purple {
+  background:$purple !important;
   color:#fff;
   padding:11px !important;
 }

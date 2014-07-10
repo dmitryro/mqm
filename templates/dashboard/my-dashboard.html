@@ -35,7 +35,7 @@
 
 
 <div id="content">
-    {% include "includes/topbar.html" with dashboard="true" %}
+    {% include "includes/topbar.html" with dashboard="true" dashboardType="personal" %}
     <div class="gridster">
         <ul></ul>
     </div><!-- End of gridster -->
@@ -409,10 +409,33 @@ google.maps.event.addDomListener(window, 'load', initializeFundingMap);
 <script type="text/javascript">
 $(document).ready(function(){
 
-    $("#events-node").datepicker({
+    
+
+    var availableDates = new Array(); //MUST innit array with var
+    $.get( "/api/events/dates/", function( data ) {
+        availableDates = data;
+
+        $("#events-node").datepicker({
         nextText: "",
-        prevText: ""
+        prevText: "",
+        beforeShowDay: available
+        });
     });
+
+
+    function available(date) {
+      var numberOfShowText = new Array();
+
+    dmy = date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear();
+        if (jQuery.inArray(dmy, availableDates) == -1) {
+            return [false];
+        } else {
+            var local = $.inArray(dmy, availableDates)
+            var text = "Event";
+            return [true, "activate c" + text, "There is an event on this day"];
+        }
+    }
+
 
     /* hide this if you dont want to show the alerts modal */
     $('#alertModal').modal({

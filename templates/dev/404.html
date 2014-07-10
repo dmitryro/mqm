@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load render_embeded %}
+
+{% block content %}
+{% include "includes/sidebar.html" %}
+
+    <div id="content">
+
+        {% include "includes/topbar.html" %}
+
+        <div class="container-fluid">
+
+            <h3 class="withIcon icon_404"><span></span>Error 404: Page not found</h3>
+            <p>The site you are requesting cannot be found. Please check if you have entered the correct URL.</p>
+         </div>
+    </div> <!-- CONTENT -->
+
+
+{% endblock %}

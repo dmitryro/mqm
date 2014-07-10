@@ -12,6 +12,11 @@
         });
 
 
+        //makes the dashboard switcher width correct
+        $("#top-bar #person ul li").css("width", $("#search-bar").position().left-54);
+        //might also need to do this on resize, probably...
+
+
         // DROP DOWNS
         $('body').on('click', '.drop', function () {
             if ($(this).hasClass('dropped')) {
