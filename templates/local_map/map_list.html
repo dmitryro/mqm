@@ -246,6 +246,7 @@ markers.push(new google.maps.Marker({
 }));
 {% endfor %}
 
+{% comment %}
 {% for local_mind in local_minds %}
 markers.push(new google.maps.Marker({
     position: new google.maps.LatLng({{ local_mind.latitude }}, {{ local_mind.longitude }}),
@@ -254,6 +255,7 @@ markers.push(new google.maps.Marker({
     filterName: 'Local Mind'
 }));
 {% endfor %}
+{% endcomment %}
 
 
 ////
