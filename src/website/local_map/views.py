@@ -19,8 +19,8 @@ class MapListView(CommonPrivacyViewMixin, ListCreateView):
 
     def get_context_data(self, **kwargs):
         kwargs['model'] = self.queryset.model
-        #local_minds = LocalMind.objects.exclude(pk=self.request.user.local_mind.pk)
-        #local_minds = local_minds.exclude(_latitude_postcode=None, _longitude_postcode=None)
+        local_minds = LocalMind.objects.exclude(pk=self.request.user.local_mind.pk)
+        local_minds = local_minds.exclude(_latitude_postcode=None, _longitude_postcode=None)
         kwargs['local_minds'] = local_minds
         return super(MapListView, self).get_context_data(**kwargs)
 
