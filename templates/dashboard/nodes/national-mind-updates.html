@@ -1,3 +1,4 @@
+{% load thumbnail %}
 <div class="nationalMindNews hidden">
     <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1" data-name="nationalMindNews">
         <div class="widget-bar">
@@ -9,8 +10,12 @@
                 <h2>{{ update.title }}</h2>
                 <p class="small text-muted">{% if update.date %}{{ update.date|date }} - {% endif %}
                     posted by {{ update.user }} - {{ update.local_mind }}</p>
+                {% if update.list_image %}
+                    {% with update.list_image.object as object %}
+                    <div class="media-content"><img src="{% thumbnail object.file 100x100 crop,upscale %}" alt="{{ object }}"/></div>
+                    {% endwith %}
+                {% endif %}
                 <p>{{ update.description|safe|truncatewords:25 }}</p>
-                <!-- feed for positive news -->
                 </div>
             </div>
         {% endfor %}

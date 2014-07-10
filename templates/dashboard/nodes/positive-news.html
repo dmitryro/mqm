@@ -1,3 +1,4 @@
+{% load thumbnail %}
 <div class="positiveNews hidden">
   <li class="widget" data-col="1" data-row="1" data-sizex="1" data-sizey="1" data-name="positiveNews">
     <div class="widget-bar">
@@ -12,6 +13,11 @@
           <h2>{{ news.title }}</h2>
         </a>
         <p class="small text-muted">{% if news.date %}{{ news.date|date }} - {% endif %} posted by {{ news.user }} - {{ news.local_mind }}</p>
+        {% if news.list_image %}
+            {% with news.list_image.object as object %}
+            <div class="media-content"><img src="{% thumbnail object.file 100x100 crop,upscale %}" alt="{{ object }}"/></div>
+            {% endwith %}
+        {% endif %}
         <p>{{ news.description|safe|truncatechars:250 }}</p>
         <!-- feed for positive news -->
       </div>
