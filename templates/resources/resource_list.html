@@ -78,15 +78,35 @@ function initialize() {
   //}
 //},100);
 
+'<p><a href="{{ local_mind.get_absolute_url|escapejs }}">{{ local_mind.name|escapejs }}</a></p><br>' +
+'<p><span class="text-muted">Type:</span> Local Mind</p>' +
+{% if map.email %}
+'<p><span class="text-muted">Email:</span> {{ local_mind.email|escapejs }}</p>    ' +
+{% endif %}
+{% if local_mind.telephone %}
+'<p><span class="text-muted">Telephone:</span> {{ local_mind.telephone|escapejs }}</p>' +
+{% endif %}
+{% if local_mind.website %}
+'<p><span class="text-muted">website:</span> <a href="{{ local_mind.website|escapejs }}">{{ local_mind.website|escapejs }}</a></p>' +
+{% endif %}
+{% if local_mind.address %}
+'<p><span class="text-muted">Address:</span> {{ local_mind.address|escapejs }}</p>' +
+{% endif %}
+''
+
+
 //information boxes content, the indexes are the same as the marker
 {% for local_mind, resources in local_minds_with_resources %}
 {% if local_mind.latitude and local_mind.longitude %}
 infoBoxes.push(new google.maps.InfoWindow({
   content: (
     '<h4><a href="{{ local_mind.get_absolute_url|escapejs }}">{{ local_mind|escapejs }}</a></h4>' +
+    {% if local_mind.telephone %}'<p><span class="text-muted">Telephone:</span> {{ local_mind.telephone|escapejs }}</p>' +{% endif %}
+    {% if local_mind.email %}'<p><span class="text-muted">Email:</span> {{ local_mind.email|escapejs }}</p>' +{% endif %}
+    {% if local_mind.website %}'<p><span class="text-muted">Website:</span> {{ local_mind.website|escapejs }}</p>' +{% endif %}
+    {% if local_mind.address %}'<p><span class="text-muted">Address:</span> {{ local_mind.address|escapejs }}</p>' +{% endif %}
     '<div class="twocol"><span class="text-muted">Resources:</span><p>' +
-    '{% for resource in resources %}{{ resource|escapejs }}{% if not forloop.last %}<br>{% endif %}{% endfor %}' +
-    '</p></div>'
+    '{% for resource in resources %}{{ resource|escapejs }}{% if not forloop.last %}<br>{% endif %}{% endfor %}</p></div>'
   )
 }));
 {% endif %}
