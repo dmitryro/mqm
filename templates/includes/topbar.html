@@ -72,34 +72,34 @@
 <div id="profile">
 
 
-    <a href="{% url "logout" %}"><div id="logout"></div></a>
+    <a href="{% url "logout" %}"><div id="logout" data-toggle="tooltip" data-placement="bottom" title="Logout"></div></a>
 
     <div id="tools">
 
-        <div id="write"></div>
+        <div id="write" data-toggle="tooltip" data-placement="bottom" title="Write"></div>
 
         <div id="add">
-            <div id="add-icon" class="drop"></div>
+            <div id="add-icon" class="drop" data-toggle="tooltip" data-placement="bottom" title="Add"></div>
             <ul>
                 <li class="settings-opt" style="background-image:url({{ STATIC_URL }}assets/img/ui/icons/service-08.svg)">
                     Add Service
                 </li>
                 <li class="settings-opt" style="background-image:url({{ STATIC_URL }}assets/img/ui/icons/contract-09.svg)">
-                    Add contract
+                    Update Design Your Support
                 </li>
                 <li class="settings-opt" style="background-image:url({{ STATIC_URL }}assets/img/ui/icons/qm-10.svg)">
                     Update Quality Mark
                 </li>
 
                 <li class="settings-opt" style="background-image:url({{ STATIC_URL }}assets/img/ui/icons/notes-02.svg)">
-                    Monthly Finances
+                    Update Finances
                 </li>
             </ul>
         </div>
     </div>
 
     <div id="settings">
-        <div id="settings-icon" class="drop"></div>
+        <div id="settings-icon" class="drop" data-toggle="tooltip" data-placement="bottom" title="Settings"></div>
         <ul>
             <li class="settings-opt" style="background-image:url({{ STATIC_URL }}assets/img/ui/icons/alert-01.svg)">
                 Alerts
@@ -115,7 +115,7 @@
             </li>
             <li class="settings-opt purple">Accounts</li>
             <a href="{{ user.get_absolute_url }}">
-                <li class="settings-opt" style="background-image:url({{ STATIC_URL }}assets/img/ui/icons/users-06.svg)">
+                <li class="settings-opt" style="background-image:url({{ STATIC_URL }}assets/img/ui/icons/profile-04.svg)">
                     View Your Profile
                 </li></a>
                 <a href="{% url "team" %}">
@@ -123,7 +123,7 @@
                         View Hub Users
                     </li></a>
                     <a href="{{ user.local_mind.get_absolute_url }}">
-                        <li class="settings-opt" style="background-image:url({{ STATIC_URL }}assets/img/ui/icons/users-06.svg)">
+                        <li class="settings-opt" style="background-image:url({{ STATIC_URL }}assets/img/ui/icons/anchor-05.svg)">
                             View {{ user.local_mind.name }}
                         </li></a>
                         <li class="settings-opt red">Settings</li>
