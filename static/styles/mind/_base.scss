@@ -43,6 +43,10 @@ h1,h2,h3,h4,h5,h6 {
   transform: rotate(180deg);
 }
 
+#content hr {border-top: 1px solid #dadad9;}
+
+#content .text-purple {color:$purple}
+
  /* Responsive video
 -------------------------------------------------------- */
 .mediaObject {
@@ -243,3 +247,16 @@ a.btn.btn-default {transition: none; -webkit-transition: none;} //disables trans
   padding-bottom: 30px;
 
 }
+
+
+.mqmPart {margin-bottom: 23px;}
+.mqmPart h4 { font-weight:bold; }
+
+.mqmPart ol {padding:0;list-style-position:inside;color:#585757}
+.mqmPart ol li {padding-bottom:20px;}
+.mqmPart ol li.cross::before {width:15px; height:15px; background:url(/static/assets/img/ui/base/status_redCross.svg);content:""; display:block; float:right; margin-left: 10px;}
+.mqmPart ol li.tick::before {width:20px; height:15px; background:url(/static/assets/img/ui/base/status_greenTick.svg);content:""; display:block; float:right; margin-left: 10px;}
+
+
+
+

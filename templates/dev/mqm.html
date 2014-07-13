@@ -1,0 +1,179 @@
+{% extends "base.html" %}
+{% comment %}
+
+
+
+
+
+NON INTEGRATED VERSION
+
+
+
+
+
+
+{% endcomment %}
+{% load djangular_tags webdesign %}
+
+{% block content %}
+
+<div id="content" class="clearfix">
+  {% include "includes/topbar.html" %}
+  <div class="container-fluid">
+
+    <h3 class="withIcon icon_externalNews"><span></span>MQM</h3>
+    <a href="/" class="page-close"></a>
+
+    <button class="btn btn-default action_addNew" data-type="MQM">UPDATE MQM</button>
+
+
+    <div>
+
+     <div class="row">
+       <div class="col-md-6 col-md-offset-3">
+        <p>DOWNLOAD SUPPORTING DOCUMENTS</p>
+        <ul>
+          <li><a href="#">MQM-supportdoc.zip</a></li>
+        </ul>
+        <hr>
+        <div class="row">
+          <div class="col-md-6 text-center h3"><span class="text-danger">OVERDUE</span><span class="text-success">COMPLETE</span><span class="text-purple">MQM DUE ON</span><br>25.11.14</div>        
+          <div class="col-md-6 text-center h3"><span class="text-success">COMPLIANT</span><span class="text-success">CONDITIONAL</span><span class="text-purple">MQM PROGRESS</span><br>65%</div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-md-6 text-center p"><span class="text-purple">LEAD CONTACT</span><br>Jane Smith</div>        
+          <div class="col-md-6 text-center p"><span class="text-purple">BIRMINGHAM</span><br>MIND DETAILS</div>
+        </div>
+
+        <hr>
+        <div class="mqmPart">
+        <h4>MIND POST-REVIEW SUMMARY</h4>
+         <div class="row">
+          <div class="col-md-6">
+          <p><strong>Review decision</strong> - Conditional</p>
+          <p><strong>Date of review decision</strong> - 28/11/14</p>
+          <p><strong>Review team</strong><br>Name - Senior Manager of Local Mind<br>Name - Expert by experiment<br>Name - Colsultent</p>
+          <p><strong>Date of site visit</strong> - 18/11/14</p>
+          <p><strong>Lead contact</strong><br>Clara Clint<br>email<br>number</p>
+          </div>
+          <div class="col-md-6"></div>
+          <p><strong>Some title</strong><br>Some content</p>
+          <p><strong>Some title</strong><br>Some content</p>
+         </div>
+        </div>
+        <hr>
+        <div class="mqmPart">
+        <h4>IMPROVEMENT ACTION PLAN</h4>
+         <div class="row margin-30-bottom">
+          <div class="col-md-4">Some action item number 1</div>
+          <div class="col-md-4 text-danger">ACTION</div>
+          <div class="col-md-4">Tick</div>
+          </div>
+          <div class="row margin-30-bottom">
+          <div class="col-md-4">Some action item number 2</div>
+          <div class="col-md-4 text-success">COMPLIENT</div>
+          <div class="col-md-4">Tick</div>
+          </div>
+        </div>
+        <hr>
+
+        <div class="mqmPart">
+          <h4>GOVERNENCE</h4>
+          <ol>
+            <li value="1" class="cross">Understands and complies with its governing document</li>
+            <li value="2" class="tick">Ensures compliance with legal requirements</li>
+            <li value="3" class="cross">Has a procedure for trustee recruitment, appointment, induction and training</li>
+            <li value="4" class="cross">Manages organisational risk including conflicts of interest effectively</li>
+            <li value="5" class="cross">Ensures trustees delegate authority appropriately and in accordance with the governing documents</li>
+            <li value="6" class="cross">Carries out planning and has a plan for a minimum of one year ahead (in accordance with the Charity Commission Effective Business Planning Documents)</li>
+            <li value="7" class="cross">Ensures that it has the correct structure (people) and resources (finance) to deliver the plan</li>
+            <li value="8" class="cross">Regularly reviews its policies and procedures </li>
+
+          </ol>
+        </div>
+
+         <div class="mqmPart">
+          <h4>PARTNERSHIP</h4>
+          <ol>
+            <li value="9" class="cross">Works effectively with other organisations in order to achieve its objectives</li>
+          </ol>
+        </div>
+
+        <div class="mqmPart">
+          <h4>FINANCE</h4>
+          <ol>
+            <li value="10" class="cross">Agrees and sets a budget sufficient to carry out its agreed operations annually and regularly monitors financial performance against it</li>
+            <li value="11" class="tick">Complies with all legal financial requirements and has relevant financial policies and procedures and financial controls including fraud prevention</li>
+          </ol>
+        </div>
+
+        <div class="mqmPart">
+          <h4>PEOPLE</h4>
+          <ol>
+            <li value="12" class="cross">Has key employment policies and procedures</li>
+            <li value="13" class="tick">Ensures staff and volunteers are effectively recruited, supported, trained and appraised</li>
+          </ol>
+        </div>
+
+        <div class="mqmPart">
+          <h4>RESOURCES</h4>
+          <ol>
+            <li value="14" class="cross">Ensures confidentiality and data protection</li>
+            <li value="15" class="tick">Ensures that there is sufficient ICT, it is effectively used, it is protected against viruses and important data is backed up</li>
+            <li value="16" class="cross">Minimises its negative environmental impact and can demonstrate how it does this</li>
+          </ol>
+        </div>
+
+        <div class="mqmPart">
+          <h4>ENGAGEMENT AND PARTICIPATION</h4>
+          <ol>
+            <li value="17" class="cross">Involves people with experience of mental health problems effectively in governance and management</li>
+            <li value="18" class="tick">Asks service users what they think about the services provided, makes improvements based on feedback and informs services users of improvements</li>
+           </ol>
+        </div>
+
+        <div class="mqmPart">
+          <h4>ONE MIND</h4>
+          <ol>
+            <li value="19" class="cross">Actively contributes to the Mind network</li>
+           </ol>
+        </div>
+
+        <div class="mqmPart">
+          <h4>EQUALITY AND DIVERSITY</h4>
+          <ol>
+            <li value="20" class="cross">Is committed to equality and diversity and provides equal opportunities to users, volunteers, staff, trustees</li>
+           </ol>
+        </div>
+
+        <div class="mqmPart">
+          <h4>QUALITY OF SERVICE</h4>
+          <ol>
+            <li value="21" class="cross">Provides a consistent and effective service to all service users</li>
+           </ol>
+        </div>
+
+        <div class="mqmPart">
+          <h4>SAFETY OF SERVICE</h4>
+          <ol>
+            <li value="22" class="cross">Has policies for managing risk to individuals including health and safety and protecting vulnerable users</li>
+           </ol>
+        </div>
+
+        <div class="mqmPart">
+          <h4>MONITORING AND EVALUATION</h4>
+          <ol>
+            <li value="23" class="cross">Monitors and evaluates its services and makes improvements as a result of this</li>
+           </ol>
+        </div>
+
+
+      </div>
+
+    </div>
+
+  </div>
+</div>
+</div> <!-- CONTENT -->
+{% endblock %}

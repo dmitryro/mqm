@@ -45,6 +45,7 @@ development_urlpatterns = patterns('',
     url(r'^d/hot-topic-news/$', protected_render, {'template_name': 'dev/hot-topic-news.html'}),
     url(r'^d/engine-room-2/$', protected_render, {'template_name': 'dev/engine-room.html'}),
     url(r'^d/404/$', protected_render, {'template_name': 'dev/404.html'}),
+    url(r'^d/mqm/$', protected_render, {'template_name': 'dev/mqm.html'}),
 
 
     url(r'^sign-up/part1$', protected_render, {'template_name': 'dev/signup/part1.html'}),

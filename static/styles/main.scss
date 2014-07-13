@@ -30,3 +30,5 @@ $icon-font-path: "../../libs/sass-bootstrap/fonts/";
 @import "mind/video";                 // Video related pages
 @import "mind/team";                  // Meet the Team styles
 @import "mind/devices";               // Device overrides
+
+@import "mind/radial-progress.scss";
