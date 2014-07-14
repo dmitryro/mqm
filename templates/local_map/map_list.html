@@ -161,7 +161,12 @@ function initialize() {
 ]
 
     var mapOptions = {
+        {% if user.local_mind.latitude and user.local_mind.longitude %}
+        center: new google.maps.LatLng({{ user.local_mind.latitude }}, {{ user.local_mind.longitude }}),
+        {% else %}
+        {# use the defaults #}
         center: new google.maps.LatLng(51.5072, 0.1275),
+        {% endif %}
         zoom: 8,
         styles: styles
     };
