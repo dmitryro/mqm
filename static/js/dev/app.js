@@ -145,7 +145,7 @@ $(document).ready(function() {
             gridster.add_widget($('.'+this.wdgName).html(), this.size_x, this.size_y, this.col, this.row);
 
     	});
-        initChosen('body');
+        initChosen($('body'));
 	}
 
 	function saveState() {
