@@ -6,11 +6,9 @@ import uuid
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
-from django_extensions.db.fields import (AutoSlugField, CreationDateTimeField,
-    ModificationDateTimeField)
-from django_publicmanager.managers import GenericPublicManager, \
-    PublicOnlyManager
-from mediastore.fields import MediaField, MultipleMediaField
+from django_extensions.db.fields import (
+    AutoSlugField, CreationDateTimeField, ModificationDateTimeField)
+from mediastore.fields import MediaField
 from taggit.managers import TaggableManager
 
 from ..privacy.models import PrivacyMixin
@@ -18,6 +16,8 @@ from ..privacy.models import PrivacyMixin
 
 def category_count():
     return Category.objects.count()
+
+
 class Category(models.Model):
     name = models.CharField(max_length=200)
     slug = models.SlugField(unique=True)
@@ -25,7 +25,7 @@ class Category(models.Model):
     list_image = MediaField(
         related_name='document_category_image',
         limit_choices_to={'content_type__model': 'image'},null=True, blank=True)
-
+    description = models.TextField(null=True, blank=True)
 
     sort_value = models.IntegerField(default=category_count, db_index=True)
 

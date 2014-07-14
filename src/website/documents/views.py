@@ -74,6 +74,7 @@ class DocumentListView(CommonPrivacyViewMixin, ListCreateView):
 
     def get_context_data(self, **kwargs):
         kwargs['regions'] = LocalMind.REGION_CHOICES
+        kwargs['category'] = self.category
         kwargs['category_list'] = self.category_queryset
         kwargs['search_form'] = self.search_form
         return super(DocumentListView, self).get_context_data(**kwargs)

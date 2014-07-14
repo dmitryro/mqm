@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load floppyforms %}
+{% load floppyforms textformat %}
 
 {% block content %}
 
@@ -15,7 +15,9 @@
         <button class="btn btn-default action_addNew" data-target="#modal-form"{% if show_form %} data-open{% endif %}>ADD NEW DOCUMENT</button>
 
         {% include "documents/_document_form.html" with id="modal-form" form=form %}
-		
+
+        {{ category.description|textformat }}
+
 		<div class="row">
 			<div class="col-md-12">
 				<br>
