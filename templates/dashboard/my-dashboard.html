@@ -207,7 +207,11 @@ NODES END
 
 
         mapOptions = {
+            {% if user.local_mind.latitude and user.local_mind.longitude %}
+          center: new google.maps.LatLng({{ user.local_mind.latitude }}, {{ user.local_mind.longitude }}),
+            {% else %}
           center: new google.maps.LatLng(51.5072, 0.1275),
+            {% endif %}
           zoom: 8,
           styles: styles,
           disableDoubleClickZoom: true,
@@ -273,7 +277,11 @@ google.maps.event.addDomListener(window, 'load', initializeLocalMap);
 
 
         mapOptions = {
+            {% if user.local_mind.latitude and user.local_mind.longitude %}
+          center: new google.maps.LatLng({{ user.local_mind.latitude }}, {{ user.local_mind.longitude }}),
+            {% else %}
           center: new google.maps.LatLng(51.5072, 0.1275),
+            {% endif %}
           zoom: 8,
           styles: styles,
           disableDoubleClickZoom: true,
@@ -341,7 +349,11 @@ google.maps.event.addDomListener(window, 'load', initializeNetworkMap);
 
 
         mapOptions = {
+            {% if user.local_mind.latitude and user.local_mind.longitude %}
+          center: new google.maps.LatLng({{ user.local_mind.latitude }}, {{ user.local_mind.longitude }}),
+            {% else %}
           center: new google.maps.LatLng(51.5072, 0.1275),
+            {% endif %}
           zoom: 8,
           styles: styles,
           disableDoubleClickZoom: true,
