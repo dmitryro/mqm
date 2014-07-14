@@ -24,7 +24,8 @@ NON INTEGRATED VERSION
     <h3 class="withIcon icon_externalNews"><span></span>MQM</h3>
     <a href="/" class="page-close"></a>
 
-    <button class="btn btn-default action_addNew" data-type="MQM">UPDATE MQM</button>
+    <button class="btn btn-default action_addNew" data-type="MQM" data-toggle="modal" data-target="#modal-form">UPDATE MQM</button>
+    {% include "dev/_mqm_form.html" with id="modal-form" form=form %}
 
 
     <div>
@@ -68,12 +69,12 @@ NON INTEGRATED VERSION
          <div class="row margin-30-bottom">
           <div class="col-md-4">Some action item number 1</div>
           <div class="col-md-4 text-danger">ACTION</div>
-          <div class="col-md-4">Tick</div>
+          <div class="col-md-4 cross"></div>
           </div>
           <div class="row margin-30-bottom">
           <div class="col-md-4">Some action item number 2</div>
           <div class="col-md-4 text-success">COMPLIENT</div>
-          <div class="col-md-4">Tick</div>
+          <div class="col-md-4 tick"></div>
           </div>
         </div>
         <hr>

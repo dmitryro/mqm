@@ -90,8 +90,8 @@ h1,h2,h3,h4,h5,h6 {
 .withIcon.icon_map span, #icon_map {width:34px; height:52px; background:url('/static/assets/img/ui/icons/icon_map.svg');}
 .withIcon.icon_map { line-height:52px;}
 
-.withIcon.icon_national span, #icon_national {width:52px; height:62px; background:url('/static/assets/img/ui/icons/icon_national.svg');}
-.withIcon.icon_national { line-height:62px;}
+.withIcon.icon_national span, #icon_national {width:57px; height:58px; background:url('/static/assets/img/ui/icons/icon_national.svg');}
+.withIcon.icon_national { line-height:58px;}
 
 .withIcon.icon_calendar span, #icon_calendar {width:51px; height:51px; background:url('/static/assets/img/ui/icons/icon_calendar.svg');}
 .withIcon.icon_calendar { line-height:51px;}
@@ -117,7 +117,7 @@ h1,h2,h3,h4,h5,h6 {
 .withIcon.icon_nationalMind span, #icon_nationalMind {width:57px; height:58px; background:url('/static/assets/img/ui/icons/icon_nationalMind.svg');}
 .withIcon.icon_nationalMind { line-height:58px;}
 
-.withIcon.icon_nationalMindUpdates span, #icon_nationalMindUpdates {width:52px; height:62px; background:url('/static/assets/img/ui/icons/icon_national.svg');}
+.withIcon.icon_nationalMindUpdates span, #icon_nationalMindUpdates {width:57px; height:58px; background:url('/static/assets/img/ui/icons/icon_nationalMind.svg');}
 .withIcon.icon_nationalMindUpdates { line-height:58px;}
 
 .withIcon.icon_buddySearch span, #icon_buddySearch {width:61px; height:81px; background:url('/static/assets/img/ui/icons/icon_buddySearch.svg');}
@@ -204,7 +204,7 @@ h1,h2,h3,h4,h5,h6 {
 #events-node .ui-datepicker-calendar td {border:1px solid #D5D5D5; border-left:0px;padding:14px 3px; text-align: center;}
 #events-node .ui-datepicker-calendar thead th {text-align:center;}
 #events-node .ui-datepicker-calendar .ui-state-highlight {color:#fff}
-#events-node .ui-datepicker-calendar .ui-datepicker-today {background:$blue !important}
+#events-node .ui-datepicker-calendar .ui-datepicker-today {background:$blue !important; color:#fff;}
 #events-node .ui-datepicker-calendar .cEvent {background: $purple;}
 #events-node .ui-datepicker-calendar .cEvent .ui-state-default {color:#fff}
 
@@ -233,7 +233,7 @@ a.btn.btn-default {transition: none; -webkit-transition: none;} //disables trans
 [data-name="eventsdiary"] .nodeIcon {background:url(/static/assets/img/ui/nodes/icons/events.svg);width:19px;}
 [data-name="theLabNews"] .nodeIcon {background:url(/static/assets/img/ui/nodes/icons/clinical.svg);width:16px;}
 [data-name="openHubUpdates"] .nodeIcon {background:url(/static/assets/img/ui/nodes/icons/hubupdates.svg);width:16px;}
-[data-name="nationalMindNews"] .nodeIcon {background:url(/static/assets/img/ui/nodes/icons/national.svg);width:16px;}
+[data-name="nationalMindNews"] .nodeIcon {background:url(/static/assets/img/ui/nodes/icons/nationalMind.svg);width:19px;}
 [data-name="callout"] .nodeIcon {background:url(/static/assets/img/ui/nodes/icons/documents.svg);width:19px;}
 [data-name="externalNews"] .nodeIcon {background:url(/static/assets/img/ui/nodes/icons/positive.svg);width:24px;}
 
@@ -254,8 +254,8 @@ a.btn.btn-default {transition: none; -webkit-transition: none;} //disables trans
 
 .mqmPart ol {padding:0;list-style-position:inside;color:#585757}
 .mqmPart ol li {padding-bottom:20px;}
-.mqmPart ol li.cross::before {width:15px; height:15px; background:url(/static/assets/img/ui/base/status_redCross.svg);content:""; display:block; float:right; margin-left: 10px;}
-.mqmPart ol li.tick::before {width:20px; height:15px; background:url(/static/assets/img/ui/base/status_greenTick.svg);content:""; display:block; float:right; margin-left: 10px;}
+.mqmPart ol li.cross::before, .mqmPart .cross::before {width:15px; height:15px; background:url(/static/assets/img/ui/base/status_redCross.svg);content:""; display:block; float:right; margin-left: 10px;}
+.mqmPart ol li.tick::before, .mqmPart .tick::before  {width:20px; height:15px; background:url(/static/assets/img/ui/base/status_greenTick.svg);content:""; display:block; float:right; margin-left: 10px;}
 
 
 
