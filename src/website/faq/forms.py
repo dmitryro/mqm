@@ -10,6 +10,9 @@ class AnswerForm(ModelForm):
         fields = (
             'answer',
         )
+        widgets = {
+            'answer': forms.Textarea(attrs={'class': 'textformat'}),
+        }
 
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user')

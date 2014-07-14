@@ -175,6 +175,7 @@ INSTALLED_APPS = (
     'website.tasks',
     'website.resources',
     'website.services',
+    'website.textformat',
     'website.updates',
     'website.videos',
 )

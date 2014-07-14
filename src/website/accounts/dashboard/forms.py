@@ -21,6 +21,9 @@ class ProfileForm(ModelForm):
             'telephone',
             'twitter',
         )
+        widgets = {
+            'biography': forms.Textarea(attrs={'class': 'textformat'}),
+        }
 
     def clean_twitter(self):
         value = self.cleaned_data['twitter']
@@ -62,6 +65,9 @@ class LocalMindForm(CompositeModelForm):
             'area_of_benefit',
             'average_volunteer_hours',
         )
+        widgets = {
+            'statement': forms.Textarea(attrs={'class': 'textformat'}),
+        }
 
 
 class PasswordChangeForm(_PasswordChangeForm):

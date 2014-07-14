@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load djangular_tags thumbnail %}
+{% load djangular_tags thumbnail textformat %}
 
 {% block content %}
 
@@ -50,7 +50,7 @@
 				<div class="col-md-4 bio-col">
                     {% if member.biography %}
 					<p><span><em>Bio</em></span></p>
-                    {{ member.biography|urlize|linebreaks }}
+                    {{ member.biography|textformat }}
                     {% endif %}
 				</div>
 				<div class="bio-divider"></div>

@@ -18,6 +18,9 @@ class FundingForm(ModelForm):
             'postcode',
             'privacy',
         )
+        widgets = {
+            'description': forms.Textarea(attrs={'class': 'textformat'}),
+        }
 
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user')
@@ -27,4 +30,3 @@ class FundingForm(ModelForm):
         self.instance.user = self.user
         self.instance.local_mind = self.user.local_mind
         return super(FundingForm, self).save(*args, **kwargs)
-

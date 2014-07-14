@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load djangular_tags thumbnail %}
+{% load djangular_tags thumbnail textformat %}
 
 {% block content %}
 
@@ -47,7 +47,7 @@
 				<div class="col-md-4 bio-col">
                     {% if local_mind.statement %}
                         <span><em>Mission Statement</em></span>
-                        {{ local_mind.statement|urlize|linebreaks }}
+                        {{ local_mind.statement|textformat }}
                     {% endif %}
 				</div>
 				<div class="bio-divider"></div>

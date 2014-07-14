@@ -3,6 +3,10 @@ Title:      M/A London @madebyMA
 Author:     @M/A London http://ma-work.co.uk
 */
 
+$mark-it-up-path: "../../markitup/skins/markitup/";
+$mark-it-up-button-path: "../../markitup/sets/default/";
+
+
 // BOOSTRAP
 $icon-font-path: "../../libs/sass-bootstrap/fonts/";
 @import "bootstrap";
@@ -14,6 +18,7 @@ $icon-font-path: "../../libs/sass-bootstrap/fonts/";
 
 // LIBS
 @import "chosen/chosen";
+@import "markitup/markitup";
 
 // MIND THEME
 @import "mind/fonts";                 // Avenir font declarations using fonts.com

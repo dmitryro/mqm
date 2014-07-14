@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load textformat %}
 
 
 {% block content %}
@@ -78,7 +79,7 @@ infoBoxes.push(new google.maps.InfoWindow({
     content: (
         '<p>{{ funding.title|escapejs }}</p><br>' +
         {% if funding.description %}
-        '{{ funding|linebreaks|escapejs }}' +
+        '{{ funding|textformat|escapejs }}' +
         {% endif %}
         {% if funding.user %}
         '<p><span class="text-muted">Created by: {{ funding.user.get_full_name|escapejs }}</span></p>' +

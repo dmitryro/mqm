@@ -46,6 +46,9 @@ class SignupLocalMindForm(ModelForm):
             'hours',
             'group_avatar',
         )
+        widgets = {
+            'statement': forms.Textarea(attrs={'class': 'textformat'}),
+        }
 
     def save(self, *args, **kwargs):
         reserved_email = kwargs.pop('reserved_email')

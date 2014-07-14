@@ -48,7 +48,26 @@
             });
         };
 
+        window.initTextformat = function ($element) {
+            $element.find('.textformat').each(function () {
+                if ($(this).hasClass('markItUpEditor') === false) {
+                    $(this).markItUp({
+                        previewParserPath: '',
+                        markupSet: [
+                            {name:'Bold', key:'B', openWith:'[b]', closeWith:'[/b]'},
+                            {name:'Italic', key:'I', openWith:'[i]', closeWith:'[/i]'},
+                            {name:'Underline', key:'U', openWith:'[u]', closeWith:'[/u]'},
+                            {name:'List', key:'R', openWith:'[ul]\n[li]', closeWith:'[/li]\n[/ul]'},
+                            {name:'List item', key:'O', openWith:'[li]', closeWith:'[/li]'},
+                            {name:'Link', key:'L', openWith:'[url=[![Url]!]]', closeWith:'[/url]', placeHolder:'Your text to link here …'}
+                        ]
+                    });
+                }
+            });
+        };
+
         initChosen($('body'));
+        initTextformat($('body'));
 
 
         // Label tooltips
@@ -84,6 +103,7 @@
             $element.on('shown.bs.modal', function () {
                 // Init document categories widget.
                 initChosen($element);
+                initTextformat($element);
             });
         };
 

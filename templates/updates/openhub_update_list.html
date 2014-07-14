@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load djangular_tags webdesign %}
+{% load djangular_tags textformat %}
 
 {% block content %}
 
@@ -23,7 +23,7 @@
          <div class="post">
             <h4>{{ object.title }}</h4>
             <p class="small meta">{% if object.date %}{{ object.date|date }} - {% endif %}posted by {{ object.user }} - {{ object.local_mind }}</p>
-            {{ object.description|safe|linebreaks }}
+            {{ object.description|textformat }}
             <p class="source"><i class="fa fa-rocket"></i> Source: <a href="{{ object.source }}" target="_blank">{{ object.source }}</a></p>
         </div>
         {% endfor %}

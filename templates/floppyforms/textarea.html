@@ -1,1 +1,1 @@
-<textarea class="form-control" rows="5" name="{{ name }}"{% if required %} required{% endif %}{% include "floppyforms/attrs.html" %}{% if placeholder %} placeholder="{{ placeholder }}"{% endif %}>{% if value %}{{ value }}{% endif %}</textarea>
+<textarea class="form-control {{ attrs.class }}" rows="5" name="{{ name }}"{% if required %} required{% endif %}{% include "floppyforms/attrs.html" %}{% if placeholder %} placeholder="{{ placeholder }}"{% endif %}>{% if value %}{{ value }}{% endif %}</textarea>
