@@ -6,13 +6,11 @@
         </div>
         <ul class="media-list">
             <li>
-                <form class="form-horizontal nodeForm" role="form">
-                  <div class="form-group">
-                    <input type="text" class="form-control" id="buddySearchInput" placeholder="Search">
-                  </div>
+                <form action="{% url "skill-search" %}" class="instant-submit nodeForm" role="form" method="get">
+                    {{ buddy_search_form.skill }}
                 </form>
             </li>
-            {% for user in local_mind_users %}
+            {% for user in random_users|slice:":4" %}
             <a href="{{ user.get_absolute_url }}">
                 <li class="media">
                     {% if user.user_avatar %}

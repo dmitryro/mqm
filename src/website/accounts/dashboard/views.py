@@ -1,13 +1,16 @@
 from django.core.urlresolvers import reverse
 from django.views.generic import FormView, TemplateView, UpdateView
-from website.views.generic import CommonViewMixin
+
 from website.documents.models import Document
-from website.news.models import PositiveNews, ExternalNews
-from website.videos.models import Video
-from website.updates.models import Update, Openhub_Update
 from website.funding_map.models import Funding
 from website.local_minds.models import LocalMind
+from website.news.models import PositiveNews, ExternalNews
+from website.updates.models import Update, Openhub_Update
+from website.videos.models import Video
+from website.views.generic import CommonViewMixin
+from ...search.forms import SkillSearchForm
 from ..forms import InvitationForm
+from ..models import User
 from .forms import LocalMindForm, ProfileForm, PasswordChangeForm
 
 
@@ -27,6 +30,7 @@ class DashboardView(CommonViewMixin, TemplateView):
         kwargs['openhub_update_list'] = Openhub_Update.objects.all()
         kwargs['funding_list'] = Funding.objects.all()
         kwargs['documents'] = Document.objects.privacy(user)
+        kwargs['random_users'] = User.active.all().order_by('?')
         partners = user.local_mind.partners.all()
         partners = partners.exclude(_latitude_postcode=None, _longitude_postcode=None)
         partners = partners.privacy(user)
@@ -37,6 +41,8 @@ class DashboardView(CommonViewMixin, TemplateView):
         kwargs['net_works'] = net_works
 
         kwargs['local_mind_users'] = user.local_mind.users.all()
+
+        kwargs['buddy_search_form'] = SkillSearchForm()
         return super(DashboardView, self).get_context_data(**kwargs)
 
 

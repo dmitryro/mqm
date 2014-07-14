@@ -16,6 +16,15 @@ from website.utils.fields import EmailField
 from .registration.tokens import token_generator
 
 
+class ActiveUserManager(UserManager):
+    def get_query_set(self):
+        queryset = super(ActiveUserManager, self).get_query_set()
+        queryset = queryset.exclude(date_joined=None)
+        queryset = queryset.exclude(local_mind=None)
+        queryset = queryset.filter(is_active=True)
+        return queryset
+
+
 class User(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = 'email'
 
@@ -59,6 +68,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now, null=True, blank=True)
 
     objects = UserManager()
+    active = ActiveUserManager()
 
     class Meta:
         verbose_name = _('user')

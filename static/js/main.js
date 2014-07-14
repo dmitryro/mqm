@@ -35,8 +35,12 @@
         // Init skills widgets.
         $('select[name=skill], select[name=skills], select[name$=-skills], select[name=categories]').addClass('chosen-select');
 
-        var initChosen = function ($element) {
+        // Make this global.
+        window.initChosen = function ($element) {
             $element.find('.chosen-select').each(function () {
+                if ($(this).next().hasClass('chosen-container')) {
+                    $(this).next().remove();
+                }
                 $(this).chosen({
                     search_contains: true
                 });
@@ -64,7 +68,7 @@
         });
 
         // Instant submit forms, for example filter in call-out.
-        $('.instant-submit :input').change(function () {
+        $('body').on('change', '.instant-submit :input', function () {
             $(this).parents('form:first').submit();
         });
 

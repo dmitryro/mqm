@@ -403,10 +403,13 @@ $(document).ready(function() {
     			return;
     		}
 	    	
-	    	gridster.add_widget( $('.'+widgetName).html(), 1, 1, 1, 1 );
+	    	var newWidget = gridster.add_widget( $('.'+widgetName).html(), 1, 1, 1, 1 );
 	    	if(widgetName == "fundingmap") {initializeFundingMap();}
 	    	if(widgetName == "myLocalArea") {initializeLocalMap();}
 	    	if(widgetName == "theNetWorks") {initializeNetworkMap();}
+	    	if(widgetName == "buddySearch") {
+                initChosen(newWidget);
+            }
 
 	    	//at this point you want to save the state again
 	    	saveState();

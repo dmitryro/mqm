@@ -2,40 +2,6 @@
 {% load thumbnail %}
 
 
-{% block extra_js %}
-{{ block.super }}
-<!-- Display a for loop of all accounts.skills to make the autocomplete wisget in the search form work -->
-<script type="text/javascript">
-  var availableTerms = [
-      "ActionScript",
-      "AppleScript",
-      "Asp",
-      "BASIC",
-      "C",
-      "C++",
-      "Clojure",
-      "COBOL",
-      "ColdFusion",
-      "Erlang",
-      "Fortran",
-      "Groovy",
-      "Haskell",
-      "Java",
-      "JavaScript",
-      "Lisp",
-      "Perl",
-      "PHP",
-      "Python",
-      "Ruby",
-      "Scala",
-      "Scheme"
-    ];
-    $( "#id_q" ).autocomplete({
-      source: availableTerms
-    });
-</script>
-{% endblock %}
-
 {% block content %}
 
 <div id="content" class="clearfix">
