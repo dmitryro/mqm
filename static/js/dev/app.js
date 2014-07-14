@@ -145,6 +145,7 @@ $(document).ready(function() {
             gridster.add_widget($('.'+this.wdgName).html(), this.size_x, this.size_y, this.col, this.row);
 
     	});
+        initChosen('body');
 	}
 
 	function saveState() {
@@ -402,7 +403,7 @@ $(document).ready(function() {
     		if(!allowAdding) {
     			return;
     		}
-	    	
+
 	    	var newWidget = gridster.add_widget( $('.'+widgetName).html(), 1, 1, 1, 1 );
 	    	if(widgetName == "fundingmap") {initializeFundingMap();}
 	    	if(widgetName == "myLocalArea") {initializeLocalMap();}
@@ -429,7 +430,7 @@ $(document).ready(function() {
 			$('.delete-node').bind('click', function() {
 		    	var widgetName = $(this).parent().parent().parent();
 		    	$("#menu .menu-button-wrap[data-widg|=" + $(widgetName).attr("data-name") + "]").show();
-		    	
+
 		    	//save at this point
 		    	saveState();
 		    });*/
@@ -442,7 +443,7 @@ $(document).ready(function() {
     	gridster.remove_widget(widgetName);
 
     	$("#menu .menu-button-wrap[data-widg|=" + $(widgetName).attr("data-name") + "]").show();
-		    	
+
 		    	//save at this point
 		    	saveState();
     });
