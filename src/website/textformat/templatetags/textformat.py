@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from django import template
-from django.template.defaultfilters import stringfilter
+from django.utils.encoding import force_unicode
 from django.utils.html import escape, urlize
 from django.utils.safestring import mark_safe
 from postmarkup import render_bbcode
@@ -17,6 +17,8 @@ def render_markup(text):
 
 
 @register.filter
-@stringfilter
 def textformat(value):
+    if not value:
+        return ''
+    value = force_unicode(value)
     return render_markup(value)
