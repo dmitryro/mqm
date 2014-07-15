@@ -213,7 +213,7 @@ def deploy(rev=DEFAULT_REV):
     '''
     update(rev=rev)
     npm_install()
-    bower_install()
+  #  bower_install()
     pip_install()
     syncdb()
     collectstatic()
@@ -390,7 +390,7 @@ def install(mysql_root_password=None):
     with cd(path):
         run('.env/bin/python manage.py loaddata config/adminuser.json')
 
-    bower_install()
+#    bower_install() - bower is Debian-specific (not used on RHEL)
     collectstatic()
     start()
     reload_webserver()
@@ -583,7 +583,7 @@ def devupdate():
 
     local('.env/bin/pip install --upgrade -r requirements/development.txt')
     local('npm install')
-    local('bower install')
+  # local('bower install') - bower is Debian-specific (not used on RHEL)
     local('gulp')
 
 def devinit():
