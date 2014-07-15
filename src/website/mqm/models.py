@@ -23,7 +23,7 @@ class Base(models.Model):
     )
 
 
-    contact_name_id = models.ForeignKey('accounts.User')
+    contact_name_id = models.ForeignKey('accounts.User', verbose_name='contact name')
     local_mind = models.ForeignKey('local_minds.LocalMind')
     due_date = models.DateField()
 
