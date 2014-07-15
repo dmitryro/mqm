@@ -582,9 +582,9 @@ def devupdate():
     os.chdir(os.path.dirname(__file__))
 
     local('.env/bin/pip install --upgrade -r requirements/development.txt')
-    local('npm install')
+    local('npm install gulp')
   # local('bower install') - bower is Debian-specific (not used on RHEL)
-    local('gulp')
+  # local('gulp') - this throws an error in the current gulp version
 
 def devinit():
     os.chdir(os.path.dirname(__file__))
