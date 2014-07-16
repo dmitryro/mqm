@@ -10,9 +10,10 @@ from django.utils.http import int_to_base36
 from django.utils.translation import ugettext_lazy as _
 from django_extensions.db.fields import AutoSlugField
 from mediastore.fields import MediaField, MultipleMediaField
-from django.utils.encoding import python_2_unicode_compatible
 
-@python_2_unicode_compatible
+"""
+MQM Model class
+"""
 class Mqm(models.Model):
 
     FRESHMAN = 'FR'
@@ -31,15 +32,11 @@ class Mqm(models.Model):
     local_mind = models.ForeignKey('local_minds.LocalMind')
     due_date = models.DateField()
     status = models.CharField(max_length=2,choices=MQM_CHOICES,default=FRESHMAN)
-   
-    def __unicode__(self):
-        return unicode(self.contact_name)
 
     class Meta:
         verbose_name = 'mqm'
         verbose_name_plural = 'mqms'
 
-@python_2_unicode_compatible
 class Question(models.Model):
     pass      
 
