@@ -17,7 +17,7 @@ MQM Model class
 """
 class Mqm(models.Model):
 
-    FRESHMAN = 'FR'
+    FRESHMAN = 'FR' #Those are just stubs
     SOPHOMORE = 'SO'
     JUNIOR = 'JR'
     SENIOR = 'SR'
@@ -42,9 +42,20 @@ class Mqm(models.Model):
         verbose_name = 'mqm'
         verbose_name_plural = 'mqms'
 
-
+"""
+ Question model
+"""
 class Question(models.Model):
-    pass      
+
+    text = models.TextField(max_length=500)
+    
+    class Meta:
+        verbose_name = 'question'
+        verbose_name_plural = 'questions'      
+
+    def __unicode__(self):
+        return self.text
+
 
 class MQMAdmin(admin.ModelAdmin):
     fieldsets = ((None, {'fields': ['contact_name','local_mind','due_date','status','supported_docs']}),)
@@ -52,6 +63,6 @@ class MQMAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Mqm, MQMAdmin)
-
+admin.site.register(Question)
 
 
