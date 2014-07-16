@@ -39,8 +39,8 @@ class Mqm(models.Model):
         max_upload_size=5242880
     )
     class Meta:
-        verbose_name = 'mqm'
-        verbose_name_plural = 'mqms'
+        verbose_name = 'MQM'
+        verbose_name_plural = 'MQMs'
 
 """
  Question model
@@ -57,6 +57,20 @@ class Question(models.Model):
         return self.text
 
 
+"""
+ Question model
+"""
+class Response(models.Model):
+    response_to = models.ForeignKey('Question') 
+    text = models.TextField(max_length=500)
+
+    class Meta:
+        verbose_name = 'response'
+        verbose_name_plural = 'responses'
+
+    def __unicode__(self):
+        return self.text
+
 class MQMAdmin(admin.ModelAdmin):
     fieldsets = ((None, {'fields': ['contact_name','local_mind','due_date','status','supported_docs']}),)
     list_display = ('contact_name','local_mind','due_date','status','supported_docs')
@@ -64,5 +78,5 @@ class MQMAdmin(admin.ModelAdmin):
 
 admin.site.register(Mqm, MQMAdmin)
 admin.site.register(Question)
-
+admin.site.register(Response)
 
