@@ -13,19 +13,7 @@ from mediastore.fields import MediaField, MultipleMediaField
 from django.utils.encoding import python_2_unicode_compatible
 
 @python_2_unicode_compatible
-class Base(models.Model):
-
-    STATUS_CHOICES = (
-         _('Intern'),
-         _('General'),
-         _('Admin'),
-         _('Super User'),
-    )
-
-
-    contact_name_id = models.ForeignKey('accounts.User', verbose_name='contact name')
-    local_mind = models.ForeignKey('local_minds.LocalMind')
-    due_date = models.DateField()
+class Mqm(models.Model):
 
     FRESHMAN = 'FR'
     SOPHOMORE = 'SO'
@@ -33,34 +21,34 @@ class Base(models.Model):
     SENIOR = 'SR'
 
     MQM_CHOICES = (
-        (FRESHMAN, 'Freshman'),
-        (SOPHOMORE, 'Sophomore'),
-        (JUNIOR, 'Junior'),
-        (SENIOR, 'Senior'),
+        (FRESHMAN,'Freshman'),
+        (SOPHOMORE,'Sophomore'),
+        (JUNIOR,'Junior'),
+        (SENIOR,'Senior'),
     )
 
-    status = models.CharField(max_length=2,
-                                      choices=MQM_CHOICES,
-                                      default=FRESHMAN)
-
-    
-    class Meta:
-        verbose_name = _('mqm')
-        verbose_name_plural = _('mqms')
-
-    def __str__(self):
-        return self.contact_name
-
+    contact_name = models.ForeignKey('accounts.User', verbose_name='contact name')
+    local_mind = models.ForeignKey('local_minds.LocalMind')
+    due_date = models.DateField()
+    status = models.CharField(max_length=2,choices=MQM_CHOICES,default=FRESHMAN)
+   
     def __unicode__(self):
         return unicode(self.contact_name)
 
+    class Meta:
+        verbose_name = 'mqm'
+        verbose_name_plural = 'mqms'
+
+@python_2_unicode_compatible
+class Question(models.Model):
+    pass      
 
 class MQMAdmin(admin.ModelAdmin):
-    fieldsets = ((None, {'fields': ['contact_name_id','local_mind','due_date','status']}),)
-    list_display = ('contact_name_id','local_mind','due_date','status')
+    fieldsets = ((None, {'fields': ['contact_name','local_mind','due_date','status']}),)
+    list_display = ('contact_name','local_mind','due_date','status')
 
 
-admin.site.register(Base, MQMAdmin)
+admin.site.register(Mqm, MQMAdmin)
 
 
 
