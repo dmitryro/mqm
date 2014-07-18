@@ -146,6 +146,7 @@ INSTALLED_APPS = (
     'mediastore.mediatypes.embeded',
     'mediastore.mediatypes.image',
     'mediastore.mediatypes.pdf',
+
     'mediastore.mediatypes.video',
     'sorl.thumbnail',
     'sortedm2m',
@@ -158,9 +159,9 @@ INSTALLED_APPS = (
     'website',
     'website.accounts',
 #    'website.alerts',
-#    'website.branding',
+    'website.branding',
     'website.local_minds',
-#    'website.clinical_research',
+    'website.clinical_research',
     'website.diary',
     'website.diversity',
     'website.documents',
@@ -171,6 +172,7 @@ INSTALLED_APPS = (
     'website.local_map',
     'website.news',
     'website.pages',
+    'website.mqm',
     'website.privacy',
     'website.tasks',
     'website.resources',
@@ -293,6 +295,17 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_FILTER_BACKENDS': ('rest_framework.filters.DjangoFilterBackend',)
 }
+
+
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#        'NAME': 'openhub',
+#        'USER': 'root',
+#        'PASSWORD': 'nu45edi',
+#        'HOST': ''
+#    }
+#}
 
 
 

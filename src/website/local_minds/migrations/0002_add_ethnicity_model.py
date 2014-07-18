@@ -56,7 +56,7 @@ class Migration(SchemaMigration):
         # Renaming column for 'LocalMind.chair_ethnicity' to match new field type.
         db.rename_column(u'local_minds_localmind', 'chair_ethnicity', 'chair_ethnicity_id')
         # Changing field 'LocalMind.chair_ethnicity'
-        db.alter_column(u'local_minds_localmind', 'chair_ethnicity_id', self.gf('django.db.models.fields.related.ForeignKey')(null=True, to=orm['local_minds.Ethnicity']))
+#        db.alter_column(u'local_minds_localmind', 'chair_ethnicity_id', self.gf('django.db.models.fields.related.ForeignKey')(null=True, to=orm['local_minds.Ethnicity']))
         # Adding index on 'LocalMind', fields ['chair_ethnicity']
         db.create_index(u'local_minds_localmind', ['chair_ethnicity_id'])
 
